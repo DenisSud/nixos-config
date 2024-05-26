@@ -69,6 +69,13 @@
       wireplumber.enable = true;
     };
 
+    udev.extraHwdb = ''
+      evdev:name:*:dmi:bvn*:bvr*:bd*:svnASUS*:pn*:*
+       KEYBOARD_KEY_ff31007c=f20    # fixes mic mute button
+       KEYBOARD_KEY_ff3100b2=home   # Set fn+LeftArrow as Home
+       KEYBOARD_KEY_ff3100b3=end    # Set fn+RightArrow as End
+    '';
+
     # Enable CUPS to print documents.
     #printing.enable = true;
 
@@ -123,31 +130,27 @@
 
     };
 
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-      nvidiaSettings = true;
-      dynamicBoost.enable = true;
-      powerManagement.enable = true;
-      powerManagement.finegrained = true;
-      nvidiaPersistenced = true;
+    # nvidia = {
+    #   modesetting.enable = true;
+    #   open = false;
+    #   nvidiaSettings = true;
+    #   dynamicBoost.enable = true;
+    #   powerManagement.enable = true;
+    #   powerManagement.finegrained = true;
+    #   nvidiaPersistenced = true;
 
 
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
+    #   prime = {
+    #     offload = {
+    #       enable = true;
+    #       enableOffloadCmd = true;
+    #     };
+    #     amdgpuBusId = "PCI:4:0:0";
+    #     nvidiaBusId = "PCI:1:0:0";
 
-        # amdgpuBusId = "PCI:69:0:0";
-        # nvidiaBusId = "PCI:1:0:0";
-      };
-    };
+    #   };
+    # };
 
-    #2 in 1 laptop
-    sensor.iio.enable = true;
-
-    logitech.wireless.enable = true;
     pulseaudio.enable = false;
 
     #Bluetooth
@@ -170,7 +173,7 @@
     };
 
     firewall = {
-      enable = true;
+      enable = false;
       #allowedTCPPorts = [ 53 ];
       #allowedUDPPorts = [ 53 51820 ];
     };

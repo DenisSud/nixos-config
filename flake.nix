@@ -6,22 +6,15 @@
 
     asusctl.url = "github:soulsoiledit/nixpkgs-asusctl-5.0.10/asusctl-5.0.10";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-
+    # home-manager = {
+    #   url = "github:nix-community/home-manager/master";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
 
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nixvim, asusctl, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, asusctl, ... }: {
     nixosConfigurations = {
       nixos = inputs.nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -29,7 +22,7 @@
         modules = [
           ./configuration.nix
           /etc/nixos/hardware-configuration.nix
-          <nixos-hardware/asus/zephyrus/ga401>
+          # <nixos-hardware/asus/zephyrus/ga401>
           ./packages.nix
 
           home-manager.nixosModules.home-manager

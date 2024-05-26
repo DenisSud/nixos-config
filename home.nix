@@ -105,11 +105,6 @@ with lib.hm.wt;
 
       };
 
-      kubernetes = {
-        format = "via [󱃾 $context\($namespace\)](bold purple) ";
-        disabled = false;
-      };
-
       vagrant = {
         disabled = true;
       };
