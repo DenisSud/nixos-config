@@ -22,6 +22,39 @@
 
 
 
+  # Set up stylix with kanagawa theme
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+
+  # Set up stylix with black metal theme
+  stylix.base16Scheme = ./black-metal-bathory.yaml
+  tylix.image = /home/denis/Pictures/chinatowne.jpg;
+
+  # Custom cursor
+  stylix.cursor.package = pkgs.bibata-cursors;
+  stylix.cursor.name = "Bibata-Modern-Ice";
+
+  # Set default window opacity
+  stylix.opacity.applications = 0.8;
+
+  # Custom fonts
+  stylix.fonts = {
+  
+    monospace = {
+      package = pkgs.nerdfonts;
+      name = "FiraMono Nerd Font";
+    };
+    
+    sansSerif = {
+      package = pkgs.nerdfonts;
+      name = "FiraCode Nerd Font";
+    };
+
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "FiraCode Nerd Font";
+    };
+    
+  };
 
 
   environment = {
