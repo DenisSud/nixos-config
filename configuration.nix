@@ -26,8 +26,8 @@
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
 
   # Set up stylix with black metal theme
-  stylix.base16Scheme = ./black-metal-bathory.yaml
-  tylix.image = ./tokyo-red.png;
+  stylix.base16Scheme = ./black-metal.yaml
+  tylix.image = ./nixos-grey.png;
 
   # Custom cursor
   stylix.cursor.package = pkgs.bibata-cursors;
