@@ -8,8 +8,8 @@ with lib.hm.wt;
   programs.home-manager.enable = true;
 
 
-  home.username = "samuel";
-  home.homeDirectory = "/home/samuel";
+  home.username = "denis";
+  home.homeDirectory = "/home/denis";
   home.stateVersion = "23.05";
 
 
@@ -17,7 +17,7 @@ with lib.hm.wt;
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "samuel";
+    userName = "denis";
     userEmail = "samworlds1231337@gmail.com";
     extraConfig = {
       safe = {
@@ -152,7 +152,7 @@ with lib.hm.wt;
     };
 
     initExtra = ''
-      (cat /home/samuel/.cache/wal/sequences &)
+      (cat /home/denis/.cache/wal/sequences &)
       eval "$(starship init zsh)"
     '';
   };

@@ -40,7 +40,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users = {
-                samuel = import ./home.nix;
+                denis = import ./home.nix;
               };
             };
           }

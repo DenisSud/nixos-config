@@ -180,9 +180,20 @@
 
 
 
-  #time 
-  time.timeZone = "America/New_York";
+  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "ru_RU.UTF-8";
+    LC_IDENTIFICATION = "ru_RU.UTF-8";
+    LC_MEASUREMENT = "ru_RU.UTF-8";
+    LC_MONETARY = "ru_RU.UTF-8";
+    LC_NAME = "ru_RU.UTF-8";
+    LC_NUMERIC = "ru_RU.UTF-8";
+    LC_PAPER = "ru_RU.UTF-8";
+    LC_TELEPHONE = "ru_RU.UTF-8";
+    LC_TIME = "ru_RU.UTF-8";
+  };
 
   console = {
     font = "Lat2-Terminus16";
@@ -198,15 +209,15 @@
   users = {
     mutableUsers = true;
     groups = {
-      samuel.gid = 1000;
+      denis.gid = 1000;
     };
 
-    users.samuel = {
+    users.denis = {
       isNormalUser = true;
-      home = "/home/samuel";
+      home = "/home/denis";
       shell = pkgs.zsh;
       uid = 1000;
-      group = "samuel";
+      group = "denis";
       extraGroups = [ "wheel" "networkmanager" /*"libvirtd"*/ ]; # Enable ‘sudo’ for the user.
     };
   };

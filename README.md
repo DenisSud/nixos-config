@@ -14,10 +14,10 @@ This guide provides a minimal NixOS configuration for ASUS laptops equipped with
     cd /etc/nixos/
     ```
 
-2. Adjust ownership (replace `samuel` with your username):
+2. Adjust ownership (replace `denis` with your username):
 
     ```
-    sudo chown -R samuel:users .
+    sudo chown -R denis:users .
     ```
 
 3. Remove old configuration files:

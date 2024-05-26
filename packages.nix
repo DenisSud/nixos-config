@@ -69,7 +69,7 @@
     #gmome
     gnomeExtensions.appindicator
     gnomeExtensions.supergfxctl-gex
-    gnomeExtensions.screen-rotate # 2 in 1 extension
+    # gnomeExtensions.screen-rotate # 2 in 1 extension
     gnomeExtensions.rounded-window-corners # waiting for update >:(
     gnomeExtensions.auto-move-windows
     gnomeExtensions.vitals
@@ -88,13 +88,26 @@
     obs-studio
 
     #browser
-    brave
+    firefox
+
+    #text editor
+    helix
+
+    #note taking
+    obsidian
+
+    #lsps
+    rust-analyzer
+    gopls
+    python311Packages.python-lsp-server
+    rocmPackages.llvm.clang-unwrapped
+    rustup
 
     #xbox controllers
-    xboxdrv
+    # xboxdrv
 
     #discord
-    webcord
+    # webcord
 
 
     #libraries
@@ -159,7 +172,7 @@
     steam-run #runs linux binaries
 
     #gaming
-    retroarchFull #emulation
+    # retroarchFull #emulation
 
 
 
@@ -177,14 +190,14 @@
   };
 
 
-  fonts.packages = with pkgs; [
-    font-awesome
-    iosevka
-    noto-fonts-cjk-sans
-    jetbrains-mono
-    nerdfonts
-    cascadia-code
-  ];
+  # fonts.packages = with pkgs; [
+  #   font-awesome
+  #   iosevka
+  #   noto-fonts-cjk-sans
+  #   jetbrains-mono
+  #   nerdfonts
+  #   cascadia-code
+  # ];
 
 
 
