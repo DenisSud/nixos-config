@@ -121,6 +121,7 @@
     gjs
 
     #utilities
+    git
     pywal
     killall
     pamixer

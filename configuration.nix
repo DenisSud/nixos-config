@@ -130,26 +130,26 @@
 
     };
 
-    # nvidia = {
-    #   modesetting.enable = true;
-    #   open = false;
-    #   nvidiaSettings = true;
-    #   dynamicBoost.enable = true;
-    #   powerManagement.enable = true;
-    #   powerManagement.finegrained = true;
-    #   nvidiaPersistenced = true;
+    nvidia = {
+      modesetting.enable = true;
+      open = false;
+      nvidiaSettings = true;
+      dynamicBoost.enable = true;
+      powerManagement.enable = true;
+      powerManagement.finegrained = true;
+      nvidiaPersistenced = true;
 
 
-    #   prime = {
-    #     offload = {
-    #       enable = true;
-    #       enableOffloadCmd = true;
-    #     };
-    #     amdgpuBusId = "PCI:4:0:0";
-    #     nvidiaBusId = "PCI:1:0:0";
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        amdgpuBusId = "PCI:4:0:0";
+        nvidiaBusId = "PCI:1:0:0";
 
-    #   };
-    # };
+      };
+    };
 
     pulseaudio.enable = false;
 

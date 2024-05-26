@@ -25,16 +25,16 @@
           # <nixos-hardware/asus/zephyrus/ga401>
           ./packages.nix
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users = {
-                denis = import ./home.nix;
-              };
-            };
-          }
+          # home-manager.nixosModules.home-manager
+          # {
+          #   home-manager = {
+          #     useGlobalPkgs = true;
+          #     useUserPackages = true;
+          #     users = {
+          #       denis = import ./home.nix;
+          #     };
+          #   };
+          # }
 
         ];
 
