@@ -27,7 +27,7 @@
 
   # Set up stylix with black metal theme
   stylix.base16Scheme = ./black-metal-bathory.yaml
-  tylix.image = /home/denis/Pictures/chinatowne.jpg;
+  tylix.image = ./tokyo-red.png;
 
   # Custom cursor
   stylix.cursor.package = pkgs.bibata-cursors;
