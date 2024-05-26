@@ -29,6 +29,7 @@
         modules = [
           ./configuration.nix
           /etc/nixos/hardware-configuration.nix
+          <nixos-hardware/asus/zephyrus/ga401>
           ./packages.nix
 
           #relies on nixvim input 
