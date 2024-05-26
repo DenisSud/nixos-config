@@ -32,9 +32,6 @@
           <nixos-hardware/asus/zephyrus/ga401>
           ./packages.nix
 
-          #relies on nixvim input 
-          ./neovim.nix
-
           home-manager.nixosModules.home-manager
           {
             home-manager = {

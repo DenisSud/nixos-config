@@ -77,6 +77,7 @@
 
     #terminal 
     blackbox-terminal
+    warp-terminal
 
     #video player
     celluloid
