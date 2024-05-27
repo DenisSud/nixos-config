@@ -112,51 +112,20 @@
 
 
     #libraries
-    ntfs3g
     linuxHeaders
     linux-firmware
-    fakeroot
-    alsa-utils
-    alsa-firmware
     gjs
 
     #utilities
     git
     pywal
     killall
-    pamixer
-    brightnessctl
-    upower
-    streamlink
+    ffmpeg
     wget
     unzip
-    time
-    socat
-    rsync
-    ripgrep
+    btop
     fzf
     neofetch
-    mpc-cli
-    mlocate
-    inotify-tools
-    groff
-    ffmpegthumbnailer
-    jellyfin-ffmpeg
-    fd
-    dialog
-    bat
-    which
-    poppler_utils
-    p7zip
-    atool
-    unrar
-    odt2txt
-    xlsx2csv
-    jq
-    mediainfo
-    imagemagick
-    libnotify
-    mangohud
 
 
 
@@ -192,15 +161,6 @@
   };
 
 
-  # fonts.packages = with pkgs; [
-  #   font-awesome
-  #   iosevka
-  #   noto-fonts-cjk-sans
-  #   jetbrains-mono
-  #   nerdfonts
-  #   cascadia-code
-  # ];
-
 
 
 
@@ -222,20 +182,6 @@
     services.spice-vdagentd.enable = true;
   */
 
-
-
-  #podman
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
 
   #asus system services
   services = {
