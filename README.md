@@ -41,7 +41,7 @@ This guide provides a minimal NixOS configuration for ASUS laptops equipped with
 6. Connect the repository to this configuration repository:
 
     ```
-    git remote add origin https://github.com/sjhaleprogrammer/nixos.git
+    git remote add origin https://github.com/DenisSud/nixos-config/
     ```
 
 7. Pull the configuration:
