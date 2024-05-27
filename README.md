@@ -1,9 +1,5 @@
 # Minimal NixOS Configuration for ASUS Laptops with NVIDIA GPUs
 
-
-![Screenshot from 2024-03-29 13-58-48](https://github.com/sjhaleprogrammer/nixos/assets/60676867/260ec810-9c87-4303-a8fb-af466c582683)
-
-
 This guide provides a minimal NixOS configuration for ASUS laptops equipped with NVIDIA GPUs. Follow these steps for a clean installation.
 
 ## Installation Steps
