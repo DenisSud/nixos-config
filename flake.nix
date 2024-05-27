@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master"
+
     asusctl.url = "github:soulsoiledit/nixpkgs-asusctl-5.0.10/asusctl-5.0.10"
 
     home-manager = {
@@ -14,15 +16,19 @@
 
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, asusctl, ... }: {
-    nixosConfigurations = {
-      nixos = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
+  outputs = inputs@{ nixpkgs, home-manager, asusctl, nixos-hardware, ... }: {
+    let 
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in 
+    { 
+      
+      nixosConfigurations.default = {
+        specialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix
           /etc/nixos/hardware-configuration.nix
-          # <nixos-hardware/asus/zephyrus/ga401>
+          <nixos-hardware/asus/zephyrus/ga401>
           ./packages.nix
 
           home-manager.nixosModules.home-manager
