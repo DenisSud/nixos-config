@@ -118,6 +118,7 @@
 
     #utilities
     git
+    gh
     pywal
     killall
     ffmpeg
@@ -127,26 +128,8 @@
     fzf
     neofetch
 
-
-
-    #virtual machines
-    /*
-      virt-manager
-      spice spice-gtk
-      spice-protocol
-      win-virtio
-      win-spice
-    */
-
-
     appimage-run #runs appimages 
     steam-run #runs linux binaries
-
-    #gaming
-    # retroarchFull #emulation
-
-
-
 
 
   ];
@@ -159,28 +142,6 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
   };
-
-
-
-
-
-
-  #virtmanager
-
-  /*
-    virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
-      };
-    };
-    spiceUSBRedirection.enable = true;
-    };
-    services.spice-vdagentd.enable = true;
-  */
 
 
   #asus system services
@@ -205,10 +166,6 @@
 
   #gnome exclusive services
   services.switcherooControl.enable = true;
-
-
-
-
 
 
 }
