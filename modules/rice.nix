@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-mirage.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/brogrammer.yaml";
     image = /home/denis/Pictures/space_person.jpg;
 
     # cursor.package = pkgs.apple-cursor;
