@@ -16,7 +16,7 @@
 
     ollama = {
       enable = true;
-      acceleration = "cuda";
+      # acceleration = "cuda";
     };
 
     openssh.enable = true;
