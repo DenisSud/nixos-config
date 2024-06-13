@@ -58,7 +58,7 @@
       };
       extraConfig = ''
         launch sh -c "tmux"
-      ''
+      '';
     };   
 
     helix = {
