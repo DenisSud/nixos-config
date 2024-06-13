@@ -1,14 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "denis";
   home.homeDirectory = "/home/denis";
 
   programs = {
 
-    # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
     fzf = {
@@ -29,8 +26,6 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
-      envExtra = "export OPENAI_BASE_URL=https://api.groq.com/openai/v1/";      
-
       shellAliases = {
         ll = "ls -l";
         pbcopy='' xclip -selection clipboard '';
@@ -39,13 +34,6 @@
         gs='' git status '';
         config='' hx ~/nixos '';
         rebuild='' cd /home/denis/nixos && git add . && git commit -m "updated conifg" && sudo nixos-rebuild switch --flake ~/nixos#default --impure && git push && cd - '';
-      };
-
-      zplug = {
-        enable = true;
-        plugins = [
-          { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
-        ];
       };
 
       oh-my-zsh = {
@@ -58,13 +46,13 @@
 
     kitty = {
       enable = true;
-      shellIntegration.enableZshIntegration = true;
+      # shellIntegration.enableZshIntegration = true;
       settings = {
         confirm_os_window_close = 0;
       };
-      extraConfig = ''
-        launch sh -c "tmux"
-      '';
+      # extraConfig = ''
+      #   launch sh -c "tmux"
+      # '';
     };   
 
     helix = {
