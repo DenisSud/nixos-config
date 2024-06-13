@@ -11,11 +11,6 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    gnome-terminal = {
-      enable = true;
-      showMenubar = false;
-    };
-
     fzf = {
       enable = true;
       enableZshIntegration = true;
@@ -57,12 +52,13 @@
 
     kitty = {
       enable = true;
-      # environment = {
-      # };
       shellIntegration.enableZshIntegration = true;
       settings = {
         confirm_os_window_close = -1;
       };
+      extraConfig = ''
+        launch sh -c "tmux"
+      ''
     };   
 
     helix = {
