@@ -67,7 +67,6 @@
   
   environment = { 
     systemPackages = with pkgs; [
-      gnome.gnome-terminal
       gnome.gnome-tweaks
       gnomeExtensions.clipboard-indicator-2
       gnomeExtensions.vitals
@@ -84,7 +83,6 @@
     ];
 
     gnome.excludePackages = (with pkgs; [
-      gnome-console # remove default apps
       gnome-text-editor
       gnome-photos
       gnome-tour

@@ -8,7 +8,7 @@
   home.sessionVariables = {
     EDITOR = "hx";
     BROWSER = "firefox";
-    TERMINAL = "black-box";
+    # TERMINAL = "black-box";
   };
 
   programs = {
