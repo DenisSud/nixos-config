@@ -14,7 +14,7 @@
     gnome-terminal = {
       enable = true;
       showMenubar = false;
-    }
+    };
 
     zsh = {
       enable = true;
