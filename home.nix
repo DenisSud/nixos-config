@@ -16,6 +16,12 @@
       showMenubar = false;
     };
 
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
+    
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -49,15 +55,15 @@
 
     };
 
-    # kitty = {
-    #   enable = true;
-    #   # environment = {
-    #   # };
-    #   shellIntegration.enableZshIntegration = true;
-    #   settings = {
-    #     confirm_os_window_close = -1;
-    #   };
-    # };   
+    kitty = {
+      enable = true;
+      # environment = {
+      # };
+      shellIntegration.enableZshIntegration = true;
+      settings = {
+        confirm_os_window_close = -1;
+      };
+    };   
 
     helix = {
       enable = true;
