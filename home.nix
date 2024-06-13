@@ -99,6 +99,17 @@
       };
     };
 
+    tmux = {
+      enable = true;
+      clock24 = true;
+      extraConfig = ''
+        set -g @plugin 'tmux-plugins/tpm'
+        set -g @plugin 'tmux-plugins/tmux-sensible'
+        
+        run '~/.tmux/plugins/tpm/tpm'
+      '';
+    };
+    
     btop = {
       enable = true;
     };
