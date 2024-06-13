@@ -2,7 +2,7 @@
 {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-seaside.yaml";
-    image = /home/denis/Pictures/space_person.jpg;
+    image = /home/denis/Pictures/green_waterfall.jpg;
 
     # cursor.package = pkgs.apple-cursor;
 
