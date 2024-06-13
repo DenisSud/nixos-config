@@ -22,6 +22,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      plugins = [ "git" "thefuck" "fzf" "tmux" ];
 
       envExtra = "export OPENAI_BASE_URL=https://api.groq.com/openai/v1/";      
 
