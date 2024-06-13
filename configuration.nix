@@ -83,7 +83,7 @@
     ];
 
     gnome.excludePackages = (with pkgs; [
-      gnome-console # remove default apps
+      # gnome-console # remove default apps
       gnome-text-editor
       gnome-photos
       gnome-tour
