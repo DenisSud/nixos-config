@@ -44,10 +44,10 @@
       python311Packages.python-lsp-server # for python
 
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.tmux;
   };
   
   programs = {
-    zsh.enable = true;
+    tmux.enable = true;
   };
 }
