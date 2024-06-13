@@ -11,6 +11,11 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    gnome-terminal = {
+      enable = true;
+      showMenubar = false;
+    }
+
     zsh = {
       enable = true;
       enableCompletion = true;
