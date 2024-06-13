@@ -14,11 +14,11 @@
       tmux.enableShellIntegration = true;
     };
 
-    thefuck = {
-      enable = true;
-      enableZshIntegration = true;
-      enableInstantMode = true;
-    };
+    # thefuck = {
+    #   enable = true;
+    #   enableZshIntegration = true;
+    #   enableInstantMode = true;
+    # };
     
     zsh = {
       enable = true;
@@ -38,7 +38,7 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "thefuck" "fzf" ];
+        plugins = [ "thefuck" ];
         theme = "minimal";
       };
 
