@@ -67,8 +67,6 @@
   
   environment = { 
     systemPackages = with pkgs; [
-      gnome.gnome-tweaks
-      gnomeExtensions.clipboard-indicator-2
       gnomeExtensions.vitals
       libappimage
       curl
@@ -100,7 +98,7 @@
       gnome-maps
       gnome-font-viewer
       yelp
-      # gnome-calendar
+      gnome-calendar
       gnome-contacts
       gnome-music
       gnome-software

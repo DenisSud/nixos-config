@@ -5,21 +5,12 @@
   # manage.
   home.username = "denis";
   home.homeDirectory = "/home/denis";
-  home.sessionVariables = {
-    EDITOR = "hx";
-    BROWSER = "firefox";
-    # TERMINAL = "black-box";
-  };
 
   programs = {
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    gnome-terminal  = {
-      enable = true;  
-    };
-    
     zsh = {
       enable = true;
       enableCompletion = true;
