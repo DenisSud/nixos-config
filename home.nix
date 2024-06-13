@@ -8,7 +8,7 @@
   home.sessionVariables = {
     EDITOR = "hx";
     BROWSER = "firefox";
-    TERMINAL = "kitty";
+    TERMINAL = "black-box";
   };
 
   programs = {
@@ -49,15 +49,15 @@
 
     };
 
-    kitty = {
-      enable = true;
-      # environment = {
-      # };
-      shellIntegration.enableZshIntegration = true;
-      settings = {
-        confirm_os_window_close = -1;
-      };
-    };   
+    # kitty = {
+    #   enable = true;
+    #   # environment = {
+    #   # };
+    #   shellIntegration.enableZshIntegration = true;
+    #   settings = {
+    #     confirm_os_window_close = -1;
+    #   };
+    # };   
 
     helix = {
       enable = true;

@@ -80,7 +80,6 @@
       ffmpeg
       btop
       neofetch
-      kitty
     ];
 
     gnome.excludePackages = (with pkgs; [
