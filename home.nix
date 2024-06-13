@@ -16,13 +16,18 @@
       enableZshIntegration = true;
       tmux.enableShellIntegration = true;
     };
+
+    thefuck = {
+      enable = true;
+      enableZshIntegration = true;
+      enableInstantMode = true;
+    }
     
     zsh = {
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      plugins = [ "git" "thefuck" "fzf" "tmux" ];
 
       envExtra = "export OPENAI_BASE_URL=https://api.groq.com/openai/v1/";      
 
