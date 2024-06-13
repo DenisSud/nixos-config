@@ -37,6 +37,7 @@
 
       # LSPs
       nil # for nix
+      markdown-oxide # for markdown
       gopls # for go 
       rust-analyzer # for rust
       python311Packages.python-lsp-server # for python
