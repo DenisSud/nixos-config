@@ -21,7 +21,7 @@
       enable = true;
       enableZshIntegration = true;
       enableInstantMode = true;
-    }
+    };
     
     zsh = {
       enable = true;
