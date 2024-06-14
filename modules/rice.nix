@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
     image = /home/denis/Pictures/kanagawa.jpg;
 
     # cursor.package = pkgs.apple-cursor;
