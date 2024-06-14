@@ -15,6 +15,7 @@
       gnome.gnome-terminal 
 
       # Shell stuff
+      bat
       ranger # file manager
       aria2 # fast downloading utility
       croc # file transfer utility (awsome)
