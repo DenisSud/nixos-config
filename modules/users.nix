@@ -10,6 +10,7 @@
       # Apps
       obsidian # note taking
       ticktick # for task managment
+      telegram-desktop
       protonvpn-gui # free vpn
       vscode # IDE
       youtube-music # for music
