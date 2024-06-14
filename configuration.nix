@@ -82,6 +82,7 @@
 
     gnome.excludePackages = (with pkgs; [
       gnome-text-editor
+      gnome-camera
       gnome-console
       gnome-photos
       gnome-tour
