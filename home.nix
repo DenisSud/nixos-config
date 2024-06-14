@@ -13,13 +13,13 @@
     };
 
     fzf = {
-      enable = true;
+      enable = false;
       enableZshIntegration = true;
       tmux.enableShellIntegration = true;
     };
 
     thefuck = {
-      enable = true;
+      enable = false;
       enableZshIntegration = true;
       enableBashIntegration = true;
       enableInstantMode = true;
@@ -43,14 +43,14 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "thefuck" ];
+        plugins = [ "git" ];
         theme = "minimal";
       };
 
     };
 
     kitty = {
-      enable = true;
+      enable = false;
       # shellIntegration.enableZshIntegration = true;
       settings = {
         confirm_os_window_close = 0;

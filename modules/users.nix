@@ -20,6 +20,7 @@
       croc # file transfer utility (awsome)
       gnused # stream editor (awdome, google it)
       zsh # shell
+      thefuck
       pandoc # file conversion 
       home-manager # manage dotfiles
       tree # getter ls tool
@@ -43,7 +44,6 @@
   };
   
   programs = {
-    thefuck.enable = true;
     zsh.enable = true;
   };
 }
