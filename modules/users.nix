@@ -11,7 +11,7 @@
       obsidian # note taking
       ticktick # for task managment
       protonvpn-gui # free vpn
-      zed-editor # modern IDE
+      vscode # IDE
       youtube-music # for music
       gnome.gnome-terminal 
 
