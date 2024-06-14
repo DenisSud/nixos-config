@@ -17,6 +17,7 @@
       # Shell stuff
       bat
       jq
+      yq
       ueberzug
       ranger # file manager
       aria2 # fast downloading utility
