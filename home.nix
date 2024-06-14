@@ -14,7 +14,7 @@
 
     fzf = {
       enable = true;
-      defautlCommand = '' ag --hidden --ignore .git -l -g "" '';
+      defaultCommand = '' ag --hidden --ignore .git -l -g "" '';
       enableZshIntegration = true;
       tmux.enableShellIntegration = true;
     };
