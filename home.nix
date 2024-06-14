@@ -43,7 +43,7 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "thefuck" "fzf" ];
+        plugins = [ "git" "thefuck" "fzf-zsh-plugin" ];
         theme = "minimal";
       };
 
