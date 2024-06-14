@@ -2,7 +2,7 @@
 {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
-    image = /home/denis/Pictures/wallpaperflare.com_wallpaper(1).jpg;
+    image = /home/denis/Pictures/dark_guy_1.jpg;
 
     # cursor.package = pkgs.apple-cursor;
 
