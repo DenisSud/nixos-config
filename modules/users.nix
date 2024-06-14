@@ -16,6 +16,7 @@
       gnome.gnome-terminal 
 
       # Shell stuff
+      gcc
       bat
       jq
       yq
