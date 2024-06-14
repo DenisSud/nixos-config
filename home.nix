@@ -189,7 +189,7 @@
       enable = true;
     };
 
-    ls = {
+    lf = {
       enable = true;
       ppreviewer.source = pkgs.writeShellScript "pv.sh" ''
          #!/bin/sh
