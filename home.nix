@@ -191,7 +191,7 @@
 
     lf = {
       enable = true;
-      ppreviewer.source = pkgs.writeShellScript "pv.sh" ''
+      previewer.source = pkgs.writeShellScript "pv.sh" ''
          #!/bin/sh
 
          case "$1" in
