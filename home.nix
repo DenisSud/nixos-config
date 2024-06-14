@@ -9,7 +9,7 @@
     home-manager.enable = true;
 
     gnome-terminal = { 
-      enable = true;
+      enable = false;
     };
 
     fzf = {
