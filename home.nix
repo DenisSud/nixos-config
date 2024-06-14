@@ -8,13 +8,6 @@
 
     home-manager.enable = true;
 
-    neovim = {
-      enable = true;
-
-      viAlias = true;
-      vimAlias = true;
-    };
-  
     fzf = {
       enable = true;
       enableZshIntegration = true;
@@ -40,7 +33,7 @@
         pbpaste='' xclip -selection clipboard -o '';
         gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
         gs='' git status '';
-        config='' hx ~/nixos '';
+        config='' nvim ~/nixos '';
         rebuild='' cd /home/denis/nixos && git add . && git commit -m "updated conifg" && sudo nixos-rebuild switch --flake ~/nixos#default --impure && git push && cd - '';
       };
 
