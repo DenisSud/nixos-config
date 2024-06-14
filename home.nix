@@ -33,6 +33,7 @@
 
       shellAliases = {
         ll = "ls -l";
+        cl = "clear"
         pbcopy='' xclip -selection clipboard '';
         pbpaste='' xclip -selection clipboard -o '';
         gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
