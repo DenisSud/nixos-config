@@ -16,6 +16,7 @@
 
       # Shell stuff
       bat
+      ueberzug
       ranger # file manager
       aria2 # fast downloading utility
       croc # file transfer utility (awsome)
