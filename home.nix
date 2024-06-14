@@ -16,7 +16,6 @@
       enable = true;
       defaultCommand = '' ag --hidden --ignore .git -l -g "" '';
       enableZshIntegration = true;
-      tmux.enableShellIntegration = true;
     };
 
     thefuck = {
