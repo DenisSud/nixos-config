@@ -8,17 +8,25 @@
 
     home-manager.enable = true;
 
+    neovim = {
+      enable = true;
+
+      viAlias = true;
+      vimAlias = true;
+    };
+  
     fzf = {
       enable = true;
       enableZshIntegration = true;
       tmux.enableShellIntegration = true;
     };
 
-    # thefuck = {
-    #   enable = true;
-    #   enableZshIntegration = true;
-    #   enableInstantMode = true;
-    # };
+    thefuck = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableInstantMode = true;
+    };
     
     zsh = {
       enable = true;
@@ -50,13 +58,10 @@
       settings = {
         confirm_os_window_close = 0;
       };
-      # extraConfig = ''
-      #   launch sh -c "tmux"
-      # '';
     };   
 
     helix = {
-      enable = true;
+      enable = false;
       defaultEditor = true;
       extraPackages = [ pkgs.marksman pkgs.nil pkgs.gopls pkgs.python3Packages.python-lsp-server pkgs.rust-analyzer ];
       settings = {
@@ -94,6 +99,7 @@
 
       };
     };
+
 
     tmux = {
       enable = true;

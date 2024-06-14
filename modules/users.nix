@@ -17,6 +17,7 @@
       kitty
 
       # Shell stuff
+      vimPlugins.nvchad
       ranger # file manager
       aria2 # fast downloading utility
       croc # file transfer utility (awsome)

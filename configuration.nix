@@ -73,7 +73,7 @@
       firefox
       fzf
       git
-      helix
+      neovim
       xclip
       ffmpeg
       btop
