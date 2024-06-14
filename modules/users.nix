@@ -8,8 +8,6 @@
     packages = with pkgs; [
 
       # Apps
-      telegram-desktop # messaging
-      # obs-studio # screen recording
       obsidian # note taking
       protonvpn-gui # free vpn
       zed-editor # modern IDE
@@ -23,9 +21,7 @@
       gnused # stream editor (awdome, google it)
       zsh # shell
       pandoc # file conversion 
-      thefuck # command autocorrect
       home-manager # manage dotfiles
-      # docker # for containerization
       tree # getter ls tool
       rustup # rust toolkit
       python3 # python
@@ -34,7 +30,6 @@
       git # version controll
       gh # github cli interface
       ollama # local llms 
-      gnumake # c and cpp compiler
 
       # LSPs
       nil # for nix
@@ -48,6 +43,7 @@
   };
   
   programs = {
+    thefuck.enable = true;
     zsh.enable = true;
   };
 }
