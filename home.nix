@@ -8,6 +8,10 @@
 
     home-manager.enable = true;
 
+    gnome-terminal = { 
+      enable = true;
+    };
+
     fzf = {
       enable = true;
       enableZshIntegration = true;

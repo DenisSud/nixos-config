@@ -14,7 +14,7 @@
       protonvpn-gui # free vpn
       zed-editor # modern IDE
       youtube-music # for music
-      kitty
+      gnome-terminal 
 
       # Shell stuff
       ranger # file manager
