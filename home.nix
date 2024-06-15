@@ -31,7 +31,8 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        l = "eza -l --icons --git -a";
+        l = '' eza -l --icons --git -a '';
+        lt = '' eza --tree --level=2 --long --icons --git '';
         cl = "clear";
         pbcopy='' xclip -selection clipboard '';
         pbpaste='' xclip -selection clipboard -o '';
