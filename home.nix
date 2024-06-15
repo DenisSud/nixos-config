@@ -47,7 +47,7 @@
 
       shellAliases = {
         v = '' nvim '';
-        vf = '' nvim $(fzf) '');
+        vf = '' nvim $(fzf) '';
         l = '' eza -l --icons --git -a '';
         lt = '' eza --tree --level=2 --long --icons --git '';
         cl = "clear";
