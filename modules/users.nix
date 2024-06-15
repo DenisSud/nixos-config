@@ -14,8 +14,8 @@
       protonvpn-gui # free vpn
       vscode # IDE
       youtube-music # for music
-      gnome.gnome-terminal 
-
+      westerm
+      
       # Shell stuff
       gcc
       bat
