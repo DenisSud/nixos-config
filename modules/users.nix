@@ -17,6 +17,8 @@
       wezterm # fast minimal terminal
       
       # Shell stuff
+      lazygit
+      lazydocker
       eza
       yazi # file manager
       zoxide # better cd (awsome)

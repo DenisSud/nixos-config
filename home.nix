@@ -7,8 +7,8 @@
 
     home-manager.enable = true;
 
-    gnome-terminal = { 
-      enable = false;
+    lazygit = {
+      enable = true;
     };
 
     fzf = {
