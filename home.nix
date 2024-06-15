@@ -7,6 +7,10 @@
 
     home-manager.enable = true;
 
+    zoxide = {
+      enable = true;
+    };
+  
     lazygit = {
       enable = true;
     };
