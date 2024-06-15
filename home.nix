@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-home
 {
   home.username = "denis";
   home.homeDirectory = "/home/denis";
@@ -32,7 +31,7 @@ home
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        ll = "eza -l --icons --git -a";
+        l = "eza -l --icons --git -a";
         cl = "clear";
         pbcopy='' xclip -selection clipboard '';
         pbpaste='' xclip -selection clipboard -o '';
