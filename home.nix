@@ -11,6 +11,11 @@
       enable = true;
       enableZshIntegration = true;
     };
+
+    yazi = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     
     wezterm = {
       enable = true;
