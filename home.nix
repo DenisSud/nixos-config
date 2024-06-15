@@ -14,7 +14,7 @@
     wezterm = {
       enable = true;
       enableZshIntegration = true;
-    }
+    };
   
     lazygit = {
       enable = true;
