@@ -14,9 +14,10 @@
       protonvpn-gui # free vpn
       vscode # IDE
       youtube-music # for music
-      westerm
+      wezterm
       
       # Shell stuff
+      yazi
       gcc
       bat
       jq
