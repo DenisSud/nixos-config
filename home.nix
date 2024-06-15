@@ -9,6 +9,7 @@
 
     zoxide = {
       enable = true;
+      enableZshIntegration = true;
     };
     
     wezterm = {
