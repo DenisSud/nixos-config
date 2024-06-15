@@ -14,17 +14,17 @@
       protonvpn-gui # free vpn
       vscode # IDE
       youtube-music # for music
-      wezterm
+      wezterm # fast minimal terminal
       
       # Shell stuff
-      yazi
-      gcc
-      bat
-      jq
-      yq
-      ueberzug
-      ripgrep
-      ranger # file manager
+      eza
+      yazi # file manager
+      zoxide # better cd (awsome)
+      gcc # compiler
+      bat # file viewer
+      jq # for working with json
+      yq # for working with yaml
+      ripgrep # for nvim
       aria2 # fast downloading utility
       croc # file transfer utility (awsome)
       gnused # stream editor (awdome, google it)
