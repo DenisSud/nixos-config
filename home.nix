@@ -111,18 +111,10 @@
         bind-key C-a send-prefix
         set -g base-index 1
 
-        # Easy config reload
-        bind-key R source-file ~/.tmux.conf \; display-message "tmux.conf reloaded."
-
-        # vi is good
-        setw -g mode-keys vi
-
         # mouse behavior
         setw -g mouse on
 
         bind-key : command-prompt
-        bind-key r refresh-client
-        bind-key L clear-history
 
         bind-key n next-window
         bind-key N previous-window
@@ -160,28 +152,11 @@
         bind-key t next-window
         bind-key T previous-window
 
-        bind-key [ copy-mode
-        bind-key ] paste-buffer
-
-        # Setup 'v' to begin selection as in Vim
-        bind-key -T copy-mode-vi v send -X begin-selection
-        bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-
-        # Update default binding of `Enter` to also use copy-pipe
-        unbind -T copy-mode-vi Enter
-        bind-key -T copy-mode-vi Enter send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-
         # Status Bar
         set-option -g status-interval 1
 
-        set-option -g pane-active-border-style fg=yellow
-        set-option -g pane-border-style fg=cyan
-
         # Enable native Mac OS X copy/paste
         # set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
-
-        # Allow the arrow key to be used immediately after changing windows
-        set-option -g repeat-time 0
 
       '';
     };
