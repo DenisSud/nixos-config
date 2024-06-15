@@ -10,6 +10,11 @@
     zoxide = {
       enable = true;
     };
+    
+    wezterm = {
+      enable = true;
+      enableZshIntegration = true;
+    }
   
     lazygit = {
       enable = true;
