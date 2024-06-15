@@ -28,7 +28,7 @@
 
     fzf = {
       enable = true;
-      defaultCommand = '' ag --hidden --ignore .git -l -g "" '';
+      # defaultCommand = '' ag --hidden --ignore .git -l -g "" '';
       enableZshIntegration = true;
     };
 
