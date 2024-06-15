@@ -46,6 +46,7 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
+        v = '' nvim ''
         l = '' eza -l --icons --git -a '';
         lt = '' eza --tree --level=2 --long --icons --git '';
         cl = "clear";
