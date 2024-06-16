@@ -36,7 +36,7 @@
       home-manager # manage dotfiles
       tree # getter ls tool
       rustup # rust toolkit
-      python3.12 # python
+      python312 # python
       pipx # for installing packages like fabric
       go # go compiler and
       git # version controll
