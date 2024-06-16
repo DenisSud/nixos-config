@@ -17,7 +17,7 @@
       wezterm # fast minimal terminal
       
       # Shell stuff
-      tt
+      ttyper
       helix
       lazygit
       lazydocker
