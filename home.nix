@@ -7,7 +7,7 @@
 
     home-manager.enable = true;
 
-    vim = {
+    neovim = {
       # Add Telescope plugin
       plugins = with pkgs; [
         ripgrep
