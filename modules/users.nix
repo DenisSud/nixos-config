@@ -51,10 +51,6 @@
   
   programs = {
     zsh.enable = true;
-    steam = {
-      enable = true;
-      gamescopeSession = true;
-    };
     gamemode.enable = true;
   };
 }
