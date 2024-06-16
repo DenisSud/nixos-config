@@ -40,6 +40,8 @@
       tree # getter ls tool
       rustup # rust toolkit
       python312 # python
+      python312Packages.jupyter-core
+      pipx
       go # go compiler and
       git # version controll
       ollama # local llms 
