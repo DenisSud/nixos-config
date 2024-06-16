@@ -16,8 +16,6 @@
         harpoon
       ];
 
-      # Configure LSP server (replace 'pylsp' with your choice)
-      additionalPackages = with pkgs; [ python312Packages.python-lsp-server rust-analyzer gopls nil ];
     };
 
 
