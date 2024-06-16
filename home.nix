@@ -12,6 +12,8 @@
       plugins = with pkgs; [
         ripgrep
         telescope
+        mason
+        harpoon
       ];
 
       # Configure LSP server (replace 'pylsp' with your choice)
