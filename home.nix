@@ -71,6 +71,14 @@
       settings = {
 
         editor = {
+
+        keys.insert = {
+          
+        }
+
+        keys.insert = {
+          
+        }
           mouse = false;
           auto-save = true;
           bufferline = "multiple";
@@ -95,6 +103,9 @@
           esc = ["collapse_selection" "keep_primary_selection"];
           X = "extend_line_above";
         };
+
+        keys.insert = {
+        }
 
         editor.lsp = {
           display-messages = true;
