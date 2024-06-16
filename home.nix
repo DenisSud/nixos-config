@@ -9,7 +9,7 @@
 
     vscode = {
       enable = true;
-      extensions = [ vscode-extensions.vscodevim.vim vscode-extensions.continue.continue ];
+      extensions = [ pkgs.vscode-extensions.vscodevim.vim pkgs.scode-extensions.continue.continue ];
     };
     
     zoxide = {
