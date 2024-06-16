@@ -15,6 +15,8 @@
       vscode # IDE
       youtube-music # for music
       wezterm # fast minimal terminal
+      mangohud # for monitoring gaming metarics
+      lutris
       
       # Shell stuff
       ttyper
@@ -49,5 +51,10 @@
   
   programs = {
     zsh.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession = true;
+    };
+    gamemode.enable = true;
   };
 }

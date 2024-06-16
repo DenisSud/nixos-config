@@ -15,7 +15,8 @@
       package = config.boot.kernelPackages.nvidiaPackages.production;
       nvidiaSettings = true;
       prime = {
-        offload = {
+        sync.enable = false; # enable for maximum performance
+        offload = { # enable for better power managment
 			    enable = true;
 			    enableOffloadCmd = true;
 		    };
@@ -27,6 +28,7 @@
     opengl = {
       enable = true;
       driSupport = true;
+      driSupport32Bit = true;
     };
   };
 
