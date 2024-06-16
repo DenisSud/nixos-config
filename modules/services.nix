@@ -8,10 +8,18 @@
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
       videoDrivers = [ "nvidia" "amd" ];
-      xkb.layout = "us,altgr-intl,ctrl:nocaps";
       excludePackages = (with pkgs; [
           xterm
       ]);
+    };
+    keyd = {
+      enable = true;
+      settings = {
+        global = {
+          # Remap Caps Lock to Esc
+          "Caps_Lock" = "Escape";
+        };
+      };
     };
 
     ollama = {
