@@ -9,7 +9,7 @@
 
     vscode = {
       enable = true;
-      extensions = [ "vscode-extensions.vscodevim.vim" "vscode-extensions.continue.continue" ];
+      extensions = [ vscode-extensions.vscodevim.vim, vscode-extensions.continue.continue ];
     };
     
     zoxide = {
