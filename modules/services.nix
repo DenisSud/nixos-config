@@ -12,15 +12,6 @@
           xterm
       ]);
     };
-    keyd = {
-      enable = true;
-      settings = {
-        global = {
-          # Remap Caps Lock to Esc
-          "Caps_Lock" = "Escape";
-        };
-      };
-    };
 
     ollama = {
       enable = true;
