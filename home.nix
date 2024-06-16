@@ -7,6 +7,11 @@
 
     home-manager.enable = true;
 
+    vscode = {
+      enable = true;
+      extensions = [ "vscode-extensions.vscodevim.vim" "vscode-extensions.continue.continue" ]
+    };
+    
     zoxide = {
       enable = true;
       enableZshIntegration = true;
