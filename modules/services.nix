@@ -7,9 +7,8 @@
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      xkb.options = "caps:swapescapeesc:swapcaps";
       videoDrivers = [ "nvidia" "amd" ];
-      layout = "us,altgr-intl,ctrl:nocaps";
+      xkb.layout = "us,altgr-intl,ctrl:nocaps";
       excludePackages = (with pkgs; [
           xterm
       ]);
