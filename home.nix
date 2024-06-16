@@ -7,11 +7,6 @@
 
     home-manager.enable = true;
 
-    vscode = {
-      enable = true;
-      extensions = [ pkgs.vscode-extensions.vscodevim.vim pkgs.vscode-extensions.continue.continue ];
-    };
-    
     zoxide = {
       enable = true;
       enableZshIntegration = true;
