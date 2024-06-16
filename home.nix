@@ -7,6 +7,20 @@
 
     home-manager.enable = true;
 
+    programs.vim = {
+      inherit pkgs vim;
+
+      # Add Telescope plugin
+      plugins = with pkgs; [
+        ripgrep
+        telescope
+      ];
+
+      # Configure LSP server (replace 'pylsp' with your choice)
+      additionalPackages = with pkgs; [ python-lsp-server rust-analyzer gopls nil ];
+    };
+
+
     zoxide = {
       enable = true;
       enableZshIntegration = true;
@@ -45,8 +59,8 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        v = '' nvim '';
-        vf = '' nvim $(fzf) '';
+        v = '' vim '';
+        vf = '' vim $(fzf) '';
         l = '' eza -l --icons --git -a '';
         lt = '' eza --tree --level=2 --long --icons --git '';
         cl = "clear";
