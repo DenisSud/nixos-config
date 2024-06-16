@@ -16,8 +16,7 @@
       youtube-music # for music
       wezterm # fast minimal terminal
       mangohud # for monitoring gaming metarics
-      lutris
-      wine
+      bottles
       
       # Shell stuff
       ttyper
