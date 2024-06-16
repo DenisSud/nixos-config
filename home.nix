@@ -64,14 +64,6 @@
 
     };
 
-    kitty = {
-      enable = false;
-      # shellIntegration.enableZshIntegration = true;
-      settings = {
-        confirm_os_window_close = 0;
-      };
-    };   
-
     helix = {
       enable = true;
       defaultEditor = true;

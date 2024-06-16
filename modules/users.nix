@@ -38,18 +38,9 @@
       tree # getter ls tool
       rustup # rust toolkit
       python312 # python
-      pipx # for installing packages like fabric
       go # go compiler and
       git # version controll
-      gh # github cli interface
       ollama # local llms 
-
-      # LSPs
-      nil # for nix
-      markdown-oxide # for markdown
-      gopls # for go 
-      rust-analyzer # for rust
-      python311Packages.python-lsp-server # for python
 
     ];
     shell = pkgs.zsh;
