@@ -9,7 +9,7 @@
       desktopManager.gnome.enable = true;
       xkb.options = "caps:swapescapeesc:swapcaps";
       videoDrivers = [ "nvidia" "amd" ];
-      services.xserver.layout = "us,altgr-intl,ctrl:nocaps";
+      layout = "us,altgr-intl,ctrl:nocaps";
       excludePackages = (with pkgs; [
           xterm
       ]);
