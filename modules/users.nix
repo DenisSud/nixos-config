@@ -17,6 +17,7 @@
       wezterm # fast minimal terminal
       mangohud # for monitoring gaming metarics
       lutris
+      wine
       
       # Shell stuff
       ttyper
