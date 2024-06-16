@@ -16,8 +16,6 @@
       youtube-music # for music
       wezterm # fast minimal terminal
       mangohud # for monitoring gaming metarics
-      bottles
-      wineWowPackages.stable
       
       # Shell stuff
       ttyper
