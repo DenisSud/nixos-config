@@ -124,15 +124,14 @@
 
         bind-key n next-window
         bind-key N previous-window
-        bind-key enter next-layout
 
         # use vim-like keys for splits and windows
-        bind-key v split-window -h
-        bind-key s split-window -v
-        bind-key h select-pane -L
-        bind-key j select-pane -D
-        bind-key k select-pane -U
-        bind-key l select-pane -R
+        # bind-key v split-window -h
+        # bind-key s split-window -v
+        # bind-key h select-pane -L
+        # bind-key j select-pane -D
+        # bind-key k select-pane -U
+        # bind-key l select-pane -R
 
         # smart pane switching with awareness of vim splits
         bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
@@ -142,27 +141,8 @@
         bind -n 'C-\' run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
         bind C-l send-keys 'C-l'
 
-        bind-key C-o rotate-window
-
-        bind-key + select-layout main-horizontal
-        bind-key = select-layout main-vertical
-
-        set-window-option -g other-pane-height 25
-        set-window-option -g other-pane-width 80
-        set-window-option -g display-panes-time 1500
-        set-window-option -g window-status-current-style fg=magenta
-
-        bind-key a last-pane
-        bind-key q display-panes
-        bind-key c new-window
-        bind-key t next-window
-        bind-key T previous-window
-
-        # Status Bar
-        set-option -g status-interval 1
-
         # Enable native Mac OS X copy/paste
-        # set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
+        set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
 
       '';
     };
