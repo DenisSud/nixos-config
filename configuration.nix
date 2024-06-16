@@ -24,12 +24,6 @@
     };
   };
 
-    keyboards = {
-      default = {
-        "Caps_Lock" = "Escape";
-      };
-    };
-
   # virtualisation.docker.enable = true;
 
   # Set your time zone.
