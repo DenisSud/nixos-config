@@ -88,7 +88,7 @@
     };   
 
     helix = {
-      enable = false;
+      enable = true;
       defaultEditor = true;
       extraPackages = [ pkgs.marksman pkgs.nil pkgs.gopls pkgs.python3Packages.python-lsp-server pkgs.rust-analyzer ];
       settings = {
