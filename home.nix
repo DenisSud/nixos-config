@@ -7,7 +7,7 @@
 
     home-manager.enable = true;
 
-    vim = {
+    neovim = {
       inherit pkgs vim;
 
       # Add Telescope plugin
