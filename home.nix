@@ -45,8 +45,6 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        v = '' vim '';
-        vf = '' vim $(fzf) '';
         l = '' eza -l --icons --git -a '';
         lt = '' eza --tree --level=2 --long --icons --git '';
         cl = "clear";
@@ -54,7 +52,7 @@
         pbpaste='' xclip -selection clipboard -o '';
         gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
         gs='' git status '';
-        config='' nvim ~/nixos '';
+        config='' z ~/nixos hx . '';
         rebuild='' cd /home/denis/nixos && git add . && git commit -m "updated conifg" && sudo nixos-rebuild switch --flake ~/nixos#default --impure && git push && cd - '';
       };
 
