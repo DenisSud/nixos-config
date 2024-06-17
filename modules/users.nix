@@ -8,6 +8,7 @@
     packages = with pkgs; [
 
       # Apps
+      gnome.gnome-tweaks
       obsidian # note taking
       ticktick # for task managment
       telegram-desktop
