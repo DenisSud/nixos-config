@@ -19,10 +19,8 @@
       mangohud # for monitoring gaming metarics
       
       # Shell stuff
-      ttyper
+      kaggle
       helix
-      lazygit
-      lazydocker
       eza
       yazi # file manager
       zoxide # better cd (awsome)
@@ -40,7 +38,7 @@
       home-manager # manage dotfiles
       tree # getter ls tool
       rustup # rust toolkit
-      python312 # python
+      python311 # python
       python312Packages.jupyter-core
       pipx
       go # go compiler and
