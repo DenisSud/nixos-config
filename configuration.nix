@@ -75,7 +75,7 @@
       xclip
       ffmpeg
       btop
-      nvtop
+      nvtopPackages.full
       neofetch
     ];
 
