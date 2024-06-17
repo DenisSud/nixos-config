@@ -6,7 +6,10 @@
     xserver = {
       enable = true;
       xkb.options = "caps:swapescape";
-      displayManager.gdm.enable = true;
+      displayManager = {
+        gdm.enable = true;
+        wayland.enable = true;
+      };
       desktopManager.gnome.enable = true;
       videoDrivers = [ "nvidia" "amdgpu" ];
       excludePackages = (with pkgs; [
