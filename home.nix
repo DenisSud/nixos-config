@@ -106,8 +106,7 @@
 
 
     tmux = {
-      enable = true;
-      clock24 = true;
+      # enable = true;
       extraConfig = ''
         # vim style tmux config
 
