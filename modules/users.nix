@@ -39,6 +39,7 @@
       tree # getter ls tool
       rustup # rust toolkit
       python311 # python
+      python312Packages.ptpython
       python312Packages.jupyter-core
       pipx
       go # go compiler and
