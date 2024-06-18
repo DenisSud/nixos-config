@@ -52,6 +52,6 @@
   
   programs = {
     zsh.enable = true;
-    gamemode.enable = true;
+    hyprland.enable = true;
   };
 }

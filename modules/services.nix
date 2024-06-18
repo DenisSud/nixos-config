@@ -11,7 +11,7 @@
         wayland.enable = true;
       };
       desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" "amdgpu" ];
+      videoDrivers = [ "nvidia" "amdgpu" "amd" ];
       excludePackages = (with pkgs; [
           xterm
       ]);

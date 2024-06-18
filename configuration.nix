@@ -47,16 +47,10 @@
   security.polkit.enable = true;
 
   boot = {
-    loader.systemd-boot.configurationLimit = 20;
+    loader.systemd-boot.configurationLimit = 10;
     blacklistedKernelModules = [ "nouveau" "nvidiafb" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    # extraModprobeConfig = ''
-    #   options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    # '';
-    # extraModulePackages = with config.boot.kernelPackages; [
-    #   v4l2loopback
-    # ];
   };
 
   networking = {
@@ -115,8 +109,6 @@
       atomix # puzzle game
     ]);
   };  
-
-  services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
