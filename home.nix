@@ -7,6 +7,80 @@
 
     home-manager.enable = true;
 
+    wayland.windowManager.hyprland = {
+      enable = true;
+      extraConfig = ''
+        $mod = SUPER
+
+        bind = $mod, F, exec, firefox
+        bind = , Print, exec, grimblast copy area
+
+        workspace = 1, name:1
+        workspace = 2, name:2
+        workspace = 3, name:3
+        workspace = 4, name:4
+        workspace = 5, name:5
+        workspace = 6, name:6
+        workspace = 7, name:7
+        workspace = 8, name:8
+        workspace = 9, name:9
+        workspace = 10, name:10
+
+        bind = $mod, 1, workspace, 1
+        bind = $mod, 2, workspace, 2
+        bind = $mod, 3, workspace, 3
+        bind = $mod, 4, workspace, 4
+        bind = $mod, 5, workspace, 5
+        bind = $mod, 6, workspace, 6
+        bind = $mod, 7, workspace, 7
+        bind = $mod, 8, workspace, 8
+        bind = $mod, 9, workspace, 9
+        bind = $mod, 0, workspace, 10
+
+        bind = $mod SHIFT, 1, movetoworkspace, 1
+        bind = $mod SHIFT, 2, movetoworkspace, 2
+        bind = $mod SHIFT, 3, movetoworkspace, 3
+        bind = $mod SHIFT, 4, movetoworkspace, 4
+        bind = $mod SHIFT, 5, movetoworkspace, 5
+        bind = $mod SHIFT, 6, movetoworkspace, 6
+        bind = $mod SHIFT, 7, movetoworkspace, 7
+        bind = $mod SHIFT, 8, movetoworkspace, 8
+        bind = $mod SHIFT, 9, movetoworkspace, 9
+        bind = $mod SHIFT, 0, movetoworkspace, 10
+      '';
+    }; 
+    waybar = {
+      enable = true;
+      settings = {
+        modules = {
+          "workspaces" = {
+            type = "workspaces";
+            format = "{icon}";
+            on-scroll-up = "hyprctl dispatch workspace e+1";
+            on-scroll-down = "hyprctl dispatch workspace e-1";
+          };
+          "window" = {
+            type = "window";
+            format = "{title}";
+            max-length = 200;
+            separate-outputs = true;
+          };
+          "cpu" = {
+            type = "cpu";
+            format = "{usage}%";
+          };
+          "memory" = {
+            type = "memory";
+            format = "{usage}%";
+          };
+          "battery" = {
+            type = "battery";
+            format = "{percentage}%";
+          };
+        };
+      };
+    };
+
     zoxide = {
       enable = true;
       enableZshIntegration = true;

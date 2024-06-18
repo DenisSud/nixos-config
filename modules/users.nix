@@ -1,4 +1,4 @@
-{config, pkgs, inputs, ...}:
+jconfig, pkgs, inputs, ...}:
 {
   
   users.users.denis = { isNormalUser = true;
@@ -16,6 +16,7 @@
       youtube-music # for music
       wezterm # fast minimal terminal
       mangohud # for monitoring gaming metarics
+      waybar
       
       # Shell stuff
       kaggle
