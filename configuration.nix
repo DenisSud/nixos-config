@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
 
@@ -6,7 +6,6 @@
     zsh.enable = true;
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages."{pkgs.system}".hyprland;
     };
   };
 
