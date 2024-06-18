@@ -1,8 +1,7 @@
 {config, pkgs, ...}:
 {
   
-  users.users.denis = {
-    isNormalUser = true;
+  users.users.denis = { isNormalUser = true;
     password = "1423";
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -21,6 +20,7 @@
       # Shell stuff
       kaggle
       helix
+      tmux
       eza
       yazi # file manager
       zoxide # better cd (awsome)
