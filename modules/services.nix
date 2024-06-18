@@ -8,7 +8,7 @@
       xkb.options = "caps:swapescape";
       displayManager.gdm = {
         enable = true;
-        wayland.enable = true;
+        # wayland.enable = true;
       };
       desktopManager.gnome.enable = true;
       videoDrivers = [ "nvidia" "amdgpu" "amd" ];
