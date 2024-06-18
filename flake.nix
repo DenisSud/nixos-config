@@ -17,7 +17,6 @@
   {
 
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-    extraSpecialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
         inputs.stylix.nixosModules.stylix
