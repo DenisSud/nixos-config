@@ -1,4 +1,4 @@
-jconfig, pkgs, inputs, ...}:
+{ config, pkgs, inputs, ...}:
 {
   
   users.users.denis = { isNormalUser = true;
