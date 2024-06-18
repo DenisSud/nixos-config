@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, inputs, ...}:
 {
   
   users.users.denis = { isNormalUser = true;
@@ -52,6 +52,9 @@
   
   programs = {
     zsh.enable = true;
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages."{pkgs.system}".hyprland;
+    };
   };
 }

@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     stylix.url = "github:danth/stylix";
   };
 
