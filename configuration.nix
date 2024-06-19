@@ -16,7 +16,7 @@
       ./modules/rice.nix
       ./modules/services.nix
       ./modules/users.nix
-      ./modules/vim.nix
+      # ./modules/vim.nix
       <home-manager/nixos>
     ];
 
