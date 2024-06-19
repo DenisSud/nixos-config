@@ -181,7 +181,7 @@
 
 
     tmux = {
-      # enable = true;
+      enable = true;
       extraConfig = ''
         # vim style tmux config
 
