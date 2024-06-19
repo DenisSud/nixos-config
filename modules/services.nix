@@ -3,6 +3,8 @@
 
   services = {
 
+    services.supergfxd.enable = true;
+
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
