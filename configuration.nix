@@ -61,7 +61,7 @@
   };
 
   networking = {
-    hostName = "g14 nixos";
+    hostName = "g14-nixos";
   };
   
   environment = { 
