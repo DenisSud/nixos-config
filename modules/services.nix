@@ -5,21 +5,12 @@
 
     xserver = {
       enable = true;
-      xkb.options = "caps:swapescape";
-      displayManager.gdm = {
-        enable = true;
-        # wayland.enable = true;
-      };
+      # displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" "amdgpu" "amd" ];
+      videoDrivers = [ "nvidia" "amdgpu" ];
       excludePackages = (with pkgs; [
           xterm
       ]);
-    };
-
-    ollama = {
-      enable = true;
-      # acceleration = "cuda";
     };
 
     openssh.enable = true;
