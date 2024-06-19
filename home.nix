@@ -50,6 +50,10 @@
 
     home-manager.enable = true;
 
+    alacrity = {
+      enable = true;
+    };
+    
     waybar = {
       enable = true;
       settings = {
