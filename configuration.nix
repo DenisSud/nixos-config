@@ -73,9 +73,7 @@
       firefox
       fzf
       git
-      neovim
       xclip
-      ffmpeg
       btop
       nvtopPackages.full
       neofetch

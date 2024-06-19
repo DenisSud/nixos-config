@@ -11,12 +11,9 @@
       obsidian # note taking
       ticktick # for task managment
       telegram-desktop
-      protonvpn-gui # free vpn
       vscode # IDE
       youtube-music # for music
       wezterm # fast minimal terminal
-      mangohud # for monitoring gaming metarics
-      waybar
       mozillavpn
       
       # Shell stuff
