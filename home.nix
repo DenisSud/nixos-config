@@ -55,7 +55,7 @@
     };
     
     waybar = {
-      enable = true;
+      enable = false;
       settings = {
         modules = {
           "workspaces" = {
