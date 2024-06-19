@@ -14,7 +14,7 @@
       vscode # IDE
       youtube-music # for music
       wezterm # fast minimal terminal
-      mozillavpn
+      # mozillavpn
       
       # Shell stuff
       kaggle
