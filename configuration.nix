@@ -68,7 +68,7 @@
     systemPackages = with pkgs; [
       gnomeExtensions.vitals
       supergfxctl
-      asusd
+      asusctl
       libappimage
       curl
       firefox
