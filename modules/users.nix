@@ -13,13 +13,8 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      alacritty # fast minimal terminal
-      # mozillavpn
       
       # Shell stuff
-      kaggle
-      helix
-      tmux
       eza
       yazi # file manager
       zoxide # better cd (awsome)
