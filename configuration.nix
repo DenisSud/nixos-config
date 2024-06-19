@@ -26,7 +26,6 @@
   };
 
   home-manager = {
-    # extraSpecialArgs = {inherit inputs; };
     users = {
       "denis" = import ./home.nix; 
     };
@@ -52,7 +51,7 @@
 
 
   # Use the systemd-boot EFI boot loader.
-  security.polkit.enable = true;
+  # security.polkit.enable = true;
 
   boot = {
     loader.systemd-boot.configurationLimit = 10;
@@ -62,7 +61,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "g14 nixos";
   };
   
   environment = { 
