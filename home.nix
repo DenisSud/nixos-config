@@ -50,7 +50,7 @@
 
     home-manager.enable = true;
 
-    alacrity = {
+    alacritty = {
       enable = true;
     };
     
