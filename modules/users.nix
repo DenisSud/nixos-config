@@ -11,7 +11,7 @@
       obsidian # note taking
       ticktick # for task managment
       telegram-desktop
-      vscode # IDE
+      zed-editor# IDE
       youtube-music # for music
       wezterm # fast minimal terminal
       # mozillavpn
