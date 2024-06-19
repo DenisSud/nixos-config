@@ -13,7 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      Alacritty # fast minimal terminal
+      alacritty # fast minimal terminal
       # mozillavpn
       
       # Shell stuff
