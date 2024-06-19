@@ -67,6 +67,8 @@
   environment = { 
     systemPackages = with pkgs; [
       gnomeExtensions.vitals
+      supergfxctl
+      asusd
       libappimage
       curl
       firefox
