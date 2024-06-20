@@ -74,7 +74,7 @@ in
             clangd.enable = true;
             gopls.enable = true;
             rust-analyzer.enable = true;
-            nil.enable = true;
+            nixd.enable = true;
             python-lsp-server.enable = true;
           };
         };
