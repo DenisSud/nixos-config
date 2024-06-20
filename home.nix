@@ -53,6 +53,10 @@
     alacritty = {
       enable = true;
     };
+
+    nixvim = {
+      enable = true;
+    };
     
     waybar = {
       enable = false;

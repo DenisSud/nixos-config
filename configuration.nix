@@ -4,7 +4,6 @@
 
   programs = {
     zsh.enable = true;
-    nixvim.enable = true;
     hyprland = {
       enable = false;
     };
