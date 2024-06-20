@@ -80,9 +80,7 @@
 
         mason-nvim
 
-        cmp_luasnip
-
-        cmp-nvim-lsp
+	nvim-cmp
 
         friendly-snippets
 
