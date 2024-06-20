@@ -152,7 +152,7 @@
     helix = {
       enable = true;
       defaultEditor = true;
-      extraPackages = [ pkgs.marksman pkgs.nil pkgs.gopls pkgs.python3Packages.python-lsp-server pkgs.rust-analyzer pkgs.dockerfile-language-server-nodejs ];
+      extraPackages = [ pkgs.marksman pkgs.nil pkgs.gopls pkgs.python3Packages.python-lsp-server pkgs.rust-analyzer pkgs.dockerfile-language-server-nodejs pkgs.docker-compose-language-service ];
       settings = {
 
         editor = {
