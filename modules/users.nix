@@ -13,8 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      vim
-      
+           
       # Shell stuff
       eza
       yazi # file manager

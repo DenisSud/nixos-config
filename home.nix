@@ -92,7 +92,7 @@ in
 
         };
 
-        nvim-cmp = {
+        cmp = {
           enable = true;
           autoEnableSources = true;
         };
