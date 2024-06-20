@@ -92,8 +92,8 @@ in
 
         };
 
-        cmp = {
-          enble = true;
+        nvim-cmp = {
+          enable = true;
           autoEnableSources = true;
           sources = [
             {name = "nvim_lsp";}
