@@ -72,7 +72,7 @@
         pkgs.vimPlugins.telescope-nvim 
 
         pkgs.vimPlugins.mason-nvim
-      ]
+      ];
     };
   
     waybar = {
