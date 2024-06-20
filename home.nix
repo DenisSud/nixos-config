@@ -90,8 +90,6 @@ in
             "K" = "hover";
           };
 
-          rust-tools.enable = true;
-
         };
 
         nvim-cmp = {
