@@ -56,22 +56,53 @@
     };
 
     neovim = {
+
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+	
       enable = true;
       extraConfig = ''
-      
+     	 
       '';
-      plugins = [
-        pkgs.vimPlugins.nvim-lspconfig
+      plugins = with pkgs.vimPlugins; [
+        nvim-lspconfig
 
-        pkgs.vimPlugins.comment-nvim
+        comment-nvim
         
-        pkgs.vimPlugins.kanagawa-nvim
+        kanagawa-nvim
 
-        pkgs.vimPlugins.harpoon
+        harpoon
 
-        pkgs.vimPlugins.telescope-nvim 
+        telescope-nvim 
 
-        pkgs.vimPlugins.mason-nvim
+        telescope-fzf-native-nvim 
+
+        mason-nvim
+
+        cmp_luasnip
+
+        cmp-nvim-lsp
+
+        friendly-snippets
+
+        friendly-snippets
+
+	rust-tools-nvim
+
+        {
+          plugin = (nvim-treesitter.withPlugins (p: [
+            p.tree-sitter-nix
+            p.tree-sitter-rust
+            p.tree-sitter-go
+            p.tree-sitter-vim
+            p.tree-sitter-bash
+            p.tree-sitter-lua
+            p.tree-sitter-python
+            p.tree-sitter-json
+          ]));
+          config = toLuaFile ./nvim/plugin/treesitter.lua;
+	}
       ];
     };
   
