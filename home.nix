@@ -1,14 +1,5 @@
 { config, pkgs, ... }:
-let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-  });
-in
 {
-
-  imports = [
-    nixvim.homeManagerModules.nixvim
-  ];
 
   home.username = "denis";
   home.homeDirectory = "/home/denis";
@@ -63,46 +54,7 @@ in
     alacritty = {
       enable = true;
     };
-
-    nixvim = {
-      enable = true;
-      plugins = {
-        lsp = {
-          enable = true;
-          servers = {
-            bashls.enable = true;
-            clangd.enable = true;
-            gopls.enable = true;
-            rust-analyzer = {
-              enable = true;
-              installCargo = true;
-              installRustc = true;
-            };
-            nixd.enable = true;
-            # python-lsp-server.enable = true;
-          };
-
-          keymaps.lspBuf = {
-            "gd" = "definition";
-            "gD" = "references";
-            "gt" = "type_definition";
-            "gi" = "implementation";
-            "K" = "hover";
-          };
-
-        };
-
-        cmp = {
-          enable = true;
-          autoEnableSources = true;
-        };
-
-        telescope = {
-          enable = true;
-        };
-      };
-    };
-    
+  
     waybar = {
       enable = false;
       settings = {
