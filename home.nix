@@ -75,7 +75,7 @@ in
             gopls.enable = true;
             rust-analyzer.enable = true;
             nixd.enable = true;
-            python-lsp-server.enable = true;
+            # python-lsp-server.enable = true;
           };
         };
       };
