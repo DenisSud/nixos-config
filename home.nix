@@ -68,6 +68,17 @@ in
 
     nixvim = {
       enable = true;
+      plugins = {
+        lsp = {
+          enable = true;
+          servers = {
+            rust-analyzer.enable = true;
+            gopls.enalbe = true;
+            nil.enable = true;
+            python-lsp-server.enable = true;
+          };
+        };
+      };
     };
     
     waybar = {
