@@ -73,10 +73,39 @@ in
             bashls.enable = true;
             clangd.enable = true;
             gopls.enable = true;
-            rust-analyzer.enable = true;
+            rust-analyzer = {
+              enable = true;
+              installCargo = true;
+              installRustc = true;
+            };
             nixd.enable = true;
             # python-lsp-server.enable = true;
           };
+
+          keymaps.lspBuf = {
+            "gd" = "definition";
+            "gD" = "references";
+            "gt" = "type_definition";
+            "gi" = "implementation";
+            "K" = "hover";
+          };
+
+          rust-tools.enable = true;
+
+        };
+
+        nvim-cmp = {
+          enble = true;
+          autoEnableSources = true;
+          sources = [
+            {name = "nvim_lsp";}
+            {name = "path";}
+            {name = "buffer";}
+          ];
+        };
+
+        telescope = {
+          enable = true;
         };
       };
     };
