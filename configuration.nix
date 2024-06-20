@@ -19,6 +19,8 @@
       <home-manager/nixos>
     ];
 
+  virtualisation.docker.enable = true;
+
   nix = {
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
