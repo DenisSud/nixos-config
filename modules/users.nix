@@ -13,6 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
+      neovim
            
       # Shell stuff
       eza

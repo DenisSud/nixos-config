@@ -54,6 +54,26 @@
     alacritty = {
       enable = true;
     };
+
+    neovim = {
+      enable = true;
+      extraConfig = ''
+      
+      '';
+      plugins = [
+        pkgs.vimPlugins.nvim-lspconfig
+
+        pkgs.vimPlugins.comment-nvim
+        
+        pkgs.vimPlugins.kanagawa-nvim
+
+        pkgs.vimPlugins.harpoon
+
+        pkgs.vimPlugins.telescope-nvim 
+
+        pkgs.vimPlugins.mason-nvim
+      ]
+    };
   
     waybar = {
       enable = false;
