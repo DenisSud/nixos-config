@@ -129,39 +129,6 @@
       ];
     };
 
-  
-    waybar = {
-      enable = false;
-      settings = {
-        modules = {
-          "workspaces" = {
-            type = "workspaces";
-            format = "{icon}";
-            on-scroll-up = "hyprctl dispatch workspace e+1";
-            on-scroll-down = "hyprctl dispatch workspace e-1";
-          };
-          "window" = {
-            type = "window";
-            format = "{title}";
-            max-length = 200;
-            separate-outputs = true;
-          };
-          "cpu" = {
-            type = "cpu";
-            format = "{usage}%";
-          };
-          "memory" = {
-            type = "memory";
-            format = "{usage}%";
-          };
-          "battery" = {
-            type = "battery";
-            format = "{percentage}%";
-          };
-        };
-      };
-    };
-
     zoxide = {
       enable = true;
       enableZshIntegration = true;
