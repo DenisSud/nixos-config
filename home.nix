@@ -20,7 +20,7 @@
 
       enable = true;
       extraConfig = ''
-        ${builtins.readFile ./modles/vim/config.lua}
+        ${builtins.readFile /home/denis/nixos/modles/vim/config.lua}
       '';
 
       plugins = with pkgs.vimPlugins; [
