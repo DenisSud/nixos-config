@@ -20,7 +20,7 @@
 
       enable = true;
       extraConfig = ''
-        ${builtins.readFile /home/denis/nixos/modules/vim/remap.vim}
+        ${builtins.readFile /home/denis/nixos/modules/vim/options.vim}
       '';
 
       plugins = with pkgs.vimPlugins; [
