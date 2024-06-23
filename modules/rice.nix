@@ -2,9 +2,7 @@
 {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-forest.yaml";
-    image = /home/denis/Pictures/kanagawa.jpg;
-
-    # cursor.package = pkgs.apple-cursor;
+    image = /home/denis/Pictures/gnu.jpg;
 
     fonts = {
       serif = {
