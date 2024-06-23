@@ -17,6 +17,7 @@
       ./modules/services.nix
       ./modules/users.nix
       <home-manager/nixos>
+      <nixos-hardware/asus/zephyrus/ga401>
     ];
 
   virtualisation.docker.enable = true;
