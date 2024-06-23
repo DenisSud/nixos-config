@@ -8,38 +8,47 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 -- Packer setup
+local packer_install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
+    vim.api.nvim_command('!git clone https://github.com/wbthomason/packer.nvim ' .. packer_install_path)
+end
+
 vim.cmd [[packadd packer.nvim]]
+local packer_ok, packer = pcall(require, 'packer')
 
--- Plugin configurations with Packer
-require('packer').startup(function()
-  use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'L3MON4D3/LuaSnip'
+if not packer_ok then
+    return
+end
 
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+return require('packer').startup(function()
+    use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'saadparwaiz1/cmp_luasnip'
+    use 'L3MON4D3/LuaSnip'
 
-  use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-telescope/telescope.nvim'
+    use 'nvim-lua/plenary.nvim'
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-  use 'NeogitOrg/neogit'
+    use 'nvim-treesitter/nvim-treesitter'
 
-  use 'kyazdani42/nvim-tree.lua'
+    use 'NeogitOrg/neogit'
 
-  use 'nvim-lualine/lualine.nvim'
+    use 'kyazdani42/nvim-tree.lua'
 
-  use 'mbbill/undotree'
-  use 'ThePrimeagen/harpoon'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
-  use 'lukas-reineke/indent-blankline.nvim'
-  use 'windwp/nvim-autopairs'
-  use 'numToStr/Comment.nvim'
+    use 'nvim-lualine/lualine.nvim'
+
+    use 'mbbill/undotree'
+    use 'ThePrimeagen/harpoon'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-commentary'
+    use 'lukas-reineke/indent-blankline.nvim'
+    use 'windwp/nvim-autopairs'
+    use 'numToStr/Comment.nvim'
 end)
 
 -- LSP settings
@@ -49,71 +58,71 @@ local cmp = require('cmp')
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 nvim_lsp.pyright.setup {
-  capabilities = capabilities,
+    capabilities = capabilities,
 }
 nvim_lsp.rust_analyzer.setup {
-  capabilities = capabilities,
+    capabilities = capabilities,
 }
 nvim_lsp.gopls.setup {
-  capabilities = capabilities,
+    capabilities = capabilities,
 }
 
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
     },
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif require('luasnip').expand_or_jumpable() then
-        require('luasnip').expand_or_jump()
-      else
-        fallback()
-      end
-    end,
-    ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif require('luasnip').jumpable(-1) then
-        require('luasnip').jump(-1)
-      else
-        fallback()
-      end
-    end,
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'cmdline' },
-    { name = 'luasnip' },
-  },
+    mapping = {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif require('luasnip').expand_or_jumpable() then
+                require('luasnip').expand_or_jump()
+            else
+                fallback()
+            end
+        end,
+        ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif require('luasnip').jumpable(-1) then
+                require('luasnip').jump(-1)
+            else
+                fallback()
+            end
+        end,
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'buffer' },
+        { name = 'path' },
+        { name = 'cmdline' },
+        { name = 'luasnip' },
+    },
 }
 
 -- Treesitter settings
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "python", "rust", "go", "markdown" },
-  highlight = {
-    enable = true,
-  },
+    ensure_installed = { "python", "rust", "go", "markdown" },
+    highlight = {
+        enable = true,
+    },
 }
 
 -- Telescope settings
 require('telescope').setup {
-  defaults = {
-    file_ignore_patterns = { "node_modules" },
-  },
+    defaults = {
+        file_ignore_patterns = { "node_modules" },
+    },
 }
 require('telescope').load_extension('fzf')
 
@@ -125,16 +134,16 @@ require('nvim-tree').setup {}
 
 -- lualine settings
 require('lualine').setup {
-  options = {
-    theme = 'auto',
-    section_separators = '',
-    component_separators = ''
-  }
+    options = {
+        theme = 'auto',
+        section_separators = '',
+        component_separators = ''
+    }
 }
 
 -- Additional plugins settings
 require("indent_blankline").setup {
-  show_end_of_line = true,
+    show_end_of_line = true,
 }
 require('nvim-autopairs').setup {}
 require('Comment').setup {}
@@ -175,12 +184,3 @@ vim.api.nvim_set_keymap('n', '<C-s>', ':lua require("harpoon.ui").nav_file(4)<CR
 vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>vws', ':lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>vd', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>vca', ':lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>vrr', ':lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', ':lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>f', ':lua vim.lsp.buf.formatting()<CR>', { noremap = true, silent = true })
-
--- Ensure that the file ends properly

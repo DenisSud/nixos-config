@@ -14,6 +14,7 @@
       zed-editor# IDE
       youtube-music # for music
            
+      # Shell stuff
       ripgrep
       gcc
       fzf
@@ -31,7 +32,6 @@
       thefuck
       pandoc # file conversion 
       tree # getter ls tool
-      # Shell stuff
       home-manager # manage dotfiles
       rustup # rust toolkit
       python311 # python

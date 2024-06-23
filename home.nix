@@ -19,6 +19,7 @@
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
+        packer-nvim
         nvim-lspconfig
         nvim-cmp
         cmp-nvim-lsp
