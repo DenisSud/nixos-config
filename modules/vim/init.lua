@@ -11,18 +11,6 @@ vim.o.expandtab = true
 -- local nvim_lsp = require('lspconfig')
 -- local cmp = require('cmp')
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-nvim_lsp.pyright.setup {
-    capabilities = capabilities,
-}
-nvim_lsp.rust_analyzer.setup {
-    capabilities = capabilities,
-}
-nvim_lsp.gopls.setup {
-    capabilities = capabilities,
-}
-
 -- cmp.setup {
 --     mapping = {
 --         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
