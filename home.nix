@@ -1,7 +1,4 @@
 { config, pkgs, ... }:
-let
-inherit (pkgs) neovim nodePackages;
-in
 {
 
   home.username = "denis";
@@ -26,7 +23,6 @@ in
     thefuck
     pandoc # file conversion 
     tree # getter ls tool
-    nodePackages.neovim
   ];
 
   programs = {
