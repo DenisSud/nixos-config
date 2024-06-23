@@ -51,7 +51,6 @@ in
         luasnip
         telescope-nvim
         plenary-nvim
-        telescope-fzf-native
         nvim-treesitter
         neogit
         nvim-tree
