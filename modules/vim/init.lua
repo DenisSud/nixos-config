@@ -1,46 +1,47 @@
--- General settings
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.hidden = true
-vim.o.wrap = false
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.expandtab = true
-vim.g.leader = " "
+" General settings
+set number
+set relativenumber
+set hidden
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set expandtab
+let mapleader = " "
 
--- Keybindings
-vim.api.nvim_set_keymap('n', '<leader>pv', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>gs', ':Neogit<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-f>', '<C-Right>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-b>', '<C-Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'J', ':m \'>+1<CR>gv=gv', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'K', ':m \'<-2<CR>gv=gv', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>Y', '"+Y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>d', '"_d', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'Q', '<nop>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-c>', ':bd<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>f', ':lua vim.lsp.buf.formatting()<CR>', { noremap = true, silent = true })
+" Keybindings
+nnoremap <silent> <leader>pv :NvimTreeToggle<CR>
+nnoremap <silent> <leader>u :UndotreeToggle<CR>
+nnoremap <silent> <leader>gs :Neogit<CR>
+nnoremap <silent> <C-f> <C-Right>
+nnoremap <silent> <C-b> <C-Left>
+vnoremap <silent> J :m '>+1<CR>gv=gv
+vnoremap <silent> K :m '<-2<CR>gv=gv
+nnoremap <silent> <leader>y "+y
+nnoremap <silent> <leader>Y "+Y
+nnoremap <silent> <leader>d "_d
+nnoremap <silent> Q <nop>
+nnoremap <silent> <C-c> :bd<CR>
+nnoremap <silent> <leader>f :lua vim.lsp.buf.formatting()<CR>
 
-vim.api.nvim_set_keymap('i', '<C-k>', '<Plug>luasnip-next-choice', {})
-vim.api.nvim_set_keymap('i', '<C-j>', '<Plug>luasnip-prev-choice', {})
+inoremap <C-k> <Plug>luasnip-next-choice
+inoremap <C-j> <Plug>luasnip-prev-choice
 
--- Telescope keybindings
-vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>vh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
+" Telescope keybindings
+nnoremap <silent> <leader>ff :Telescope find_files<CR>
+nnoremap <silent> <C-p> :Telescope git_files<CR>
+nnoremap <silent> <leader>fg :Telescope live_grep<CR>
+nnoremap <silent> <leader>vh :Telescope help_tags<CR>
 
--- Harpoon keybindings
-vim.api.nvim_set_keymap('n', '<leader>a', ':lua require("harpoon.mark").add_file()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-e>', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', ':lua require("harpoon.ui").nav_file(1)<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-t>', ':lua require("harpoon.ui").nav_file(2)<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-n>', ':lua require("harpoon.ui").nav_file(3)<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-s>', ':lua require("harpoon.ui").nav_file(4)<CR>', { noremap = true, silent = true })
+" Harpoon keybindings
+nnoremap <silent> <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent> <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent> <C-h> :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent> <C-t> :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent> <C-n> :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent> <C-s> :lua require("harpoon.ui").nav_file(4)<CR>
 
--- LSP keybindings
-vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>vws', ':lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = true, silent = true })
+" LSP keybindings
+nnoremap <silent> gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>vws :lua vim.lsp.buf.workspace_symbol()<CR>
+
