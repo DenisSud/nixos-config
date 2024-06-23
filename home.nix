@@ -19,20 +19,20 @@
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
-        # nvim-lspconfig
+        nvim-lspconfig
         nvim-cmp
-        # cmp-nvim-lsp
-        # cmp-buffer
-        # cmp-path
-        # cmp-cmdline
-        # cmp_luasnip
-        # luasnip
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        cmp-cmdline
+        cmp_luasnip
+        luasnip
         telescope-nvim
         mason-nvim
-        # plenary-nvim
-        # nvim-treesitter
+        plenary-nvim
+        nvim-treesitter
         neogit
-        # undotree
+        undotree
         harpoon
       ];
 
