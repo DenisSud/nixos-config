@@ -59,7 +59,7 @@ in
         vim-surround
         vim-commentary
         nvim-autopairs
-        comment
+        vim-commentary
       ];
 
       extraConfig = builtins.readFile /home/denis/modules/vim/init.vim;  
