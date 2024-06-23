@@ -5,7 +5,7 @@
   home.homeDirectory = "/home/denis";
 
   home.packages = with pkgs; [
-    neovim
+    # neovim
     ripgrep
     gcc
     fzf
