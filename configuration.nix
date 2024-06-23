@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 
@@ -16,20 +16,16 @@
       ./modules/rice.nix
       ./modules/services.nix
       ./modules/users.nix
-      <home-manager/nixos>
+      inputs.home-manager.nixosModules.default
     ];
+
+  home-manager.users.denis = import ./home.nix; 
 
   virtualisation.docker.enable = true;
 
   nix = {
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  home-manager = {
-    users = {
-      "denis" = import ./home.nix; 
-    };
   };
 
   # Set your time zone.

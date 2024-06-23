@@ -14,6 +14,23 @@
       zed-editor# IDE
       youtube-music # for music
            
+      ripgrep
+      gcc
+      fzf
+      eza
+      yazi # file manager
+      zoxide # better cd (awsome)
+      bat # file viewer
+      jq # for working with json
+      yq # for working with yaml
+      ripgrep # for nvim
+      aria2 # fast downloading utility
+      croc # file transfer utility (awsome)
+      gnused # stream editor (awdome, google it)
+      zsh # shell
+      thefuck
+      pandoc # file conversion 
+      tree # getter ls tool
       # Shell stuff
       home-manager # manage dotfiles
       rustup # rust toolkit
