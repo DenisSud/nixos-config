@@ -3,82 +3,9 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.hidden = true
 vim.o.wrap = false
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
 vim.o.expandtab = true
-
--- LSP settings
--- local nvim_lsp = require('lspconfig')
--- local cmp = require('cmp')
-
--- cmp.setup {
---     mapping = {
---         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
---         ['<C-f>'] = cmp.mapping.scroll_docs(4),
---         ['<C-Space>'] = cmp.mapping.complete(),
---         ['<C-e>'] = cmp.mapping.close(),
---         ['<CR>'] = cmp.mapping.confirm {
---             behavior = cmp.ConfirmBehavior.Replace,
---             select = true,
---         },
---         ['<Tab>'] = function(fallback)
---             if cmp.visible() then
---                 cmp.select_next_item()
---             elseif require('luasnip').expand_or_jumpable() then
---                 require('luasnip').expand_or_jump()
---             else
---                 fallback()
---             end
---         end,
---         ['<S-Tab>'] = function(fallback)
---             if cmp.visible() then
---                 cmp.select_prev_item()
---             elseif require('luasnip').jumpable(-1) then
---                 require('luasnip').jump(-1)
---             else
---                 fallback()
---             end
---         end,
---     },
---     sources = {
---         { name = 'nvim_lsp' },
---         { name = 'buffer' },
---         { name = 'path' },
---         { name = 'cmdline' },
---         { name = 'luasnip' },
---     },
--- }
-
--- Treesitter settings
--- require'nvim-treesitter.configs'.setup {
---     ensure_installed = { "python", "rust", "go", "markdown" },
---     highlight = {
---         enable = true,
---     },
--- }
-
--- Telescope settings
--- require('telescope').setup {
---     defaults = {
---         file_ignore_patterns = { "node_modules" },
---     },
--- }
--- require('telescope').load_extension('fzf')
-
--- Neogit settings
-require('neogit').setup {}
-
--- nvim-tree settings
-require('nvim-tree').setup {}
-
--- lualine settings
-require('lualine').setup {
-    options = {
-        theme = 'auto',
-        section_separators = '',
-        component_separators = ''
-    }
-}
 
 -- Keybindings
 vim.api.nvim_set_keymap('n', '<leader>pv', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
