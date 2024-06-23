@@ -34,10 +34,7 @@
         lualine-nvim
         undotree
         harpoon
-        vim-surround
-        vim-commentary
         nvim-autopairs
-        vim-commentary
       ];
 
       extraLuaConfig = builtins.readFile ./modules/vim/init.lua;  
