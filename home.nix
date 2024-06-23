@@ -58,7 +58,6 @@ in
         harpoon
         vim-surround
         vim-commentary
-        indent-blankline
         nvim-autopairs
         comment
       ];
