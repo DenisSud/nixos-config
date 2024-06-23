@@ -26,9 +26,9 @@ vim.api.nvim_set_keymap('i', '<C-k>', '<Plug>luasnip-next-choice', {})
 vim.api.nvim_set_keymap('i', '<C-j>', '<Plug>luasnip-prev-choice', {})
 
 -- Telescope keybindings
-vim.api.nvim_set_keymap('n', '<leader>pf', ':Telescope find_files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ps', ':Telescope live_grep<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>vh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
 
 -- Harpoon keybindings
