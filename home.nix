@@ -20,7 +20,7 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
-        nvim-cmp
+        # nvim-cmp
         # cmp-nvim-lsp
         # cmp-buffer
         # cmp-path
