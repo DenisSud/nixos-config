@@ -2,7 +2,7 @@
 {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-forest.yaml";
-    image = /home/denis/Pictures/gnu.jpg;
+    image = /home/denis/Pictures/gruvbox.jpg;
 
     fonts = {
       serif = {
