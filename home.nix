@@ -20,12 +20,12 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
-        # nvim-cmp
-        # cmp-nvim-lsp
-        # cmp-buffer
-        # cmp-path
-        # cmp-cmdline
-        # cmp_luasnip
+        nvim-cmp
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        cmp-cmdline
+        cmp_luasnip
         luasnip
         telescope-nvim
         plenary-nvim
