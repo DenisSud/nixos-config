@@ -30,7 +30,7 @@
         telescope-nvim
         telescope-fzf-native-nvim
         mason-nvim
-        nvim-cmp
+        # nvim-cmp
         friendly-snippets
         rust-tools-nvim
         {
