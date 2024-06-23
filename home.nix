@@ -36,7 +36,7 @@
         harpoon
       ];
 
-      extraLuaConfig = builtins.readFile ./modules/vim/init.lua;  
+      # extraLuaConfig = builtins.readFile ./modules/vim/init.lua;  
     };
 
     zoxide = {
