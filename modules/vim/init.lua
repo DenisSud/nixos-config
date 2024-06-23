@@ -1,7 +1,8 @@
 -- Packer setup
 vim.cmd [[packadd packer.nvim]]
 
-require('packer').startup(function(use)
+-- Initialize plugins
+require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
@@ -23,7 +24,7 @@ require('packer').startup(function(use)
   -- Treesitter
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
-  -- Git Integration
+  -- Neogit
   use 'NeogitOrg/neogit'
 
   -- File Explorer
