@@ -41,28 +41,28 @@ in
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
-        neovim/nvim-lspconfig
-        hrsh7th/nvim-cmp
-        hrsh7th/cmp-nvim-lsp
-        hrsh7th/cmp-buffer
-        hrsh7th/cmp-path
-        hrsh7th/cmp-cmdline
-        saadparwaiz1/cmp_luasnip
-        L3MON4D3/LuaSnip
-        nvim-telescope/telescope.nvim
-        nvim-lua/plenary.nvim
-        nvim-telescope/telescope-fzf-native.nvim
-        nvim-treesitter/nvim-treesitter
-        NeogitOrg/neogit
-        kyazdani42/nvim-tree.lua
-        nvim-lualine/lualine.nvim
-        mbbill/undotree
-        ThePrimeagen/harpoon
-        tpope/vim-surround
-        tpope/vim-commentary
-        lukas-reineke/indent-blankline.nvim
-        windwp/nvim-autopairs
-        numToStr/Comment.nvim
+        nvim-lspconfig
+        nvim-cmp
+        cmp-nvim-lsp
+        cmp-buffer
+        cmp-path
+        cmp-cmdline
+        cmp_luasnip
+        LuaSnip
+        telescope
+        plenary
+        telescope-fzf-native
+        nvim-treesitter
+        neogit
+        nvim-tree
+        lualine
+        undotree
+        harpoon
+        vim-surround
+        vim-commentary
+        indent-blankline
+        nvim-autopairs
+        Comment
       ];
 
       extraConfig = builtins.readFile /home/denis/modules/vim/init.vim;  
