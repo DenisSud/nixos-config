@@ -50,7 +50,7 @@ in
         cmp_luasnip
         luasnip
         telescope-nvim
-        plenary
+        plenary-nvim
         telescope-fzf-native
         nvim-treesitter
         neogit
