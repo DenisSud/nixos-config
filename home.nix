@@ -48,7 +48,7 @@ in
         cmp-path
         cmp-cmdline
         cmp_luasnip
-        LuaSnip
+        luasnip
         telescope
         plenary
         telescope-fzf-native
@@ -62,7 +62,7 @@ in
         vim-commentary
         indent-blankline
         nvim-autopairs
-        Comment
+        comment
       ];
 
       extraConfig = builtins.readFile /home/denis/modules/vim/init.vim;  
