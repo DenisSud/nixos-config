@@ -4,6 +4,27 @@
   home.username = "denis";
   home.homeDirectory = "/home/denis";
 
+  home.packages = with pkgs; [
+    neovim
+    ripgrep
+    gcc
+    fzf
+    eza
+    yazi # file manager
+    zoxide # better cd (awsome)
+    bat # file viewer
+    jq # for working with json
+    yq # for working with yaml
+    ripgrep # for nvim
+    aria2 # fast downloading utility
+    croc # file transfer utility (awsome)
+    gnused # stream editor (awdome, google it)
+    zsh # shell
+    thefuck
+    pandoc # file conversion 
+    tree # getter ls tool
+  ];
+
   programs = {
 
     home-manager.enable = true;
@@ -14,38 +35,33 @@
 
 
     neovim = {
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-
       enable = true;
-      extraConfig = ''
-        ${builtins.readFile /home/denis/nixos/modules/vim/options.vim}
-      '';
-
       plugins = with pkgs.vimPlugins; [
-        nvim-lspconfig
-        comment-nvim
-        harpoon
-        telescope-nvim
-        telescope-fzf-native-nvim
-        mason-nvim
-        nvim-cmp
-        friendly-snippets
-        rust-tools-nvim
-        {
-          plugin = (nvim-treesitter.withPlugins (p: [
-            p.tree-sitter-nix
-            p.tree-sitter-rust
-            p.tree-sitter-go
-            p.tree-sitter-vim
-            p.tree-sitter-bash
-            p.tree-sitter-lua
-            p.tree-sitter-python
-            p.tree-sitter-json
-          ]));
-        }
+        neovim/nvim-lspconfig
+        hrsh7th/nvim-cmp
+        hrsh7th/cmp-nvim-lsp
+        hrsh7th/cmp-buffer
+        hrsh7th/cmp-path
+        hrsh7th/cmp-cmdline
+        saadparwaiz1/cmp_luasnip
+        L3MON4D3/LuaSnip
+        nvim-telescope/telescope.nvim
+        nvim-lua/plenary.nvim
+        nvim-telescope/telescope-fzf-native.nvim
+        nvim-treesitter/nvim-treesitter
+        NeogitOrg/neogit
+        kyazdani42/nvim-tree.lua
+        nvim-lualine/lualine.nvim
+        mbbill/undotree
+        ThePrimeagen/harpoon
+        tpope/vim-surround
+        tpope/vim-commentary
+        lukas-reineke/indent-blankline.nvim
+        windwp/nvim-autopairs
+        numToStr/Comment.nvim
       ];
+
+      extraConfig = builtins.readFile ~/.config/nvim/init.vim;  
     };
 
     zoxide = {

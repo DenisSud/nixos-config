@@ -13,25 +13,9 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      neovim
            
       # Shell stuff
-      eza
-      yazi # file manager
-      zoxide # better cd (awsome)
-      gcc # compiler
-      bat # file viewer
-      jq # for working with json
-      yq # for working with yaml
-      ripgrep # for nvim
-      aria2 # fast downloading utility
-      croc # file transfer utility (awsome)
-      gnused # stream editor (awdome, google it)
-      zsh # shell
-      thefuck
-      pandoc # file conversion 
       home-manager # manage dotfiles
-      tree # getter ls tool
       rustup # rust toolkit
       python311 # python
       python312Packages.ptpython
