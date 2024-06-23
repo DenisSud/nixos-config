@@ -40,7 +40,7 @@
         vim-commentary
       ];
 
-      # extraConfig = builtins.readFile ./modules/vim/init.vim;  
+      extraLuaConfig = builtins.readFile ./modules/vim/init.lua;  
     };
 
     zoxide = {
