@@ -49,7 +49,7 @@ in
         cmp-cmdline
         cmp_luasnip
         luasnip
-        telescope
+        telescope-nvim
         plenary
         telescope-fzf-native
         nvim-treesitter
