@@ -19,9 +19,9 @@
       vimdiffAlias = true;
 
       enable = true;
-      extraConfig = ''
-        ${builtins.readFile /home/denis/nixos/modules/vim/options.vim}
-      '';
+      # extraConfig = ''
+      #   ${builtins.readFile /home/denis/nixos/modules/vim/options.vim}
+      # '';
 
       plugins = with pkgs.vimPlugins; [
         nvim-lspconfig
