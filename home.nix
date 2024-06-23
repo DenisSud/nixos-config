@@ -20,22 +20,22 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [
         packer-nvim
-        nvim-lspconfig
-        nvim-cmp
-        cmp-nvim-lsp
-        cmp-buffer
-        cmp-path
-        cmp-cmdline
-        cmp_luasnip
-        luasnip
-        telescope-nvim
-        plenary-nvim
-        nvim-treesitter
-        neogit
-        lualine-nvim
-        undotree
-        harpoon
-        nvim-autopairs
+        # nvim-lspconfig
+        # nvim-cmp
+        # cmp-nvim-lsp
+        # cmp-buffer
+        # cmp-path
+        # cmp-cmdline
+        # cmp_luasnip
+        # luasnip
+        # telescope-nvim
+        # plenary-nvim
+        # nvim-treesitter
+        # neogit
+        # lualine-nvim
+        # undotree
+        # harpoon
+        # nvim-autopairs
       ];
 
       extraLuaConfig = builtins.readFile ./modules/vim/init.lua;  
