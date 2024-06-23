@@ -61,7 +61,7 @@
         numToStr/Comment.nvim
       ];
 
-      extraConfig = builtins.readFile ./modules/vim/init.vim;  
+      extraConfig = builtins.readFile /home/denis/modules/vim/init.vim;  
     };
 
     zoxide = {
