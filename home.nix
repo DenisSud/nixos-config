@@ -53,7 +53,6 @@ in
         plenary-nvim
         nvim-treesitter
         neogit
-        nvim-tree
         lualine
         undotree
         harpoon
