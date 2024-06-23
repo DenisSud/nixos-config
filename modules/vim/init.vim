@@ -6,9 +6,8 @@ set nowrap
 set tabstop=2
 set shiftwidth=2
 set expandtab
-let mapleader = " "
+let mapleader = "<Space>"
 
-" Keybindings
 nnoremap <silent> <leader>pv :NvimTreeToggle<CR>
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
 nnoremap <silent> <leader>gs :Neogit<CR>
