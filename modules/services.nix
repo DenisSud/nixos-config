@@ -10,6 +10,15 @@
       enableUserService = true;
     };
 
+    services.tor = {
+      enable = true;
+      openFirewall = true;
+      relay = {
+        enable = true;
+        role = "relay";
+      };
+    };
+
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
