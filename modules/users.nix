@@ -16,6 +16,8 @@
       mozwire
 
       # Shell stuff
+      lazydocker
+      lazygit
       ripgrep
       gcc
       fzf
