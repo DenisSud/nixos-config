@@ -20,8 +20,11 @@
       ]);
     };
 
-    ollama.enable = true;
-
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
+    
     openssh.enable = true;
 
     pipewire = {
