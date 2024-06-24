@@ -13,7 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      protonvpn-gui_legacy
+      protonvpn-gui
 
       # Shell stuff
       ripgrep
