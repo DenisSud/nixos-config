@@ -13,6 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
+      mozillavpn
            
       # Shell stuff
       ripgrep
