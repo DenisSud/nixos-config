@@ -14,6 +14,7 @@
       zed-editor# IDE
       youtube-music # for music
       protonvpn-gui
+      mozillavpn
 
       # Shell stuff
       ripgrep
