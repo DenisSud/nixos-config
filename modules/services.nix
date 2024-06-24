@@ -10,7 +10,7 @@
       enableUserService = true;
     };
 
-    services.tor = {
+    tor = {
       enable = true;
       openFirewall = true;
       relay = {
