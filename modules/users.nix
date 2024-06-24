@@ -13,7 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      mozwire
+      protonvpn-gui
 
       # Shell stuff
       lazydocker
