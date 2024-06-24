@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ...}:
+j config, pkgs, inputs, ...}:
 {
   
   users.users.denis = { isNormalUser = true;
@@ -13,7 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      protonvpn-gui
+      torctl
 
       # Shell stuff
       lazydocker
