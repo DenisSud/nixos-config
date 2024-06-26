@@ -13,11 +13,6 @@
       enable = true;
     };
 
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
-
     openssh = {
       enalbe = true;
     };
