@@ -13,10 +13,6 @@
       enable = true;
     };
 
-    openssh = {
-      enalbe = true;
-    };
-
   };
 
   programs = {
