@@ -7,6 +7,23 @@
   home.packages = with pkgs; [
   ];
 
+  services = {
+
+    syncthing= {
+      enable = true;
+    };
+
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
+
+    openssh = {
+      enalbe = true;
+    };
+
+  };
+
   programs = {
 
     home-manager.enable = true;
