@@ -13,7 +13,7 @@
       telegram-desktop
       zed-editor# IDE
       youtube-music # for music
-      protonvpn-cli_2
+      syncthing
 
       # Shell stuff
       lazydocker

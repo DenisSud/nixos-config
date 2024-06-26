@@ -11,11 +11,6 @@
 
     home-manager.enable = true;
 
-    alacritty = {
-      enable = true;
-    };
-
-
     neovim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
