@@ -59,7 +59,7 @@
           p.tree-sitter-json
           p.tree-sitter-bash
           p.tree-sitter-toml
-        ]));
+        ]))
       ];
 
       extraLuaConfig = ''
