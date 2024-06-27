@@ -45,7 +45,7 @@
           config = toLua ./modules/vim/plugins/treesitter.lua;
         }
 
-        nvim-cmp-lsp
+        cmp-nvim-lsp
         luasnip
         mason-nvim
         neogit
