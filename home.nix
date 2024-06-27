@@ -26,23 +26,23 @@
       plugins = with pkgs.vimPlugins; [
 
         {
-          plugin = nvim-lspconfig
-          config = toLuaFile ./modules/vim/plugins/lsp.lua 
+          plugin = nvim-lspconfig;
+          config = toLuaFile ./modules/vim/plugins/lsp.lua ;
         }
         
         {
-          plugin = nvim-cmp
-          config = toLuaFile ./modules/vim/plugins/cmp.lua
+          plugin = nvim-cmp;
+          config = toLuaFile ./modules/vim/plugins/cmp.lua;
         }
 
         {
-          plugin = telescope-nvim
-          config = toLua ./modules/vim/plugins/telescope.lua
+          plugin = telescope-nvim;
+          config = toLua ./modules/vim/plugins/telescope.lua;
         }
 
         {
-          plugin = nvim-treesitter
-          config = toLua ./modules/vim/plugins/treesitter.lua
+          plugin = nvim-treesitter;
+          config = toLua ./modules/vim/plugins/treesitter.lua;
         }
 
         luasnip
