@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-dune-light.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-dune.yaml";
     image = /home/denis/Pictures/gruvbox.jpg;
 
     fonts = {
