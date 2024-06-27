@@ -9,38 +9,61 @@
 
   services = {
 
-    syncthing= {
-      enable = true;
-    };
-
   };
 
   programs = {
 
     home-manager.enable = true;
 
-    neovim = {
+    neovim = 
+    let 
+      toLua = str: "lua <<EOF\n${str}\nEOF\n";
+      toLuaFile = file: "lua <<EOF\n${builtins.readFile file}\nEOF\n";
+    in
+    {
       enable = true;
+
       plugins = with pkgs.vimPlugins; [
-        nvim-lspconfig
-        nvim-cmp
-        cmp-nvim-lsp
-        cmp-buffer
-        cmp-path
-        cmp-cmdline
-        cmp_luasnip
+
+        {
+          plugin = nvim-lspconfig
+          config = toLuaFile ./modules/vim/plugins/lsp.lua 
+        }
+        
+        {
+          plugin = nvim-cmp
+          config = toLuaFile ./modules/vim/plugins/cmp.lua
+        }
+
+        {
+          plugin = telescope-nvim
+          config = toLua ./modules/vim/plugins/telescope.lua
+        }
+
+        {
+          plugin = nvim-treesitter
+          config = toLua ./modules/vim/plugins/treesitter.lua
+        }
+
         luasnip
-        telescope-nvim
         mason-nvim
-        plenary-nvim
-        nvim-treesitter
         neogit
         undotree
         harpoon
+        (nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix
+          p.tree-sitter-rust
+          p.tree-sitter-python
+          p.tree-sitter-go
+          p.tree-sitter-lua
+          p.tree-sitter-json
+          p.tree-sitter-bash
+          p.tree-sitter-toml
+        ]));
       ];
 
-      extraConfig = ''
-
+      extraLuaConfig = ''
+        ${builtins.readFile ./modules/vim/options.lua}
       '';
     };
 
@@ -82,8 +105,7 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        l = '' eza -l --icons --git -a '';
-        lt = '' eza --tree --level=2 --long --icons --git '';
+        lt = '' tree '';
         cl = "clear";
         pbcopy='' xclip -selection clipboard '';
         pbpaste='' xclip -selection clipboard -o '';

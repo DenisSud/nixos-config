@@ -2,6 +2,10 @@
 {
 
   services = {
+  
+    syncthing= {
+      enable = true;
+    };
 
     supergfxd.enable = true;
 
