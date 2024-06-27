@@ -37,7 +37,7 @@
 
         {
           plugin = telescope-nvim;
-          # config = toLua ./modules/vim/plugins/telescope.lua;
+          config = toLua ./modules/vim/plugins/telescope.lua;
         }
 
         {
