@@ -1,8 +1,8 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-estuary.yaml";
-    image = /home/denis/Pictures/gruvbox.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-nile.yaml";
+    image = /home/denis/Pictures/space_person.jpg;
 
     fonts = {
       serif = {
