@@ -14,6 +14,7 @@
       zed-editor# IDE
       youtube-music # for music
       syncthing
+      lmstudio
 
       # Shell stuff
       lazydocker
