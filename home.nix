@@ -37,12 +37,12 @@
 
         {
           plugin = telescope-nvim;
-          config = toLua ./modules/vim/plugins/telescope.lua;
+          # config = toLua ./modules/vim/plugins/telescope.lua;
         }
 
         {
           plugin = nvim-treesitter;
-          # config = toLua ./modules/vim/plugins/treesitter.lua;
+          config = toLua ./modules/vim/plugins/treesitter.lua;
         }
 
         luasnip
