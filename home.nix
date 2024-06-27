@@ -27,7 +27,7 @@
 
         {
           plugin = nvim-lspconfig;
-          config = toLuaFile ./modules/vim/plugins/lsp.lua ;
+          # config = toLuaFile ./modules/vim/plugins/lsp.lua ;
         }
         
         {
