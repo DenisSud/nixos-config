@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-heath.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-estuary.yaml";
     image = /home/denis/Pictures/gruvbox.jpg;
 
     fonts = {
