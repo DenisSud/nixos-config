@@ -27,17 +27,17 @@
 
         {
           plugin = nvim-lspconfig;
-          # config = toLuaFile ./modules/vim/plugins/lsp.lua ;
+          config = toLuaFile ./modules/vim/plugins/lsp.lua ;
         }
         
         {
           plugin = nvim-cmp;
-          # config = toLuaFile ./modules/vim/plugins/cmp.lua;
+          config = toLuaFile ./modules/vim/plugins/cmp.lua;
         }
 
         {
           plugin = telescope-nvim;
-          # config = toLua ./modules/vim/plugins/telescope.lua;
+          config = toLua ./modules/vim/plugins/telescope.lua;
         }
 
         {
