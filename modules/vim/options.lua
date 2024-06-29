@@ -66,7 +66,7 @@ cmp.setup {
 }
 
 -- Telescope config
-require(telescope').setup({
+require('telescope').setup({
 	extensions = {
     	fzf = {
       	fuzzy = true,                    
