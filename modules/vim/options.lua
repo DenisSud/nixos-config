@@ -77,8 +77,6 @@ require('telescope').setup({
   	}
 })
 
-require('telescope').load_extension('fzf')
-
 -- LSP config                                                                                                                    
 local on_attach = function(_, bufnr)
 
