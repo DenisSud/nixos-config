@@ -106,7 +106,7 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        lt = '' tree '';
+        lt = '' tree -L 5'';
         cl = "clear";
         pbcopy='' xclip -selection clipboard '';
         pbpaste='' xclip -selection clipboard -o '';
