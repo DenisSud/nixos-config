@@ -23,6 +23,11 @@
     {
       enable = true;
 
+			defaultEditor = true;
+
+			viAlias = true;
+			vimAlias = true;
+
       plugins = with pkgs.vimPlugins; [
 
         {
@@ -106,8 +111,6 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-				vi = '' nvim '';
-				vim = '' nvim '';
         lt = '' tree -L 5'';
         cl = "clear";
         pbcopy='' xclip -selection clipboard '';
