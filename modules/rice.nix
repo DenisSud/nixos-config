@@ -2,7 +2,7 @@
 {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-dune.yaml";
-    image = /home/denis/Pictures/gurvbox_pacman.png;
+    image = /home/denis/Pictures/gruvbox_pacman.png;
 
     fonts = {
       serif = {
