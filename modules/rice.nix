@@ -2,7 +2,7 @@
 {
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-savanna.yaml";
-    image = /home/denis/Pictures/green_waterfall.png;
+    image = /home/denis/Pictures/green_waterfall.jpg;
 
     fonts = {
       serif = {
