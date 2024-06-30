@@ -13,9 +13,10 @@
       telegram-desktop # Telegram mesanger
       zed-editor # IDE
       syncthing # for syncing folders accross devices
-	  protonvpn-cli_2
+			protonvpn-cli_2
 
       # Shell stuff
+			tmux # Utility for terminal tyling, sesions and more
       lazydocker # TUI for docker
       lazygit # TUI for git
       ripgrep # Grep tool

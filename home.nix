@@ -4,13 +4,6 @@
   home.username = "denis";
   home.homeDirectory = "/home/denis";
 
-  home.packages = with pkgs; [
-  ];
-
-  services = {
-
-  };
-
   programs = {
 
     home-manager.enable = true;
@@ -129,49 +122,8 @@
 
     };
 
-    helix = {
-      enable = false;
-      defaultEditor = true;
-      extraPackages = [ pkgs.marksman pkgs.nil pkgs.gopls pkgs.python3Packages.python-lsp-server pkgs.rust-analyzer pkgs.dockerfile-language-server-nodejs pkgs.docker-compose-language-service ];
-      settings = {
-
-        editor = {
-          mouse = false;
-          auto-save = true;
-          bufferline = "multiple";
-          auto-format = true;
-          line-number = "relative";
-          scrolloff = 6;
-        };
-
-        editor.indent-guides = {
-          character = "╎";
-          render = true;
-        };
-        editor.statusline = {
-          left = [ "mode" "spinner" "diagnostics" ];
-          center = [ "file-name" "separator" "version-control" "separator" ];
-          right = [ "position" "position-percentage" "total-line-numbers" ];
-          mode.normal = "NORMAL";
-          mode.insert = "INSERT";
-          mode.select = "SELECT";
-        };
-        keys.normal = {
-          esc = ["collapse_selection" "keep_primary_selection"];
-          X = "extend_line_above";
-        };
-
-        editor.lsp = {
-          display-messages = true;
-          display-inlay-hints = true;
-        };
-
-      };
-    };
-
-
     tmux = {
-      enable = true;
+      enable = false;
       extraConfig = ''
         # vim style tmux config
 
