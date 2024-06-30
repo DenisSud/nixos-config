@@ -7,22 +7,19 @@
     packages = with pkgs; [
 
       # Apps
-      gnome.gnome-tweaks
-      obsidian # note taking
-      ticktick # for task managment
-      telegram-desktop
-      zed-editor# IDE
-      youtube-music # for music
-      syncthing
-      lmstudio
+      gnome.gnome-tweaks # Gnome advanced settings
+      obsidian # For note taking
+      ticktick # For task managment
+      telegram-desktop # Telegram mesanger
+      zed-editor # IDE
+      syncthing # for syncing folders accross devices
 
       # Shell stuff
-      lazydocker
-      lazygit
-      ripgrep
-      gcc
-      fzf
-      eza
+      lazydocker # TUI for docker
+      lazygit # TUI for git
+      ripgrep # Grep tool
+      gcc # C and C++ compiler
+      fzf # fuzzy finder (awsome)
       yazi # file manager
       zoxide # better cd (awsome)
       bat # file viewer
@@ -39,9 +36,6 @@
       home-manager # manage dotfiles
       rustup # rust toolkit
       python311 # python
-      python312Packages.ptpython
-      python312Packages.jupyter-core
-      pipx
       go # go compiler and
       git # version controll
       ollama # local llms 

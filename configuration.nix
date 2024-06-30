@@ -4,9 +4,6 @@
 
   programs = {
     zsh.enable = true;
-    hyprland = {
-      enable = false;
-    };
   };
 
   imports =
