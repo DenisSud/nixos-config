@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-savanna.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/danqing-light.yaml";
     image = /home/denis/Pictures/green_waterfall.jpg;
 
     fonts = {
