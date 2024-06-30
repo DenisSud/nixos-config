@@ -127,11 +127,11 @@
       extraConfig = ''
         # vim style tmux config
 
-        # use C-a, since it's on the home row and easier to hit than C-b
-        set-option -g prefix C-a
-        unbind-key C-a
-        bind-key C-a send-prefix
-        set -g base-index 1
+				# remap prefix from 'C-b' to 'C-a'
+				unbind C-b
+				set-option -g prefix C-a
+				bind-key C-a send-prefix
+
 
         # mouse behavior
         set -g mouse on
