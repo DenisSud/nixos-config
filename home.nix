@@ -123,7 +123,7 @@
     };
 
     tmux = {
-      enable = false;
+      enable = true;
       extraConfig = ''
         # vim style tmux config
 
@@ -134,7 +134,7 @@
         set -g base-index 1
 
         # mouse behavior
-        setw -g mouse on
+        set -g mouse on
 
         bind-key : command-prompt
 
