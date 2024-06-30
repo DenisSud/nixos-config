@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/ia-light.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/ia-dark.yaml";
     image = /home/denis/Pictures/green_waterfall.jpg;
 
     fonts = {
