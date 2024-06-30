@@ -3,31 +3,11 @@
 
   services = {
   
-    syncthing= {
+		syncthing= {
       enable = true;
     };
 
-    supergfxd.enable = true;
-
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
-
-    tor = {
-      enable = true;
-      openFirewall = true;
-      relay = {
-        enable = true;
-        role = "relay";
-      };
-      settings = {
-        Nickname = "toradmin";
-        ORPort = 9001;
-        ControlPort = 9051;
-        BandWidthRate = "1 MBytes";
-      };
-    };
+		supergfxd.enable = true;
 
     xserver = {
       enable = true;
@@ -41,7 +21,6 @@
 
     ollama = {
       enable = true;
-      # acceleration = "cuda";
     };
     
     openssh.enable = true;
