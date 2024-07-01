@@ -40,7 +40,6 @@
       python311 # python
       go # go compiler and
       git # version controll
-      ollama # local llms 
 
     ];
     shell = pkgs.zsh;
