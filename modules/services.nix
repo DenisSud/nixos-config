@@ -15,7 +15,7 @@
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" "amd" ];
+      videoDrivers = [ "nvidia" "amdgpu" ];
       excludePackages = (with pkgs; [
           xterm
       ]);
