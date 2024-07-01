@@ -18,8 +18,6 @@
 
   home-manager.users.denis = import ./home.nix; 
 
-  virtualisation.docker.enable = true;
-
   nix = {
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
@@ -43,13 +41,9 @@
     LC_TIME = "ru_RU.UTF-8";
   };
 
-
-  # Use the systemd-boot EFI boot loader.
-  # security.polkit.enable = true;
-
   boot = {
     loader.systemd-boot.configurationLimit = 10;
-    blacklistedKernelModules = [ "nouveau" "nvidiafb" ];
+    blacklistedKernelModules = [ "nouveau" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
   };
