@@ -3,17 +3,13 @@
 
   services = {
   
-		syncthing= {
-      enable = true;
-    };
-
 		supergfxd.enable = true;
 
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" "amdgpu" ];
+      videoDrivers = [ "nvidia" "amd" ];
       excludePackages = (with pkgs; [
           xterm
       ]);
