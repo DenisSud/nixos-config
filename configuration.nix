@@ -18,6 +18,12 @@
 
   home-manager.users.denis = import ./home.nix; 
 
+	fileSystems."/".options = [ "noatime" ];
+	fileSystems."/boot".options = [ "noatime" ];
+
+	fileSystems."/".autoResize = false;
+	fileSystems."/boot".autoResize = false;
+
   nix = {
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
