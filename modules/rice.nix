@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-nile.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
     image = /home/denis/Pictures/dark_guy_1.jpg;
 
     fonts = {
