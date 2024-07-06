@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ...}:
 {
-  
+
   users.users.denis = { isNormalUser = true;
     password = "1423";
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
@@ -13,6 +13,7 @@
       telegram-desktop # Telegram mesanger
       zed-editor # IDE
       syncthing # for syncing folders accross devices
+      neovim
 			protonvpn-cli_2
 
       # Shell stuff
@@ -35,7 +36,7 @@
       gnused # stream editor (awdome, google it)
       zsh # shell
       thefuck
-      pandoc # file conversion 
+      pandoc # file conversion
       tree # getter ls tool
       home-manager # manage dotfiles
       rustup # rust toolkit
@@ -46,5 +47,5 @@
     ];
     shell = pkgs.zsh;
   };
-  
+
 }
