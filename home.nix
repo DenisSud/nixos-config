@@ -15,7 +15,40 @@
         viAlias = true;
         vimAlias = true;
 
-	extraLuaConfig = builtins.readFile /home/denis/nixos/modules/vim/init.lua;
+	extraLuaConfig = builtins.readFile /home/denis/.config/init.lua;
+    };
+
+    tmux = {
+      enable = true;
+      extraConfig = ''
+        # vim style tmux config
+
+				# remap prefix from 'C-b' to 'C-a'
+				unbind C-b
+				set-option -g prefix C-a
+				bind-key C-a send-prefix
+
+
+        # mouse behavior
+        set -g mouse on
+
+        bind-key : command-prompt
+
+        bind-key n next-window
+        bind-key N previous-window
+
+        # use vim-like keys for splits and windows
+        bind-key v split-window -h
+        bind-key s split-window -v
+        bind-key h select-pane -L
+        bind-key j select-pane -D
+        bind-key k select-pane -U
+        bind-key l select-pane -R
+
+        # Enable native Mac OS X copy/paste
+        set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
+
+      '';
     };
 
     zoxide = {
@@ -64,8 +97,8 @@
         pbpaste='' xclip -selection clipboard -o '';
         gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
         gs='' git status '';
-        config='' z ~/nixos hx . '';
-        rebuild='' z nixos-config && git add . && git commit -m "conifg" && sudo nixos-rebuild switch --flake "~/nixos-config#default" --impure && git push '';
+        config='' z ~/nixos vi . '';
+        rebuild='' z nixos && git add . && git commit -m "conifg" && sudo nixos-rebuild switch --flake ~/nixos#default --impure && git push '';
       };
 
       oh-my-zsh = {
