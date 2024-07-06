@@ -10,7 +10,7 @@
 
     neovim =
     {
-      enable = false;
+      enable = true;
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
