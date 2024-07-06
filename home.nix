@@ -30,7 +30,7 @@
 
     wezterm = {
       enable = true;
-      extraConfig = builtins.readFile /home/denis/nixos/modules/wezterm/keys.lua;
+      # extraConfig = builtins.readFile /home/denis/nixos/modules/wezterm/keys.lua;
     };
 
     lazygit = {
