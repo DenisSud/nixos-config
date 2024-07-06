@@ -10,12 +10,12 @@
 
     neovim =
     {
-      enable = true;
+      enable = false;
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
 
-	extraLuaConfig = builtins.readFile /home/denis/.config/init.lua;
+	extraLuaConfig = builtins.readFile /home/denis/.config/nvim/init.lua;
     };
 
     tmux = {
