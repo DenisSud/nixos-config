@@ -8,14 +8,15 @@
 
     home-manager.enable = true;
 
-    neovim =
-    {
+    neovim = {
       enable = true;
-        defaultEditor = true;
-        viAlias = true;
-        vimAlias = true;
 
-	extraLuaConfig = builtins.readFile /home/denis/.config/nvim/init.lua;
+      defaultEditor = true;
+
+      viAlias = true;
+      vimAlias = true;
+
+      extraLuaConfig = builtins.readFile ./modules/vim/init.lua;
     };
 
     tmux = {
@@ -44,10 +45,6 @@
         bind-key j select-pane -D
         bind-key k select-pane -U
         bind-key l select-pane -R
-
-        # Enable native Mac OS X copy/paste
-        set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
-
       '';
     };
 
@@ -90,15 +87,13 @@
 
       shellAliases = {
       	lg = '' lazygit '';
-	ld = '' lazydocker'';
+        ld = '' lazydocker'';
         lt = '' tree -L 5'';
         cl = "clear";
         pbcopy='' xclip -selection clipboard '';
         pbpaste='' xclip -selection clipboard -o '';
         gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
         gs='' git status '';
-        config='' z ~/nixos vi . '';
-        rebuild='' z nixos && git add . && git commit -m "conifg" && sudo nixos-rebuild switch --flake ~/nixos#default --impure && git push '';
       };
 
       oh-my-zsh = {

@@ -1,2 +1,1 @@
-require("theprimeagen")
-
+/nix/store/fkv2z8j12jz05llbma24n49cn1iwk1qv-home-manager-files/.config/nvim/init.lua

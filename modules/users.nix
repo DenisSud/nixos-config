@@ -12,9 +12,8 @@
       ticktick # For task managment
       telegram-desktop # Telegram mesanger
       zed-editor # IDE
-      syncthing # for syncing folders accross devices
       neovim
-			protonvpn-cli_2
+      youtube-music
 
       # Shell stuff
 			openai-whisper

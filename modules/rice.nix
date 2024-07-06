@@ -1,8 +1,8 @@
 {config, pkgs, ...}:
 {
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-    image = /home/denis/Pictures/dark_guy_1.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    image = /home/denis/Pictures/gnu.jpg;
 
     fonts = {
       serif = {
