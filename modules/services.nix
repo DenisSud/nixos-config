@@ -8,7 +8,12 @@
 				SystemMaxUse=1G
 			'';
 		};
-  
+
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
+
 		supergfxd.enable = true;
 
     xserver = {

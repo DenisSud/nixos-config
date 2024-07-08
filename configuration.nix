@@ -66,6 +66,11 @@
   };
 
   environment = {
+    variables = {
+      EDITOR = "neovim";
+      OPENAI_BASE_URL = "https://localhost:11434/v1";
+    };
+
     systemPackages = with pkgs; [
       ffmpeg
       gnomeExtensions.vitals

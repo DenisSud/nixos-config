@@ -14,6 +14,7 @@
       zed-editor # IDE
       neovim
       youtube-music
+      youtube-dl-light
 
       # Shell stuff
 			openai-whisper
