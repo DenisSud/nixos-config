@@ -7,6 +7,8 @@
 
     pulseaudio.enable = false;
 
+    cpu.amd.updateMicrocode = true;
+
     nvidia = {
       modesetting.enable = true;
       prime = {

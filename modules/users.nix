@@ -17,6 +17,7 @@
       youtube-dl-light
 
       # Shell stuff
+      smassh # TUI monkeytype
 			openai-whisper
 			ollama
 			tmux # Utility for terminal tyling, sesions and more

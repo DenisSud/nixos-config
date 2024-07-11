@@ -9,9 +9,13 @@ return {
 
   {
     "jesseduffield/lazygit",
+    cmd = "LazyGit",
     config = function()
-      require("configs.lazygit-config")
-    end
+      vim.g.lazygit_floating_window_winblend = 0 -- transparency of floating window
+      vim.g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
+      vim.g.lazygit_floating_window_line_spacing = 2 -- additional line spacing in floating window
+      vim.g.lazygit_use_neovim_remote = 1
+    end,
   },
 
   -- These are some examples, uncomment them if you want to see them work!

@@ -56,9 +56,10 @@
 
   boot = {
     loader.systemd-boot.configurationLimit = 10;
-    blacklistedKernelModules = [ "nouveau" ];
+    blacklistedKernelModules = [ "nouveau" "amd_pstate" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "amd_iommu=pt" "iommu=soft" ];
   };
 
   networking = {

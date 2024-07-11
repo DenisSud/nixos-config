@@ -6,6 +6,22 @@
 
   programs = {
 
+    firefox = {
+      enable = false;
+      enableGnomeExtensions = true;
+      profiles.default = {
+        isDefault = true;
+        user = "sudakov.denis.2007@gmail.com";
+        id = 0;
+        settings = {
+          "layout.css.backdrop-filter.enabled" = true;
+          "layout.css.backdrop-filter.quality" = 3;
+          "layout.css.backdrop-filter.radius" = 20;
+          "layout.css.backdrop-filter.amount" = "0.8";
+        };
+      };
+    };
+
     home-manager.enable = true;
 
     neovim = {
@@ -60,7 +76,13 @@
 
     wezterm = {
       enable = true;
-      # extraConfig = builtins.readFile /home/denis/nixos/modules/wezterm/keys.lua;
+      extraConfig = ''
+        local wezterm = require 'wezterm'
+        return {
+          window_background_opacity = 0.8,
+          text_background_opacity = 0,
+        }
+      '';
     };
 
     lazygit = {
