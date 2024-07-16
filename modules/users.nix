@@ -5,7 +5,6 @@
     password = "1423";
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-
       # Apps
       gnome.gnome-tweaks # Gnome advanced settings
       obsidian # For note taking
@@ -14,13 +13,15 @@
       zed-editor # IDE
       neovim
       youtube-music
-      youtube-dl-light
+      yt-dlp-light
+      vlc
 
       # Shell stuff
       smassh # TUI monkeytype
+      docker # Containerization tool
 			openai-whisper
-			ollama
 			tmux # Utility for terminal tyling, sesions and more
+      llmstudio 
       lazydocker # TUI for docker
       lazygit # TUI for git
       ripgrep # Grep tool
@@ -48,5 +49,6 @@
     ];
     shell = pkgs.zsh;
   };
+
 
 }

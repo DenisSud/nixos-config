@@ -76,13 +76,6 @@
 
     wezterm = {
       enable = true;
-      extraConfig = ''
-        local wezterm = require 'wezterm'
-        return {
-          window_background_opacity = 0.8,
-          text_background_opacity = 0,
-        }
-      '';
     };
 
     lazygit = {
@@ -95,10 +88,7 @@
     };
 
     thefuck = {
-      enable = false;
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      enableInstantMode = true;
+      enable = true;
     };
 
     zsh = {

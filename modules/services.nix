@@ -24,7 +24,7 @@
 
     ollama = {
       enable = true;
-      # acceleration = "cuda";
+      acceleration = "cuda";
     };
 
 		supergfxd.enable = true;
