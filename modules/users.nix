@@ -21,7 +21,7 @@
       docker # Containerization tool
 			openai-whisper
 			tmux # Utility for terminal tyling, sesions and more
-      llmstudio 
+      lmstudio 
       lazydocker # TUI for docker
       lazygit # TUI for git
       ripgrep # Grep tool
