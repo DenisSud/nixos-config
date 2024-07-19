@@ -25,7 +25,7 @@
     home-manager.enable = true;
 
     neovim = {
-      enable = true;
+      enable = false;
 
       defaultEditor = true;
 

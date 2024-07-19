@@ -22,11 +22,6 @@
 
     gnome.gnome-browser-connector.enable = true;
 
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
-
 		supergfxd.enable = true;
 
     xserver = {

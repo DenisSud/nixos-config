@@ -6,21 +6,19 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       # Apps
-      gnome.gnome-tweaks # Gnome advanced settings
       obsidian # For note taking
       ticktick # For task managment
       telegram-desktop # Telegram mesanger
       zed-editor # IDE
       neovim
       youtube-music
-      yt-dlp-light
       vlc
 
       # Shell stuff
       smassh # TUI monkeytype
       docker # Containerization tool
-			openai-whisper
-			tmux # Utility for terminal tyling, sesions and more
+      openai-whisper
+      tmux # Utility for terminal tyling, sesions and more
       lmstudio 
       lazydocker # TUI for docker
       lazygit # TUI for git

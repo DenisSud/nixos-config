@@ -18,7 +18,7 @@
     [
       ./hardware-configuration.nix
       ./modules/hardware.nix
-      ./modules/rice.nix
+      # ./modules/rice.nix
       ./modules/services.nix
       ./modules/users.nix
       inputs.home-manager.nixosModules.default
