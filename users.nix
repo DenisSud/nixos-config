@@ -19,6 +19,7 @@
       age
       nerdfonts
       git
+      git-lfs
       zellij
       vimPlugins.packer-nvim
       smassh # TUI monkeytype

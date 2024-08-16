@@ -4,7 +4,12 @@
   services = {
 
 		supergfxd.enable = true;
-    
+
+		ollama = {
+		  enable = true;
+			acceleration = "cuda";
+		};
+
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;

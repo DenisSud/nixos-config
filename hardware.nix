@@ -9,6 +9,10 @@
 
     cpu.amd.updateMicrocode = true;
 
+    graphics.enable = true;
+
+    nvidia-container-toolkit.enable = true;
+
     nvidia = {
       modesetting.enable = true;
       prime = {
@@ -17,8 +21,6 @@
 		    };
       };
     };
-
-    opengl.enable = true;
 
   };
 

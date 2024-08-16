@@ -9,9 +9,15 @@
       ./hardware.nix
     ];
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
 
   programs = {
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
     zsh.enable = true;
     firefox.enable = true;
     nh = {
@@ -64,8 +70,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Allow unfree packages
@@ -82,7 +88,7 @@
     systemPackages = with pkgs; [
       cudaPackages.cuda_nvcc
       gnomeExtensions.vitals
-      gnome3.gnome-tweaks
+      gnome-tweaks
       supergfxctl
       asusctl
       curl
