@@ -1,0 +1,137 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      ./users.nix
+      ./services.nix
+      ./hardware.nix
+    ];
+
+  virtualisation.docker.enable = true;
+
+  programs = {
+    zsh.enable = true;
+    firefox.enable = true;
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/denis/nixos-config";
+    };
+  };
+
+  home-manager.users.denis = import ./home.nix;
+  home-manager.backupFileExtension = "backup";
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "g14"; # Define your hostname.
+
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "Europe/Moscow";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "ru_RU.UTF-8";
+    LC_IDENTIFICATION = "ru_RU.UTF-8";
+    LC_MEASUREMENT = "ru_RU.UTF-8";
+    LC_MONETARY = "ru_RU.UTF-8";
+    LC_NAME = "ru_RU.UTF-8";
+    LC_NUMERIC = "ru_RU.UTF-8";
+    LC_PAPER = "ru_RU.UTF-8";
+    LC_TELEPHONE = "ru_RU.UTF-8";
+    LC_TIME = "ru_RU.UTF-8";
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment = {
+
+    variables = {
+        NIX_BUILD_SHELL = "zsh";
+    };
+
+    systemPackages = with pkgs; [
+      cudaPackages.cuda_nvcc
+      gnomeExtensions.vitals
+      gnome3.gnome-tweaks
+      supergfxctl
+      asusctl
+      curl
+      fzf
+      git
+      xclip
+      btop
+      neofetch
+    ];
+
+    gnome.excludePackages = (with pkgs; [
+      gnome-text-editor
+      gnome-photos
+      gnome-tour
+      gnome-connections
+      simple-scan
+      gnome-usage
+      gnome-system-monitor
+      cheese
+      seahorse
+      eog
+      yelp
+      gnome-font-viewer
+      epiphany # web browser
+      geary # email reader
+      evince # document viewer
+      # totem # video player
+      ]) ++ (with  pkgs.gnome; [
+      gnome-logs
+      gnome-maps
+      gnome-contacts
+      gnome-music
+      gnome-software
+      gnome-characters
+      gnome-weather
+      gnome-clocks
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+    ]);
+  };
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
+
+}
