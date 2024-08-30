@@ -7,29 +7,24 @@
     packages = with pkgs; [
       # Apps
       ticktick # For task managment
+      google-chrome
       telegram-desktop # Telegram mesanger
       neovim
-      zed-editor
       youtube-music
       obsidian
-      lmstudio
       discord
+      vscode
+      flatpak
 
       # Shell stuff
-      age
       nerdfonts
-      git
       git-lfs
-      zellij
       vimPlugins.packer-nvim
-      smassh # TUI monkeytype
       docker # Containerization tool
-      openai-whisper
       lazydocker # TUI for docker
       lazygit # TUI for git
       gcc # C and C++ compiler
       fzf # fuzzy finder (awsome)
-      yazi # file manager
       zoxide # better cd (awsome)
       bat # file viewer
       ripgrep # for nvim

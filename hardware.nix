@@ -14,12 +14,10 @@
     nvidia-container-toolkit.enable = true;
 
     nvidia = {
+      open = false;
+      powerManagement.enable = true;
+      powerManagement.finegrained = true;
       modesetting.enable = true;
-      prime = {
-        offload = { # enable for better power managment
-			    enable = true;
-		    };
-      };
     };
 
   };

@@ -13,13 +13,14 @@
     enable = true;
   };
 
+  security.rtkit.enable = true;
+
   programs = {
     git = {
       enable = true;
       lfs.enable = true;
     };
     zsh.enable = true;
-    firefox.enable = true;
     nh = {
       enable = true;
       clean.enable = true;
@@ -83,10 +84,12 @@
 
     variables = {
         NIX_BUILD_SHELL = "zsh";
+        EDITOR = "zed";
     };
 
     systemPackages = with pkgs; [
       cudaPackages.cuda_nvcc
+      cudaPackages.cudatoolkit
       gnomeExtensions.vitals
       gnome-tweaks
       supergfxctl
@@ -96,7 +99,6 @@
       git
       xclip
       btop
-      neofetch
     ];
 
     gnome.excludePackages = (with pkgs; [
@@ -112,11 +114,9 @@
       eog
       yelp
       gnome-font-viewer
-      epiphany # web browser
       geary # email reader
+      epiphany # web browser
       evince # document viewer
-      # totem # video player
-      ]) ++ (with  pkgs.gnome; [
       gnome-logs
       gnome-maps
       gnome-contacts
@@ -125,6 +125,7 @@
       gnome-characters
       gnome-weather
       gnome-clocks
+      totem # video player
       tali # poker game
       iagno # go game
       hitori # sudoku game
