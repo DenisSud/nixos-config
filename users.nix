@@ -9,12 +9,9 @@
       ticktick # For task managment
       google-chrome
       telegram-desktop # Telegram mesanger
+      zed-editor
       neovim
-      youtube-music
       obsidian
-      discord
-      vscode
-      flatpak
 
       # Shell stuff
       nerdfonts

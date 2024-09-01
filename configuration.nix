@@ -84,7 +84,6 @@
 
     variables = {
         NIX_BUILD_SHELL = "zsh";
-        EDITOR = "zed";
     };
 
     systemPackages = with pkgs; [

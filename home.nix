@@ -27,6 +27,11 @@
     };
 
     zsh = {
+
+      initExtra = ''
+        export PATH="$HOME/.local/bin:$PATH"
+        '';
+
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
@@ -49,9 +54,6 @@
         plugins = [ "git" "fzf" ];
         theme = "minimal";
       };
-
-      initExtra = ''
-      '';
 
     };
 
