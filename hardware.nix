@@ -14,10 +14,11 @@
     nvidia-container-toolkit.enable = true;
 
     nvidia = {
-      open = false;
+      open = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
       modesetting.enable = true;
+      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
 
   };

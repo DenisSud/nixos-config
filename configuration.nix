@@ -16,15 +16,20 @@
   security.rtkit.enable = true;
 
   programs = {
+    gamemode = {
+      enable = true;
+    };
     git = {
       enable = true;
       lfs.enable = true;
     };
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+    };
     nh = {
       enable = true;
       clean.enable = true;
-      clean.extraArgs = "--keep-since 4d --keep 3";
+      clean.extraArgs = "--keep-since 2d --keep 3";
       flake = "/home/denis/nixos-config";
     };
   };
@@ -36,8 +41,11 @@
 
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "mem_sleep_default=deep" ];
+  };
 
   networking.hostName = "g14"; # Define your hostname.
 
@@ -66,8 +74,10 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager = {
+    gdm.enable = true;
+    # gnome.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {

@@ -14,7 +14,7 @@
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" "amdgpu" ];
+      videoDrivers = [ "nvidia" "mesa" ];
       excludePackages = (with pkgs; [
           xterm
       ]);
@@ -22,6 +22,11 @@
 
     openssh.enable = true;
 
+    tor = {
+      enable = true;
+      client.enable = true;
+      torsocks.enable = true;
+    };
 
     pipewire = {
       enable = true;

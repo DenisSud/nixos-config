@@ -11,7 +11,10 @@
       telegram-desktop # Telegram mesanger
       zed-editor
       neovim
+      wireguard-tools
       obsidian
+      lutris
+      tor
 
       # Shell stuff
       nerdfonts
