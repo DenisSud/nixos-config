@@ -3,6 +3,15 @@
 
   services = {
 
+    nvidia-suspend.enable = true;
+
+    logind  = {
+      # lidSwitch = "suspend";
+      # lidSwitchDocked = "ignore";
+      # handleLidSwitch = "suspend";
+      # handleLidSwitchDocked = "ignore";
+    };
+
 		supergfxd.enable = true;
 
 		ollama = {

@@ -10,11 +10,15 @@
       google-chrome
       telegram-desktop # Telegram mesanger
       zed-editor
+      vscode
       neovim
       wireguard-tools
       obsidian
       lutris
-      tor
+      wine 
+      bottles
+      tmux
+      python312Packages.ipykernel
 
       # Shell stuff
       nerdfonts
