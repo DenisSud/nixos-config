@@ -122,7 +122,6 @@
       seahorse
       eog
       yelp
-      gnome-font-viewer
       geary # email reader
       epiphany # web browser
       evince # document viewer

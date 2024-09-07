@@ -3,8 +3,6 @@
 
   services = {
 
-    nvidia-suspend.enable = true;
-
     # logind  = {
     #   lidSwitch = "suspend";
     #   lidSwitchDocked = "ignore";

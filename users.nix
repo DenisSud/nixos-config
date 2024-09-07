@@ -10,7 +10,6 @@
       google-chrome
       telegram-desktop # Telegram mesanger
       zed-editor
-      vscode
       neovim
       wireguard-tools
       obsidian
