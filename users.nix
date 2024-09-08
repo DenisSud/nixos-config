@@ -9,6 +9,7 @@
       ticktick # For task managment
       google-chrome
       telegram-desktop # Telegram mesanger
+      vscode
       zed-editor
       neovim
       wireguard-tools
@@ -20,6 +21,7 @@
       python312Packages.ipykernel
 
       # Shell stuff
+      ollama-cuda
       nerdfonts
       git-lfs
       vimPlugins.packer-nvim

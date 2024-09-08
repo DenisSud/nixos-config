@@ -12,10 +12,10 @@
 
 		supergfxd.enable = true;
 
-		ollama = {
-		  enable = true;
-			acceleration = "cuda";
-		};
+		# ollama = {
+		#   enable = true;
+		# 	acceleration = "cuda";
+		# };
 
     xserver = {
       enable = true;
