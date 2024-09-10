@@ -16,9 +16,9 @@
     nvidia = {
       open = true;
       powerManagement.enable = true;
-      powerManagement.finegrained = false;
+      powerManagement.finegrained = true;
       modesetting.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.vulkan;
+      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
 
   };

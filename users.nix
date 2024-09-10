@@ -15,10 +15,12 @@
       wireguard-tools
       obsidian
       lutris
-      wine 
+      wine
       bottles
       tmux
+      python312
       python312Packages.ipykernel
+      pyright
 
       # Shell stuff
       ollama-cuda

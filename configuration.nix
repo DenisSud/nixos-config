@@ -11,6 +11,7 @@
 
   virtualisation.docker = {
     enable = true;
+    enableNvidia = true;
   };
 
   security.rtkit.enable = true;
