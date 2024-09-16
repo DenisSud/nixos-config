@@ -14,7 +14,7 @@
     nvidia-container-toolkit.enable = true;
 
     nvidia = {
-      open = true;
+      open = false;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
       modesetting.enable = true;

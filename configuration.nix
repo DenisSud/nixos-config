@@ -17,25 +17,31 @@
   security.rtkit.enable = true;
 
   programs = {
-    gamemode = {
+
+    firefox = {
       enable = true;
     };
+    
     git = {
       enable = true;
       lfs.enable = true;
     };
+
     zsh = {
       enable = true;
     };
+
     nh = {
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 2d --keep 3";
-      flake = "/home/denis/nixos-config";
+      flake = "/home/Denis/nixos-config";
     };
-  };
 
-  home-manager.users.denis = import ./home.nix;
+  };
+  
+
+  home-manager.users.Denis = import ./home.nix;
   home-manager.backupFileExtension = "backup";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -43,9 +49,9 @@
 
   # Bootloader.
   boot = {
+    loader.grub.useOSProber = true;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    kernelParams = [ "mem_sleep_default=deep" ];
   };
 
   networking.hostName = "g14"; # Define your hostname.
@@ -98,6 +104,7 @@
     };
 
     systemPackages = with pkgs; [
+      fprintd 
       cudaPackages.cuda_nvcc
       cudaPackages.cudatoolkit
       gnomeExtensions.vitals
@@ -125,15 +132,15 @@
       yelp
       geary # email reader
       epiphany # web browser
-      evince # document viewer
+      # evince # document viewer
       gnome-logs
       gnome-maps
       gnome-contacts
       gnome-music
       gnome-software
       gnome-characters
-      gnome-weather
-      gnome-clocks
+      # gnome-weather
+      # gnome-clocks
       totem # video player
       tali # poker game
       iagno # go game

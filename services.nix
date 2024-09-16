@@ -3,19 +3,18 @@
 
   services = {
 
-    # logind  = {
-    #   lidSwitch = "suspend";
-    #   lidSwitchDocked = "ignore";
-    #   handleLidSwitch = "suspend";
-    #   handleLidSwitchDocked = "ignore";
-    # };
+    fprintd = {
+      enable = true;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-goodix;
+    };
 
 		supergfxd.enable = true;
 
-		# ollama = {
-		#   enable = true;
-		# 	acceleration = "cuda";
-		# };
+		ollama = {
+		  enable = true;
+			acceleration = "cuda";
+		};
 
     xserver = {
       enable = true;

@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
 
-  home.username = "denis";
-  home.homeDirectory = "/home/denis";
+  home.username = "Denis";
+  home.homeDirectory = "/home/Denis";
 
   programs = {
 
