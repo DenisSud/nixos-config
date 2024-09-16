@@ -11,17 +11,14 @@
 
   virtualisation.docker = {
     enable = true;
-    enableNvidia = true;
   };
-
-  security.rtkit.enable = true;
 
   programs = {
 
     firefox = {
       enable = true;
     };
-    
+
     git = {
       enable = true;
       lfs.enable = true;
@@ -35,13 +32,13 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 2d --keep 3";
-      flake = "/home/Denis/nixos-config";
+      flake = "/home/denis/nixos-config";
     };
 
   };
-  
 
-  home-manager.users.Denis = import ./home.nix;
+
+  home-manager.users.denis = import ./home.nix;
   home-manager.backupFileExtension = "backup";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -83,7 +80,6 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager = {
     gdm.enable = true;
-    # gnome.enable = true;
   };
 
   # Configure keymap in X11
@@ -104,7 +100,6 @@
     };
 
     systemPackages = with pkgs; [
-      fprintd 
       cudaPackages.cuda_nvcc
       cudaPackages.cudatoolkit
       gnomeExtensions.vitals

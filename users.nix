@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ...}:
 {
-  users.users.Denis = { isNormalUser = true;
+  users.users.denis = { isNormalUser = true;
     password = "1423";
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -14,8 +14,6 @@
       beeper
 
       # Shell stuff
-      pandoc
-      jupyter
       nerdfonts
       git-lfs
       vimPlugins.packer-nvim
