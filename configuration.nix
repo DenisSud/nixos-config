@@ -3,10 +3,10 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./users.nix
-      ./services.nix
-      ./hardware.nix
+      ./modules/hardware-configuration.nix
+      ./modules/users.nix
+      ./modules/services.nix
+      ./modules/hardware.nix
     ];
 
   virtualisation.docker = {
@@ -37,8 +37,13 @@
 
   };
 
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+    image = ./space-guy.jpg;
+  };
 
-  home-manager.users.denis = import ./home.nix;
+  home-manager.users.denis = import ./modules/home.nix;
   home-manager.backupFileExtension = "backup";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
