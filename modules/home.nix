@@ -28,7 +28,7 @@
 
     zsh = {
 
-      extraInit = ''
+      initExtra = ''
         export DEFAULT_MODEL=phi3.5:latest
         export DEFAULT_VENDOR=Ollama
       '';
