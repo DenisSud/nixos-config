@@ -26,6 +26,10 @@
 
     zsh = {
       enable = true;
+      sessionVariables = {
+        DEFAULT_VENDOR = "SiliconCloud";
+        DEFAULT_MODEL = "Qwen/Qwen1.5-110B-Chat";
+      };
     };
 
     nh = {

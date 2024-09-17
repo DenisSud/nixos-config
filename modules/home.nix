@@ -4,11 +4,6 @@
   home.username = "denis";
   home.homeDirectory = "/home/denis";
 
-  # home.sessionVariables = {
-  #   DEFAULT_VENDOR = "Ollama";
-  #   DEFAULT_MODEL = "phi3.5:latest";
-  # };
-
   programs = {
 
     home-manager.enable = true;
