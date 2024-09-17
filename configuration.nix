@@ -40,7 +40,7 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
-    image = ./space-guy.jpg;
+    image = ./wallpapers/black.png;
   };
 
   home-manager.users.denis = import ./modules/home.nix;
