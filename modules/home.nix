@@ -44,6 +44,7 @@
 
 
       shellAliases = {
+        gac = '' git add . && git commit -m "auto commit" && git push '';
       	lg = '' lazygit '';
         ld = '' lazydocker'';
         lt = '' tree -L 5'';
