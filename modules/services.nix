@@ -3,6 +3,11 @@
 
   services = {
 
+    asusd = {
+      enable = true;
+      enableUserService = true;
+    };
+
     fprintd = {
       enable = true;
       tod.enable = true;

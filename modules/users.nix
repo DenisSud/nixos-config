@@ -7,6 +7,7 @@
     packages = with pkgs; [
       # Apps
       ticktick
+      zed-editor
       neovim
       wireguard-tools
       obsidian

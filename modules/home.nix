@@ -4,6 +4,11 @@
   home.username = "denis";
   home.homeDirectory = "/home/denis";
 
+  # home.sessionVariables = {
+  #   DEFAULT_VENDOR = "Ollama";
+  #   DEFAULT_MODEL = "phi3.5:latest";
+  # };
+
   programs = {
 
     home-manager.enable = true;
@@ -62,11 +67,6 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.file = {
-  };
-
-  home.sessionVariables = {
-    OPENAI_BASE_URL="https://api.groq.com/openai/v1";
-    DEFAULT_MODEL="llama3-70b-8192";
   };
 
 }
