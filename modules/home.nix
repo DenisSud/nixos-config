@@ -28,9 +28,10 @@
 
     zsh = {
 
-      initExtra = ''
-        export PATH="$HOME/.local/bin:$PATH"
-        '';
+      extraInit = ''
+        export DEFAULT_MODEL=phi3.5:latest
+        export DEFAULT_VENDOR=Ollama
+      '';
 
       enable = true;
       enableCompletion = true;
