@@ -39,8 +39,23 @@
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
     image = ./wallpapers/black.png;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+    fonts = {
+      serif = {
+        package = pkgs.nerdfonts;
+        name = "JetBrainsMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerdfonts;
+        name = "JetBrainsMono Nerd Font";
+      };
+      monospace = {
+        package = pkgs.nerdfonts;
+        name = "JetBrainsMono Nerd Font";
+      };
+    };
   };
 
   home-manager.users.denis = import ./modules/home.nix;

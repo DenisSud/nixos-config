@@ -9,12 +9,12 @@
       tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
 
-		supergfxd.enable = true;
+    supergfxd.enable = true;
 
-		ollama = {
-		  enable = true;
-			acceleration = "cuda";
-		};
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
 
     xserver = {
       enable = true;
@@ -27,12 +27,6 @@
     };
 
     openssh.enable = true;
-
-    tor = {
-      enable = true;
-      client.enable = true;
-      torsocks.enable = true;
-    };
 
     pipewire = {
       enable = true;

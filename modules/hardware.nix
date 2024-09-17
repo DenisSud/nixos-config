@@ -9,17 +9,17 @@
 
     cpu.amd.updateMicrocode = true;
 
-    graphics.enable = true;
+    # graphics.enable = true;
     
     nvidia-container-toolkit.enable = true;
 
-    nvidia = {
-      open = false;
-      powerManagement.enable = true;
-      powerManagement.finegrained = true;
-      modesetting.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
-    };
+    # nvidia = {
+    #   open = false;
+    #   powerManagement.enable = true;
+    #   powerManagement.finegrained = true;
+    #   modesetting.enable = true;
+    #   package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+    # };
 
   };
 
