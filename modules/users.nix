@@ -15,6 +15,7 @@
       beeper
 
       # Shell stuff
+      yt-dlp
       fabric-ai
       jupyter
       texliveMedium

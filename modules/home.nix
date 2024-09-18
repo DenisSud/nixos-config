@@ -29,8 +29,8 @@
     zsh = {
 
       initExtra = ''
-        export DEFAULT_MODEL=phi3.5:latest
-        export DEFAULT_VENDOR=Ollama
+        export DEFAULT_MODEL=Qwen/Qwen2-57B-A14B-Instruct
+        export DEFAULT_VENDOR=SiliconCloud
       '';
 
       enable = true;
@@ -38,9 +38,9 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
-
       shellAliases = {
-        gac = '' git add . && git commit -m "auto commit" && git push '';
+        gsc = '' git add . && git commit -m $(git diff | fabric -p summarize_git_changes --model phi3.5:latest) && git push '';
+        gac = '' git commit -am "auto commit" && git push '';
       	lg = '' lazygit '';
         ld = '' lazydocker'';
         lt = '' tree -L 5'';
