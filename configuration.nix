@@ -40,7 +40,7 @@
 
   stylix = {
     enable = true;
-    image = ./wallpapers/black.png;
+    image = ./wallpapers/focus.png;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
     fonts = {
