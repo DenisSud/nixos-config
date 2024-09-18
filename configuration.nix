@@ -11,6 +11,7 @@
 
   virtualisation.docker = {
     enable = true;
+    enableNvidia = true;
   };
 
   programs = {
