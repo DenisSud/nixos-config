@@ -33,7 +33,7 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 2d --keep 3";
-      flake = "/home/denis/nixos-config";
+      flake = "/home/denis/NixOS";
     };
 
   };
@@ -73,9 +73,15 @@
   };
 
   networking.hostName = "g14"; # Define your hostname.
+  networking.firewall.enable = false;
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    connectionConfig = {
+      "wifi-sec.pmf.enable" = "enable";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";

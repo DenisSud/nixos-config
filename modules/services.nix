@@ -8,6 +8,8 @@
       enableUserService = true;
     };
 
+    dnsmasq.enable = true;
+
     fprintd = {
       enable = true;
       tod.enable = true;

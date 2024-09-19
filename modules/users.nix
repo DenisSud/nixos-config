@@ -11,8 +11,10 @@
       neovim
       wireguard-tools
       obsidian
+      anki
       gimp
       beeper
+      bottles
 
       # Shell stuff
       yt-dlp
