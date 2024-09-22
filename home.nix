@@ -29,8 +29,8 @@
     zsh = {
 
       initExtra = ''
-        export DEFAULT_MODEL=Qwen/Qwen2-57B-A14B-Instruct
-        export DEFAULT_VENDOR=SiliconCloud
+        export DEFAULT_VENDOR=Groq
+        export DEFAULT_MODEL=mixtral-8x7b-32768
       '';
 
       enable = true;
@@ -39,6 +39,8 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
+        vi = '' nvim '';
+        vim = '' nvim '';
         gsc = '' git add . && git commit -m "$(git diff | fabric -p summarize_git_changes --model phi3.5:latest)" && git push '';
         gac = '' git commit -am "auto commit" && git push '';
       	lg = '' lazygit '';

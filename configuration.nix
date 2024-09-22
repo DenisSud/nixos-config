@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -41,6 +37,27 @@
   home-manager.users.denis = import ./home.nix;
   home-manager.backupFileExtension = "backup";
 
+  stylix = {
+    enable = true;
+    image = ./wallpaper/focus.png;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+    fonts = {
+      serif = {
+        package = pkgs.nerdfonts;
+        name = "JetBrainsMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerdfonts;
+        name = "JetBrainsMono Nerd Font";
+      };
+      monospace = {
+        package = pkgs.nerdfonts;
+        name = "JetBrainsMono Nerd Font";
+      };
+    };
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
 
   # Bootloader.
@@ -71,6 +88,19 @@
   };
 
   services = {
+
+    printing = {
+      enable = true;
+      browsing = true;
+      defaultShared = true;
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      drivers = with pkgs; [
+        gutenprint
+        cups-filters
+        hplipWithPlugin
+      ];
+    };
 
     asusd = {
       enable = true;
@@ -121,7 +151,7 @@
 
     cpu.amd.updateMicrocode = true;
 
-    # graphics.enable = true;
+    graphics.enable = true;
     
     nvidia-container-toolkit.enable = true;
 
@@ -138,7 +168,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.denis = {
     isNormalUser = true;
-    password = "1423";
+    password = "asdfghjkl;'";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     packages = with pkgs; [
       # Apps
@@ -149,8 +179,8 @@
       obsidian
       anki
       gimp
-      beeper
       bottles
+      telegram-desktop
 
       # Shell stuff
       yt-dlp
@@ -187,8 +217,8 @@
     variables = {
         NIX_BUILD_SHELL = "zsh";
         EDITOR = "zed";
-        DEFAULT_VENDOR = "SiliconCloud";
-        DEFAULT_MODEL = "Qwen/Qwen1.5-110B-Chat";
+        DEFAULT_VENDOR = "Groq";
+        DEFAULT_MODEL = "llama-3.1-70b-versatile";
     };
 
     systemPackages = with pkgs; [
