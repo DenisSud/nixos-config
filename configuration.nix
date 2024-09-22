@@ -19,6 +19,8 @@
     git = {
       enable = true;
       lfs.enable = true;
+      # userName  = "DenisSud";
+      # userEmail = "sudakov.denis.2007@gmail.com";
     };
 
     zsh = {
