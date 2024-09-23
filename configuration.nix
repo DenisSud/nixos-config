@@ -182,6 +182,7 @@
       flatpak
       ticktick
       obsidian
+      newsflash
       zed-editor
       winetricks
       gnome-graphs
