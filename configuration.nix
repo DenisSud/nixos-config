@@ -181,7 +181,6 @@
       newsflash
       zed-editor
       impression
-      winetricks
       gnome-graphs
       wireguard-tools
       telegram-desktop
@@ -207,6 +206,7 @@
       lazydocker
       home-manager
       texliveMedium
+      docker-compose
       vimPlugins.packer-nvim
     ];
     shell = pkgs.zsh;
