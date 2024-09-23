@@ -12,10 +12,6 @@
 
   programs = {
 
-    firefox = {
-      enable = true;
-    };
-
     zsh.enable = true;
 
     git = {
@@ -193,7 +189,6 @@
 
       # Shell stuff
       go
-      git
       git
       gcc
       fzf
