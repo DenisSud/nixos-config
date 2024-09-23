@@ -180,6 +180,7 @@
       ticktick
       obsidian
       zed-editor
+      winetricks
       wireguard-tools
       telegram-desktop
 
