@@ -184,6 +184,7 @@
       obsidian
       newsflash
       zed-editor
+      impression
       winetricks
       gnome-graphs
       wireguard-tools
