@@ -63,6 +63,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  networking.firewall.enable  = false;
 
   networking.hostName = "g14"; # Define your hostname.
 
@@ -172,37 +173,39 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     packages = with pkgs; [
       # Apps
-      ticktick
-      zed-editor
-      neovim
-      wireguard-tools
-      obsidian
+      wine
       gimp
+      neovim
       bottles
+      ticktick
+      obsidian
+      zed-editor
+      wireguard-tools
       telegram-desktop
 
       # Shell stuff
-      yt-dlp
-      fabric-ai
-      texliveMedium
-      pandoc
-      nerdfonts
-      git-lfs
-      vimPlugins.packer-nvim
-      docker
-      lazydocker
-      lazygit
-      gcc
-      fzf
-      zoxide
-      bat
-      ripgrep
-      zsh
-      tree
-      home-manager
-      nodejs
       go
       git
+      git
+      gcc
+      fzf
+      bat
+      zsh
+      tree
+      nodejs
+      zoxide
+      yt-dlp
+      pandoc
+      docker
+      lazygit
+      ripgrep
+      git-lfs
+      nerdfonts
+      fabric-ai
+      lazydocker
+      home-manager
+      texliveMedium
+      vimPlugins.packer-nvim
     ];
     shell = pkgs.zsh;
   };
