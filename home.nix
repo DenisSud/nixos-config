@@ -29,6 +29,7 @@
     zsh = {
 
       initExtra = ''
+        export WINEPREFIX="$HOME/.wine"
         export DEFAULT_VENDOR=Groq
         export DEFAULT_MODEL=mixtral-8x7b-32768
       '';
