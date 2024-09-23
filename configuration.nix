@@ -175,7 +175,6 @@
     packages = with pkgs; [
       # Apps
       wine
-      :wa
       gimp
       neovim
       flatpak
