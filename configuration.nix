@@ -63,7 +63,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  networking.firewall.enable  = false;
+  networking.firewall.enable  = true;
 
   networking.hostName = "g14"; # Define your hostname.
 
