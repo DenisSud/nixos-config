@@ -16,6 +16,8 @@
       enable = true;
     };
 
+    zsh.enable = true;
+
     git = {
       enable = true;
       lfs.enable = true;
@@ -182,9 +184,10 @@
       obsidian
       zed-editor
       winetricks
+      gnome-graphs
       wireguard-tools
       telegram-desktop
-      gnome.gnome-software
+      gnome-software
 
       # Shell stuff
       go
@@ -209,7 +212,7 @@
       texliveMedium
       vimPlugins.packer-nvim
     ];
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
   };
 
   # Allow unfree packages
@@ -218,7 +221,7 @@
   environment = {
 
     variables = {
-        NIX_BUILD_SHELL = "bash";
+        NIX_BUILD_SHELL = "zsh";
         EDITOR = "zed";
         DEFAULT_VENDOR = "Groq";
         DEFAULT_MODEL = "llama-3.1-70b-versatile";
