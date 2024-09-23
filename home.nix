@@ -11,6 +11,7 @@
     zoxide = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true; # Enable zoxide for Bash
     };
 
     lazygit = {
@@ -20,10 +21,12 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true; # Enable fzf for Bash
     };
 
     thefuck = {
       enable = true;
+      enableBashIntegration = true; # Enable thefuck for Bash
     };
 
     zsh = {
@@ -44,7 +47,7 @@
         vim = '' nvim '';
         gsc = '' git add . && git commit -m "$(git diff | fabric -p summarize_git_changes --model phi3.5:latest)" && git push '';
         gac = '' git commit -am "auto commit" && git push '';
-      	lg = '' lazygit '';
+        lg = '' lazygit '';
         ld = '' lazydocker'';
         lt = '' tree -L 5'';
         cl = "clear";
@@ -60,6 +63,36 @@
         theme = "minimal";
       };
 
+    };
+
+    bash = {
+      enable = true;
+
+      # Enable bash-completion
+      enableCompletion = true;
+
+      initExtra = ''
+        export WINEPREFIX="$HOME/.wine"
+        export DEFAULT_VENDOR=Groq
+        export DEFAULT_MODEL=mixtral-8x7b-32768
+      '';
+      
+      # Enable programmable completion
+      shellAliases = {
+        vi = "nvim";
+        vim = "nvim";
+        gsc = "git add . && git commit -m \"$(git diff | fabric -p summarize_git_changes --model phi3.5:latest)\" && git push";
+        gac = "git commit -am \"auto commit\" && git push";
+        lg = "lazygit";
+        ld = "lazydocker";
+        lt = "tree -L 5";
+        cl = "clear";
+        pbcopy = "xclip -selection clipboard";
+        pbpaste = "xclip -selection clipboard -o";
+        gl = "git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
+        gs = "git status";
+      };
+      
     };
 
   };

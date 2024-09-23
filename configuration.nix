@@ -21,10 +21,6 @@
       lfs.enable = true;
     };
 
-    zsh = {
-      enable = true;
-    };
-
     nh = {
       enable = true;
       clean.enable = true;
@@ -90,6 +86,17 @@
 
   services = {
 
+    flatpak = {
+      enable = true;
+    };
+
+    fprintd = {
+      enable = true;
+      package = pkgs.fprintd-tod;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-goodix;
+    };
+
     printing = {
       enable = true;
       browsing = true;
@@ -109,12 +116,6 @@
     };
 
     dnsmasq.enable = true;
-
-    fprintd = {
-      enable = true;
-      tod.enable = true;
-      tod.driver = pkgs.libfprint-2-tod1-goodix;
-    };
 
     supergfxd.enable = true;
 
@@ -174,15 +175,17 @@
     packages = with pkgs; [
       # Apps
       wine
+      :wa
       gimp
       neovim
-      bottles
+      flatpak
       ticktick
       obsidian
       zed-editor
       winetricks
       wireguard-tools
       telegram-desktop
+      gnome.gnome-software
 
       # Shell stuff
       go
@@ -191,7 +194,6 @@
       gcc
       fzf
       bat
-      zsh
       tree
       nodejs
       zoxide
@@ -208,7 +210,7 @@
       texliveMedium
       vimPlugins.packer-nvim
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.bash;
   };
 
   # Allow unfree packages
@@ -217,7 +219,7 @@
   environment = {
 
     variables = {
-        NIX_BUILD_SHELL = "zsh";
+        NIX_BUILD_SHELL = "bash";
         EDITOR = "zed";
         DEFAULT_VENDOR = "Groq";
         DEFAULT_MODEL = "llama-3.1-70b-versatile";
@@ -249,7 +251,7 @@
       seahorse
       eog
       yelp
-      geary # email reader
+      # geary # email reader
       epiphany # web browser
       # evince # document viewer
       gnome-logs
