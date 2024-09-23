@@ -12,12 +12,6 @@
 
   programs = {
 
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server
-    }
-
     firefox = {
       enable = true;
     };
@@ -25,8 +19,6 @@
     git = {
       enable = true;
       lfs.enable = true;
-      # userName  = "DenisSud";
-      # userEmail = "sudakov.denis.2007@gmail.com";
     };
 
     zsh = {
@@ -185,7 +177,6 @@
       neovim
       wireguard-tools
       obsidian
-      anki
       gimp
       bottles
       telegram-desktop
@@ -193,7 +184,6 @@
       # Shell stuff
       yt-dlp
       fabric-ai
-      jupyter
       texliveMedium
       pandoc
       nerdfonts
