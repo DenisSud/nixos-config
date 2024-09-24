@@ -33,9 +33,9 @@
 
   stylix = {
     enable = true;
-    image = ./wallpaper/focus.png;
+    image = ./wallpaper/dune.jpg;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-bathory.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-dune.yaml";
     fonts = {
       serif = {
         package = pkgs.nerdfonts;
