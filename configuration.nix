@@ -35,7 +35,7 @@
     enable = true;
     image = ./wallpaper/focus.png;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
     fonts = {
       serif = {
         package = pkgs.nerdfonts;
@@ -209,7 +209,7 @@
       docker-compose
       vimPlugins.packer-nvim
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.bash;
   };
 
   # Allow unfree packages
