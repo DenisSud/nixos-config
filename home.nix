@@ -75,7 +75,7 @@
 
         # PS1='\[\e[1;34m\]\u\[\e[m\]@\[\e[1;32m\]\h\[\e[m\]:\[\e[1;35m\]\w\[\e[m\]\$ '
       initExtra = ''
-        PS1='\[\e[34m\]\u@\h:\w\$ \[\e[m\]'
+        PS1='\[\e[37m\]\u@\h:\w\$ \[\e[m\]'
         export WINEPREFIX="$HOME/.wine"
         export DEFAULT_VENDOR=Groq
         export DEFAULT_MODEL=mixtral-8x7b-32768
