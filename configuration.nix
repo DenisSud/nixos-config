@@ -35,7 +35,7 @@
     enable = true;
     image = ./wallpaper/dune.jpg;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-dune.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-plateau.yaml";
     fonts = {
       serif = {
         package = pkgs.nerdfonts;
