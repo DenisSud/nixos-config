@@ -35,7 +35,7 @@
     enable = true;
     image = ./wallpaper/focus.png;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-bathory.yaml";
     fonts = {
       serif = {
         package = pkgs.nerdfonts;
