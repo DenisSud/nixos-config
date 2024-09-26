@@ -12,7 +12,12 @@
 
   programs = {
 
-    zsh.enable = true;
+    gamemode.enable = true;
+
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+    };
 
     git = {
       enable = true;
@@ -33,9 +38,9 @@
 
   stylix = {
     enable = true;
-    image = ./wallpaper/dune.jpg;
+    image = ./wallpaper/focus.png;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-plateau.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
     fonts = {
       serif = {
         package = pkgs.nerdfonts;
@@ -178,10 +183,12 @@
       flatpak
       ticktick
       obsidian
+      mangohud
       newsflash
       zed-editor
       impression
       gnome-graphs
+      clipboard-jh
       wireguard-tools
       telegram-desktop
       gnome-software
