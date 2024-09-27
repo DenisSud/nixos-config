@@ -12,6 +12,8 @@
 
   programs = {
 
+    zsh.enable = true;
+
     gamemode.enable = true;
 
     steam = {
@@ -32,7 +34,7 @@
     };
 
   };
-  
+
   home-manager.users.denis = import ./home.nix;
   home-manager.backupFileExtension = "backup";
 
@@ -57,7 +59,7 @@
     };
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -124,7 +126,7 @@
 
     ollama = {
       enable = true;
-      acceleration = "cuda";
+      # acceleration = "cuda";
     };
 
     xserver = {
@@ -157,7 +159,7 @@
     cpu.amd.updateMicrocode = true;
 
     graphics.enable = true;
-    
+
     nvidia-container-toolkit.enable = true;
 
     nvidia = {
@@ -216,7 +218,7 @@
       docker-compose
       vimPlugins.packer-nvim
     ];
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
   };
 
   # Allow unfree packages
@@ -259,7 +261,7 @@
       yelp
       # geary # email reader
       epiphany # web browser
-      # evince # document viewer
+      evince # document viewer
       gnome-logs
       gnome-maps
       gnome-contacts

@@ -282,6 +282,8 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
 
       shellAliases = {
         iv = '' nvim '';
+        vi = "nvim";
+        vim = "nvim";
         gsc = '' git add . && git commit -m "$(git diff | fabric -p summarize_git_changes --model phi3.5:latest)" && git push '';
         gac = '' git commit -am "auto commit" && git push '';
         lg = '' lazygit '';
