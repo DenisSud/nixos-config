@@ -175,18 +175,20 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.denis = {
     isNormalUser = true;
-    password = "asdfghjkl;'";
+    password = "jkl;'";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     packages = with pkgs; [
       # Apps
       wine
       gimp
       neovim
+      wezterm
       flatpak
       ticktick
       obsidian
       mangohud
       newsflash
+      bettercap
       zed-editor
       impression
       gnome-graphs
@@ -240,6 +242,7 @@
       gnome-tweaks
       supergfxctl
       asusctl
+      ffmpeg
       curl
       fzf
       git
@@ -259,18 +262,18 @@
       seahorse
       eog
       yelp
-      # geary # email reader
-      epiphany # web browser
-      evince # document viewer
+      geary # email reader
+      # epiphany # web browser
+      # evince # document viewer
       gnome-logs
       gnome-maps
       gnome-contacts
       gnome-music
       gnome-software
       gnome-characters
-      # gnome-weather
+      gnome-weather
       # gnome-clocks
-      totem # video player
+      # totem # video player
       tali # poker game
       iagno # go game
       hitori # sudoku game

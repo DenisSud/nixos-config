@@ -271,6 +271,7 @@ vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
 
       initExtra = ''
         export WINEPREFIX="$HOME/.wine"
+        export NIX_BUILD_SHELL=$(which zsh)
         export DEFAULT_VENDOR=Groq
         export DEFAULT_MODEL=mixtral-8x7b-32768
       '';
