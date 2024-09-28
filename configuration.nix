@@ -91,6 +91,8 @@
 
   services = {
 
+    cpupower-gui.enable;
+
     flatpak = {
       enable = true;
     };
@@ -133,7 +135,7 @@
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" "mesa" ];
+      videoDrivers = [ "nvidia" ];
       excludePackages = (with pkgs; [
           xterm
       ]);
