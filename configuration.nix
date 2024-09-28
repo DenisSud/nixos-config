@@ -91,7 +91,7 @@
 
   services = {
 
-    cpupower-gui.enable;
+    cpupower-gui.enable = true;
 
     flatpak = {
       enable = true;
