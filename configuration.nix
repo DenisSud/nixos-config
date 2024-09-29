@@ -1,288 +1,283 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+    imports =
+        [ # Include the results of the hardware scan.
+            ./hardware-configuration.nix
+        ];
 
-  virtualisation.docker = {
-    enable = true;
-  };
-
-  programs = {
-
-    zsh.enable = true;
-
-    gamemode.enable = true;
-
-    steam = {
-      enable = true;
-      gamescopeSession.enable = true;
+    virtualisation.docker = {
+        enable = true;
     };
 
-    git = {
-      enable = true;
-      lfs.enable = true;
+    programs = {
+
+        zsh.enable = true;
+
+        git = {
+            enable = true;
+            lfs.enable = true;
+        };
+
+        nh = {
+            enable = true;
+            clean.enable = true;
+            clean.extraArgs = "--keep-since 2d --keep 3";
+            flake = "/home/denis/NixOS";
+        };
+
     };
 
-    nh = {
-      enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 2d --keep 3";
-      flake = "/home/denis/NixOS";
+    home-manager.users.denis = import ./home.nix;
+    home-manager.backupFileExtension = "backup";
+
+    stylix = {
+        enable = true;
+        image = ./wallpaper/focus.png;
+        polarity = "dark";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+        fonts = {
+            serif = {
+                package = pkgs.nerdfonts;
+                name = "JetBrainsMono Nerd Font";
+            };
+            sansSerif = {
+                package = pkgs.nerdfonts;
+                name = "JetBrainsMono Nerd Font";
+            };
+            monospace = {
+                package = pkgs.nerdfonts;
+                name = "JetBrainsMono Nerd Font";
+            };
+        };
     };
 
-  };
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  home-manager.users.denis = import ./home.nix;
-  home-manager.backupFileExtension = "backup";
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-  stylix = {
-    enable = true;
-    image = ./wallpaper/focus.png;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
-    fonts = {
-      serif = {
-        package = pkgs.nerdfonts;
-        name = "JetBrainsMono Nerd Font";
-      };
-      sansSerif = {
-        package = pkgs.nerdfonts;
-        name = "JetBrainsMono Nerd Font";
-      };
-      monospace = {
-        package = pkgs.nerdfonts;
-        name = "JetBrainsMono Nerd Font";
-      };
-    };
-  };
+    networking.hostName = "g14"; # Define your hostname.
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    # Enable networking
+    networking.networkmanager.enable = true;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  networking.firewall.enable  = true;
+    # Set your time zone.
+    time.timeZone = "Europe/Moscow";
 
-  networking.hostName = "g14"; # Define your hostname.
+    # Select internationalisation properties.
+    i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Moscow";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "ru_RU.UTF-8";
-    LC_IDENTIFICATION = "ru_RU.UTF-8";
-    LC_MEASUREMENT = "ru_RU.UTF-8";
-    LC_MONETARY = "ru_RU.UTF-8";
-    LC_NAME = "ru_RU.UTF-8";
-    LC_NUMERIC = "ru_RU.UTF-8";
-    LC_PAPER = "ru_RU.UTF-8";
-    LC_TELEPHONE = "ru_RU.UTF-8";
-    LC_TIME = "ru_RU.UTF-8";
-  };
-
-  services = {
-
-    cpupower-gui.enable = true;
-
-    flatpak = {
-      enable = true;
+    i18n.extraLocaleSettings = {
+        LC_ADDRESS = "ru_RU.UTF-8";
+        LC_IDENTIFICATION = "ru_RU.UTF-8";
+        LC_MEASUREMENT = "ru_RU.UTF-8";
+        LC_MONETARY = "ru_RU.UTF-8";
+        LC_NAME = "ru_RU.UTF-8";
+        LC_NUMERIC = "ru_RU.UTF-8";
+        LC_PAPER = "ru_RU.UTF-8";
+        LC_TELEPHONE = "ru_RU.UTF-8";
+        LC_TIME = "ru_RU.UTF-8";
     };
 
-    fprintd = {
-      enable = true;
-      package = pkgs.fprintd-tod;
-      tod.enable = true;
-      tod.driver = pkgs.libfprint-2-tod1-goodix;
+    services = {
+
+        flatpak = {
+            enable = true;
+        };
+
+        printing = {
+            enable = true;
+            browsing = true;
+            defaultShared = true;
+            listenAddresses = [ "*:631" ];
+            allowFrom = [ "all" ];
+            drivers = with pkgs; [
+                gutenprint
+                cups-filters
+                hplipWithPlugin
+            ];
+        };
+
+        asusd = {
+            enable = true;
+            enableUserService = true;
+        };
+
+        dnsmasq.enable = true;
+
+        supergfxd.enable = true;
+
+        ollama = {
+            enable = true;
+            acceleration = "cuda";
+        };
+
+        xserver = {
+            enable = true;
+            displayManager.gdm.enable = true;
+            desktopManager.gnome.enable = true;
+            videoDrivers = [ "nvidia" ];
+            excludePackages = (with pkgs; [
+                xterm
+            ]);
+        };
+
+        openssh.enable = true;
+
+        pipewire = {
+            enable = true;
+            alsa.enable = true;
+            alsa.support32Bit = true;
+            pulse.enable = true;
+        };
+
     };
 
-    printing = {
-      enable = true;
-      browsing = true;
-      defaultShared = true;
-      listenAddresses = [ "*:631" ];
-      allowFrom = [ "all" ];
-      drivers = with pkgs; [
-        gutenprint
-        cups-filters
-        hplipWithPlugin
-      ];
+    hardware = {
+
+        bluetooth.enable = true;
+
+        pulseaudio.enable = false;
+
+        cpu.amd.updateMicrocode = true;
+
+        graphics.enable = true;
+
+        nvidia-container-toolkit.enable = true;
+
+        nvidia = {
+            prime = {
+                offload = {
+                    enable = true;
+                    enableOffloadCmd = true;
+                }; 
+                amdgpuBusId = "PCI:4:0:0";
+                nvidiaBusId = "PCI:1:0:0";
+            };
+            open = false;
+            powerManagement.enable = true;
+            powerManagement.finegrained = true;
+            modesetting.enable = true;
+            package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+        };
+
     };
 
-    asusd = {
-      enable = true;
-      enableUserService = true;
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.denis = {
+        isNormalUser = true;
+        password = "jkl;'";
+        extraGroups = [ "wheel" "networkmanager" "docker" ];
+        packages = with pkgs; [
+            # Performce / Optimizatoin
+            stress-ng
+            sysbench
+            supergfxctl
+            mission-center
+            asusctl
+
+            # Apps
+            wine
+            gimp
+            kitty
+            neovim
+            pfetch
+            flatpak
+            ticktick
+            obsidian
+            mangohud
+            bettercap
+            zed-editor
+            impression
+            wireguard-tools
+            telegram-desktop
+            gnome-software
+
+            # Shell stuff
+            nb
+            go
+            git
+            gcc
+            fzf
+            bat
+            tree
+            nodejs
+            rustup
+            zoxide
+            pandoc
+            docker
+            gnumake
+            lazygit
+            ripgrep
+            git-lfs
+            fabric-ai
+            home-manager
+            docker-compose
+        ];
+        shell = pkgs.zsh;
     };
 
-    dnsmasq.enable = true;
+    # Allow unfree packages
+    nixpkgs.config.allowUnfree = true;
 
-    supergfxd.enable = true;
+    environment = {
 
-    ollama = {
-      enable = true;
-      # acceleration = "cuda";
+        variables = {
+            EDITOR = "nvim";
+            NIX_BUILD_SHELL = "zsh";
+            WINEPREFIX = "$HOME/.wine";
+            DEFAULT_VENDOR = "Ollama";
+            DEFAULT_MODEL = "llama3.2:latest";
+        };
+
+        systemPackages = with pkgs; [
+            cudaPackages.cuda_nvcc
+            cudaPackages.cudatoolkit
+            gnomeExtensions.vitals
+            gnome-tweaks
+            ffmpeg
+            curl
+            fzf
+            git
+            xclip
+            btop
+        ];
+
+        gnome.excludePackages = (with pkgs; [
+            gnome-text-editor
+            gnome-photos
+            gnome-tour
+            gnome-connections
+            simple-scan
+            gnome-usage
+            gnome-system-monitor
+            cheese
+            seahorse
+            eog
+            yelp
+            # geary # email reader
+            # epiphany # web browser
+            # evince # document viewer
+            gnome-logs
+            gnome-maps
+            gnome-contacts
+            gnome-music
+            gnome-software
+            gnome-characters
+            gnome-weather
+            gnome-clocks
+            totem # video player
+            tali # poker game
+            iagno # go game
+            hitori # sudoku game
+            atomix # puzzle game
+            gnome-terminal
+            gnome-console
+        ]);
     };
 
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-      videoDrivers = [ "nvidia" ];
-      excludePackages = (with pkgs; [
-          xterm
-      ]);
-    };
-
-    openssh.enable = true;
-
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-
-  };
-
-  hardware = {
-
-    bluetooth.enable = true;
-
-    pulseaudio.enable = false;
-
-    cpu.amd.updateMicrocode = true;
-
-    graphics.enable = true;
-
-    nvidia-container-toolkit.enable = true;
-
-    nvidia = {
-      open = false;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      modesetting.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
-    };
-
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.denis = {
-    isNormalUser = true;
-    password = "jkl;'";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
-    packages = with pkgs; [
-      # Apps
-      wine
-      gimp
-      neovim
-      wezterm
-      flatpak
-      ticktick
-      obsidian
-      mangohud
-      newsflash
-      bettercap
-      zed-editor
-      impression
-      gnome-graphs
-      clipboard-jh
-      wireguard-tools
-      telegram-desktop
-      gnome-software
-
-      # Shell stuff
-      go
-      git
-      gcc
-      fzf
-      bat
-      tree
-      nodejs
-      zoxide
-      yt-dlp
-      pandoc
-      docker
-      lazygit
-      ripgrep
-      git-lfs
-      nerdfonts
-      fabric-ai
-      lazydocker
-      home-manager
-      texliveMedium
-      docker-compose
-      vimPlugins.packer-nvim
-    ];
-    shell = pkgs.zsh;
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  environment = {
-
-    variables = {
-        NIX_BUILD_SHELL = "zsh";
-        EDITOR = "zed";
-        DEFAULT_VENDOR = "Groq";
-        DEFAULT_MODEL = "llama-3.1-70b-versatile";
-    };
-
-    systemPackages = with pkgs; [
-      cudaPackages.cuda_nvcc
-      cudaPackages.cudatoolkit
-      gnomeExtensions.vitals
-      gnome-tweaks
-      supergfxctl
-      asusctl
-      ffmpeg
-      curl
-      fzf
-      git
-      xclip
-      btop
-    ];
-
-    gnome.excludePackages = (with pkgs; [
-      gnome-text-editor
-      gnome-photos
-      gnome-tour
-      gnome-connections
-      simple-scan
-      gnome-usage
-      gnome-system-monitor
-      cheese
-      seahorse
-      eog
-      yelp
-      geary # email reader
-      # epiphany # web browser
-      # evince # document viewer
-      gnome-logs
-      gnome-maps
-      gnome-contacts
-      gnome-music
-      gnome-software
-      gnome-characters
-      gnome-weather
-      # gnome-clocks
-      # totem # video player
-      tali # poker game
-      iagno # go game
-      hitori # sudoku game
-      atomix # puzzle game
-    ]);
-  };
-
-  system.stateVersion = "24.05"; # Did you read the comment?
+    system.stateVersion = "24.05"; # Did you read the comment?
 
 }
