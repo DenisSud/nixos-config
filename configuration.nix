@@ -12,7 +12,9 @@
 
     programs = {
 
-        zsh.enable = true;
+        zsh = { 
+            enable = true;
+        };
 
         git = {
             enable = true;
@@ -83,6 +85,8 @@
 
     services = {
 
+        cpupower-gui.enable = true;
+
         flatpak = {
             enable = true;
         };
@@ -118,7 +122,7 @@
             enable = true;
             displayManager.gdm.enable = true;
             desktopManager.gnome.enable = true;
-            videoDrivers = [ "nvidia" ];
+            videoDrivers = [ "amdgpu" ];
             excludePackages = (with pkgs; [
                 xterm
             ]);
@@ -148,17 +152,9 @@
         nvidia-container-toolkit.enable = true;
 
         nvidia = {
-            prime = {
-                offload = {
-                    enable = true;
-                    enableOffloadCmd = true;
-                }; 
-                amdgpuBusId = "PCI:4:0:0";
-                nvidiaBusId = "PCI:1:0:0";
-            };
             open = false;
-            powerManagement.enable = true;
-            powerManagement.finegrained = true;
+            powerManagement.enable = false;
+            powerManagement.finegrained = false;
             modesetting.enable = true;
             package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
         };

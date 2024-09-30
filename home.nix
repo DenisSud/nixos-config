@@ -45,7 +45,6 @@
     zsh = {
 
       initExtra = ''
-        pfetch
         export DEFAULT_VENDOR=Ollama
         export DEFAULT_MODEL=llama3.2:latest
       '';
