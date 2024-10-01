@@ -8,9 +8,17 @@
 
     virtualisation.docker = {
         enable = true;
+        rootless = {
+            enable = true;
+            setSocketVariable = true;
+        };
     };
 
     programs = {
+
+        firefox = {
+            enable = true;
+        };
 
         zsh = { 
             enable = true;
@@ -54,7 +62,13 @@
         };
     };
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix = {
+        enable = true;
+        settings = {
+            experimental-features = [ "nix-command" "flakes" ];
+            auto-optimise-store = true;
+        };
+    };
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -122,7 +136,7 @@
             enable = true;
             displayManager.gdm.enable = true;
             desktopManager.gnome.enable = true;
-            videoDrivers = [ "amdgpu" ];
+            videoDrivers = [ "nvidia" ];
             excludePackages = (with pkgs; [
                 xterm
             ]);
@@ -147,7 +161,10 @@
 
         cpu.amd.updateMicrocode = true;
 
-        graphics.enable = true;
+        graphics = {
+            enable = true;
+            enable32Bit= true;
+        };
 
         nvidia-container-toolkit.enable = true;
 
@@ -168,27 +185,23 @@
         extraGroups = [ "wheel" "networkmanager" "docker" ];
         packages = with pkgs; [
             # Performce / Optimizatoin
-            stress-ng
-            sysbench
             supergfxctl
-            mission-center
             asusctl
 
             # Apps
-            wine
             gimp
+            runc
             kitty
             neovim
-            pfetch
             flatpak
             ticktick
             obsidian
-            mangohud
-            bettercap
             zed-editor
             impression
             wireguard-tools
             telegram-desktop
+            nvidia-container-toolkit
+            cudaPackages.cudatoolkit
             gnome-software
 
             # Shell stuff
@@ -196,9 +209,6 @@
             go
             git
             gcc
-            fzf
-            bat
-            tree
             nodejs
             rustup
             zoxide
@@ -206,6 +216,7 @@
             docker
             gnumake
             lazygit
+            lazydocker
             ripgrep
             git-lfs
             fabric-ai
@@ -222,26 +233,27 @@
 
         variables = {
             EDITOR = "nvim";
-            NIX_BUILD_SHELL = "zsh";
             WINEPREFIX = "$HOME/.wine";
             DEFAULT_VENDOR = "Ollama";
             DEFAULT_MODEL = "llama3.2:latest";
         };
 
         systemPackages = with pkgs; [
-            cudaPackages.cuda_nvcc
-            cudaPackages.cudatoolkit
-            gnomeExtensions.vitals
             gnome-tweaks
             ffmpeg
             curl
             fzf
+            nb
             git
+            bat
+            tree
             xclip
             btop
         ];
 
         gnome.excludePackages = (with pkgs; [
+            # geary # email reader
+            # evince # document viewer
             gnome-text-editor
             gnome-photos
             gnome-tour
@@ -253,9 +265,7 @@
             seahorse
             eog
             yelp
-            # geary # email reader
-            # epiphany # web browser
-            # evince # document viewer
+            epiphany # web browser
             gnome-logs
             gnome-maps
             gnome-contacts
