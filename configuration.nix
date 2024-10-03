@@ -13,10 +13,6 @@
 
     programs = {
 
-        # steam = {
-        #     enable = true;
-        # };
-
         firefox = {
             enable = true;
         };
@@ -190,42 +186,42 @@
         extraGroups = [ "wheel" "networkmanager" "docker" ];
         packages = with pkgs; [
             # # Performce / Optimizatoin
-            # supergfxctl
-            # asusctl
-            #
+            supergfxctl
+            asusctl
+
             # # Apps
-            # gimp
-            # runc
+            gimp
+            runc
             kitty
             neovim
             flatpak
-            # ticktick
-            # obsidian
-            # impression
-            # zed-editor
-            # wireguard-tools
-            # telegram-desktop
-            # cudaPackages.cudatoolkit
+            ticktick
+            obsidian
+            impression
+            zed-editor
+            wireguard-tools
+            telegram-desktop
+            cudaPackages.cudatoolkit
             gnome-software
-            #
+            
             # # Shell stuff
-            # nb
-            # go
+            nb
+            go
             git
             gcc
-            # nodejs
-            # rustup
+            nodejs
+            rustup
             zoxide
-            # pandoc
-            # gnumake
-            # docker
-            # lazygit
-            # lazydocker
-            # ripgrep
-            # git-lfs
-            # fabric-ai
-            # home-manager
-            # docker-compose
+            pandoc
+            gnumake
+            docker
+            lazygit
+            lazydocker
+            ripgrep
+            git-lfs
+            fabric-ai
+            home-manager
+            docker-compose
         ];
         shell = pkgs.zsh;
     };
