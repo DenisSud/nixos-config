@@ -8,10 +8,7 @@
 
     virtualisation.docker = {
         enable = true;
-        rootless = {
-            enable = true;
-            setSocketVariable = true;
-        };
+        enableNvidia = true;
     };
 
     programs = {
@@ -43,9 +40,9 @@
 
     stylix = {
         enable = true;
-        image = ./wallpaper/focus.png;
+        image = ./wallpaper/tower.jpg;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
@@ -159,20 +156,24 @@
 
         pulseaudio.enable = false;
 
-        cpu.amd.updateMicrocode = true;
-
         graphics = {
             enable = true;
             enable32Bit= true;
         };
 
-        nvidia-container-toolkit.enable = true;
-
         nvidia = {
+
+            prime = {
+                offload.enable = true;
+                amdgpuBusId = "PCI:4:0:0";
+                nvidiaBusId = "PCI:1:0:0";
+            };
+
             open = false;
-            powerManagement.enable = false;
-            powerManagement.finegrained = false;
+            
+            powerManagement.enable = true;
             modesetting.enable = true;
+
             package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
         };
 
@@ -196,11 +197,10 @@
             flatpak
             ticktick
             obsidian
-            zed-editor
             impression
+            zed-editor
             wireguard-tools
             telegram-desktop
-            nvidia-container-toolkit
             cudaPackages.cudatoolkit
             gnome-software
 
@@ -213,8 +213,8 @@
             rustup
             zoxide
             pandoc
-            docker
             gnumake
+            docker
             lazygit
             lazydocker
             ripgrep
