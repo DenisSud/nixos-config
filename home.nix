@@ -11,9 +11,9 @@
         kitty = {
             enable = true;
             extraConfig = ''
-        hide_window_decorations yes
-        window_border_width 3
-        draw_minimal_borders yes
+                hide_window_decorations yes
+                window_border_width 3
+                draw_minimal_borders yes
             '';
         };
 
@@ -60,9 +60,9 @@
                 vim = "nvim";
                 gac = '' git commit -am "auto commit" && git push '';
                 lt = '' tree -L 5'';
-                pbcopy='' xclip -selection clipboard '';
-                pbpaste='' xclip -selection clipboard -o '';
-                gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
+                    pbcopy='' xclip -selection clipboard '';
+                    pbpaste='' xclip -selection clipboard -o '';
+                    gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
                 gs='' git status '';
             };
 

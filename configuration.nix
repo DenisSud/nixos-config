@@ -13,6 +13,10 @@
 
     programs = {
 
+        # steam = {
+        #     enable = true;
+        # };
+
         firefox = {
             enable = true;
         };
@@ -185,43 +189,43 @@
         password = "jkl;'";
         extraGroups = [ "wheel" "networkmanager" "docker" ];
         packages = with pkgs; [
-            # Performce / Optimizatoin
-            supergfxctl
-            asusctl
-
-            # Apps
-            gimp
-            runc
+            # # Performce / Optimizatoin
+            # supergfxctl
+            # asusctl
+            #
+            # # Apps
+            # gimp
+            # runc
             kitty
             neovim
             flatpak
-            ticktick
-            obsidian
-            impression
-            zed-editor
-            wireguard-tools
-            telegram-desktop
-            cudaPackages.cudatoolkit
+            # ticktick
+            # obsidian
+            # impression
+            # zed-editor
+            # wireguard-tools
+            # telegram-desktop
+            # cudaPackages.cudatoolkit
             gnome-software
-
-            # Shell stuff
-            nb
-            go
+            #
+            # # Shell stuff
+            # nb
+            # go
             git
             gcc
-            nodejs
-            rustup
+            # nodejs
+            # rustup
             zoxide
-            pandoc
-            gnumake
-            docker
-            lazygit
-            lazydocker
-            ripgrep
-            git-lfs
-            fabric-ai
-            home-manager
-            docker-compose
+            # pandoc
+            # gnumake
+            # docker
+            # lazygit
+            # lazydocker
+            # ripgrep
+            # git-lfs
+            # fabric-ai
+            # home-manager
+            # docker-compose
         ];
         shell = pkgs.zsh;
     };
@@ -236,6 +240,7 @@
             WINEPREFIX = "$HOME/.wine";
             DEFAULT_VENDOR = "Ollama";
             DEFAULT_MODEL = "llama3.2:latest";
+            NIXPKGS_ALLOW_UNFREE = 1;
         };
 
         systemPackages = with pkgs; [
