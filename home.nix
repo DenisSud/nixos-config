@@ -8,6 +8,10 @@
 
         home-manager.enable = true;
 
+        wezterm = {
+            enable = true;
+        };
+
         kitty = {
             enable = true;
             extraConfig = ''

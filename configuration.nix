@@ -42,7 +42,7 @@
         enable = true;
         image = ./wallpaper/tower.jpg;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
@@ -217,6 +217,7 @@
             docker
             lazygit
             lazydocker
+            libllvm
             ripgrep
             git-lfs
             fabric-ai
