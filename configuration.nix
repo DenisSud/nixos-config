@@ -42,7 +42,7 @@
         enable = true;
         image = ./wallpaper/a_man_sitting_in_a_chair.png;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-mayhem.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-duen.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
@@ -95,8 +95,6 @@
     };
 
     services = {
-
-        cpupower-gui.enable = true;
 
         flatpak = {
             enable = true;
@@ -238,6 +236,7 @@
             WINEPREFIX = "$HOME/.wine";
             DEFAULT_VENDOR = "Ollama";
             DEFAULT_MODEL = "llama3.2:latest";
+            RUST_BACKTRACE=1;
             NIXPKGS_ALLOW_UNFREE = 1;
         };
 
