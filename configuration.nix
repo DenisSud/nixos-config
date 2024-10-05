@@ -40,9 +40,9 @@
 
     stylix = {
         enable = true;
-        image = ./wallpaper/tower.jpg;
+        image = ./wallpaper/a_man_sitting_in_a_chair.png;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-mayhem.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
@@ -192,7 +192,6 @@
             # # Apps
             gimp
             runc
-            kitty
             neovim
             flatpak
             ticktick
@@ -201,6 +200,8 @@
             zed-editor
             wireguard-tools
             telegram-desktop
+            jetbrains-mono
+            noto-fonts-emoji
             cudaPackages.cudatoolkit
             gnome-software
             
