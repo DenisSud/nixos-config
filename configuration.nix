@@ -13,6 +13,8 @@
 
     programs = {
 
+        nix-ld.enable = true;
+
         firefox = {
             enable = true;
         };
@@ -40,9 +42,9 @@
 
     stylix = {
         enable = true;
-        image = ./wallpaper/a_man_sitting_in_a_chair.png;
+        image = ./wallpaper/penguin.png;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-duen.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
@@ -131,6 +133,14 @@
             enable = true;
             displayManager.gdm.enable = true;
             desktopManager.gnome.enable = true;
+            # windowManager.i3 = {
+            #     enable = true;
+            #     extraPackages = with pkgs; [
+            #         dmenu #application launcher most people use
+            #         i3status # gives you the default i3 status bar
+            #         i3lock #default i3 screen locker
+            #     ];
+            # };
             videoDrivers = [ "nvidia" ];
             excludePackages = (with pkgs; [
                 xterm
@@ -183,27 +193,22 @@
         password = "jkl;'";
         extraGroups = [ "wheel" "networkmanager" "docker" ];
         packages = with pkgs; [
-            # # Performce / Optimizatoin
-            supergfxctl
-            asusctl
-
-            # # Apps
-            gimp
-            runc
+            # Apps
+            onefetch
+            keypunch
+            neofetch
             neovim
             flatpak
             ticktick
             obsidian
             impression
             zed-editor
-            wireguard-tools
             telegram-desktop
             jetbrains-mono
             noto-fonts-emoji
             cudaPackages.cudatoolkit
-            gnome-software
             
-            # # Shell stuff
+            # Shell stuff
             nb
             go
             git
@@ -216,12 +221,12 @@
             docker
             lazygit
             lazydocker
-            libllvm
             ripgrep
             git-lfs
             fabric-ai
             home-manager
             docker-compose
+            wireguard-tools
         ];
         shell = pkgs.zsh;
     };
@@ -236,12 +241,13 @@
             WINEPREFIX = "$HOME/.wine";
             DEFAULT_VENDOR = "Ollama";
             DEFAULT_MODEL = "llama3.2:latest";
-            RUST_BACKTRACE=1;
+            RUST_BACKTRACE="full";
             NIXPKGS_ALLOW_UNFREE = 1;
         };
 
         systemPackages = with pkgs; [
             gnome-tweaks
+            gnome-software
             ffmpeg
             curl
             fzf
