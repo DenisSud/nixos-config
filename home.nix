@@ -25,11 +25,6 @@
             enableFishIntegration = true;
         };
 
-        thefuck = {
-            enable = true;
-            enableFishIntegration = true;
-        };
-
 
         fish = {
             enable = true;
@@ -104,8 +99,5 @@
     };
 
     home.stateVersion = "24.05"; # Please read the comment before changing.
-
-    home.file = {
-    };
 
 }
