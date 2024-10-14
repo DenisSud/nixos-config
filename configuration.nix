@@ -1,31 +1,27 @@
 { config, pkgs, ... }:
 
 {
-    imports =
-        [ # Include the results of the hardware scan.
-            ./hardware-configuration.nix
-        ];
+    imports = [ 
+        ./hardware-configuration.nix
+    ];
 
     virtualisation.docker = {
         enable = true;
-        enableNvidia = true;
     };
 
     programs = {
 
-        nix-ld.enable = true;
-
         firefox = {
-            enable = true;
-        };
-
-        zsh = { 
             enable = true;
         };
 
         git = {
             enable = true;
             lfs.enable = true;
+        };
+
+        fish = {
+            enable = true;
         };
 
         nh = {
@@ -44,7 +40,7 @@
         enable = true;
         image = ./wallpaper/penguin.png;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
@@ -70,10 +66,26 @@
     };
 
     # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot = {
+        loader.grub = {
+            enable = true;  # Enable GRUB
+            useOSProber = true;  # Enable OS probing for dual-booting
+            device = "nodev";  # Use this for EFI systems
+            efiSupport = true;  # Enable EFI support
+        };
+
+        extraModulePackages = with config.boot.kernelPackages; [
+            v4l2loopback
+        ];
+
+        kernelModules = [ "v4l2loopback" ];
+        extraModprobeConfig = ''
+            options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+        '';
+    };
 
     networking.hostName = "g14"; # Define your hostname.
+    networking.firewall.enable = true;
 
     # Enable networking
     networking.networkmanager.enable = true;
@@ -106,21 +118,13 @@
             enable = true;
             browsing = true;
             defaultShared = true;
-            listenAddresses = [ "*:631" ];
             allowFrom = [ "all" ];
-            drivers = with pkgs; [
-                gutenprint
-                cups-filters
-                hplipWithPlugin
-            ];
         };
 
         asusd = {
             enable = true;
             enableUserService = true;
         };
-
-        dnsmasq.enable = true;
 
         supergfxd.enable = true;
 
@@ -133,14 +137,6 @@
             enable = true;
             displayManager.gdm.enable = true;
             desktopManager.gnome.enable = true;
-            # windowManager.i3 = {
-            #     enable = true;
-            #     extraPackages = with pkgs; [
-            #         dmenu #application launcher most people use
-            #         i3status # gives you the default i3 status bar
-            #         i3lock #default i3 screen locker
-            #     ];
-            # };
             videoDrivers = [ "nvidia" ];
             excludePackages = (with pkgs; [
                 xterm
@@ -169,20 +165,31 @@
             enable32Bit= true;
         };
 
+        nvidia-container-toolkit.enable = true;
+
         nvidia = {
 
+            modesetting.enable = true;
+            package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+
+            open = false;
+
+            powerManagement.enable = true;
+            powerManagement.finegrained = true;
+
+            nvidiaSettings = true;
+
             prime = {
-                offload.enable = true;
+
+                offload = {
+                    enable = true;
+                    enableOffloadCmd = true;
+                };
+
                 amdgpuBusId = "PCI:4:0:0";
                 nvidiaBusId = "PCI:1:0:0";
             };
 
-            open = false;
-            
-            powerManagement.enable = true;
-            modesetting.enable = true;
-
-            package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
         };
 
     };
@@ -194,30 +201,29 @@
         extraGroups = [ "wheel" "networkmanager" "docker" ];
         packages = with pkgs; [
             # Apps
+            nvidia-container-toolkit
+            cudaPackages.cudatoolkit
+            obs-studio
             onefetch
-            keypunch
             neofetch
             neovim
             flatpak
             ticktick
             obsidian
-            impression
             zed-editor
             telegram-desktop
-            jetbrains-mono
             noto-fonts-emoji
             cudaPackages.cudatoolkit
-            
+
             # Shell stuff
             nb
             go
             git
             gcc
+            ngrok
             nodejs
             rustup
             zoxide
-            pandoc
-            gnumake
             docker
             lazygit
             lazydocker
@@ -228,7 +234,7 @@
             docker-compose
             wireguard-tools
         ];
-        shell = pkgs.zsh;
+        shell = pkgs.fish;
     };
 
     # Allow unfree packages
@@ -241,13 +247,11 @@
             WINEPREFIX = "$HOME/.wine";
             DEFAULT_VENDOR = "Ollama";
             DEFAULT_MODEL = "llama3.2:latest";
-            RUST_BACKTRACE="full";
             NIXPKGS_ALLOW_UNFREE = 1;
         };
 
         systemPackages = with pkgs; [
             gnome-tweaks
-            gnome-software
             ffmpeg
             curl
             fzf
@@ -262,6 +266,7 @@
         gnome.excludePackages = (with pkgs; [
             # geary # email reader
             # evince # document viewer
+            # totem # video player
             gnome-text-editor
             gnome-photos
             gnome-tour
@@ -282,7 +287,6 @@
             gnome-characters
             gnome-weather
             gnome-clocks
-            totem # video player
             tali # poker game
             iagno # go game
             hitori # sudoku game
