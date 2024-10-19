@@ -13,7 +13,7 @@
 
         zoxide = {
             enable = true;
-            enableFishIntegration = true;
+            enableNushellIntegration = true;
         };
 
         lazygit = {
@@ -22,21 +22,22 @@
 
         fzf = {
             enable = true;
-            enableFishIntegration = true;
         };
 
 
-        fish = {
+        nushell = {
             enable = true;
 
             shellAliases = {
                 iv = '' nvim '';
                 vi = "nvim";
                 vim = "nvim";
-                gac = '' git commit -am "auto commit" && git push '';
+                gc = '' git commit -am "auto commit" '';
+                gp = '' git push '';
                 lt = '' tree -L 5'';
-                pbcopy='' xclip -selection clipboard ''; pbpaste='' xclip -selection clipboard -o '';
-                gl='' git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short '';
+                pbcopy='' xclip -selection clipboard '';
+                pbpaste='' xclip -selection clipboard -o '';
+                gl='' git log --graph --date=short '';
                 gs='' git status '';
             };
 
@@ -47,9 +48,11 @@
             settings = {
 
                 format = ''
-                    $directory$git_branch$git_status$docker_context$fill$rust$python$golang$nix_shell$lua
+                    $directory$git_branch$git_status$docker_context$fill
                     $custom$character
                 '';
+
+                right_format = "$nix_shell$time";
 
                 directory = {
                     style = "blue";
