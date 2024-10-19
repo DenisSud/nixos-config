@@ -115,7 +115,7 @@
         enable = true;
         image = ./wallpaper/black-hole.jpeg;
         polarity = "dark";
-        # base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
         fonts = {
             serif = {
                 package = pkgs.nerdfonts;
