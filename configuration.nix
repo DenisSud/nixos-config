@@ -65,6 +65,10 @@
             };
 
             grub = {
+                default = "saved";
+                extraConfig = ''
+                  GRUB_SAVEDEFAULT=true
+                '';
                 enable = true;  # Enable GRUB
                 useOSProber = false;  # Enable OS probing for dual-booting
                 device = "nodev";  # Use this for EFI systems
