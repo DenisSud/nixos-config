@@ -3,6 +3,7 @@
 {
     imports = [
         ./hardware-configuration.nix
+        ./nixvim
     ];
 
     virtualisation.docker = {
@@ -29,6 +30,8 @@
             lfs.enable = true;
         };
     };
+
+    home-manager.users.denis = import ./home.nix;
 
     xdg = {
         mime.enable = true;
@@ -199,6 +202,7 @@
         extraGroups = [ "wheel" "networkmanager" "docker" ];
         packages = with pkgs; [
             # Apps
+	    home-manager
             evince
             open-interpreter
             nvidia-container-toolkit

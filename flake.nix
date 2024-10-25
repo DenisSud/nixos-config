@@ -24,10 +24,6 @@
                     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
                     inputs.home-manager.nixosModules.home-manager
                     {
-                        home-manager.useGlobalPkgs = true;
-                        home-manager.useUserPackages = true;
-                        home-manager.users.denis = import ./conf/home.nix;
-                        home-manager.backupFileExtension = "backup";
                     }
                 ];
             };
