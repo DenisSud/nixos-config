@@ -23,7 +23,6 @@
         gitui
         oxker
         tmux
-        neovim
         btop
         fzf
         kitty

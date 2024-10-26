@@ -7,6 +7,10 @@
         home-manager.url = "github:nix-community/home-manager";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
         nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+        nixvim = {
+            url = "github:nix-community/nixvim";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
     outputs = { self, nixpkgs, ... }@inputs:
@@ -19,12 +23,11 @@
                 inherit system;
                 specialArgs = { inherit inputs; };
                 modules = [
-                    ./conf/configuration.nix
+                    ./configuration.nix
                     inputs.stylix.nixosModules.stylix
                     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
                     inputs.home-manager.nixosModules.home-manager
-                    {
-                    }
+                    inputs.nixvim.nixosModules.nixvim # Import the NixVim module
                 ];
             };
         };
