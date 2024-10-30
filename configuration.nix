@@ -10,6 +10,15 @@
         enable = true;
         enableNvidia = true;
         extraOptions = "--default-runtime=nvidia";
+
+        daemon.settings = {
+            "data-root" = "/home/denis/Docker";
+        };
+
+        autoPrune = {
+            enable = true;
+            dates = "daily";
+        };
     };
 
     programs = {
@@ -23,6 +32,14 @@
             clean.enable = true;
             clean.extraArgs = "--keep-since 3d --keep 3";
             flake = "/home/denis/NixOS";
+        };
+
+        gamemode.enable = true; # for performance mode
+
+        steam = {
+            enable = true; # install steam
+            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
         };
 
         git = {
@@ -40,10 +57,10 @@
 
     stylix = {
         enable = true;
-        image = ./modules/wallpaper/drip.jpg;
+        image = ./modules/wallpaper/magic_tree.png;
 
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/da-one-gray.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/classic-dark.yaml";
 
         fonts = {
             serif = {
@@ -118,28 +135,25 @@
 
         ollama = {
             enable = true;
+            openFirewall = true;
+            port = 11434;
             acceleration = "cuda";
+            models = "~/Ollama/models/";
         };
-
-        interception-tools.enable = true;
 
         xserver = {
             enable = true;
 
             displayManager = { 
-                # gdm.enable = true;
-                defaultSession = "none+i3"; 
-                lightdm = { 
-                    enable = true; 
-                    greeter.enable = false; 
-                };
+                gdm.enable = true;
+                lightdm.enable = false;
             };
 
-            desktopManagergnome.enable = true;
-            windowManager.i3.enable = true;
-
-            services.displayManager.sddm.enable = true;
-            services.desktopManager.plasma6.enable = true;
+            desktopManager.gnome.enable = true;
+            windowManager = {
+                i3.enable = false;
+                awesome.enable = false;
+            };
 
             videoDrivers = [ "nvidia" ];
             excludePackages = (with pkgs; [
@@ -211,10 +225,27 @@
     users.users.denis = {
         isNormalUser = true;
         password = "jkl;'";
-        extraGroups = [ "wheel" "networkmanager" "docker" ];
+        extraGroups = [ "wheel" "networkmanager" ];
         packages = with pkgs; [
+            # Awesome dependencies
+            # dmenu 
+            # rofi 
+            # firefox 
+            # kitty 
+            # pasystray 
+            # volumeicon
+            # terminus_font 
+
+            # Gamming stuff
+            lutris
+            wine
+            protonup-qt
+
             # Apps
+            fabric-ai
 	    home-manager
+            gnomeExtensions.caffeine
+            gnomeExtensions.vitals
             evince
             open-interpreter
             nvidia-container-toolkit
@@ -259,8 +290,7 @@
             EDITOR = "nvim";
             DEFAULT_VENDOR = "Ollama";
             DEFAULT_MODEL = "llama3.2:latest";
-            OLLAMA_MODELS = "/home/denis/Ollama-models";
-            NIXPKGS_ALLOW_UNFREE = 1;
+            OLLAMA_MODELS = "/ome/denis/Ollama-models";
         };
 
         systemPackages = with pkgs; [
