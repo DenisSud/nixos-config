@@ -14,28 +14,6 @@
     };
   };
 
-  # File systems configuration for your G14
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/1f15bc9d-7c0b-4abe-bfb5-a682aa55bf5d";
-      fsType = "ext4";
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-uuid/E026-0C48";
-      fsType = "vfat";
-    };
-
-    "/home" = {
-      device = "/dev/disk/by-uuid/bd2a2e94-1207-47b8-b5b9-a4c33f72c46e";
-      fsType = "ext4";
-    };
-  };
-
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/b37bebca-b1a8-4005-ae82-83fa5a6ae8dc"; }
-  ];
-
   # Hardware specific settings for G14
   hardware = {
     bluetooth.enable = true;
