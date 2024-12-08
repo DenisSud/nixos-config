@@ -1,0 +1,330 @@
+clear
+CLEAR
+clear
+cd nix
+clear
+sudo wg show
+clear
+rebot
+reboot
+clear
+cd nix
+cd NixOS/
+clar
+clear
+ls
+code hosts/g14/configuration.nix
+nh os switch 
+nh os switch ./NixOS/
+clear
+cd NixOS/
+cleawr
+ls
+code .
+nh os switch ./NixOS/
+nh os switch ~/NixOS/
+reboot
+nvim
+cd NixOS/
+code /
+code .
+cd nix
+code .
+ping google.com
+sudo wg-quick up nl1
+clear
+ping google.com
+clear
+ping google.com
+clear
+ping google.com
+clear
+ping google.com
+clear
+ping google.com
+sudo wg-quick down nl
+sudo wg-quick down nl1
+clear
+cd NixOS/
+clear
+code /
+code .
+nh os switch ~/NixOS/
+clear
+nh os switch ~/NixOS/
+ls /etc/wireguard/
+cd VPN
+cd 
+cd VPN/
+clea
+clear
+cat nl1.conf | grep "PrivateKey" | awk '{ print $3 }' | \<\n>    sudo tee /etc/wireguard/nl1.key<\n>
+sudo wg show
+sudo wg-quick down nl1
+sudo wg-quick down wg1
+nvim
+cd NixOS/
+code
+nh os switch ~/NixOS/
+cd NixOS/
+code /
+code .
+nh os switch ~/NixOS/
+clear
+ping google.com
+nh os switch ~/NixOS/
+clear
+nh os switch ~/NixOS/
+flatpak
+flatpak install zen-browser
+flatpak install flathub io.github.zen_browser.zen
+nh os switch ~/NixOS/
+cd nix
+cd NixOS/
+clear
+code .
+nh os switch ~/NixOS/
+cat hosts/g14/configuration.nix
+clear
+aider --model mistral/mistral-large-latest
+clear
+cat .bashrc
+cd
+cat .bashrc
+cd .config/
+mkdir nushell
+cd nushell/
+vim
+vi
+zeditor .
+cat 
+cd
+cat .bashrc
+mkdir ~/.cache/starship<\n>starship init nu | save -f ~/.cache/starship/init.nu
+$nu.config-path
+cd ..
+ls | grep starship
+cd ..
+ls | grep starship
+tree | grep starship
+tee
+clear
+clea
+clear
+cd
+zoxide init nushell | save -f ~/.zoxide.nu
+nh os 
+nh os switch ~/NixOS/
+z
+zoxide
+zoxide init nushell | save -f ~/.zoxide.nu
+clear
+z
+clear
+gl
+d
+cd
+cd NixOS/
+clear
+gl
+git
+neofetch
+cd Projects/
+mkdir CZII
+cd CZII/
+clear
+zeditor .
+nh os switch ~/NixOS/
+clear
+nh os switch ~/NixOS/
+miromamba
+micromamba 
+clear
+aider
+aidercler
+celar
+cler
+clear
+aider --model mistral/mistral-large-latest
+clear
+miromamba create -f env.yml
+nix devleop
+nix develop
+git add .
+clear
+nix develop
+cd CZ
+clear
+zed .
+miromamba create -f env.yml
+micromamba create -f env.yml
+clear
+nix develop
+cd CZ
+clear
+nix develop
+nix develo
+cd CZ
+nix develo
+cd nix
+clear
+zeditor .
+cd CZ
+nix develop
+clear
+tree data
+nix-shell -p tree
+python3 data_loader.py
+clear
+cd CZ
+cd Projects/
+git clone git@github.com:DenisSud/search-algorithm.git
+cd search-algorithm/
+gl
+git checkout  f73c5584
+clear
+zeditor .
+micromamba create -f env.yml
+micromamba create -f environment.yml
+git add .
+cd nix
+code .
+nh os switch ~/NixOS/
+cd Projects
+mkdir temp
+cp ~/Downloads/*.xlsx ./temp/
+cp ~/Downloads/* ./temp/
+cp -r ~/Downloads/* ./temp/
+ls
+cd temp
+ls
+clear
+cd `Telegram Desktop/`
+clear
+ls
+zedd .
+zed .
+nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#python"
+nix devlop
+nix develop
+mv ./main.py ../main.py
+cd ..
+zeditor .
+clear
+cd
+cd 
+paswrd
+passwrod
+password
+passwd 
+clear
+passwd 
+sudo echo he
+clear
+fastllm
+quickllm
+ligtllm
+lightllm
+nix-shell -p ligtllm
+nix-shell -p liggtllm
+nix-shell -p lightllm
+nix-shell -p litellm
+nix-shell -p python312Packages.litellm
+nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#python"
+mkdir temp
+cd temp
+nix flake init --template "https://flakehub.com/f/the-nix-way/dev-templates/*#python"
+nix develop
+ollama 
+nvim
+cd nix
+zed .
+echo $env.MISTRAL_API_KEY
+fabric
+cd .config
+cd nushell
+clear
+cd ..
+cd -
+ls
+nvim config.nu
+fabric --setup
+nvim env.nu
+echo $env.MISTRAL_API_KEY
+echo $env.DEFAULT_MODEL
+echo $env.DESKTOP_SESSION
+echo $env.MISTRAL_API_KEY
+cd nu
+nvim
+echo $env.MISTRAL_API_KEY
+nvim
+cd nu
+nvim
+$env
+$env | table -e
+clear
+nvim
+cat env.nu
+$env.EDITOR = "zeditor"; $env.DEFAULT_MODEL="mistral-large-latest"; $env.MISTRAL_API_KEY = "yENTT910OTPZU1Pn6X4fKOJ0QvOIzdDO"; $env.CODESTRAL_API_KEY = "lRAijYjXkFWF4NFpcZOOtJz8bzg9cMmq"<\n>
+nvim
+cd nu
+nim
+const DEFAULT_MODEL='mistral-large-latest'<\n>
+const DEFAULT_MODEL = 'mistral-large-latest'<\n>
+echo $env.DEFAULT_MODEL
+$DEFAULT_MODEL
+$env.DEFAULT_MODEL = 'var'
+cd nu
+nvim
+$env.DEFAULT_MODEL = 'var'
+echo $env.DEFAULT_MODEL
+fabric 
+nvim
+cd nu
+nvim
+fabric 
+$env.DEFAULT_VENDER
+nvim
+cd nu
+nvim
+$env.DEFAULT_VENDER
+$env.DEFAULT_VENDOR
+clear
+fabric
+echo $env.MISTRAL_API_KEY
+fabric --setup
+fabric 
+fabric --model mistral-large-latest
+fabric --model mistral-large-latest -sp hello
+fabric --model mistral-large-latest hello
+nvim
+cd nu
+nvim
+nix shell nixpkgs#python312Packages.llama-index-cli
+fabric hello
+fabric --list
+fabric --ls
+fabric -ls
+cd nix
+zed .
+cp -r ~/Downloads/purple.jpg NixOS/modules/wallpapers/purple.jpg
+clear
+cd nix
+zed .
+nh os switch ~/NixOS/
+git add .
+nh os switch ~/NixOS/
+neofetch
+clear
+nh os switch ~/NixOS/
+clear
+neofetch
+clear
+cd nix
+zed .
+nh os switch ~/NixOS/
+clear
+echo hi
+cp ~/.config/nushell/* ~/NixOS/modules/dotfiles/nushell/
+git add .
+cp ~/.config/nushell/* ~/NixOS/modules/dotfiles/nushell/
