@@ -201,16 +201,16 @@
 # User configuration
   stylix = {
     enable = true;
-    image = lib.mkDefault ../../modules/wallpapers/Mountain.png;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+    image = lib.mkDefault ../../modules/wallpapers/UsesKizuPalette.png;
+    polarity = lib.mkDefault "dark";
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
   };
 
   specialisation.light.configuration = {
     environment.etc."specialisation".text = "light"; # this is for 'nh' to correctly recognise the specialisation
     stylix = {
       enable = true;
-      image = lib.mkDefault ../../modules/wallpapers/Mountain.png;
+      image = ../../modules/wallpapers/Architecture.jpg;
       polarity = "light";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
     };

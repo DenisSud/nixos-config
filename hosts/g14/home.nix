@@ -12,7 +12,7 @@
 		".config/nushell/config.nu".source = ../../modules/dotfiles/nushell/config.nu;
 		".config/nushell/env.nu".source = ../../modules/dotfiles/nushell/env.nu;
 		".config/.zoxide.nu".source = ../../modules/dotfiles/nushell/.zoxide.nu;
-		".config/nvim/my_nvim_config.lua".source = ../modules/dotfiles/neovim/init.lua;
+		".config/nvim/my_nvim_config.lua".source = ../../modules/dotfiles/neovim/init.lua;
 	};
 
 	home.sessionVariables = {
