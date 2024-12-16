@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{lib, config, pkgs, ... }:
 
 {
 	home.username = "denis";
@@ -12,7 +12,6 @@
 		".config/nushell/config.nu".source = ../../modules/dotfiles/nushell/config.nu;
 		".config/nushell/env.nu".source = ../../modules/dotfiles/nushell/env.nu;
 		".config/.zoxide.nu".source = ../../modules/dotfiles/nushell/.zoxide.nu;
-		".config/nvim/my_nvim_config.lua".source = ../../modules/dotfiles/neovim/init.lua;
 	};
 
 	home.sessionVariables = {
@@ -38,6 +37,7 @@
 
 			plugins = with pkgs.vimPlugins; [
 				plenary-nvim
+                nui-nvim
 				conform-nvim
 				nvim-web-devicons
 				telescope-nvim
@@ -72,9 +72,7 @@
 				nvim-tree-lua
 			];
 
-			extraLuaConfig = ''
-        require("my_nvim_config")
-      '';
+			extraLuaConfig = lib.fileContents ../../modules/dotfiles/neovim/init.lua;
 		};
 
 		home-manager.enable = true;

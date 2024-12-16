@@ -19,24 +19,6 @@
         inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401 # Hardware
         inputs.home-manager.nixosModules.default # App config
         inputs.stylix.nixosModules.stylix # Linux ricing
-        # Windsurf
-        ({ pkgs, ... }: {
-          nixpkgs.overlays = [
-            (final: prev: {
-              windsurf = final.callPackage ./modules/packages/windsurf {
-                nixpkgs = nixpkgs;
-              };
-            })
-          ];
-        })
-        # NGC CLI (nvidia ai shit)
-        ({ pkgs, ... }: {
-          nixpkgs.overlays = [
-            (final: prev: {
-              ngc-cli = final.callPackage ./modules/packages/ngc-cli { };
-            })
-          ];
-        })
       ];
     };
   };

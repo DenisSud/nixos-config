@@ -8,6 +8,7 @@ vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
+vim.opt.laststatus = 3  -- recommended setting for avante
 
 -- Improve default formatting and indentation
 vim.opt.autoindent = true
@@ -168,3 +169,5 @@ conform.setup({
 vim.keymap.set("n", "<leader>f", function()
   conform.format({ async = true, lsp_fallback = true })
 end, { desc = "Format buffer" })
+
+

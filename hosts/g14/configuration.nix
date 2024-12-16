@@ -105,65 +105,67 @@
       enable = lib.mkDefault true;
     };
     ollama = {
-      enable = lib.mkDefault true;
-      acceleration = lib.mkDefault "cuda";
+      enable = true;
+      acceleration = "cuda";
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.cudaSupport= true;
+  nixpkgs.config = {
+      allowUnfree = true;
+  };
 
   environment = {
-
     systemPackages = with pkgs; [
       impression
-        gnome-tweaks
-        neovim
-        neofetch
-        onefetch
-        gcc
-        curl
-        wget
-        bat
-        git
-        git-lfs
-        btop
-        dust
-        gnomeExtensions.duckduckgo-search-provider
-        gnomeExtensions.caffeine
-        gnomeExtensions.vitals
+      gnome-tweaks
+      neovim
+      neofetch
+      onefetch
+      gcc
+      curl
+      wget
+      bat
+      git
+      git-lfs
+      nvtopPackages.full
+      htop
+      dust
+      gnomeExtensions.pip-on-top
+      gnomeExtensions.caffeine # no sleep
+      gnomeExtensions.clipboard-indicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.vitals # system resources
     ];
 
     gnome.excludePackages = (with pkgs; [
-        totem
-        gnome-photos
-        gnome-tour
-        gnome-text-editor
-        gnome-connections
-        simple-scan
-        gnome-usage
-        gnome-system-monitor
-        cheese
-        seahorse
-        eog
-        yelp
-        epiphany
-        gnome-logs
-        gnome-maps
-        gnome-contacts
-        gnome-music
-        gnome-characters
-        gnome-weather
-        gnome-clocks
-        tali
-        iagno
-        hitori
-        atomix
-        gnome-console
-        gnome-keyring
-        gnome-terminal
-        ]);
-
+      totem
+      gnome-photos
+      gnome-tour
+      gnome-text-editor
+      gnome-connections
+      simple-scan
+      gnome-usage
+      gnome-system-monitor
+      cheese
+      seahorse
+      eog
+      yelp
+      epiphany
+      gnome-logs
+      gnome-maps
+      gnome-contacts
+      gnome-music
+      gnome-characters
+      gnome-weather
+      gnome-clocks
+      tali
+      iagno
+      hitori
+      atomix
+      gnome-console
+      gnome-keyring
+      gnome-terminal
+    ]);
   };
 # Hardware-specific settings
   powerManagement.cpuFreqGovernor = "powersave";
@@ -178,14 +180,13 @@
 
     nvidia-container-toolkit.enable = true;
 
-# NVIDIA configuration
     nvidia = {
       modesetting.enable = true;
       package = config.boot.kernelPackages.nvidiaPackages.production;
       open = false;
       powerManagement = {
-        enable = false;
-        finegrained = false;
+        enable = true;
+        finegrained = true;
       };
       prime = {
         offload = {
@@ -201,7 +202,7 @@
 # User configuration
   stylix = {
     enable = true;
-    image = lib.mkDefault ../../modules/wallpapers/UsesKizuPalette.png;
+    image = lib.mkDefault ../../modules/wallpapers/FantasyWoods.jpg;
     polarity = lib.mkDefault "dark";
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
   };
@@ -220,50 +221,45 @@
     isNormalUser = true;
     shell = pkgs.nushell;
     description = "denis";
+    initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-# Base packages
+      # Base packages
+      eyedropper
+      alpaca
       libreoffice-qt
-        telegram-desktop
-        wireguard-tools
-        yandex-music
-        obs-studio
-        ticktick
-        obsidian
-        ddcutil
-        gimp
-        vlc
+      telegram-desktop
+      yandex-music
+      obs-studio
+      obsidian
+      gimp
 
-# Dev packages
-        cudaPackages_12.cudatoolkit
-        docker-compose
-        nvidia-container-toolkit
-        aider-chat
-        kitty
-        pipenv
-        windsurf
-        zed-editor
+      # Dev packages
+      docker-compose
+      zed-editor
+      kitty
+      pipenv
 
-# Shell packages
-        speedtest-rs
-        starship
-        ripgrep
-        nushell
-        zellij
-        zoxide
-        pandoc
-        oxker
-        tree
-        dust
-        fzf
-        jq
-        eza
-        bat
+      # Shell packages
+      speedtest-rs
+      starship
+      ripgrep
+      nushell
+      zellij
+      zoxide
+      oxker
+      tree
+      ddgr
+      dust
+      fzf
+      eza
+      bat
+      jq
 
-# Virtualization
-        bottles
-        wine
-        ];
+      # Virtualization
+      bottles
+      virtualbox
+    ];
   };
 
   home-manager = {
