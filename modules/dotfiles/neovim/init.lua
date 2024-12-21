@@ -9,6 +9,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.laststatus = 3  -- recommended setting for avante
+vim.opt.clipboard = "unnamedplus"
 
 -- Improve default formatting and indentation
 vim.opt.autoindent = true

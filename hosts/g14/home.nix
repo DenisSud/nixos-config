@@ -25,10 +25,14 @@
 				scrollback_lines = 10000;
 				copy_on_select = true;
 			};
+            extraConfig = ''
+                background_opacity 0.8
+                background_blur 5
+            '';
 		};
 
-    zellij.enable = true;
-    btop.enable = true;
+        zellij.enable = true;
+        btop.enable = true;
 
 		neovim = {
 			enable = true;
