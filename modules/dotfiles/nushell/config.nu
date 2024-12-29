@@ -910,6 +910,31 @@ alias gc = git commit -a -m
 alias gp = git push
 alias gl = git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%ar) %C(bold blue)[%an]%Creset%C(yellow)%d%Creset' --abbrev-commit
 
+# Config for fabric ai patterns:
+# Add this to your config.nu file
+
+# Function to register all fabric patterns as commands
+def register-fabric-patterns [] {
+    # Get all pattern files from the fabric patterns directory
+    let pattern_files = (ls $"($env.HOME)/.config/fabric/patterns/*" | get name)
+    
+    # Loop through each pattern file and create a command
+    for pattern in $pattern_files {
+        let pattern_name = ($pattern | path basename)
+        # Define the command using def-env to make it available in the environment
+        let command_def = $"def-env ($pattern_name) [] { ^fabric --pattern ($pattern_name) }"
+        nu -c $command_def
+    }
+}
+
+# YouTube transcript helper function
+def yt [video_link: string] {
+    ^fabric -y $video_link --transcript
+}
+
+# Call the function to register all patterns
+register-fabric-patterns
+
 $env.EDITOR = 'zeditor'
 $env.DEFAULT_MODEL = 'mistral-large-latest'
 $env.DEFAULT_VENDOR = 'mistral'
@@ -920,4 +945,4 @@ $env.YOUTUBE_API_KEY = 'AIzaSyDIKOJ38v9CtvisuunFpbrGEEq4sgh4ntI'
 $env.NGC_API_KEY = 'aHZkbzM2M3Q0M3AwNDBpc3MxcjJjZ25xMmY6M2IzNzk0YTktYjQ2Mi00YWRhLWIyNGYtYjBmZGE2YmIwMTEx'
 $env.EXA_API_KEY = '3e8ed71b-e98e-4a9d-a39f-888c255c34f0'
 $env.GEMINI_API_KEY = 'AIzaSyAks3D4r3IA_x1CFFH_drNAOOJO_rMSVTw'
-
+$env.JINA_API_KEY = 'jina_715b3037056c44e99c519be8fb046847myG_-cM7HcDjEIzXPV-7QvPJtVl3'

@@ -66,6 +66,11 @@
             enable = true;
             lfs.enable = true;
         };
+        steam = {
+            enable = true;
+            gamescopeSession.enable = true;
+        };
+        gamemode.enable = true;
         nh = {
             enable = true;
             clean.enable = true;
@@ -79,12 +84,13 @@
         resolved = {
             enable = true;
         };
+        asusd.enable = true;
+        supergfxd.enable = true;
         openssh = {
             enable = lib.mkDefault true;
         };
         ollama = {
             enable = false;
-            acceleration = "cuda";
         };
         open-webui = {
             enable = true;
@@ -99,54 +105,55 @@
     environment = {
         systemPackages = with pkgs; [
             gnome-tweaks
-                neovim
-                fzf
-                gcc
-                curl
-                wget
-                bat
-                dust
-                htop
-                git
-                git-lfs
-                nvtopPackages.full
-                gnomeExtensions.pip-on-top
-                gnomeExtensions.docker
-                gnomeExtensions.caffeine # no sleep
-                gnomeExtensions.clipboard-indicator
-                gnomeExtensions.blur-my-shell
-                gnomeExtensions.vitals # system resources
+            neovim
+            fzf
+            gcc
+            curl
+            wget
+            bat
+            dust
+            htop
+            git
+            git-lfs
+            inputs.ghostty.packages.${system}.default
+            nvtopPackages.full
+            gnomeExtensions.pip-on-top
+            gnomeExtensions.gpu-supergfxctl-switch
+            gnomeExtensions.caffeine # no sleep
+            gnomeExtensions.clipboard-indicator
+            gnomeExtensions.blur-my-shell
+            gnomeExtensions.vitals # system resources
         ];
 
         gnome.excludePackages = (with pkgs; [
-                totem
-                gnome-photos
-                gnome-tour
-                gnome-text-editor
-                gnome-connections
-                simple-scan
-                gnome-usage
-                gnome-system-monitor
-                cheese
-                seahorse
-                eog
-                yelp
-                epiphany
-                gnome-logs
-                gnome-maps
-                gnome-contacts
-                gnome-music
-                gnome-characters
-                gnome-weather
-                gnome-clocks
-                tali
-                iagno
-                hitori
-                atomix
-                gnome-console
-                gnome-keyring
-                gnome-terminal
-                ]);
+            totem
+            gnome-photos
+            gnome-tour
+            gnome-text-editor
+            gnome-connections
+            simple-scan
+            gnome-usage
+            gnome-system-monitor
+            cheese
+            seahorse
+            eog
+            yelp
+            epiphany
+            gnome-logs
+            gnome-maps
+            gnome-contacts
+            gnome-music
+            gnome-characters
+            gnome-weather
+            gnome-clocks
+            tali
+            iagno
+            hitori
+            atomix
+            gnome-console
+            gnome-keyring
+            gnome-terminal
+        ]);
     };
 # Hardware-specific settings
     powerManagement.cpuFreqGovernor = "powersave";
@@ -159,7 +166,7 @@
             enable32Bit = true;
         };
 
-        nvidia-container-toolkit.enable = false;
+        nvidia-container-toolkit.enable = true;
 
         nvidia = {
             modesetting.enable = true;
@@ -185,7 +192,7 @@
         enable = true;
         image = lib.mkDefault ../../modules/wallpapers/Campfire.png;
         polarity = lib.mkDefault "dark";
-        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     };
 
     specialisation.light.configuration = {
@@ -194,7 +201,7 @@
                 enable = true;
                 image = ../../modules/wallpapers/Downtown.png;
                 polarity = "light";
-                base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
+                base16Scheme = "${pkgs.base16-schemes}/share/themes/github.yaml";
             };
     };
 
@@ -205,34 +212,31 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
-# Base packages
-            morgen
-                eyedropper
-                libreoffice-qt
-                telegram-desktop
-                obsidian
-                gimp
+            # Base packages
+            libreoffice-qt
+            telegram-desktop
+            obsidian
+            gimp
 
-# Shell packages
-                kitty
-                speedtest-rs
-                starship
-                ripgrep
-                nushell
-                zellij
-                zoxide
-                oxker
-                tree
-                ddgr
-                dust
-                eza
-                bat
-                jq
+            # Gaming
+            lutris
 
-# Virtualization
-                bottles
-                virtualbox
-                ];
+            # Shell packages
+            python313Packages.jupytext
+            fabric-ai
+            starship
+            ripgrep
+            nushell
+            zoxide
+            tree
+            dust
+            eza
+            bat
+
+            # Virtualization
+            bottles
+            virtualbox
+        ];
     };
 
     home-manager = {
