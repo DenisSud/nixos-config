@@ -171,4 +171,68 @@ vim.keymap.set("n", "<leader>f", function()
   conform.format({ async = true, lsp_fallback = true })
 end, { desc = "Format buffer" })
 
+-- Jupytext configuration
+require('jupytext').setup({
+  style = "markdown",
+  autosync = true,
+  sync_patterns = { '*.md', '*.py', '*.ipynb' },
+})
 
+-- Disable gitsigns for ipynb files as recommended in jupytext docs
+require('gitsigns').setup{
+  on_attach = function(bufnr)
+    if vim.api.nvim_buf_get_name(bufnr):match('%.ipynb$') then
+      return false
+    end
+    -- Your existing gitsigns config here
+  end,
+}
+
+-- DAP configuration for Python debugging
+local dap = require('dap')
+local dapui = require('dapui')
+
+-- Initialize DAP UI
+dapui.setup()
+
+-- Python adapter setup
+require('dap-python').setup('python')
+
+-- Debugging keymaps
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Continue" })
+vim.keymap.set('n', '<leader>dj', dap.step_over, { desc = "Step over" })
+vim.keymap.set('n', '<leader>dl', dap.step_into, { desc = "Step into" })
+vim.keymap.set('n', '<leader>dh', dap.step_out, { desc = "Step out" })
+vim.keymap.set('n', '<leader>dt', dapui.toggle, { desc = "Toggle DAP UI" })
+
+-- Python-specific settings
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"python", "ipynb"},
+  callback = function()
+    -- Use black line length of 88
+    vim.opt_local.textwidth = 88
+    -- Configure conform.nvim for Python files
+    require("conform").setup({
+      formatters_by_ft = {
+        python = { "black" },
+      },
+    })
+  end
+})
+
+-- Make LSP work better with Jupyter notebooks
+local lspconfig = require('lspconfig')
+lspconfig.pyright.setup({
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "off",  -- Less strict for notebook-style development
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+      }
+    }
+  },
+  -- Don't run LSP in ipynb files as it can be noisy
+  filetypes = { "python" },
+})
