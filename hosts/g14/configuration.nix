@@ -222,7 +222,6 @@
             lutris
 
             # Shell packages
-            python313Packages.jupytext
             fabric-ai
             starship
             ripgrep
