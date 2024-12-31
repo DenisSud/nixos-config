@@ -65,12 +65,12 @@
 
             ];
 
-            extraLuaConfig = ''
-                ${builtins.readFile ./modules/dotfiles/neovim/options.lua}
-                ${builtins.readFile ./modules/dotfiles/neovim/keymaps.lua}
-                ${builtins.readFile ./modules/dotfiles/neovim/plugins/init.lua}
-            '';        
-        };
+	    extraLuaConfig = ''
+	    ${builtins.readFile ../../modules/dotfiles/neovim/options.lua}
+	    ${builtins.readFile ../../modules/dotfiles/neovim/keymaps.lua}
+	    ${builtins.readFile ../../modules/dotfiles/neovim/plugins/init.lua}
+	    '';        
+      };
 
         home-manager.enable = true;
     };

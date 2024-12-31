@@ -1,11 +1,10 @@
 { lib, config, pkgs, inputs, ... }:
 
 {
-    imports =
-        [
+    imports = [
         ./hardware-configuration.nix
-            ../../modules/wireguard
-        ];
+        ../../modules/wireguard
+    ];
 
     boot = {
         loader = {
@@ -105,55 +104,55 @@
     environment = {
         systemPackages = with pkgs; [
             gnome-tweaks
-            neovim
-            fzf
-            gcc
-            curl
-            wget
-            bat
-            dust
-            htop
-            git
-            git-lfs
-            inputs.ghostty.packages.${system}.default
-            nvtopPackages.full
-            gnomeExtensions.pip-on-top
-            gnomeExtensions.gpu-supergfxctl-switch
-            gnomeExtensions.caffeine # no sleep
-            gnomeExtensions.clipboard-indicator
-            gnomeExtensions.blur-my-shell
-            gnomeExtensions.vitals # system resources
+                neovim
+                fzf
+                gcc
+                curl
+                wget
+                bat
+                dust
+                htop
+                git
+                git-lfs
+                inputs.ghostty.packages.${system}.default
+                nvtopPackages.full
+                gnomeExtensions.pip-on-top
+                gnomeExtensions.gpu-supergfxctl-switch
+                gnomeExtensions.caffeine # no sleep
+                gnomeExtensions.clipboard-indicator
+                gnomeExtensions.blur-my-shell
+                gnomeExtensions.vitals # system resources
         ];
 
         gnome.excludePackages = (with pkgs; [
-            totem
-            gnome-photos
-            gnome-tour
-            gnome-text-editor
-            gnome-connections
-            simple-scan
-            gnome-usage
-            gnome-system-monitor
-            cheese
-            seahorse
-            eog
-            yelp
-            epiphany
-            gnome-logs
-            gnome-maps
-            gnome-contacts
-            gnome-music
-            gnome-characters
-            gnome-weather
-            gnome-clocks
-            tali
-            iagno
-            hitori
-            atomix
-            gnome-console
-            gnome-keyring
-            gnome-terminal
-        ]);
+                totem
+                gnome-photos
+                gnome-tour
+                gnome-text-editor
+                gnome-connections
+                simple-scan
+                gnome-usage
+                gnome-system-monitor
+                cheese
+                seahorse
+                eog
+                yelp
+                epiphany
+                gnome-logs
+                gnome-maps
+                gnome-contacts
+                gnome-music
+                gnome-characters
+                gnome-weather
+                gnome-clocks
+                tali
+                iagno
+                hitori
+                atomix
+                gnome-console
+                gnome-keyring
+                gnome-terminal
+                ]);
     };
 # Hardware-specific settings
     powerManagement.cpuFreqGovernor = "powersave";
@@ -190,7 +189,7 @@
 # User configuration
     stylix = {
         enable = true;
-        image = lib.mkDefault ../../modules/wallpapers/Campfire.png;
+        image = lib.mkDefault ../../modules/wallpapers/minimal_range.jpg;
         polarity = lib.mkDefault "dark";
         base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     };
@@ -199,9 +198,9 @@
         environment.etc."specialisation".text = "light"; # this is for 'nh' to correctly recognise the specialisation
             stylix = {
                 enable = true;
-                image = ../../modules/wallpapers/Downtown.png;
+                image = ../../modules/wallpapers/minimal_range.jpg;
                 polarity = "light";
-                base16Scheme = "${pkgs.base16-schemes}/share/themes/github.yaml";
+                base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-heath-light.yaml";
             };
     };
 
@@ -212,30 +211,27 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
-            # Base packages
+# Base packages
             libreoffice-qt
-            telegram-desktop
-            obsidian
-            gimp
+                telegram-desktop
+                obsidian
+                gimp
 
-            # Gaming
-            lutris
+# Shell packages
+                fabric-ai
+                starship
+                ripgrep
+                nushell
+                zoxide
+                tree
+                dust
+                eza
+                bat
 
-            # Shell packages
-            fabric-ai
-            starship
-            ripgrep
-            nushell
-            zoxide
-            tree
-            dust
-            eza
-            bat
-
-            # Virtualization
-            bottles
-            virtualbox
-        ];
+# Virtualization
+                bottles
+                virtualbox
+                ];
     };
 
     home-manager = {
