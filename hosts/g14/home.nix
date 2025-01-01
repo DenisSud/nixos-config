@@ -26,6 +26,7 @@
 
             plugins = with pkgs.vimPlugins; [
                 jupytext-nvim
+                mason-nvim
                 nvim-dap  # for debugging
                 nvim-dap-python  # Python debug adapter
                 nvim-dap-ui  # UI for debugging

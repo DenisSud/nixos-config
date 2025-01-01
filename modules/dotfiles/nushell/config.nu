@@ -899,11 +899,11 @@ $env.config = {
 
 source ~/.zoxide.nu
 alias cd = z
+alias rm = rip
 alias l = exa -l
 alias la = exa -la
 alias ls = exa
 alias zed = zeditor
-alias fabric = fabric --model mistral-large-latest
 alias gs = git status
 alias ga = git add .
 alias gc = git commit -a -m

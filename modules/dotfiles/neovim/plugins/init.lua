@@ -10,6 +10,8 @@ require("telescope").setup{
     }
   }
 }
+-- Mason setup
+require("mason").setup()
 
 -- nvim-cmp setup
 local cmp = require("cmp")

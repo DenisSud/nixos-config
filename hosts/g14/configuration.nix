@@ -40,7 +40,7 @@
         };
     };
 
-    time.timeZone = "Europe/Moscow";
+    # time.timeZone = "Europe/Moscow";
     i18n.defaultLocale = "en_US.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -189,7 +189,7 @@
 # User configuration
     stylix = {
         enable = true;
-        image = lib.mkDefault ../../modules/wallpapers/minimal_range.jpg;
+        image = lib.mkDefault ../../modules/wallpapers/color.png;
         polarity = lib.mkDefault "dark";
         base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     };
@@ -211,27 +211,28 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
-# Base packages
+            # Base packages
+            galaxy-buds-client
             libreoffice-qt
-                telegram-desktop
-                obsidian
-                gimp
+            telegram-desktop
+            obsidian
+            bottles
+            gimp
 
-# Shell packages
-                fabric-ai
-                starship
-                ripgrep
-                nushell
-                zoxide
-                tree
-                dust
-                eza
-                bat
-
-# Virtualization
-                bottles
-                virtualbox
-                ];
+            # Shell packages
+            zed-editor
+            fabric-ai
+            starship
+            ripgrep
+            nushell
+            harper
+            zoxide
+            rip2
+            tree
+            dust
+            eza
+            bat
+        ];
     };
 
     home-manager = {
