@@ -900,15 +900,11 @@ $env.config = {
 source ~/.zoxide.nu
 alias cd = z
 alias rm = rip
-alias l = exa -l
-alias la = exa -la
-alias ls = exa
 alias zed = zeditor
 alias gs = git status
 alias ga = git add .
 alias gc = git commit -a -m
 alias gp = git push
-alias gl = git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%ar) %C(bold blue)[%an]%Creset%C(yellow)%d%Creset' --abbrev-commit
 
 $env.EDITOR = 'zeditor'
 $env.DEFAULT_MODEL = 'mistral-large-latest'

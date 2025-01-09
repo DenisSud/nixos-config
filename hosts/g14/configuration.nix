@@ -3,7 +3,6 @@
 {
     imports = [
         ./hardware-configuration.nix
-        ../../modules/wireguard
     ];
 
     boot = {
@@ -40,7 +39,7 @@
         };
     };
 
-    # time.timeZone = "Europe/Moscow";
+    time.timeZone = "Europe/Moscow";
     i18n.defaultLocale = "en_US.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -55,11 +54,6 @@
         LC_TIME = "ru_RU.UTF-8";
     };
 
-    services.xserver.xkb = {
-        layout = "us";
-        variant = "";
-    };
-
     programs = {
         git = {
             enable = true;
@@ -69,31 +63,33 @@
             enable = true;
             gamescopeSession.enable = true;
         };
-        gamemode.enable = true;
         nh = {
             enable = true;
             clean.enable = true;
-            flake = "/home/denis/NixOS";
         };
+        gamemode.enable = true;
         direnv.enable = true;
     };
 
     services = {
+        asusd.enable = true;
+        supergfxd.enable = true;
         flatpak.enable = true;
+        printing.enable = true;
+        avahi = {
+            enable = true;
+            nssmdns4 = true;
+            openFirewall = true;
+        };
         resolved = {
             enable = true;
         };
-        asusd.enable = true;
-        supergfxd.enable = true;
         openssh = {
             enable = lib.mkDefault true;
         };
         ollama = {
             enable = false;
-        };
-        open-webui = {
-            enable = true;
-            port = 11111;
+            # acceleration = lib.mkDefault "cuda";
         };
     };
 
@@ -114,8 +110,8 @@
                 htop
                 git
                 git-lfs
-                inputs.ghostty.packages.${system}.default
-                nvtopPackages.full
+                ghostty
+                # nvtopPackages.full
                 gnomeExtensions.pip-on-top
                 gnomeExtensions.gpu-supergfxctl-switch
                 gnomeExtensions.caffeine # no sleep
@@ -194,14 +190,7 @@
         base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     };
 
-    specialisation.light.configuration = {
-        environment.etc."specialisation".text = "light"; # this is for 'nh' to correctly recognise the specialisation
-            stylix = {
-                enable = true;
-                image = ../../modules/wallpapers/minimal_range.jpg;
-                polarity = "light";
-                base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-heath-light.yaml";
-            };
+    specialisation = {
     };
 
     users.users.denis = {
@@ -213,16 +202,19 @@
         packages = with pkgs; [
             # Base packages
             galaxy-buds-client
-            libreoffice-qt
             telegram-desktop
+            seahorse
+            eyedropper
             obsidian
             bottles
+            alpaca
             gimp
 
             # Shell packages
             zed-editor
             fabric-ai
             starship
+            carapace
             ripgrep
             nushell
             harper
@@ -230,8 +222,6 @@
             rip2
             tree
             dust
-            eza
-            bat
         ];
     };
 

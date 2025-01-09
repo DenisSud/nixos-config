@@ -7,17 +7,24 @@
     home.stateVersion = "24.11";
 
     home.file = {
-        ".config/nushell/config.nu".source = ../../modules/dotfiles/nushell/config.nu;
-        ".config/nushell/env.nu".source = ../../modules/dotfiles/nushell/env.nu;
-        ".config/.zoxide.nu".source = ../../modules/dotfiles/nushell/.zoxide.nu;
-        ".config/zed/settings.json".source = ../../modules/dotfiles/zed/settings.json;
-        ".config/ghostty/config".source = ../../modules/dotfiles/ghostty/config;
+        ".config/nushell/config.nu".source = ../../dotfiles/nushell/config.nu;
+        ".config/nushell/env.nu".source = ../../dotfiles/nushell/env.nu;
+        ".config/.zoxide.nu".source = ../../dotfiles/nushell/.zoxide.nu;
+        ".config/zed/settings.json".source = ../../dotfiles/zed/settings.json;
     };
 
     programs = {
 
-        zellij.enable = true;
         btop.enable = true;
+
+        ghostty = {
+            enable = true;
+            installBatSyntax = true;
+            installVimSyntax = true;
+            settings = {
+                theme = "vesper";
+            };
+        };
 
         neovim = {
             enable = true;
@@ -67,10 +74,10 @@
             ];
 
 	    extraLuaConfig = ''
-	    ${builtins.readFile ../../modules/dotfiles/neovim/options.lua}
-	    ${builtins.readFile ../../modules/dotfiles/neovim/keymaps.lua}
-	    ${builtins.readFile ../../modules/dotfiles/neovim/plugins/init.lua}
-	    '';        
+	    ${builtins.readFile ../../dotfiles/neovim/options.lua}
+	    ${builtins.readFile ../../dotfiles/neovim/keymaps.lua}
+	    ${builtins.readFile ../../dotfiles/neovim/plugins/init.lua}
+	    '';
       };
 
         home-manager.enable = true;
