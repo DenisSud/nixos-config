@@ -1,97 +1,24 @@
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
-    imports = [
-        ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules
+  ];
 
-    boot = {
-        loader = {
-            grub = {
-                efiSupport = true;
-                efiInstallAsRemovable = true;
-                device = "nodev";
-            };
-        };
+  myconfig = {
+    base = {
+      enable = true;
+      hostname = "g14";
     };
+    desktop.enable = true;
+  };
 
-    virtualisation = {
-        docker = {
-            enable = true;
-        };
-    };
-
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-    services.xserver = {
-        enable = true;
-        videoDrivers = [ "nvidia" ];
-        excludePackages = [ pkgs.xterm ];
-        displayManager.gdm.enable = true;
-        desktopManager.gnome.enable = true;
-    };
-
-    networking = {
-        hostName = "g14";
-        networkmanager.enable = true;
-        firewall = {
-            enable = false;
-        };
-    };
-
-    time.timeZone = "Europe/Moscow";
-    i18n.defaultLocale = "en_US.UTF-8";
-
-    i18n.extraLocaleSettings = {
-        LC_ADDRESS = "ru_RU.UTF-8";
-        LC_IDENTIFICATION = "ru_RU.UTF-8";
-        LC_MEASUREMENT = "ru_RU.UTF-8";
-        LC_MONETARY = "ru_RU.UTF-8";
-        LC_NAME = "ru_RU.UTF-8";
-        LC_NUMERIC = "ru_RU.UTF-8";
-        LC_PAPER = "ru_RU.UTF-8";
-        LC_TELEPHONE = "ru_RU.UTF-8";
-        LC_TIME = "ru_RU.UTF-8";
-    };
-
-    programs = {
-        git = {
-            enable = true;
-            lfs.enable = true;
-        };
-        steam = {
-            enable = true;
-            gamescopeSession.enable = true;
-        };
-        nh = {
-            enable = true;
-            clean.enable = true;
-        };
-        gamemode.enable = true;
-        direnv.enable = true;
-    };
-
-    services = {
-        asusd.enable = true;
-        supergfxd.enable = true;
-        flatpak.enable = true;
-        printing.enable = true;
-        avahi = {
-            enable = true;
-            nssmdns4 = true;
-            openFirewall = true;
-        };
-        resolved = {
-            enable = true;
-        };
-        openssh = {
-            enable = lib.mkDefault true;
-        };
-        ollama = {
-            enable = false;
-            # acceleration = lib.mkDefault "cuda";
-        };
-    };
+  # G14 specific configurations
+  services = {
+    asusd.enable = true;
+    supergfxd.enable = true;
+  };
 
     nixpkgs.config = {
         allowUnfree = true;
@@ -185,7 +112,7 @@
 # User configuration
     stylix = {
         enable = true;
-        image = lib.mkDefault ../../modules/wallpapers/color.png;
+        image = lib.mkDefault ../../wallpapers/color.png;
         polarity = lib.mkDefault "dark";
         base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     };
