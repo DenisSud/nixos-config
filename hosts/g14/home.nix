@@ -10,6 +10,7 @@
         ".config/nushell/config.nu".source = ../../dotfiles/nushell/config.nu;
         ".config/nushell/env.nu".source = ../../dotfiles/nushell/env.nu;
         ".config/.zoxide.nu".source = ../../dotfiles/nushell/.zoxide.nu;
+        ".config/starship.toml".source = ../../dotfiles/starship.toml;
         ".config/zed/settings.json".source = ../../dotfiles/zed/settings.json;
     };
 
