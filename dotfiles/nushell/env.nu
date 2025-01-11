@@ -99,3 +99,18 @@ $env.NU_PLUGIN_DIRS = [
 
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
+zoxide init nushell | save -f ~/.zoxide.nu
+mkdir ~/.cache/starship
+starship init nu | save -f ~/.cache/starship/init.nu
+$env.EDITOR = 'nvim'
+$env.DEFAULT_MODEL = 'mistral-large-latest'
+$env.DEFAULT_VENDOR = 'mistral'
+$env.MISTRAL_API_KEY = 'XgQo6BoJsnhqtrtODvX9iAIAmWysr2vr'
+$env.CODESTRAL_API_KEY = 'lRAijYjXkFWF4NFpcZOOtJz8bzg9cMmq'
+$env.GROQ_API_KEY = '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'
+$env.YOUTUBE_API_KEY = 'AIzaSyDIKOJ38v9CtvisuunFpbrGEEq4sgh4ntI'
+$env.NGC_API_KEY = 'aHZkbzM2M3Q0M3AwNDBpc3MxcjJjZ25xMmY6M2IzNzk0YTktYjQ2Mi00YWRhLWIyNGYtYjBmZGE2YmIwMTEx'
+$env.EXA_API_KEY = '3e8ed71b-e98e-4a9d-a39f-888c255c34f0'
+$env.GEMINI_API_KEY = 'AIzaSyAks3D4r3IA_x1CFFH_drNAOOJO_rMSVTw'
+$env.JINA_API_KEY = 'jina_715b3037056c44e99c519be8fb046847myG_-cM7HcDjEIzXPV-7QvPJtVl3'
+$env.NIXPKGS_ALLOW_UNFREE = 1
