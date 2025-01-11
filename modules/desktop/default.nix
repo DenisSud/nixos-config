@@ -35,6 +35,7 @@ with lib;
     environment.systemPackages = with pkgs; [
       gnome-tweaks
       ghostty
+      gnomeExtensions.twingate-status
       gnomeExtensions.pip-on-top
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator

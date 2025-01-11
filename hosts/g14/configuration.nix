@@ -31,6 +31,7 @@
   services = {
     asusd.enable = true;
     supergfxd.enable = true;
+    twingate.enable = true;
   };
 
   nixpkgs.config = {
@@ -90,6 +91,7 @@
       eyedropper
       seahorse
       obsidian
+      twingate
       bottles
 
       # Shell packages
