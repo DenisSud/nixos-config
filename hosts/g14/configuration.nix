@@ -93,6 +93,7 @@
       bottles
 
       # Shell packages
+      texliveBasic
       zed-editor
       fabric-ai
       starship # shell prompt
@@ -101,6 +102,8 @@
       nushell # the best shell
       harper # auto-correct lsp
       zoxide # better cd
+      pandoc
+      yazi
       rip2 # better rm
       tree # better ls
     ];

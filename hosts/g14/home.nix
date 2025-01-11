@@ -22,6 +22,7 @@
             enable = true;
             installBatSyntax = true;
             installVimSyntax = true;
+            enableBashIntegration = true;
             settings = {
                 theme = "vesper";
             };
