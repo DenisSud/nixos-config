@@ -32,6 +32,9 @@
     asusd.enable = true;
     supergfxd.enable = true;
     twingate.enable = true;
+    ollama = {
+        enable = true;
+    };
   };
 
   nixpkgs.config = {
@@ -93,6 +96,7 @@
       obsidian
       twingate
       bottles
+      alpaca
 
       # Shell packages
       texliveBasic
@@ -102,9 +106,13 @@
       carapace # shell completion library
       ripgrep # better grep
       nushell # the best shell
+      lazygit
       harper # auto-correct lsp
       zoxide # better cd
       pandoc
+      helix
+      nmap
+      croc
       yazi
       rip2 # better rm
       tree # better ls

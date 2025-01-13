@@ -103,8 +103,6 @@ zoxide init nushell | save -f ~/.zoxide.nu
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 $env.EDITOR = 'nvim'
-$env.DEFAULT_MODEL = 'mistral-large-latest'
-$env.DEFAULT_VENDOR = 'mistral'
 $env.MISTRAL_API_KEY = 'XgQo6BoJsnhqtrtODvX9iAIAmWysr2vr'
 $env.CODESTRAL_API_KEY = 'lRAijYjXkFWF4NFpcZOOtJz8bzg9cMmq'
 $env.GROQ_API_KEY = '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'

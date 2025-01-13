@@ -16,70 +16,32 @@
     programs = {
 
         btop.enable = true;
+        lazygit.enable = true;
 
         ghostty = {
             enable = true;
             installBatSyntax = true;
-            installVimSyntax = true;
             enableBashIntegration = true;
             settings = {
                 theme = "vesper";
             };
         };
 
-        neovim = {
-            enable = true;
-            viAlias = true;
-            vimAlias = true;
-
-            plugins = with pkgs.vimPlugins; [
-                jupytext-nvim
-                mason-nvim
-                nvim-dap  # for debugging
-                nvim-dap-python  # Python debug adapter
-                nvim-dap-ui  # UI for debugging
-                plenary-nvim
-                nui-nvim
-                conform-nvim
-                nvim-web-devicons
-                telescope-nvim
-                telescope-fzf-native-nvim
-                nvim-cmp
-                cmp-buffer
-                cmp-path
-                cmp-nvim-lsp
-                cmp-nvim-lua
-                luasnip
-                cmp_luasnip
-                friendly-snippets
-                which-key-nvim
-
-                nvim-lspconfig
-
-                vim-fugitive
-                gitsigns-nvim
-
-                tokyonight-nvim
-                lualine-nvim
-                nvim-tree-lua
-
-                (nvim-treesitter.withPlugins (plugins: with plugins; [
-                    tree-sitter-nix
-                    tree-sitter-lua
-                    tree-sitter-python
-                    tree-sitter-rust
-                    tree-sitter-typescript
-                    tree-sitter-javascript
-                ]))
-
-            ];
-
-	    extraLuaConfig = ''
-	    ${builtins.readFile ../../dotfiles/neovim/options.lua}
-	    ${builtins.readFile ../../dotfiles/neovim/keymaps.lua}
-	    ${builtins.readFile ../../dotfiles/neovim/plugins/init.lua}
-	    '';
-      };
+        helix = {
+          enable = true;   
+          settings = {
+            editor = {
+              line-number = "relative";
+              lsp.display-messages = true;
+            };
+            keys.normal = {
+              space.w = ":w";
+              space.q = ":q";
+              esc = [ "collapse_selection" "keep_primary_selection" ];
+              "C-g" = [":new" ":insert-output lazygit" ":buffer-close!" ":redraw"];
+            };
+          };
+        };
 
         home-manager.enable = true;
     };
