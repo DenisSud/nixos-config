@@ -89,14 +89,15 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       # Base packages
-      galaxy-buds-client
+      galaxy-buds-client # galaxy buds util
+      rquickshare # quick share util
+      gnome-solanum # pomidoro timer
       telegram-desktop
-      eyedropper
-      seahorse
+      eyedropper # color picker
+      seahorse # password and secrets
       obsidian
       twingate
       bottles
-      alpaca
 
       # Shell packages
       texliveBasic
@@ -110,7 +111,9 @@
       harper # auto-correct lsp
       zoxide # better cd
       pandoc
+      aider-chat
       helix
+      typer
       nmap
       croc
       yazi

@@ -36,6 +36,7 @@ with lib;
       gnome-tweaks
       ghostty
       gnomeExtensions.twingate-status
+      gnomeExtensions.wintile-beyond
       gnomeExtensions.pip-on-top
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
