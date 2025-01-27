@@ -1,144 +1,163 @@
 { config, lib, pkgs, inputs, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+    imports = [
+        ./hardware-configuration.nix
+    ];
 
-  # System configuration
-  networking = {
-    hostName = "g14";
-    networkmanager.enable = true;
-    firewall.enable = false;
-  };
-
-  # Basic system settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  time.timeZone = "Europe/Moscow";
-  nixpkgs.config.allowUnfree = true;
-
-  # Localization
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "ru_RU.UTF-8";
-      LC_IDENTIFICATION = "ru_RU.UTF-8";
-      LC_MEASUREMENT = "ru_RU.UTF-8";
-      LC_MONETARY = "ru_RU.UTF-8";
-      LC_NAME = "ru_RU.UTF-8";
-      LC_NUMERIC = "ru_RU.UTF-8";
-      LC_PAPER = "ru_RU.UTF-8";
-      LC_TELEPHONE = "ru_RU.UTF-8";
-      LC_TIME = "ru_RU.UTF-8";
+# System configuration
+    networking = {
+        hostName = "g14";
+        networkmanager.enable = true;
+        firewall.enable = false;
     };
-  };
 
-  # Boot configuration
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      devices = [ "nodev" ];
-      efiSupport = true;
-      useOSProber = true;
-    };
-  };
+# Basic system settings
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    time.timeZone = "Europe/Moscow";
+    nixpkgs.config.allowUnfree = true;
 
-  # Hardware configuration
-  hardware = {
-    bluetooth.enable = true;
-    graphics.enable = true;
-    nvidia = {
-      modesetting.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
-      open = false;
-      powerManagement = {
-        enable = true;
-        finegrained = true;
-      };
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
+# Localization
+    i18n = {
+        defaultLocale = "en_US.UTF-8";
+        extraLocaleSettings = {
+            LC_ADDRESS = "ru_RU.UTF-8";
+            LC_IDENTIFICATION = "ru_RU.UTF-8";
+            LC_MEASUREMENT = "ru_RU.UTF-8";
+            LC_MONETARY = "ru_RU.UTF-8";
+            LC_NAME = "ru_RU.UTF-8";
+            LC_NUMERIC = "ru_RU.UTF-8";
+            LC_PAPER = "ru_RU.UTF-8";
+            LC_TELEPHONE = "ru_RU.UTF-8";
+            LC_TIME = "ru_RU.UTF-8";
         };
-      };
     };
-  };
 
-  stylix = {
-    enable = false;
-    image = lib.mkDefault ../../wallpapers/FrenchRevolution.jpg;
-    polarity = lib.mkDefault "dark";
-    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
-  };
-
-  # System services
-  services = {
-    xserver = {
-      enable = true;
-      excludePackages = [ pkgs.xterm ];
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+# Boot configuration
+    boot.loader = {
+        efi = {
+            canTouchEfiVariables = true;
+            efiSysMountPoint = "/boot";
+        };
+        grub = {
+            enable = true;
+            devices = [ "nodev" ];
+            efiSupport = true;
+            useOSProber = true;
+        };
     };
-    twingate.enable = true;
-    ollama = {
+
+# Hardware configuration
+    hardware = {
+        bluetooth.enable = true;
+        graphics.enable = true;
+        nvidia-container-toolkit.enable = true;
+        nvidia = {
+            modesetting.enable = true;
+            package = config.boot.kernelPackages.nvidiaPackages.production;
+            open = false;
+            powerManagement = {
+                enable = true;
+                finegrained = true;
+            };
+            prime = {
+                offload = {
+                    enable = true;
+                    enableOffloadCmd = true;
+                };
+            };
+        };
+    };
+
+    virtualisation = {
+        containers.enable = true;
+        podman = {
+            enable = true;
+            dockerCompat = true;
+            defaultNetwork.settings.dns_enabled = true;
+        };
+        oci-containers = {
+            backend = "podman";
+            containers = {
+                open-webui = import ../../containers/open-webui.nix;
+            };
+        };
+    };
+
+    stylix = {
         enable = true;
-        acceleration = "cuda";
+        image = lib.mkDefault ../../wallpapers/Mountain.png;
+        polarity = lib.mkDefault "dark";
+        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
     };
-    flatpak.enable = true;
-    printing.enable = true;
-    openssh.enable = true;
-  };
 
-  # Basic system programs
-  programs = {
-    git.enable = true;
-    nh = {
-      enable = true;
-      clean = {
-        enable = true;
-        dates = "weekly";  # optional: automatically clean old generations
-      };
+# System services
+    services = {
+        xserver = {
+            enable = true;
+            excludePackages = [ pkgs.xterm ];
+            displayManager.gdm.enable = true;
+            desktopManager.gnome.enable = true;
+        };
+        twingate.enable = true;
+        ollama = {
+            enable = true;
+            acceleration = "cuda";
+        };
+        flatpak.enable = true;
+        printing.enable = true;
+        openssh.enable = true;
     };
-  };
 
-  # Essential system packages
-  environment.systemPackages = with pkgs; [
-    # System essentials
-    neovim
-    curl
-    wget
-    git
-    fzf
+# Basic system programs
+    programs = {
+        git.enable = true;
+        nh = {
+            enable = true;
+            clean = {
+                enable = true;
+                dates = "weekly";  # optional: automatically clean old generations
+            };
+        };
+    };
 
-    # Gnome specific
-    ghostty
-    gnome-tweaks
-    gnomeExtensions.twingate-status
-    gnomeExtensions.wintile-beyond
-    gnomeExtensions.pip-on-top
-    gnomeExtensions.caffeine
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.vitals
-  ];
+# Essential system packages
+    environment.systemPackages = with pkgs; [
+# System essentials
+        libfprint
+        neovim
+        curl
+        wget
+        git
+        fzf
 
-  # User configuration
-  users.users.denis = {
-    isNormalUser = true;
-    shell = pkgs.nushell;
-    description = "denis";
-    initialPassword = "password";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-  };
+# Gnome specific
+        ghostty
+        gnome-tweaks
+        gnomeExtensions.twingate-status
+        gnomeExtensions.wintile-beyond
+        gnomeExtensions.pip-on-top
+        gnomeExtensions.caffeine
+        gnomeExtensions.clipboard-indicator
+        gnomeExtensions.blur-my-shell
+        gnomeExtensions.vitals
+    ];
 
-  # Home Manager configuration
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    backupFileExtension = "backup";
-    users.denis = import ./home.nix;
-  };
+# User configuration
+    users.users.denis = {
+        isNormalUser = true;
+        shell = pkgs.nushell;
+        description = "denis";
+        initialPassword = "password";
+        extraGroups = [ "networkmanager" "wheel" "docker" ];
+        packages = with pkgs; [
+        ];
+    };
 
-  system.stateVersion = "24.05";
-}
+# Home Manager configuration
+    home-manager = {
+        extraSpecialArgs = {inherit inputs;};
+        backupFileExtension = "backup";
+        users.denis = import ./home.nix;
+    };
+
+    system.stateVersion = "24.05";
+                                    }

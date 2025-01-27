@@ -12,10 +12,13 @@
         packages = with pkgs; [
             # Development tools
             starship
+            dive
+            podman-tui
+            docker-compose
             fabric-ai
-            zed-editor
             ripgrep
             lazygit
+            git-lfs
             zoxide
             harper
             rip2
@@ -28,6 +31,9 @@
             tree
 
             # Applications
+            tor
+            tor-browser
+            zed-editor
             galaxy-buds-client
             telegram-desktop
             gnome-solanum
