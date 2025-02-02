@@ -4,8 +4,8 @@
   },
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "openai",
+      "model": "deepseek-r1-distill-llama-70b"
     },
     "version": "2"
   },
@@ -52,8 +52,8 @@
           "max_tokens": 8000
         },
         {
-          "name": "llama-3.1-8b-instant",
-          "max_tokens": 32000
+          "name": "deepseek-r1-distill-llama-70b",
+          "max_tokens": 128000
         }
       ]
     }

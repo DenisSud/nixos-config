@@ -69,16 +69,11 @@
 
     virtualisation = {
         containers.enable = true;
+        oci-containers.backend = "podman";
         podman = {
             enable = true;
             dockerCompat = true;
             defaultNetwork.settings.dns_enabled = true;
-        };
-        oci-containers = {
-            backend = "podman";
-            containers = {
-                open-webui = import ../../containers/open-webui.nix;
-            };
         };
     };
 
@@ -97,11 +92,18 @@
             displayManager.gdm.enable = true;
             desktopManager.gnome.enable = true;
         };
-        twingate.enable = true;
         ollama = {
             enable = true;
             acceleration = "cuda";
+            environmentVariables = {
+                OLLAMA_HOST = "0.0.0.0:11434";  # Allow external access
+            };
         };
+        open-webui = {
+            enable = true;
+            port = 2025;
+        };
+        twingate.enable = true;
         flatpak.enable = true;
         printing.enable = true;
         openssh.enable = true;
@@ -149,13 +151,25 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
-        ];
+            tor-browser
+            zed-editor
+            code-cursor
+            galaxy-buds-client
+            telegram-desktop
+            gnome-solanum
+            eyedropper
+            seahorse
+            obsidian
+            twingate
+            bottles
+            alpaca
+       ];
     };
 
 # Home Manager configuration
     home-manager = {
         extraSpecialArgs = {inherit inputs;};
-        backupFileExtension = "backup";
+        backupFileExtension = "back";
         users.denis = import ./home.nix;
     };
 
