@@ -10,14 +10,12 @@
         stateVersion = "24.11";
 
         packages = with pkgs; [
-# Development tools
+            # Development tools
             starship
-            dive
-            podman-tui
+            aider-chat
             docker-compose
             fabric-ai
             ripgrep
-            kaggle
             lazygit
             git-lfs
             zoxide
@@ -26,15 +24,21 @@
             bat
             tor
 
-# Shell utilities
+            # Shell utilities
+            unzip
+            zip
+            rustup
             xclip
             carapace
             pandoc
             nmap
             tree
+
+            # For language servers
+            nodejs
         ];
 
-# Dotfiles
+        # Dotfiles
         file = {
             ".config/nushell/config.nu".source = ../../dotfiles/nushell/config.nu;
             ".config/nushell/env.nu".source = ../../dotfiles/nushell/env.nu;
@@ -42,7 +46,7 @@
         };
     };
 
-# Program configurations
+    # Program configurations
     programs = {
         bat.enable = true;
         btop.enable = true;
@@ -53,30 +57,31 @@
             installBatSyntax = true;
             enableBashIntegration = true;
             settings = {
-                theme = "vesper";
+                theme = "Oxocarbon";
                 font-size = 13;
             };
         };
 
         neovim = {
+
             enable = true;
             defaultEditor = true;
             viAlias = true;
             vimAlias = true;
 
-# Neovim plugins to install
+            # Neovim plugins to install
             plugins = with pkgs.vimPlugins; [
                 plenary-nvim
-                    telescope-nvim
-                    mini-nvim
-                    render-markdown-nvim
-                    avante-nvim
-                    dressing-nvim
-                    nui-nvim
-                    supermaven-nvim
-                ];
+                telescope-nvim
+                mason-nvim
+                mason-lspconfig-nvim
+                nvim-lspconfig
+                mini-nvim
+                supermaven-nvim
+                aider-nvim
+            ];
 
-# Lua-based pluin configuration
+            # Lua-based pluin configuration
             extraLuaConfig = ''
                 -- Clipboard settings
                 vim.o.clipboard = "unnamedplus"
@@ -132,6 +137,10 @@
                         file_ignore_patterns = {"node_modules", ".git"},
                     }
                 }
+
+                vim.api.nvim_set_keymap('n', '<leader>Ao', ':AiderOpen<CR>', {noremap = true, silent = true})
+                vim.api.nvim_set_keymap('n', '<leader>Am', ':AiderAddModifiedFiles<CR>', {noremap = true, silent = true})
+
                 require("supermaven-nvim").setup({
                     keymaps = {
                         accept_suggestion = "<Tab>",
@@ -150,10 +159,56 @@
                         return false
                     end -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
                 })
+                
+                -- Mason LSP configuration 
+                require("mason").setup()
+                require("mason-lspconfig").setup({
+                    ensure_installed = { "lua_ls", "pyright" }, -- Add your preferred servers
+                    automatic_installation = true
+                })
+
+                -- Configure LSP and mini modules
+                local lspconfig = require('lspconfig')
+                local mini_completion = require('mini.completion')
+
+                -- Basic LSP setup
+                local on_attach = function(client, bufnr)
+                  mini_completion.setup({
+                    lsp_completion = { source = 'lsp' }, -- Enable LSP completion
+                    mappings = {
+                      force_twoway_next = '<C-n>',
+                      force_twoway_prev = '<C-p>'
+                    }
+                  })
+                end
+                -- LSP navigation
+                vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+                vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
+                vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+                vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
+
+                -- Configure language servers
+                lspconfig.lua_ls.setup({ on_attach = on_attach })
+                lspconfig.pyright.setup({ on_attach = on_attach })
+                lspconfig.clangd.setup({ on_attach = on_attach })
+
+                -- Enable diagnostics
+                vim.diagnostic.config({
+                  virtual_text = true,
+                  signs = true,
+                  update_in_insert = false
+                })
+
+                -- Format on save
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  pattern = "*",
+                  callback = function()
+                    vim.lsp.buf.format({ async = false })
+                  end
+                })
 
                 require('mini.pairs').setup()
                 require('mini.deps').setup()
-                require('mini.animate').setup()
                 require('mini.statusline').setup()
                 require('mini.tabline').setup()
                 require('mini.pick').setup()
@@ -162,9 +217,9 @@
                 require('mini.surround').setup()
                 require('mini.jump').setup()
                 require('mini.completion').setup()
-                '';
+          '';
         };
 
         home-manager.enable = true;
     };
-                            }
+}

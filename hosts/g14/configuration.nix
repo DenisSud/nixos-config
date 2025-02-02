@@ -81,7 +81,7 @@
         enable = true;
         image = lib.mkDefault ../../wallpapers/Mountain.png;
         polarity = lib.mkDefault "dark";
-        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/vesper.yaml";
+        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
     };
 
 # System services
