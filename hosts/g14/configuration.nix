@@ -79,7 +79,7 @@
 
     stylix = {
         enable = true;
-        image = lib.mkDefault ../../wallpapers/Mountain.png;
+        image = lib.mkDefault ../../wallpapers/Downtown.png;
         polarity = lib.mkDefault "dark";
         base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
     };
@@ -151,10 +151,12 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
+            ticktick
             tor-browser
             zed-editor
-            code-cursor
+            vscode
             galaxy-buds-client
+            whatsapp-for-linux
             telegram-desktop
             gnome-solanum
             eyedropper

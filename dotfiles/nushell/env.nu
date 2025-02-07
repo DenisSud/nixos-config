@@ -104,7 +104,7 @@ mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 $env.EDITOR = 'nvim'
 $env.MISTRAL_API_KEY = 'XgQo6BoJsnhqtrtODvX9iAIAmWysr2vr'
-$env.CODESTRAL_API_KEY = 'lRAijYjXkFWF4NFpcZOOtJz8bzg9cMmq'
+$env.CODESTRAL_API_KEY = '9jlj9Iiaj5wROVxfsuZOhW4HFeMztHBX'
 $env.GROQ_API_KEY = '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'
 $env.OPENAI_API_KEY = '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'
 $env.YOUTUBE_API_KEY = 'AIzaSyDIKOJ38v9CtvisuunFpbrGEEq4sgh4ntI'
