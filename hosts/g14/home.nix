@@ -47,6 +47,7 @@
             ".config/nushell/config.nu".source = ../../dotfiles/nushell/config.nu;
             ".config/nushell/env.nu".source = ../../dotfiles/nushell/env.nu;
             ".config/starship.toml".source = ../../dotfiles/starship.toml;
+            ".config/ghostty/themes/mountain-base16".source = ../../dotfiles/ghostty/themes/mountain-base16;
         };
     };
 
@@ -61,7 +62,7 @@
             installBatSyntax = true;
             enableBashIntegration = true;
             settings = {
-                theme = "Oxocarbon";
+                theme = "mountain-base16";
                 font-size = 13;
             };
         };
