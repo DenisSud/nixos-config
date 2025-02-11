@@ -14,7 +14,7 @@
             starship
             aider-chat
             open-interpreter
-            docker-compose
+            podman-compose
             fabric-ai
             ripgrep
             lazygit

@@ -99,7 +99,7 @@
   # Stylix (Theme/Image) Settings
   stylix = {
     enable = true;
-    image = lib.mkDefault ../../wallpapers/Downtown.png;
+    image = lib.mkDefault ../../wallpapers/touch.png;
     polarity = lib.mkDefault "dark";
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
   };
@@ -120,7 +120,7 @@
       enable = true;
       acceleration = "cuda";
       environmentVariables = {
-        OLLAMA_HOST = "0.0.0.0:11434";
+        OLLAMA_HOST = "0.0.0.0:11434"; 
       };
     };
 
@@ -128,7 +128,7 @@
     flatpak.enable = true;
     printing.enable = true;
     openssh.enable = true;
-    gnome.core-utilities.enable = false;
+    # gnome.core-utilities.enable = false;
   };
 
   #########################################################
@@ -176,14 +176,12 @@
     shell = pkgs.nushell;
     description = "denis";
     initialPassword = "password";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" "docker" ];
     packages = with pkgs; [
       ticktick
       tor-browser
       zed-editor
-      vscode
       galaxy-buds-client
-      whatsapp-for-linux
       telegram-desktop
       gnome-solanum
       eyedropper
