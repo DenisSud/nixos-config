@@ -184,6 +184,7 @@
       galaxy-buds-client # utility for galaxy buds
       telegram-desktop # messenger
       gnome-solanum # pomo timer
+      libreoffice # office suite
       eyedropper # color picker
       seahorse # password manager
       obsidian # note taking and knowledge base
