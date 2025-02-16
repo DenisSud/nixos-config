@@ -178,18 +178,19 @@
     initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" "podman" "docker" ];
     packages = with pkgs; [
-      ticktick
-      tor-browser
-      zed-editor
-      galaxy-buds-client
-      telegram-desktop
-      gnome-solanum
-      eyedropper
-      seahorse
-      obsidian
-      twingate
-      bottles
-      alpaca
+      ticktick # taks management
+      tor-browser # anonymous browser
+      zed-editor # code editor
+      galaxy-buds-client # utility for galaxy buds
+      telegram-desktop # messenger
+      gnome-solanum # pomo timer
+      eyedropper # color picker
+      seahorse # password manager
+      obsidian # note taking and knowledge base
+      twingate # remote management
+      bottles # wine bottles manager
+      alpaca # for local chats
+      zotero # For managin research papers
     ];
   };
 

@@ -64,6 +64,7 @@
             settings = {
                 theme = "mountain-base16";
                 font-size = 13;
+                shell-integration-features = "sudo";
             };
         };
 
