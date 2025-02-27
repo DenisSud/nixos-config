@@ -1,0 +1,88 @@
+{
+  "ssh_connections": [
+    {
+      "host": "mypi.home",
+      "username": "denis",
+      "projects": [
+        {
+          "paths": ["/etc/lighttpd"]
+        },
+        {
+          "paths": ["/etc/samba"]
+        },
+        {
+          "paths": ["~/nextcloud"]
+        }
+      ]
+    }
+  ],
+  "outline_panel": {
+    "dock": "right"
+  },
+  "assistant": {
+    "enabled": false,
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
+    },
+    "version": "2",
+    "enable_experimental_live_diffs": true
+  },
+  "features": {
+    "inline_completion_provider": ""
+  },
+  "editor": {
+    "completion": {
+      "enabled": true,
+      "triggerCharacters": [".", "("]
+    }
+  },
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "on_yank",
+    "use_multiline_find": true,
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15.0,
+  "theme": {
+    "mode": "system",
+    "light": "Base16 Classic Light",
+    "dark": "Base16 Mountain"
+  },
+  "relative_line_numbers": true,
+  "languages": {
+    "Python": {
+      "format_on_save": { "language_server": { "name": "ruff" } },
+      "formatter": { "language_server": { "name": "ruff" } },
+      "language_servers": ["pyright", "ruff", "jedi"],
+      "tab_size": 4,
+      "soft_tabs": true,
+      "repl": {
+        "enabled": true,
+        "command": "python"
+      }
+    },
+    "Nix": {
+      "format_on_save": { "external": { "command": "nixfmt" } },
+      "formatter": { "external": { "command": "nixfmt" } },
+      "language_servers": ["rnix-lsp"],
+      "tab_size": 2,
+      "soft_tabs": true
+    }
+  },
+  "tab_size": 2,
+  "snippets": {
+    "Python": [
+      {
+        "prefix": "class",
+        "body": ["class ${1:name}:", "    pass"]
+      },
+      {
+        "prefix": "def",
+        "body": ["def ${1:name}(${2:args}):", "    ${3:pass}"]
+      }
+    ]
+  }
+}

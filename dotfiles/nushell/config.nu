@@ -899,6 +899,8 @@ $env.config = {
 source ~/.zoxide.nu
 use ~/.cache/starship/init.nu
 alias cd = z
+alias pd = podman
+alias pdc = podman-compose
 alias rm = rip
 alias zed = zeditor
 alias gs = git status

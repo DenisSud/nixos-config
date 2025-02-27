@@ -33,6 +33,7 @@
             cargo
             xclip
             carapace
+            dust
             pandoc
             nmap
             tree
@@ -40,6 +41,9 @@
 
             # For language servers
             nodejs
+            nil
+            ruff
+            lua-language-server
         ];
 
         # Dotfiles
@@ -48,6 +52,7 @@
             ".config/nushell/env.nu".source = ../../dotfiles/nushell/env.nu;
             ".config/starship.toml".source = ../../dotfiles/starship.toml;
             ".config/ghostty/themes/mountain-base16".source = ../../dotfiles/ghostty/themes/mountain-base16;
+            ".config/zed/settings.json".source = ../../dotfiles/zed/settings.json;
         };
     };
 

@@ -103,7 +103,16 @@ require("lazy").setup({
             require('mini.align').setup()
             require('mini.comment').setup()
             require('mini.pairs').setup()
-            require('mini.surround').setup()
+            require('mini.surround').setup({
+                mappings = {
+                    add = 'sa',    -- Add surrounding
+                    delete = 'sd', -- Delete surrounding
+                    find = 'sf',   -- Find surrounding
+                    highlight = 'sh', -- Highlight surrounding
+                    replace = 'sr', -- Replace surrounding
+                    update_n_lines = 'sn', -- Update number of lines in surrounding
+                },
+            })
             require('mini.completion').setup({
                 lsp_completion = { source = 'lsp' },
                 mappings = {
@@ -122,6 +131,16 @@ require("lazy").setup({
             require('mini.jump').setup()
             require('mini.notify').setup()
             require('mini.starter').setup()
+            require('mini.files').setup({
+                options = {
+                    permanent_delete = false,
+                    use_as_default_explorer = true,
+                },
+                windows = {
+                    preview = true,
+                    width_preview = 45,
+                },
+            })
 
             -- Visual: Modules that affect the look and feel of your Neovim interface.
             require('mini.statusline').setup()

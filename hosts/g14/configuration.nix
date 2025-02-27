@@ -1,15 +1,10 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-
-  #########################################################
-  # Imports
-  #########################################################
   imports = [
     ./hardware-configuration.nix
   ];
 
-  #########################################################
   # System & Basic Settings
   #########################################################
 
@@ -23,7 +18,11 @@
   # Core System Settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   time.timeZone = "Europe/Moscow";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    ];
+  };
 
   # Localization Settings
   i18n = {
@@ -41,22 +40,28 @@
     };
   };
 
-  #########################################################
   # Boot & Hardware Configuration
   #########################################################
 
   # Boot Loader & GRUB
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      enable = true;
-      devices = [ "nodev" ];
-      efiSupport = true;
-      useOSProber = true;
-    };
+  boot = {
+      kernelModules = [ "v4l2loopback" ];
+      extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+      extraModprobeConfig = ''
+        options v4l2loopback exclusive_caps=1 card_label="Virtual Webcam"
+      '';
+      loader = {
+          efi = {
+              canTouchEfiVariables = true;
+              efiSysMountPoint = "/boot";
+          };
+          grub = {
+              enable = true;
+              devices = [ "nodev" ];
+              efiSupport = true;
+              useOSProber = true;
+          };
+      };
   };
 
   # Hardware Settings
@@ -70,7 +75,7 @@
       open = false;
       powerManagement = {
         enable = true;
-        finegrained = true;
+        finegrained = false;
       };
       prime = {
         offload = {
@@ -81,7 +86,6 @@
     };
   };
 
-  #########################################################
   # Virtualisation & Visual Customization
   #########################################################
 
@@ -98,13 +102,12 @@
 
   # Stylix (Theme/Image) Settings
   stylix = {
-    enable = true;
+    enable = lib.mkDefault true;
     image = lib.mkDefault ../../wallpapers/touch.png;
     polarity = lib.mkDefault "dark";
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
   };
 
-  #########################################################
   # Services Configuration
   #########################################################
 
@@ -120,7 +123,7 @@
       enable = true;
       acceleration = "cuda";
       environmentVariables = {
-        OLLAMA_HOST = "0.0.0.0:11434"; 
+        OLLAMA_HOST = "0.0.0.0:11434";
       };
     };
 
@@ -128,10 +131,9 @@
     flatpak.enable = true;
     printing.enable = true;
     openssh.enable = true;
-    # gnome.core-utilities.enable = false;
+    syncthing.enable = true;
   };
 
-  #########################################################
   # Basic Programs & Essential System Packages
   #########################################################
 
@@ -149,14 +151,12 @@
 
   # System-wide packages to be installed
   environment.systemPackages = with pkgs; [
-    libfprint
     neovim
     curl
     wget
     git
     fzf
     ghostty
-    gnome-tweaks
     gnomeExtensions.twingate-status
     gnomeExtensions.wintile-beyond
     gnomeExtensions.pip-on-top
@@ -166,7 +166,18 @@
     gnomeExtensions.vitals
   ];
 
+  # Specializations
   #########################################################
+
+  specialisation = {
+    light.configuration = {
+      stylix = {
+        enable = false;
+        image = ../../wallpapers/touch.png;
+      };
+    };
+  };
+
   # User & Home Manager Configuration
   #########################################################
 
@@ -185,13 +196,9 @@
       telegram-desktop # messenger
       gnome-solanum # pomo timer
       libreoffice # office suite
-      eyedropper # color picker
-      seahorse # password manager
       obsidian # note taking and knowledge base
       twingate # remote management
       bottles # wine bottles manager
-      alpaca # for local chats
-      zotero # For managin research papers
     ];
   };
 
@@ -202,11 +209,9 @@
     users.denis = import ./home.nix;
   };
 
-  #########################################################
   # System State Version
   #########################################################
 
   system.stateVersion = "24.05";
 
 }
-
