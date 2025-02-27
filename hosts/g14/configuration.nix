@@ -120,7 +120,7 @@
     };
 
     ollama = {
-      enable = false;
+      enable = true;
       acceleration = "cuda";
       environmentVariables = {
         OLLAMA_HOST = "0.0.0.0:11434";
@@ -203,13 +203,13 @@
   # Home Manager configuration for 'denis'
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    backupFileExtension = "idk";
+    backupFileExtension = "backup";
     users.denis = import ./home.nix;
   };
 
   # System State Version
   #########################################################
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
 }

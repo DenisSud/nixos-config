@@ -34,7 +34,6 @@
   "editor": {
     "completion": {
       "enabled": true,
-      "triggerCharacters": [".", "(", "[", "{", ","],
       "use_language_server": true
     },
     "hover": {
@@ -86,7 +85,7 @@
     "Python": {
       "format_on_save": { "language_server": { "name": "ruff" } },
       "formatter": { "language_server": { "name": "ruff" } },
-      "language_servers": ["pyright", "ruff", "jedi"],
+      "language_servers": ["pyright", "ruff"],
       "tab_size": 2,
       "soft_tabs": true,
       "repl": {
@@ -106,142 +105,6 @@
     }
   },
   "tab_size": 2,
-  "snippets": {
-    "Python": [
-      {
-        "prefix": "pl_model",
-        "body": [
-          "import lightning.pytorch as pl",
-          "import torch.nn as nn",
-          "import torch.optim as optim",
-          "",
-          "class ${1:LightningModel}(pl.LightningModule):",
-          "    def __init__(self, ${2:hparams}):",
-          "        super().__init__()",
-          "        self.save_hyperparameters()",
-          "        self.model = nn.Sequential(",
-          "            ${3:# Define your model layers}",
-          "        )",
-          "        self.criterion = nn.${4:CrossEntropyLoss}()",
-          "",
-          "    def forward(self, x):",
-          "        return self.model(x)",
-          "",
-          "    def training_step(self, batch, batch_idx):",
-          "        x, y = batch",
-          "        y_hat = self(x)",
-          "        loss = self.criterion(y_hat, y)",
-          "        self.log('train_loss', loss)",
-          "        return loss",
-          "",
-          "    def validation_step(self, batch, batch_idx):",
-          "        x, y = batch",
-          "        y_hat = self(x)",
-          "        loss = self.criterion(y_hat, y)",
-          "        self.log('val_loss', loss)",
-          "        return loss",
-          "",
-          "    def test_step(self, batch, batch_idx):",
-          "        x, y = batch",
-          "        y_hat = self(x)",
-          "        loss = self.criterion(y_hat, y)",
-          "        self.log('test_loss', loss)",
-          "        return loss",
-          "",
-          "    def configure_optimizers(self):",
-          "        optimizer = optim.${5:Adam}(self.parameters(), lr=self.hparams.learning_rate)",
-          "        return optimizer"
-        ]
-      },
-      {
-        "prefix": "pl_dataset",
-        "body": [
-          "from torch.utils.data import Dataset, DataLoader",
-          "import lightning.pytorch as pl",
-          "",
-          "class ${1:LightningDataset}(pl.LightningDataModule):",
-          "    def __init__(self, ${2:data_params}, batch_size=32):",
-          "        super().__init__()",
-          "        self.batch_size = batch_size",
-          "        self.${3:data_params} = ${2:data_params}",
-          "",
-          "    def prepare_data(self):",
-          "        # Download data, etc.",
-          "        pass",
-          "",
-          "    def setup(self, stage=None):",
-          "        # Assign train/val datasets for use in dataloaders",
-          "        self.train_dataset = ${4:YourDataset}(${5:self.data_params.train_data})",
-          "        self.val_dataset = ${4:YourDataset}(${6:self.data_params.val_data})",
-          "        self.test_dataset = ${4:YourDataset}(${7:self.data_params.test_data})",
-          "",
-          "    def train_dataloader(self):",
-          "        return DataLoader(self.train_dataset, batch_size=self.batch_size)",
-          "",
-          "    def val_dataloader(self):",
-          "        return DataLoader(self.val_dataset, batch_size=self.batch_size)",
-          "",
-          "    def test_dataloader(self):",
-          "        return DataLoader(self.test_dataset, batch_size=self.batch_size)"
-        ]
-      },
-      {
-        "prefix": "pl_train",
-        "body": [
-          "from lightning.pytorch import Trainer",
-          "from ${1:model_file} import ${2:LightningModel}",
-          "from ${3:data_file} import ${4:LightningDataset}",
-          "",
-          "def train_model():",
-          "    model = ${2:LightningModel}(learning_rate=1e-3)",
-          "    data_module = ${4:LightningDataset}(${5:data_params})",
-          "    trainer = Trainer(max_epochs=${6:10})",
-          "    trainer.fit(model, data_module)",
-          "    trainer.test(model, datamodule=data_module)",
-          "    return model",
-          "",
-          "if __name__ == '__main__':",
-          "    trained_model = train_model()"
-        ]
-      },
-      {
-        "prefix": "pl_predict",
-        "body": [
-          "from lightning.pytorch import Trainer",
-          "from ${1:model_file} import ${2:LightningModel}",
-          "from ${3:data_file} import ${4:LightningDataset}",
-          "import torch",
-          "",
-          "def predict(model, dataloader):",
-          "    trainer = Trainer()",
-          "    predictions = trainer.predict(model, dataloader=dataloader)",
-          "    #Concatenate all prediction batches into a single tensor.",
-          "    predictions = torch.cat(predictions)",
-          "    return predictions",
-          "",
-          "def run_predict():",
-          "    data_module = ${4:LightningDataset}(${5:data_params})",
-          "    data_module.setup('predict')",
-          "    dataloader = data_module.test_dataloader()",
-          "    model = ${2:LightningModel}.load_from_checkpoint('${6:path/to/checkpoint.ckpt}')",
-          "    predictions = predict(model, dataloader)",
-          "    print(predictions)",
-          "",
-          "if __name__ == '__main__':",
-          "    run_predict()"
-        ]
-      },
-      {
-        "prefix": "np_import",
-        "body": [
-          "import numpy as np",
-          "import polars as pd",
-          "import seaborn as sns",
-          "import matplotlib.pyplot as plt"
-        ]
-      }
-    ]
-  },
   "search": {
     "case_sensitive": false,
     "whole_word": false,

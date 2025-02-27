@@ -1,9 +1,5 @@
 { lib, config, pkgs, ... }: {
 
-  nixpkgs.config = {
-    allowUnfree = true;  # Add this line
-  };
-
   home = {
     username = "denis";
     homeDirectory = "/home/denis";
@@ -53,6 +49,7 @@
       ".config/starship.toml".source = ../../dotfiles/starship.toml;
       ".config/ghostty/themes/mountain-base16".source = ../../dotfiles/ghostty/themes/mountain-base16;
       ".config/zed/settings.json".source = ../../dotfiles/zed/settings.json;
+      ".config/zed/snippets/python.json".source = ../../dotfiles/zed/snippets/python.json;
     };
 
   };
