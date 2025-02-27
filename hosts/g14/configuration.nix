@@ -120,7 +120,7 @@
     };
 
     ollama = {
-      enable = true;
+      enable = false;
       acceleration = "cuda";
       environmentVariables = {
         OLLAMA_HOST = "0.0.0.0:11434";
@@ -192,9 +192,7 @@
       ticktick # taks management
       tor-browser # anonymous browser
       zed-editor # code editor
-      galaxy-buds-client # utility for galaxy buds
       telegram-desktop # messenger
-      gnome-solanum # pomo timer
       libreoffice # office suite
       obsidian # note taking and knowledge base
       twingate # remote management
@@ -205,7 +203,7 @@
   # Home Manager configuration for 'denis'
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    backupFileExtension = "back";
+    backupFileExtension = "idk";
     users.denis = import ./home.nix;
   };
 
