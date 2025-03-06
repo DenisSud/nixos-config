@@ -44,12 +44,14 @@
   #########################################################
 
   # Boot Loader & GRUB
+
+  security.polkit.enable = true;
   boot = {
+      extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
       kernelModules = [ "v4l2loopback" ];
-      extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
       extraModprobeConfig = ''
-        options v4l2loopback exclusive_caps=1 card_label="Virtual Webcam"
-      '';
+          options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+          '';
       loader = {
           efi = {
               canTouchEfiVariables = true;
@@ -140,6 +142,7 @@
   # Basic system programs configuration
   programs = {
     git.enable = true;
+    adb.enable = true;
     nh = {
       enable = true;
       clean = {
@@ -190,6 +193,11 @@
     extraGroups = [ "networkmanager" "wheel" "podman" "docker" ];
     packages = with pkgs; [
       ticktick # taks management
+      android-tools  # For ADB
+      chromium
+      obs-studio
+      v4l-utils      # Camera utilities
+      droidcam       # Client application
       tor-browser # anonymous browser
       zed-editor # code editor
       telegram-desktop # messenger

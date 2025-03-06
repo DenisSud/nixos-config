@@ -1,4 +1,19 @@
+-- Neovim Configuration
+-- ====================
+
+-- This config is structured into the following sections:
+-- 1. Initial Setup
+-- 2. Core Settings
+-- 3. Plugin Management
+-- 4. Keymaps
+-- 5. Autocommands
+
+-----------------------
+-- === 1. INITIAL SETUP
+-----------------------
+local vim = vim -- Fix global vim references
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -9,9 +24,14 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
--- Basic vim settings
+
+-----------------------
+-- === 2. CORE SETTINGS
+-----------------------
+-- Editor behavior
 vim.o.clipboard = "unnamedplus"
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -20,192 +40,116 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.laststatus = 3
+
+-- Search settings
 vim.o.ignorecase = true
 vim.o.smartcase = true
+
+-- Split behavior
 vim.o.splitbelow = true
 vim.o.splitright = true
+
+-- Leader key
 vim.g.mapleader = " "
 
--- Plugin specifications
+
+---------------------------
+-- === 3. PLUGIN MANAGEMENT
+---------------------------
 require("lazy").setup({
-    -- Core plugins
-    {
-        'nvim-lua/plenary.nvim',
-        lazy = false,
-    },
-    {
-        'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-        require('telescope').setup{
-            defaults = {
-                file_ignore_patterns = {"node_modules", ".git"},
-            }
-        }
-        -- Telescope keymaps
-        vim.keymap.set('n', '<Leader>ff', ':Telescope find_files<CR>', { noremap = true, silent = true })
-        vim.keymap.set('n', '<Leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
-        vim.keymap.set('n', '<Leader>fb', ':Telescope buffers<CR>', { noremap = true, silent = true })
-        vim.keymap.set('n', '<Leader>fh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
-        end,
-    },
-
-    -- LSP plugins
-    {
-        "williamboman/mason.nvim",
-        config = function()
-        require("mason").setup()
-        end,
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-        require("mason-lspconfig").setup({
-            ensure_installed = { "lua_ls", "pyright" },
-            automatic_installation = true
-        })
-        end,
-    },
-    {
-        "neovim/nvim-lspconfig",
-        config = function()
-        local lspconfig = require('lspconfig')
-
-        -- Basic LSP setup
-        local on_attach = function(client, bufnr)
-        -- LSP keybindings
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
-        end
-
-        -- Configure language servers
-        lspconfig.lua_ls.setup({ on_attach = on_attach })
-        lspconfig.pyright.setup({ on_attach = on_attach })
-        lspconfig.clangd.setup({ on_attach = on_attach })
-
-        -- Enable diagnostics
-        vim.diagnostic.config({
-            virtual_text = true,
-            signs = true,
-            update_in_insert = false
-        })
-        end,
-    },
-
-    -- Mini plugins
-    {
-        'echasnovski/mini.nvim',
-        config = function()
-            -- Text Editing: Modules that directly modify or enhance your text-manipulation abilities.
-            require('mini.ai').setup()
-            require('mini.align').setup()
-            require('mini.comment').setup()
-            require('mini.pairs').setup()
-            require('mini.surround').setup({
-                mappings = {
-                    add = 'sa',    -- Add surrounding
-                    delete = 'sd', -- Delete surrounding
-                    find = 'sf',   -- Find surrounding
-                    highlight = 'sh', -- Highlight surrounding
-                    replace = 'sr', -- Replace surrounding
-                    update_n_lines = 'sn', -- Update number of lines in surrounding
-                },
-            })
-            require('mini.completion').setup({
-                lsp_completion = { source = 'lsp' },
-                mappings = {
-                    force_twoway_next = '<C-n>',
-                    force_twoway_prev = '<C-p>'
-                }
-            })
-
-            -- Workflow: Modules that improve your overall editing flow and navigation.
-            require('mini.basics').setup()
-            require('mini.bracketed').setup()
-            require('mini.doc').setup()
-            require('mini.git').setup()
-            require('mini.clue').setup()
-            require('mini.pick').setup()
-            require('mini.jump').setup()
-            require('mini.notify').setup()
-            require('mini.starter').setup()
-            require('mini.files').setup({
-                options = {
-                    permanent_delete = false,
-                    use_as_default_explorer = true,
-                },
-                windows = {
-                    preview = true,
-                    width_preview = 45,
-                },
-            })
-
-            -- Visual: Modules that affect the look and feel of your Neovim interface.
-            require('mini.statusline').setup()
-            require('mini.tabline').setup()
-            require('mini.icons').setup()
-            require('mini.cursorword').setup()
-            require('mini.hipatterns').setup()
-            require('mini.indentscope').setup()
-            require('mini.trailspace').setup()
-
-            -- Miscellaneous: Modules that don’t clearly fall into the above categories.
-            require('mini.deps').setup()
-        end,
-    },
-
-    -- AI assistance plugins
-    {
-        'supermaven-inc/supermaven-nvim',
-        config = function()
-        require("supermaven-nvim").setup({
-            keymaps = {
-                accept_suggestion = "<Tab>",
-                clear_suggestion = "<C-]>",
-                accept_word = "<C-j>",
-            },
-            ignore_filetypes = { cpp = true },
-            color = {
-                suggestion_color = "#ffffff",
-                cterm = 244,
-            },
-            log_level = "off",
-            disable_inline_completion = false,
-            disable_keymaps = false,
-            condition = function()
-            return false
-            end
-        })
-        end,
-    },
+    require("plugins.core_utils"),                 -- plugins/core_utils.lua
+    require("plugins.terminal"),                   -- plugins/terminal.lua
+    require("plugins.telescope"),                  -- plugins/telescope.lua
+    require("plugins.symbols_outline"),            -- plugins/symbols_outline.lua
+    require("plugins.git"),                        -- plugins/git.lua
+    require("plugins.project_management"),         -- plugins/project_management.lua
+    require("plugins.ai_companion"),               -- plugins/ai_companion.lua
+    require("plugins.lsp"),                        -- plugins/lsp.lua
+    require("plugins.completion"),                 -- plugins/completion.lua
+    require("plugins.mini_plugins"),               -- plugins/mini_plugins.lua
+    require("plugins.ai_assistance"),              -- plugins/ai_assistance.lua
 })
 
--- Basic keymaps
-vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', 'j', 'gj', { noremap = true })
-vim.keymap.set('n', 'k', 'gk', { noremap = true })
 
--- Autocommands
+-------------------
+-- === 4. KEYMAPS
+-------------------
+-- General keymaps
+vim.keymap.set('n', '<Space>', ':w<CR>', { silent = true })
+vim.keymap.set('n', 'j', 'gj', { remap = true })
+vim.keymap.set('n', 'k', 'gk', { remap = true })
+
+
+-- Window/split management
+vim.keymap.set('n', '<leader>sv', ':vsplit<CR>', { desc = "Split vertically" })
+vim.keymap.set('n', '<leader>sh', ':split<CR>', { desc = "Split horizontally" })
+vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = "Make splits equal size" })
+vim.keymap.set('n', '<leader>sx', ':close<CR>', { desc = "Close current split" })
+
+
+-- Window navigation
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Move to left window" })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Move to below window" })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Move to above window" })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "Move to right window" })
+
+
+-- Buffer management
+vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = "Next buffer" })
+vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { desc = "Previous buffer" })
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete buffer" })
+
+
+-----------------------
+-- === 5. AUTOCOMMANDS
+-----------------------
+-- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
     callback = function()
-    vim.highlight.on_yank({ timeout = 200 })
+        vim.highlight.on_yank({ timeout = 200 })
     end,
 })
 
+
+-- Remove automatic comment insertion
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*",
     callback = function()
-    vim.opt.formatoptions:remove("c")
+        vim.opt.formatoptions:remove("c")
     end,
 })
+
 
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function()
-    vim.lsp.buf.format({ async = false })
-    end
+        vim.lsp.buf.format({ async = false })
+    end,
+})
+
+
+-- Python-specific settings
+local hipatterns = require('mini.hipatterns')
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        -- Check if enable_highlight exists in the module
+        if hipatterns.enable_highlight then
+            hipatterns.enable_highlight('python_docstrings', {
+                pattern = [[\V"""\V.*]],
+                group = 'SpecialComment',
+            })
+        else
+            print("Warning: enable_highlight function not found in mini.hipatterns")
+        end
+
+
+        -- Set up the key mapping for restarting the Ruff LSP server
+        vim.keymap.set('n', '<leader>rr', function()
+            vim.cmd('LspRestart ruff')
+        end, { buffer = true, desc = "Restart Ruff LSP server" })
+    end,
 })

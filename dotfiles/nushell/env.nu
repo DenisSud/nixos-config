@@ -103,13 +103,14 @@ zoxide init nushell | save -f ~/.zoxide.nu
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 $env.EDITOR = 'nvim'
-$env.MISTRAL_API_KEY = 'XgQo6BoJsnhqtrtODvX9iAIAmWysr2vr'
-$env.CODESTRAL_API_KEY = '9jlj9Iiaj5wROVxfsuZOhW4HFeMztHBX'
-$env.GROQ_API_KEY = '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'
-$env.OPENAI_API_KEY = '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'
-$env.YOUTUBE_API_KEY = 'AIzaSyDIKOJ38v9CtvisuunFpbrGEEq4sgh4ntI'
-$env.NGC_API_KEY = 'aHZkbzM2M3Q0M3AwNDBpc3MxcjJjZ25xMmY6M2IzNzk0YTktYjQ2Mi00YWRhLWIyNGYtYjBmZGE2YmIwMTEx'
-$env.EXA_API_KEY = '3e8ed71b-e98e-4a9d-a39f-888c255c34f0'
-$env.GEMINI_API_KEY = 'AIzaSyDn0zpSTUydmxZjA9lMprjQtkDFig896kY'
-$env.JINA_API_KEY = 'jina_715b3037056c44e99c519be8fb046847myG_-cM7HcDjEIzXPV-7QvPJtVl3'
 $env.NIXPKGS_ALLOW_UNFREE = 1
+
+# Set API keys as environment variables
+$env.MY_MISTRAL_API_KEY    = "HjMq8RnkBMgYMlDjHTPdiNcpr8PJuilX"
+$env.MY_CODESTRAL_API_KEY  = "jolVEfOPhM474fkT4v0VYzeGnuoX9s9C"
+$env.MY_GROQ_API_KEY       = "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"
+$env.MY_GEMINI_API_KEY     = "AIzaSyAe-BgTUpOiAgEJlg1iO8crKmVRlipGd9s"
+$env.YOUTUBE_API_KEY    = "AIzaSyDIKOJ38v9CtvisuunFpbrGEEq4sgh4ntI"
+$env.NGC_API_KEY        = "aHZkbzM2M3Q0M3AwNDBpc3MxcjJjZ25xMmY6M2IzNzk0YTktYjQ2Mi00YWRhLWIyNGYtYjBmZGE2YmIwMTEx"
+$env.EXA_API_KEY        = "3e8ed71b-e98e-4a9d-a39f-888c255c34f0"
+$env.JINA_API_KEY       = "jina_715b3037056c44e99c519be8fb046847myG_-cM7HcDjEIzXPV-7QvPJtVl3"

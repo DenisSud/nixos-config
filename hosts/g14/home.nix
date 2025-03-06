@@ -1,16 +1,18 @@
-{ lib, config, pkgs, ... }: {
+{ lib, config, pkgs, ... }:
+{
 
   home = {
     username = "denis";
     homeDirectory = "/home/denis";
     stateVersion = "24.11";
 
-    packages = with pkgs; [
+    packages =  with pkgs;[
       # Development tools
       starship
       aider-chat
       open-interpreter
       podman-compose
+      superfile
       fabric-ai
       ripgrep
       lazygit
@@ -36,10 +38,13 @@
       gnutar
 
       # For language servers
-      ruff
-      pyright
-      nil  # For Nix
       lua-language-server
+      ruff
+      ruff-lsp
+      rust-analyzer
+      nil               # For Nix language support
+      bash-language-server
+      yaml-language-server
     ];
 
     # Dotfiles
@@ -47,13 +52,13 @@
       ".config/nushell/config.nu".source = ../../dotfiles/nushell/config.nu;
       ".config/nushell/env.nu".source = ../../dotfiles/nushell/env.nu;
       ".config/starship.toml".source = ../../dotfiles/starship.toml;
-      ".config/ghostty/themes/mountain-base16".source = ../../dotfiles/ghostty/themes/mountain-base16;
-      ".config/zed/settings.json".source = ../../dotfiles/zed/settings.json;
-      ".config/zed/snippets/python.json".source = ../../dotfiles/zed/snippets/python.json;
+      ".config/ghostty/themes/mountain-base16".source =
+        ../../dotfiles/ghostty/themes/mountain-base16;
+      ".config/nvim/lua/plugins".source = ../../dotfiles/nvim/lua/plugins;
+      ".config/nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
     };
 
   };
-
 
   # Program configurations
   programs = {
@@ -70,19 +75,6 @@
         font-size = 13;
         shell-integration-features = "sudo";
       };
-    };
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-
-      plugins = with pkgs.vimPlugins; [
-        lazy-nvim
-      ];
-
-      extraLuaConfig = builtins.readFile ../../dotfiles/nvim/init.lua;
     };
 
     home-manager.enable = true;

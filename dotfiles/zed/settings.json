@@ -1,53 +1,6 @@
 {
-  "ssh_connections": [
-    {
-      "host": "mypi.home",
-      "username": "denis",
-      "projects": [
-        {
-          "paths": ["/etc/lighttpd"]
-        },
-        {
-          "paths": ["/etc/samba"]
-        },
-        {
-          "paths": ["~/nextcloud"]
-        }
-      ]
-    }
-  ],
-  "outline_panel": {
-    "dock": "right"
-  },
-  "assistant": {
-    "enabled": false,
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    },
-    "version": "2",
-    "enable_experimental_live_diffs": true
-  },
   "features": {
-    "inline_completion_provider": "none"
-  },
-  "editor": {
-    "completion": {
-      "enabled": true,
-      "use_language_server": true
-    },
-    "hover": {
-      "enabled": true,
-      "delay_ms": 300
-    },
-    "auto_bracket_pairs": true,
-    "soft_wrap": "none",
-    "cursor_blink": true,
-    "semantic_index": {
-      "enabled": true
-    },
-    "show_breadcrumbs": true,
-    "show_whitespaces": "selection"
+    "inline_completion_provider": "supermaven"
   },
   "vim_mode": true,
   "vim": {
@@ -81,29 +34,6 @@
     "metrics": false,
     "diagnostics": false
   },
-  "languages": {
-    "Python": {
-      "format_on_save": { "language_server": { "name": "ruff" } },
-      "formatter": { "language_server": { "name": "ruff" } },
-      "language_servers": ["pyright", "ruff"],
-      "tab_size": 2,
-      "soft_tabs": true,
-      "repl": {
-        "enabled": true,
-        "command": "python"
-      },
-      "enable_snippets": true,
-      "auto_indent": true,
-      "jump_to_definition": true
-    },
-    "Nix": {
-      "format_on_save": { "external": { "command": "nixfmt" } },
-      "formatter": { "external": { "command": "nixfmt" } },
-      "language_servers": ["rnix-lsp"],
-      "tab_size": 2,
-      "soft_tabs": true
-    }
-  },
   "tab_size": 2,
   "search": {
     "case_sensitive": false,
@@ -113,19 +43,6 @@
   "autosave": {
     "after_delay": {
       "milliseconds": 1000
-    }
-  },
-  "jupyter": {
-    "kernels": {
-      "ml-custom": {
-        "command": [
-          "/nix/store/wck1ndqprzr86brq4in1dq2nx2sd2ngm-python3.12-ipykernel-6.29.5/bin/python",
-          "-m",
-          "ipykernel_launcher",
-          "-f",
-          "{connection_file}"
-        ]
-      }
     }
   },
   "git": {
