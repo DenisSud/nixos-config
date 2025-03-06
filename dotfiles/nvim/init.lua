@@ -51,22 +51,30 @@ vim.o.splitright = true
 -- Leader key
 vim.g.mapleader = " "
 
+-- Load base16 colors from separate file
+require("base16_mountain")
+
+-- Set base16 colorscheme
+vim.cmd("colorscheme base16-default")
+
 ---------------------------
 -- === 3. PLUGIN MANAGEMENT
 ---------------------------
 require("lazy").setup({
-    require("plugins.core_utils"),         -- plugins/core_utils.lua
-    require("plugins.terminal"),           -- plugins/terminal.lua
-    require("plugins.telescope"),          -- plugins/telescope.lua
-    require("plugins.symbols_outline"),    -- plugins/symbols_outline.lua
-    require("plugins.git"),                -- plugins/git.lua
-    require("plugins.project_management"), -- plugins/project_management.lua
-    require("plugins.ai_companion"),       -- plugins/ai_companion.lua
-    require("plugins.lsp"),                -- plugins/lsp.lua
-    require("plugins.completion"),         -- plugins/completion.lua
-    require("plugins.mini_plugins"),       -- plugins/mini_plugins.lua
-    require("plugins.ai_assistance"),      -- plugins/ai_assistance.lua
+    { "RRethy/nvim-base16", config = true }, -- Add nvim-base16 plugin
+    require("plugins.core_utils"),
+    require("plugins.terminal"),
+    require("plugins.telescope"),
+    require("plugins.symbols_outline"),
+    require("plugins.git"),
+    require("plugins.project_management"),
+    require("plugins.ai_companion"),
+    require("plugins.lsp"),
+    require("plugins.completion"),
+    require("plugins.mini_plugins"),
+    require("plugins.ai_assistance"),
 })
+
 
 -------------------
 -- === 4. KEYMAPS
@@ -76,11 +84,13 @@ vim.keymap.set('n', '<Space>', ':w<CR>', { silent = true })
 vim.keymap.set('n', 'j', 'gj', { remap = true })
 vim.keymap.set('n', 'k', 'gk', { remap = true })
 
+
 -- Window/split management
 vim.keymap.set('n', '<leader>sv', ':vsplit<CR>', { desc = "Split vertically" })
 vim.keymap.set('n', '<leader>sh', ':split<CR>', { desc = "Split horizontally" })
 vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = "Make splits equal size" })
 vim.keymap.set('n', '<leader>sx', ':close<CR>', { desc = "Close current split" })
+
 
 -- Window navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Move to left window" })
@@ -88,10 +98,12 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Move to below window" })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Move to above window" })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "Move to right window" })
 
+
 -- Buffer management
 vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = "Next buffer" })
 vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { desc = "Previous buffer" })
 vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete buffer" })
+
 
 -----------------------
 -- === 5. AUTOCOMMANDS
@@ -104,6 +116,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+
 -- Remove automatic comment insertion
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*",
@@ -112,6 +125,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
+
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
@@ -119,6 +133,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.lsp.buf.format({ async = false })
     end,
 })
+
 
 -- Python-specific settings
 local hipatterns = require('mini.hipatterns')
