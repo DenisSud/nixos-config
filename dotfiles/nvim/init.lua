@@ -51,28 +51,22 @@ vim.o.splitright = true
 -- Leader key
 vim.g.mapleader = " "
 
--- Load base16 colors from separate file
-require("base16_mountain")
-
--- Set base16 colorscheme
-vim.cmd("colorscheme base16-default")
 
 ---------------------------
 -- === 3. PLUGIN MANAGEMENT
 ---------------------------
 require("lazy").setup({
-    { "RRethy/nvim-base16", config = true }, -- Add nvim-base16 plugin
-    require("plugins.core_utils"),
-    require("plugins.terminal"),
-    require("plugins.telescope"),
-    require("plugins.symbols_outline"),
-    require("plugins.git"),
-    require("plugins.project_management"),
-    require("plugins.ai_companion"),
-    require("plugins.lsp"),
-    require("plugins.completion"),
-    require("plugins.mini_plugins"),
-    require("plugins.ai_assistance"),
+    require("plugins.core_utils"),         -- plugins/core_utils.lua
+    require("plugins.terminal"),           -- plugins/terminal.lua
+    require("plugins.telescope"),          -- plugins/telescope.lua
+    require("plugins.symbols_outline"),    -- plugins/symbols_outline.lua
+    require("plugins.git"),                -- plugins/git.lua
+    require("plugins.project_management"), -- plugins/project_management.lua
+    require("plugins.lsp"),                -- plugins/lsp.lua
+    require("plugins.completion"),         -- plugins/completion.lua
+    require("plugins.mini_plugins"),       -- plugins/mini_plugins.lua
+    require("plugins.ai_assistance"),      -- plugins/ai_assistance.lua
+    require("plugins.base16_theme"),       -- plugins/base16_theme.lua
 })
 
 
