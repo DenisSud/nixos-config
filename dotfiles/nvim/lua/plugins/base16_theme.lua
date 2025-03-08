@@ -21,8 +21,6 @@ return {
             base0E = '#ac8aac',
             base0F = '#ac8a8c',
         })
-
-        vim.cmd("colorscheme base16-default")
     end,
     lazy = false,    -- Set to false to load it on startup, as colorscheme is fundamental
     priority = 1000, -- Give it a high priority to load early

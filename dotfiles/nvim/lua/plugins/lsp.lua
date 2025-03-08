@@ -33,6 +33,11 @@ return {
             on_attach = on_attach
         })
 
+        lspconfig.texlab.setup({
+            cmd = { "/home/denis/.nix-profile/bin/texlab" },
+            on_attach = on_attach,
+        })
+
         -- Diagnostic configuration
         vim.diagnostic.config({
             virtual_text = true,

@@ -9,10 +9,8 @@
     packages =  with pkgs;[
       # Development tools
       starship
-      aider-chat
-      open-interpreter
-      podman-compose
-      superfile
+      docker-compose
+      yazi
       fabric-ai
       ripgrep
       lazygit
@@ -38,13 +36,14 @@
       gnutar
 
       # For language servers
-      lua-language-server
-      ruff
-      ruff-lsp
+      lua-language-server # for Lua
+      ruff # for Python
+      ruff-lsp # for Python
       rust-analyzer
-      nil               # For Nix language support
-      bash-language-server
-      yaml-language-server
+      nil # For Nix language support
+      texlab # for LaTeX
+      bash-language-server # for Bash
+      yaml-language-server # for YAML
     ];
 
     # Dotfiles
