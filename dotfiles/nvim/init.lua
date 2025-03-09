@@ -58,7 +58,7 @@ vim.g.mapleader = " "
 require("lazy").setup({
     require("plugins.core_utils"),         -- plugins/core_utils.lua
     require("plugins.terminal"),           -- plugins/terminal.lua
-    require("plugins.telescope"),          -- plugins/telescope.lua
+    -- require("plugins.telescope"),          -- plugins/telescope.lua
     require("plugins.symbols_outline"),    -- plugins/symbols_outline.lua
     require("plugins.git"),                -- plugins/git.lua
     require("plugins.project_management"), -- plugins/project_management.lua
@@ -77,6 +77,10 @@ require("lazy").setup({
 vim.keymap.set('n', '<Space>', ':w<CR>', { silent = true })
 vim.keymap.set('n', 'j', 'gj', { remap = true })
 vim.keymap.set('n', 'k', 'gk', { remap = true })
+
+
+-- LSP keymaps
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
 
 
 -- Window/split management

@@ -45,3 +45,4 @@ return {
         vim.keymap.set('n', '<leader>tv', ':ToggleTerm direction=vertical<CR>', { desc = "Toggle vertical terminal" })
     end
 }
+

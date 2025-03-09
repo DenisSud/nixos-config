@@ -1,29 +1,36 @@
 return {
     'echasnovski/mini.nvim',
     config = function()
-        -- mini.ai: Improves text object selections.
-        require('mini.ai').setup({
+        -- mini.ai: Text object enhancements.
+        local mini_ai = require('mini.ai')
+        mini_ai.setup({
             custom_textobjects = {
-                [';'] = require('mini.ai').gen_spec.treesitter({
+                [';'] = mini_ai.gen_spec.treesitter({
                     a = '@call.outer',
                     i = '@call.inner',
                 }),
             },
         })
-        -- (No additional keymaps needed; mini.ai integrates with Vim’s native text object commands.)
+
+        -- mini.fuzzy: Fuzzy finder.
+        require('mini.fuzzy').setup()
 
         -- mini.comment: Toggle comments.
         require('mini.comment').setup()
-        vim.keymap.set("n", "gcc", require("mini.comment").toggle, { desc = "Toggle comment" })
-        vim.keymap.set("x", "gc", require("mini.comment").toggle, { desc = "Toggle comment" })
+        if require("mini.comment").toggle then
+            vim.keymap.set("n", "gcc", require("mini.comment").toggle, { desc = "Toggle comment" })
+            vim.keymap.set("x", "gc", require("mini.comment").toggle, { desc = "Toggle comment" })
+        end
 
-        -- mini.pairs: Automatic pairing (no mapping needed).
+        -- mini.pairs: Automatic pairing.
         require('mini.pairs').setup()
 
-        -- mini.splitjoin: Toggle between single-line and multi-line forms.
+        -- mini.splitjoin: Toggle split/join.
         require('mini.splitjoin').setup()
-        vim.keymap.set("n", "gs", require("mini.splitjoin").toggle, { desc = "Toggle split/join" })
-        vim.keymap.set("x", "gs", require("mini.splitjoin").toggle, { desc = "Toggle split/join" })
+        if require("mini.splitjoin").toggle then
+            vim.keymap.set("n", "gs", require("mini.splitjoin").toggle, { desc = "Toggle split/join" })
+            vim.keymap.set("x", "gs", require("mini.splitjoin").toggle, { desc = "Toggle split/join" })
+        end
 
         -- mini.surround: Add, delete, or replace surroundings.
         require('mini.surround').setup({
@@ -37,11 +44,13 @@ return {
                 },
             },
         })
-        vim.keymap.set("n", "ys", require("mini.surround").add, { desc = "Add surrounding" })
-        vim.keymap.set("n", "ds", require("mini.surround").delete, { desc = "Delete surrounding" })
-        vim.keymap.set("n", "cs", require("mini.surround").replace, { desc = "Replace surrounding" })
+        if require("mini.surround").add then
+            vim.keymap.set("n", "ys", require("mini.surround").add, { desc = "Add surrounding" })
+            vim.keymap.set("n", "ds", require("mini.surround").delete, { desc = "Delete surrounding" })
+            vim.keymap.set("n", "cs", require("mini.surround").replace, { desc = "Replace surrounding" })
+        end
 
-        -- mini.completion: Completion mappings are set during setup.
+        -- mini.completion: Code completion.
         require('mini.completion').setup({
             delay = { completion = 150, info = 1000 },
             mappings = {
@@ -51,34 +60,32 @@ return {
             },
         })
 
-        -- mini.statusline: Statusline setup (no mapping required).
+        -- mini.statusline: Statusline.
         require('mini.statusline').setup()
 
-        -- mini.tabline: Tabline setup (no mapping required).
+        -- mini.tabline: Tabline.
         require('mini.tabline').setup()
+        require('mini.icons').setup()
 
         -- mini.files: File explorer.
-        require('mini.files').setup()
-        vim.keymap.set("n", "<leader>m", require("mini.files").open, { desc = "Open MiniFiles" })
-
-        -- mini.git: Git integration.
-        require('mini.git').setup()
-        -- If available, set keymaps for hunk navigation.
-        if require("mini.git").hunk_next then
-            vim.keymap.set("n", "<leader>gj", require("mini.git").hunk_next, { desc = "Next git hunk" })
-            vim.keymap.set("n", "<leader>gk", require("mini.git").hunk_prev, { desc = "Previous git hunk" })
+        local mini_files = require('mini.files')
+        mini_files.setup()
+        if mini_files.open then
+            vim.keymap.set("n", "<leader>m", mini_files.open, { desc = "Open MiniFiles" })
         end
 
         -- mini.starter: Startup screen.
-        require('mini.starter').setup()
-        if require("mini.starter").open then
-            vim.keymap.set("n", "<leader>ss", require("mini.starter").open, { desc = "Open Starter" })
+        local mini_starter = require('mini.starter')
+        mini_starter.setup()
+        if mini_starter.open then
+            vim.keymap.set("n", "<leader>ss", mini_starter.open, { desc = "Open Starter" })
         end
 
-        -- mini.doc: Documentation browsing.
-        require('mini.doc').setup()
-        if require("mini.doc").open then
-            vim.keymap.set("n", "<leader>md", require("mini.doc").open, { desc = "Open MiniDoc" })
+        -- mini.doc: Documentation.
+        local mini_doc = require('mini.doc')
+        mini_doc.setup()
+        if mini_doc.open then
+            vim.keymap.set("n", "<leader>md", mini_doc.open, { desc = "Open MiniDoc" })
         end
     end,
 }

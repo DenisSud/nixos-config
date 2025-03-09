@@ -140,6 +140,7 @@
     programs = {
         git.enable = true;
         adb.enable = true;
+        zsh.enable = true;
         nh = {
             enable = true;
             clean = {
@@ -184,7 +185,7 @@
     # User configuration for 'denis'
     users.users.denis = {
         isNormalUser = true;
-        shell = pkgs.nushell;
+        shell = pkgs.zsh;
         description = "denis";
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
