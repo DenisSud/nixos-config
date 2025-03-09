@@ -33,22 +33,7 @@ return {
         end
 
         -- mini.surround: Add, delete, or replace surroundings.
-        require('mini.surround').setup({
-            custom_surroundings = {
-                ['f'] = {
-                    input = { '%f[%a]()%F[%A]', '^.-%(.*%)' },
-                    output = function()
-                        local func = vim.fn.input('Function: ')
-                        return { left = func .. '(', right = ')' }
-                    end,
-                },
-            },
-        })
-        if require("mini.surround").add then
-            vim.keymap.set("n", "ys", require("mini.surround").add, { desc = "Add surrounding" })
-            vim.keymap.set("n", "ds", require("mini.surround").delete, { desc = "Delete surrounding" })
-            vim.keymap.set("n", "cs", require("mini.surround").replace, { desc = "Replace surrounding" })
-        end
+        require('mini.surround').setup()
 
         -- mini.completion: Code completion.
         require('mini.completion').setup({

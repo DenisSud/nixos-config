@@ -1,5 +1,16 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 {
+    imports = [
+        inputs.stylix.homeManagerModules.stylix
+    ];
+
+
+    stylix = {
+        enable = lib.mkDefault true;
+        image = lib.mkDefault ../../wallpapers/touch.png;
+        polarity = lib.mkDefault "dark";
+        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
+    };
 
     home = {
         username = "denis";

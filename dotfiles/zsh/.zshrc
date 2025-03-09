@@ -14,7 +14,6 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # Custom Aliases - from your nushell config
-alias cd="z"
 alias rm="rip"
 alias zed="zeditor" # You might need to define zeditor or change this if you use it
 alias gs="git status"

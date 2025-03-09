@@ -1,5 +1,4 @@
 { config, lib, pkgs, inputs, ... }:
-
 {
     imports = [
         ./hardware-configuration.nix
@@ -99,14 +98,6 @@
         };
     };
 
-    # Stylix (Theme/Image) Settings
-    stylix = {
-        enable = lib.mkDefault true;
-        image = lib.mkDefault ../../wallpapers/touch.png;
-        polarity = lib.mkDefault "dark";
-        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
-    };
-
     # Services Configuration
     #########################################################
 
@@ -143,6 +134,7 @@
         zsh.enable = true;
         nh = {
             enable = true;
+            flake = "/home/denis/NixOS";
             clean = {
                 enable = true;
                 dates = "weekly";  # Automatically clean old generations weekly
@@ -171,12 +163,6 @@
     #########################################################
 
     specialisation = {
-        light.configuration = {
-            stylix = {
-                enable = false;
-                image = ../../wallpapers/touch.png;
-            };
-        };
     };
 
     # User & Home Manager Configuration
@@ -190,8 +176,10 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
+            vscode
             ticktick # taks management
             android-tools  # For ADB
+            foliate # eBook reader
             chromium
             obs-studio
             v4l-utils      # Camera utilities
@@ -204,12 +192,6 @@
             obsidian # note taking and knowledge base
             twingate # remote management
             bottles # wine bottles manager
-        ];
-        subUidRanges = [
-            { startUid = 100000; count = 65536; }
-        ];
-        subGidRanges = [
-            { startGid = 100000; count = 65536; }
         ];
     };
 
