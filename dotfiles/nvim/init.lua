@@ -57,6 +57,7 @@ vim.g.mapleader = " "
 ---------------------------
 require("lazy").setup({
     require("plugins.core_utils"),         -- plugins/core_utils.lua
+    require("plugins.mason"),              -- plugins/mason.lua
     require("plugins.terminal"),           -- plugins/terminal.lua
     require("plugins.telescope"),          -- plugins/telescope.lua
     require("plugins.symbols_outline"),    -- plugins/symbols_outline.lua

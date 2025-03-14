@@ -19,8 +19,8 @@
           ./hosts/g14/configuration.nix
           inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401 # Hardware config
           inputs.home-manager.nixosModules.default # App config
+          inputs.stylix.nixosModules.stylix # Stylix config
         ];
-        specialArgs = { inherit inputs; }; # Pass inputs to configuration.nix
       };
     };
   };

@@ -140,6 +140,12 @@
                 dates = "weekly";  # Automatically clean old generations weekly
             };
         };
+        ssh = {
+          extraConfig = ''
+            Host *
+              SetEnv TERM=xterm-256color
+          '';
+        };
     };
 
     # System-wide packages to be installed
@@ -163,6 +169,16 @@
     #########################################################
 
     specialisation = {
+    };
+
+    # Stylix
+    #########################################################
+
+    stylix = {
+        enable = lib.mkDefault true;
+        image = lib.mkDefault ../../wallpapers/touch.png;
+        polarity = lib.mkDefault "dark";
+        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
     };
 
     # User & Home Manager Configuration
@@ -197,7 +213,6 @@
 
     # Home Manager configuration for 'denis'
     home-manager = {
-        extraSpecialArgs = { inherit inputs; };
         backupFileExtension = "backup";
         users.denis = import ./home.nix;
     };

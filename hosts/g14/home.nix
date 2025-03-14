@@ -1,28 +1,17 @@
 { lib, config, pkgs, inputs, ... }:
 {
-    imports = [
-        inputs.stylix.homeManagerModules.stylix
-    ];
-
-
-    stylix = {
-        enable = lib.mkDefault true;
-        image = lib.mkDefault ../../wallpapers/touch.png;
-        polarity = lib.mkDefault "dark";
-        base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
-    };
-
     home = {
         username = "denis";
         homeDirectory = "/home/denis";
         stateVersion = "24.11";
 
-        packages =  with pkgs;[
+        packages = with pkgs; [
             # Development tools
             starship
             docker-compose
             yazi
             fabric-ai
+            aider-chat
             ripgrep
             lazygit
             git-lfs
@@ -33,6 +22,7 @@
             bat
             tor
             gh
+            thefuck  # Added 'thefuck' here
 
             # Shell utilities
             unzip
@@ -56,18 +46,19 @@
             texlab # for LaTeX
             bash-language-server # for Bash
             yaml-language-server # for YAML
+
+            # zsh-syntax-highlighting
+            zsh-syntax-highlighting
         ];
 
         # Dotfiles
         file = {
-            ".zshrc".source = ../../dotfiles/zsh/.zshrc;
             ".config/starship.toml".source = ../../dotfiles/starship.toml;
             ".config/ghostty/themes/mountain-base16".source =
             ../../dotfiles/ghostty/themes/mountain-base16;
             ".config/nvim/lua/plugins".source = ../../dotfiles/nvim/lua/plugins;
             ".config/nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
         };
-
     };
 
     # Program configurations
@@ -78,12 +69,52 @@
 
         zsh = {
             enable = true;
-            enableCompletion = true; # Enable zsh completion system
+            enableCompletion = true;
+            autosuggestion.enable = true;
             history = {
-                share = true; # Share history between sessions
+                share = true;
+                size = 10000;
+                save = 10000;
+                ignoreDups = true;
+                extended = true;
             };
-            # zshrc = ...  // We will configure this below
-            # envExtra = ... // We will configure this below
+
+            # Load zsh extra config from file
+            initExtraFirst = ''
+                autoload -U compinit
+                compinit
+                eval "$(carapace zsh)"
+                eval "$(zoxide init zsh)"
+                eval "$(starship init zsh)"
+                eval "$(thefuck --alias)"  # Added 'thefuck' initialization here
+
+                # Enable zsh-syntax-highlighting
+                source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+                # Vi mode with better indication
+                bindkey -v
+                export KEYTIMEOUT=1
+            '';
+
+            shellAliases = {
+                rm = "rip";
+                zed = "zeditor";
+                gs = "git status";
+                ga = "git add .";
+                gc = "git commit -a -m";
+                gp = "git push";
+                gl = "git log --graph --abbrev-commit --decorate --format=format:%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)";
+                v = "nvim";
+                vi = "nvim";
+                ls = "ls --color=auto";
+                ll = "ls -la";
+                la = "ls -a";
+            };
+        };
+
+        fzf = {
+            enable = true;
+            enableZshIntegration = true;
         };
 
         ghostty = {
@@ -99,5 +130,4 @@
 
         home-manager.enable = true;
     };
-
 }
