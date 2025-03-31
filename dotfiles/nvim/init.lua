@@ -59,8 +59,21 @@ require("lazy").setup({
     require("plugins.core_utils"),         -- plugins/core_utils.lua
     require("plugins.base16_theme"),       -- plugins/base16_theme.lua
     require("plugins.telescope"),
+    require("plugins.git"),
+    require("plugins.mini_plugins"),
 })
 
+-- Configuration for mini.pairs
+require("mini.pairs").setup()
+
+-- Configuration for mini.icons (you might need to set up an icon font)
+require("mini.icons").setup()
+
+-- Configuration for mini.snip
+require("mini.snip").setup()
+
+-- Configuration for mini.completion
+require("mini.completion").setup()
 
 -------------------
 -- === 4. KEYMAPS
@@ -77,6 +90,9 @@ vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc =
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Help tags' })
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { desc = 'Document symbols' })
 vim.keymap.set('n', '<leader>fa', require('telescope.builtin').lsp_workspace_symbols, { desc = 'Workspace symbols' })
+
+-- LazyGit keymap
+vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { desc = "Open LazyGit" })
 
 -- LSP keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
