@@ -10,10 +10,8 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "ruff_lsp",
-                "clangd",
                 "texlab",
-                "pyright", -- Good for ML/PyTorch code
+                "pyright",
             },
             automatic_installation = true,
         })
@@ -29,27 +27,6 @@ return {
                         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
                     end,
                     -- You can add server-specific settings here
-                })
-            end,
-
-            -- Override specific server configurations if needed
-            ["ruff_lsp"] = function()
-                require("lspconfig").ruff_lsp.setup({
-                    on_attach = function(_, bufnr)
-                        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr })
-                        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
-                        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
-                        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
-                        vim.keymap.set('n', '<leader>rr', function()
-                            vim.cmd('LspRestart ruff_lsp')
-                        end, { buffer = true, desc = "Restart Ruff LSP server" })
-                    end,
-                    init_options = {
-                        settings = {
-                            organizeImports = true,
-                            fixAll = true
-                        }
-                    }
                 })
             end,
         })

@@ -8,8 +8,9 @@
         packages = with pkgs; [
             # Development tools
             starship
-            docker-compose
+            podman-compose
             yazi
+            jq
             fabric-ai
             aider-chat
             ripgrep
@@ -38,14 +39,9 @@
             gnutar
 
             # For language servers
-            lua-language-server # for Lua
-            ruff # for Python
-            ruff-lsp # for Python
-            rust-analyzer
-            nil # For Nix language support
-            texlab # for LaTeX
-            bash-language-server # for Bash
-            yaml-language-server # for YAML
+            nodejs
+            cmake
+            python3
 
             # zsh-syntax-highlighting
             zsh-syntax-highlighting
@@ -103,7 +99,7 @@
                 ga = "git add .";
                 gc = "git commit -a -m";
                 gp = "git push";
-                gl = "git log --graph --abbrev-commit --decorate --format=format:%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)";
+                gl = "git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches --all";
                 v = "nvim";
                 vi = "nvim";
                 ls = "ls --color=auto";

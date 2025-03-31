@@ -57,17 +57,8 @@ vim.g.mapleader = " "
 ---------------------------
 require("lazy").setup({
     require("plugins.core_utils"),         -- plugins/core_utils.lua
-    require("plugins.mason"),              -- plugins/mason.lua
-    require("plugins.terminal"),           -- plugins/terminal.lua
-    require("plugins.telescope"),          -- plugins/telescope.lua
-    require("plugins.symbols_outline"),    -- plugins/symbols_outline.lua
-    require("plugins.git"),                -- plugins/git.lua
-    require("plugins.project_management"), -- plugins/project_management.lua
-    require("plugins.lsp"),                -- plugins/lsp.lua
-    require("plugins.completion"),         -- plugins/completion.lua
-    require("plugins.mini_plugins"),       -- plugins/mini_plugins.lua
-    require("plugins.ai_assistance"),      -- plugins/ai_assistance.lua
     require("plugins.base16_theme"),       -- plugins/base16_theme.lua
+    require("plugins.telescope"),
 })
 
 
@@ -75,10 +66,17 @@ require("lazy").setup({
 -- === 4. KEYMAPS
 -------------------
 -- General keymaps
-vim.keymap.set('n', '<Space>', ':w<CR>', { silent = true })
 vim.keymap.set('n', 'j', 'gj', { remap = true })
 vim.keymap.set('n', 'k', 'gk', { remap = true })
 
+-- Telescope keymaps
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>fj', require('telescope.builtin').grep_string, { desc = 'Grep string' })
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find buffers' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Help tags' })
+vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { desc = 'Document symbols' })
+vim.keymap.set('n', '<leader>fa', require('telescope.builtin').lsp_workspace_symbols, { desc = 'Workspace symbols' })
 
 -- LSP keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
@@ -107,53 +105,10 @@ vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete buffer" })
 -----------------------
 -- === 5. AUTOCOMMANDS
 -----------------------
--- Highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
-    pattern = "*",
-    callback = function()
-        vim.highlight.on_yank({ timeout = 200 })
-    end,
-})
-
-
--- Remove automatic comment insertion
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*",
-    callback = function()
-        vim.opt.formatoptions:remove("c")
-    end,
-})
-
-
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function()
         vim.lsp.buf.format({ async = false })
-    end,
-})
-
-
--- Python-specific settings
-local hipatterns = require('mini.hipatterns')
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "python",
-    callback = function()
-        -- Check if enable_highlight exists in the module
-        if hipatterns.enable_highlight then
-            hipatterns.enable_highlight('python_docstrings', {
-                pattern = [[\V"""\V.*]],
-                group = 'SpecialComment',
-            })
-        else
-            print("Warning: enable_highlight function not found in mini.hipatterns")
-        end
-
-
-        -- Set up the key mapping for restarting the Ruff LSP server
-        vim.keymap.set('n', '<leader>rr', function()
-            vim.cmd('LspRestart ruff')
-        end, { buffer = true, desc = "Restart Ruff LSP server" })
     end,
 })

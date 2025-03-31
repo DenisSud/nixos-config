@@ -49,7 +49,7 @@
         extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
         kernelModules = [ "v4l2loopback" ];
         extraModprobeConfig = ''
-            options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+            options v4l2loopback video_nr=2 width=1920 max_width=1920 height=1080 max_height=1080 format=YU12 exclusive_caps=1 card_label=GoPro debug=1
         '';
         loader = {
             efi = {
@@ -92,9 +92,12 @@
 
     # Virtualisation Settings
     virtualisation = {
-        docker = {
+        podman = {
             enable = true;
-            enableNvidia = true;
+            dockerCompat = true;    # Create `docker` alias for Podman
+            defaultNetwork.settings = {
+                dns_enabled = true;  # Enable DNS for containers
+            };
         };
     };
 
@@ -121,7 +124,7 @@
         flatpak.enable = true;
         printing.enable = true;
         openssh.enable = true;
-        syncthing.enable = true;
+        syncthing.enable = false;
     };
 
     # Basic Programs & Essential System Packages
@@ -141,29 +144,34 @@
             };
         };
         ssh = {
-          extraConfig = ''
-            Host *
-              SetEnv TERM=xterm-256color
-          '';
+            extraConfig = ''
+                Host *
+                SetEnv TERM=xterm-256color
+            '';
         };
     };
 
     # System-wide packages to be installed
-    environment.systemPackages = with pkgs; [
-        neovim
-        curl
-        wget
-        git
-        fzf
-        ghostty
-        gnomeExtensions.twingate-status
-        gnomeExtensions.wintile-beyond
-        gnomeExtensions.pip-on-top
-        gnomeExtensions.caffeine
-        gnomeExtensions.clipboard-indicator
-        gnomeExtensions.blur-my-shell
-        gnomeExtensions.vitals
-    ];
+    environment = {
+        systemPackages = with pkgs; [
+            neovim
+            ffmpeg
+            vlc
+            curl
+            wget
+            git
+            fzf
+            ghostty
+            gnomeExtensions.twingate-status
+            gnomeExtensions.wintile-beyond
+            gnomeExtensions.pip-on-top
+            gnomeExtensions.caffeine
+            gnomeExtensions.clipboard-indicator
+            gnomeExtensions.blur-my-shell
+            gnomeExtensions.vitals
+        ];
+    };
+
 
     # Specializations
     #########################################################
@@ -190,9 +198,9 @@
         shell = pkgs.zsh;
         description = "denis";
         initialPassword = "password";
-        extraGroups = [ "networkmanager" "wheel" "docker" ];
+        extraGroups = [ "networkmanager" "wheel" ];
         packages = with pkgs; [
-            vscode
+            chocolate-doom # Doom source port
             ticktick # taks management
             android-tools  # For ADB
             foliate # eBook reader
@@ -202,12 +210,14 @@
             droidcam       # Client application
             tor-browser # anonymous browser
             zed-editor # code editor
-            code-cursor
+            code-cursor # ai code cursor
+            vscode # the devil
             telegram-desktop # messenger
             libreoffice # office suite
             obsidian # note taking and knowledge base
             twingate # remote management
             bottles # wine bottles manager
+            alpaca
         ];
     };
 
