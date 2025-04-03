@@ -60,20 +60,9 @@ require("lazy").setup({
     require("plugins.base16_theme"),       -- plugins/base16_theme.lua
     require("plugins.telescope"),
     require("plugins.git"),
-    require("plugins.mini_plugins"),
+    require("plugins.mason"),
+    require("plugins.mini")
 })
-
--- Configuration for mini.pairs
-require("mini.pairs").setup()
-
--- Configuration for mini.icons (you might need to set up an icon font)
-require("mini.icons").setup()
-
--- Configuration for mini.snip
-require("mini.snip").setup()
-
--- Configuration for mini.completion
-require("mini.completion").setup()
 
 -------------------
 -- === 4. KEYMAPS
@@ -81,6 +70,7 @@ require("mini.completion").setup()
 -- General keymaps
 vim.keymap.set('n', 'j', 'gj', { remap = true })
 vim.keymap.set('n', 'k', 'gk', { remap = true })
+vim.keymap.set('n', '<Space>', ':w<CR>') 
 
 -- Telescope keymaps
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find files' })

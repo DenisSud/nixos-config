@@ -8,6 +8,7 @@
         packages = with pkgs; [
             # Development tools
             starship
+            gnumeric
             podman-compose
             yazi
             jq
