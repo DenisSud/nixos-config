@@ -23,7 +23,6 @@ return {
         }
       })
       require('mini.surround').setup()
-      require('mini.snippets').setup()
       require('mini.pairs').setup()
       require('mini.icons').setup()
       require('mini.files').setup()

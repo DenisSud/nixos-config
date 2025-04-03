@@ -81,6 +81,11 @@ vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { desc = 'Document symbols' })
 vim.keymap.set('n', '<leader>fa', require('telescope.builtin').lsp_workspace_symbols, { desc = 'Workspace symbols' })
 
+-- Files keymap
+vim.keymap.set('n', '<leader>e', function() 
+  MiniFiles.open(vim.api.nvim_buf_get_name(0))
+end)
+
 -- LazyGit keymap
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { desc = "Open LazyGit" })
 
