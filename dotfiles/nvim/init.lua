@@ -56,13 +56,103 @@ vim.g.mapleader = " "
 -- === 3. PLUGIN MANAGEMENT
 ---------------------------
 require("lazy").setup({
-    require("plugins.core_utils"),         -- plugins/core_utils.lua
     require("plugins.base16_theme"),       -- plugins/base16_theme.lua
-    require("plugins.telescope"),
-    require("plugins.git"),
-    require("plugins.mason"),
-    require("plugins.mini")
+    require("plugins.terminal"),
+    'echasnovski/mini.nvim',
+    'nvim-lua/plenary.nvim',
+    "kdheepak/lazygit.nvim",
+    'nvim-telescope/telescope.nvim',
+    requires = {
+        {'nvim-lua/plenary.nvim'},
+        {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    },
+    { 'augmentcode/augment.vim' },
 })
+
+-- Basic configuration (optional but recommended)
+require('mini.basics').setup({
+    silent = true, -- Whether to disable showing non-error feedback
+    options = {
+        extra_ui = true, -- Enable extra UI features
+        win_borders = 'default' -- Preserve window borders
+    },
+    mappings = {
+        windows = true -- Window navigation with <C-hjkl>, resize with <C-arrow>    
+    },
+    autocommands = {
+        relnum_in_visual_mode = true
+    }
+})
+
+-- Configure individual modules
+require('mini.completion').setup({
+    lsp_completion = {
+        source_func = 'omnifunc',  -- Use LSP as completion source
+        auto_setup = true,         -- Auto-configure LSP
+    },
+})
+
+local miniclue = require('mini.clue')
+miniclue.setup({
+  triggers = {
+    -- Leader triggers
+    { mode = 'n', keys = '<Leader>' },
+    { mode = 'x', keys = '<Leader>' },
+
+    -- Built-in completion
+    { mode = 'i', keys = '<C-x>' },
+
+    -- `g` key
+    { mode = 'n', keys = 'g' },
+    { mode = 'x', keys = 'g' },
+
+    -- Marks
+    { mode = 'n', keys = "'" },
+    { mode = 'n', keys = '`' },
+    { mode = 'x', keys = "'" },
+    { mode = 'x', keys = '`' },
+
+    -- Registers
+    { mode = 'n', keys = '"' },
+    { mode = 'x', keys = '"' },
+    { mode = 'i', keys = '<C-r>' },
+    { mode = 'c', keys = '<C-r>' },
+
+    -- Window commands
+    { mode = 'n', keys = '<C-w>' },
+
+    -- `z` key
+    { mode = 'n', keys = 'z' },
+    { mode = 'x', keys = 'z' },
+  },
+
+  clues = {
+    -- Enhance this by adding descriptions for <Leader> mapping groups
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
+  },
+})
+require('mini.jump2d').setup()
+require('mini.diff').setup()
+require('mini.operators').setup()
+require('mini.notify').setup()
+require('mini.map').setup()
+require('mini.indentscope').setup()
+require('mini.icons').setup()
+require('mini.cursorword').setup()
+require('mini.starter').setup()
+require('mini.ai').setup()
+require('mini.surround').setup()
+require('mini.pairs').setup()
+require('mini.icons').setup()
+require('mini.files').setup()
+require('mini.tabline').setup()
+require('mini.statusline').setup()
+require('mini.git').setup()
 
 -------------------
 -- === 4. KEYMAPS
@@ -100,11 +190,12 @@ vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = "Make splits equal size" })
 vim.keymap.set('n', '<leader>sx', ':close<CR>', { desc = "Close current split" })
 
 
--- Window navigation
-vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Move to left window" })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Move to below window" })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Move to above window" })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "Move to right window" })
+-- This was made redundent by mini.default
+-- -- Window navigation
+-- vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Move to left window" })
+-- vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Move to below window" })
+-- vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = "Move to above window" })
+-- vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = "Move to right window" })
 
 
 -- Buffer management

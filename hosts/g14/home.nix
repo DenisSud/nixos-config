@@ -10,21 +10,16 @@
             starship
             gnumeric
             podman-compose
-            yazi
-            jq
             fabric-ai
-            aider-chat
             ripgrep
             lazygit
             git-lfs
-            direnv
             zoxide
             harper
             rip2
             bat
-            tor
+            jq
             gh
-            thefuck  # Added 'thefuck' here
 
             # Shell utilities
             unzip
@@ -43,6 +38,7 @@
             nodejs
             cmake
             python3
+            gopls
 
             # zsh-syntax-highlighting
             zsh-syntax-highlighting
@@ -83,7 +79,6 @@
                 eval "$(carapace zsh)"
                 eval "$(zoxide init zsh)"
                 eval "$(starship init zsh)"
-                eval "$(thefuck --alias)"  # Added 'thefuck' initialization here
 
                 # Enable zsh-syntax-highlighting
                 source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

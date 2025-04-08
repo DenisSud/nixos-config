@@ -38,6 +38,16 @@
             LC_TIME            = "ru_RU.UTF-8";
         };
     };
+    
+    fonts = {
+        packages = with pkgs; [
+            noto-fonts                # Universal sans-serif fonts for many languages
+            noto-fonts-emoji          # Emoji rendering
+            liberation_ttf            # Popular alternative to Arial, Times New Roman, etc.
+            ubuntu_font_family        # Clean and widely used sans-serif font
+            cantarell-fonts           # Commonly used in GNOME environments
+        ];
+    };
 
     # Boot & Hardware Configuration
     #########################################################
@@ -162,7 +172,8 @@
             git
             fzf
             ghostty
-            gnomeExtensions.twingate-status
+            gnomeExtensions.gsconnect
+            gnomeExtensions.penguin-ai-chatbot
             gnomeExtensions.wintile-beyond
             gnomeExtensions.pip-on-top
             gnomeExtensions.caffeine
@@ -200,8 +211,8 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" ];
         packages = with pkgs; [
-            chocolate-doom # Doom source port
             ticktick # taks management
+            zotero-beta # For reading and organizing research papers
             android-tools  # For ADB
             foliate # eBook reader
             chromium
@@ -218,6 +229,7 @@
             twingate # remote management
             bottles # wine bottles manager
             alpaca
+            qbittorrent
         ];
     };
 
