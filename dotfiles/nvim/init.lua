@@ -15,14 +15,14 @@ local vim = vim -- Fix global vim references
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable",
-        lazypath,
-    })
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -34,8 +34,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.o.clipboard = "unnamedplus"
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
 vim.o.expandtab = true
 vim.o.smartindent = true
 vim.o.laststatus = 3
@@ -56,40 +56,77 @@ vim.g.mapleader = " "
 -- === 3. PLUGIN MANAGEMENT
 ---------------------------
 require("lazy").setup({
-    require("plugins.base16_theme"),       -- plugins/base16_theme.lua
-    require("plugins.terminal"),
-    'echasnovski/mini.nvim',
-    'nvim-lua/plenary.nvim',
-    "kdheepak/lazygit.nvim",
-    'nvim-telescope/telescope.nvim',
-    requires = {
-        {'nvim-lua/plenary.nvim'},
-        {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+  require("plugins.base16_theme"), -- plugins/base16_theme.lua
+  require("plugins.terminal"),
+  require("plugins.lsp"),          -- Add our new LSP Zero setup
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
     },
-    { 'augmentcode/augment.vim' },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
+  'echasnovski/mini.nvim',
+  'nvim-lua/plenary.nvim',
+  "kdheepak/lazygit.nvim",
+  'nvim-telescope/telescope.nvim',
+  requires = {
+    { 'nvim-lua/plenary.nvim' },
+    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  },
+})
+
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
 })
 
 -- Basic configuration (optional but recommended)
 require('mini.basics').setup({
-    silent = true, -- Whether to disable showing non-error feedback
-    options = {
-        extra_ui = true, -- Enable extra UI features
-        win_borders = 'default' -- Preserve window borders
-    },
-    mappings = {
-        windows = true -- Window navigation with <C-hjkl>, resize with <C-arrow>    
-    },
-    autocommands = {
-        relnum_in_visual_mode = true
-    }
+  silent = true,            -- Whether to disable showing non-error feedback
+  options = {
+    extra_ui = true,        -- Enable extra UI features
+    win_borders = 'default' -- Preserve window borders
+  },
+  mappings = {
+    windows = true -- Window navigation with <C-hjkl>, resize with <C-arrow>
+  },
+  autocommands = {
+    relnum_in_visual_mode = true
+  }
 })
 
 -- Configure individual modules
 require('mini.completion').setup({
-    lsp_completion = {
-        source_func = 'omnifunc',  -- Use LSP as completion source
-        auto_setup = true,         -- Auto-configure LSP
-    },
+  lsp_completion = {
+    source_func = 'omnifunc', -- Use LSP as completion source
+    auto_setup = true,        -- Auto-configure LSP
+  },
 })
 
 local miniclue = require('mini.clue')
@@ -107,7 +144,6 @@ miniclue.setup({
     { mode = 'x', keys = 'g' },
 
     -- Marks
-    { mode = 'n', keys = "'" },
     { mode = 'n', keys = '`' },
     { mode = 'x', keys = "'" },
     { mode = 'x', keys = '`' },
@@ -137,7 +173,6 @@ miniclue.setup({
   },
 })
 require('mini.jump2d').setup()
-require('mini.diff').setup()
 require('mini.operators').setup()
 require('mini.notify').setup()
 require('mini.map').setup()
@@ -149,7 +184,6 @@ require('mini.ai').setup()
 require('mini.surround').setup()
 require('mini.pairs').setup()
 require('mini.icons').setup()
-require('mini.files').setup()
 require('mini.tabline').setup()
 require('mini.statusline').setup()
 require('mini.git').setup()
@@ -160,7 +194,10 @@ require('mini.git').setup()
 -- General keymaps
 vim.keymap.set('n', 'j', 'gj', { remap = true })
 vim.keymap.set('n', 'k', 'gk', { remap = true })
-vim.keymap.set('n', '<Space>', ':w<CR>') 
+vim.keymap.set('n', '<Space>', ':w<CR>')
+
+-- Tree-nvim
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle')
 
 -- Telescope keymaps
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find files' })
@@ -171,16 +208,13 @@ vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { desc = 'Document symbols' })
 vim.keymap.set('n', '<leader>fa', require('telescope.builtin').lsp_workspace_symbols, { desc = 'Workspace symbols' })
 
--- Files keymap
-vim.keymap.set('n', '<leader>e', function() 
-  MiniFiles.open(vim.api.nvim_buf_get_name(0))
-end)
-
 -- LazyGit keymap
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { desc = "Open LazyGit" })
 
 -- LSP keymaps
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover, { desc = "LSP Hover Info" })
+
 
 
 -- Window/split management
@@ -209,8 +243,8 @@ vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete buffer" })
 -----------------------
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        vim.lsp.buf.format({ async = false })
-    end,
+  pattern = "*",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
 })
