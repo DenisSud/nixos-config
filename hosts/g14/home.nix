@@ -8,9 +8,8 @@
         packages = with pkgs; [
             # Development tools
             starship
-            gnumeric
-            podman-compose
             fabric-ai
+            goose-cli
             ripgrep
             lazygit
             git-lfs
@@ -46,11 +45,13 @@
 
         # Dotfiles
         file = {
+            ".config/nvim" = {
+              source = ../../dotfiles/nvim; # Points to your `dotfiles/nvim` directory
+              recursive = true;             # Ensures the entire directory contents are linked/copied
+            };
             ".config/starship.toml".source = ../../dotfiles/starship.toml;
             ".config/ghostty/themes/mountain-base16".source =
             ../../dotfiles/ghostty/themes/mountain-base16;
-            ".config/nvim/lua/plugins".source = ../../dotfiles/nvim/lua/plugins;
-            ".config/nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
         };
     };
 
@@ -90,6 +91,7 @@
 
             shellAliases = {
                 rm = "rip";
+                lg = "lazygit";
                 zed = "zeditor";
                 gs = "git status";
                 ga = "git add .";
