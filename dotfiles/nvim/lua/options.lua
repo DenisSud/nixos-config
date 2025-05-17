@@ -1,6 +1,7 @@
 require "nvchad.options"
 
 -- add yours here!
-
--- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
+require('mini.surround').setup()
+require('mini.jump2d').setup()
+require('mini.cursorword').setup()
+require('mini.indentscope').setup()

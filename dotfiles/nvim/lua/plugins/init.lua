@@ -10,19 +10,18 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       require "configs.lspconfig"
+
     end,
   },
+  
+  -- my plugins
+  { 'echasnovski/mini.nvim', version = false }, -- Nice collection of small plugins
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({})
+    end,
+  }, -- AI autocomplete
+  -- { 'augmentcode/augment.vim' }, -- AI shit
 
-  -- test new blink
-  -- { import = "nvchad.blink.lazyspec" },
-
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
 }
