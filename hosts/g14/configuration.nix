@@ -205,8 +205,8 @@
     initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      anki
-      vllm
+      anki # For studying
+      lima
       tor
       android-tools  # For ADB
       alpaca
@@ -216,6 +216,8 @@
       v4l-utils      # Camera utilities
       droidcam       # Client application
       zed-editor # code editor
+      code-cursor
+      windsurf
       vscode # the devil
       telegram-desktop # messenger
       whatsapp-for-linux
