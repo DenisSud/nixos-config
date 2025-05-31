@@ -101,9 +101,11 @@
 
 # Virtualisation Settings
   virtualisation = {
-    docker.rootless = {
+    containers.enable = true;
+    podman = {
       enable = true;
-      setSocketVariable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 
@@ -127,7 +129,6 @@
     flatpak.enable = true;
     printing.enable = true;
     openssh.enable = true;
-    syncthing.enable = false;
   };
 
 # Basic Programs & Essential System Packages
@@ -205,11 +206,12 @@
     initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      uutils-coreutils-noprefix # replacing standard core utils with rusty alternatives
+      galaxy-buds-client
       anki # For studying
       lima
       tor
       android-tools  # For ADB
-      alpaca
       foliate # eBook reader
       chromium
       obs-studio
@@ -217,7 +219,6 @@
       droidcam       # Client application
       zed-editor # code editor
       code-cursor
-      windsurf
       vscode # the devil
       telegram-desktop # messenger
       whatsapp-for-linux

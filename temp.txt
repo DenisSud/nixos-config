@@ -1,0 +1,150 @@
+# GGML-Qwen3 Rust Crate Project Specification
+
+## Project Overview
+
+**Project Name:** ggml-qwen3  
+**Purpose:** High-performance Rust crate for parsing GGML/GGUF files containing Qwen3 family models (dense and MoE variants)  
+**Target Use Case:** Performance-critical LLM inference engine using rust-cuda  
+**Design Philosophy:** Zero-copy, lazy-loading, minimal overhead interface for direct GPU memory operations
+
+## Context & Integration
+
+This crate is a component of a larger rust-cuda based LLM inference engine. The crate must provide:
+- Direct access to raw tensor data for CUDA kernel operations
+- Minimal CPU overhead during inference
+- Memory-efficient handling of large model files (7B-72B parameters)
+- Support for quantized weights (Q4_0, Q4_1, Q8_0 formats)
+
+## Core Requirements
+
+### Functional Requirements
+
+1. **File Format Support**
+   - Parse GGUF format files (focus on Qwen3 models)
+   - Support both dense and Mixture-of-Experts (MoE) architectures
+   - Handle quantized weight formats: Q4_0, Q4_1, Q8_0, F16, F32
+
+2. **Performance Requirements**
+   - Zero-copy file access via memory mapping
+   - Lazy tensor loading (metadata parsed upfront, data loaded on-demand)
+   - No unnecessary data copying or format conversion
+   - Thread-safe read access for parallel inference
+
+3. **Model Structure Parsing**
+   - Extract Qwen3 architecture parameters (hidden_size, num_layers, etc.)
+   - Map tensor names to model components (attention, MLP, embeddings)
+   - Handle MoE-specific parameters (num_experts, top_k routing)
+
+### Non-Functional Requirements
+
+- **Memory Efficiency:** Constant memory usage regardless of model size
+- **Load Time:** File opening should be sub-second for any model size
+- **Error Handling:** Fast-fail on corrupted files with detailed diagnostics
+- **API Stability:** Low-level interface suitable for performance-critical code
+
+## API Design Specification
+
+### Core Types
+
+```rust
+// Main file handle - memory-mapped, metadata parsed
+pub struct GgmlFile {
+    // Internal: memory map, parsed headers, tensor registry
+}
+
+// Lightweight tensor metadata - no data loaded
+pub struct TensorRef<'a> {
+    pub name: &'a str,
+    pub shape: &'a [u32],
+    pub dtype: TensorType,
+    pub quantization: QuantizationType,
+    // Internal: file offset, size
+}
+
+// Qwen3 model structure with tensor references
+pub struct Qwen3Model<'a> {
+    pub config: Qwen3Config,
+    pub embed_tokens: TensorRef<'a>,
+    pub layers: Vec<Qwen3Layer<'a>>,
+    pub norm: TensorRef<'a>,
+    pub lm_head: TensorRef<'a>,
+}
+
+pub struct Qwen3Layer<'a> {
+    pub attn: AttentionWeights<'a>,
+    pub mlp: MlpWeights<'a>,
+    pub input_layernorm: TensorRef<'a>,
+    pub post_attention_layernorm: TensorRef<'a>,
+}
+```
+
+### Primary Interface
+
+```rust
+impl GgmlFile {
+    // Fast file opening - only memory mapping and header parsing
+    pub fn open<P: AsRef<Path>>(path: P) -> Result<Self, GgmlError>;
+    
+    // Iterate over all tensors without loading data
+    pub fn tensors(&self) -> impl Iterator<Item = TensorRef>;
+    
+    // Find specific tensor by name
+    pub fn get_tensor(&self, name: &str) -> Option<TensorRef>;
+    
+    // KEY METHOD: Zero-copy access to raw tensor bytes
+    pub fn tensor_data(&self, tensor: &TensorRef) -> &[u8];
+}
+
+impl Qwen3Model<'_> {
+    // Parse Qwen3-specific model structure from GGML file
+    pub fn from_ggml(file: &GgmlFile) -> Result<Qwen3Model, GgmlError>;
+}
+```
+
+## Usage Pattern
+
+The typical usage in the inference engine:
+
+```rust
+// 1. Open model file (fast initialization)
+let ggml = GgmlFile::open("qwen3-7b.gguf")?;
+let model = Qwen3Model::from_ggml(&ggml)?;
+
+// 2. During inference - load tensors on demand
+for layer in &model.layers {
+    // Get raw bytes for CUDA upload
+    let weight_data = ggml.tensor_data(&layer.attn.q_proj);
+    
+    // Upload to GPU with quantization info
+    let gpu_tensor = cuda_upload(
+        weight_data, 
+        layer.attn.q_proj.shape,
+        layer.attn.q_proj.quantization
+    );
+    
+    // Run CUDA kernels...
+}
+```
+
+## Success Criteria
+
+1. **Performance:** File opening < 1s, tensor access < 1μs
+2. **Memory:** Constant memory usage regardless of model size
+3. **Compatibility:** Works with all Qwen3 GGUF files from HuggingFace
+4. **Reliability:** Robust error handling for corrupted files
+5. **Integration:** Seamless integration with rust-cuda inference pipeline
+
+## Out of Scope
+
+- Tensor operations or transformations
+- Model execution logic
+- Support for other model architectures
+- File format conversion utilities
+- Network loading or caching mechanisms
+
+## Technical Constraints
+
+- **No dynamic allocation** during tensor access (zero-copy requirement)
+- **No format conversion** (work directly with quantized data)
+- **Thread-safe reads** (multiple inference threads may access same model)
+- **Cross-platform compatibility** (Linux primary, Windows/macOS secondary)

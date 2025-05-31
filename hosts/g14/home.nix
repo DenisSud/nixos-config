@@ -7,6 +7,7 @@
 
     packages = with pkgs; [
       # Development tools
+      zellij
       starship
       fabric-ai
       goose-cli
@@ -19,6 +20,8 @@
       bat
       jq
       gh
+      xh
+      mprocs
 
 # Shell utilities
       unzip
