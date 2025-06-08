@@ -211,6 +211,7 @@
       anki # For studying
       lima
       tor
+      opencode
       android-tools  # For ADB
       foliate # eBook reader
       chromium
@@ -226,6 +227,7 @@
       obsidian # note taking and knowledge base
       newsflash
       zoom-us
+      bottles
       twingate # remote management
       gnome-chess # chess gui
       gnuchess # chess engine
