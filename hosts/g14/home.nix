@@ -53,8 +53,8 @@
           recursive = true;             # Ensures the entire directory contents are linked/copied
       };
       ".config/starship.toml".source = ../../dotfiles/starship.toml;
-      ".config/ghostty/themes/mountain-base16".source =
-        ../../dotfiles/ghostty/themes/mountain-base16;
+      ".config/ghostty/themes/black-metal-gorgoroth".source =
+        ../../dotfiles/ghostty/themes/black-metal-gorgoroth;
     };
   };
 
@@ -117,7 +117,7 @@
       installBatSyntax = true;
       enableBashIntegration = true;
       settings = {
-        theme = "mountain-base16";
+        theme = "black-metal-gorgoroth";
         font-size = 13;
         shell-integration-features = "sudo";
       };

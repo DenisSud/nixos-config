@@ -113,12 +113,9 @@
 #########################################################
 
   services = {
-    xserver = {
-      enable = true;
-      excludePackages = [ pkgs.xterm ];
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-    };
+
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
 
     ollama = {
       enable = true;
@@ -192,7 +189,7 @@
     enable = lib.mkDefault true;
     image = lib.mkDefault ../../wallpapers/touch.png;
     polarity = lib.mkDefault "dark";
-    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/mountain.yaml";
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/black-metal-gorgoroth.yaml";
   };
 
 # User & Home Manager Configuration
