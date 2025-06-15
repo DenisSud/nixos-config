@@ -227,6 +227,11 @@ map('n', '<leader>fw', '<cmd>Telescope live_grep<cr>', { desc = 'Find word (grep
 map('n', '<leader>fg', '<cmd>Telescope git_files<cr>', { desc = 'Find git files' })
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = 'Find help' })
 
+
+-- Keymaps for buffer navigation
+vim.keymap.set('n', 'gb', ':bnext<CR>', { noremap = true, silent = true, desc = "Go to next buffer" })
+vim.keymap.set('n', 'gB', ':bprevious<CR>', { noremap = true, silent = true, desc = "Go to previous buffer" })
+
 -- LazyGit mapping
 map('n', '<leader>lg', '<cmd>LazyGit<cr>', { desc = 'LazyGit' })
 
