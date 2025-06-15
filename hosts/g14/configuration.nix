@@ -19,6 +19,7 @@
   time.timeZone = "Europe/Moscow";
   nixpkgs.config = {
     allowUnfree = true;
+    enableCuda = true;
     allowBroken = true;
   };
 
@@ -203,6 +204,8 @@
     initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      cudaPackages.cudatoolkit
+      cudaPackages.cudnn
       uutils-coreutils-noprefix # replacing standard core utils with rusty alternatives
       galaxy-buds-client
       anki # For studying
@@ -228,6 +231,7 @@
       twingate # remote management
       gnome-chess # chess gui
       gnuchess # chess engine
+      dia # gnome diagram editor
     ];
   };
 

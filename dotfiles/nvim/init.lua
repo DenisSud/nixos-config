@@ -13,10 +13,12 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = false
 vim.opt.wrap = false
 vim.opt.breakindent = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
+vim.o.tabstop = 4                -- Number of spaces per tab
+vim.o.shiftwidth = 4             -- Indentation width
 
 -- Initialize mini.deps
 local path_package = vim.fn.stdpath('data') .. '/site/'
@@ -43,6 +45,9 @@ now(function()
     add('nvim-lua/plenary.nvim')
     add('nvim-telescope/telescope-fzf-native.nvim')
 
+    -- LSP-config
+    add('neovim/nvim-lspconfig')
+
     -- LazyGit
     add('kdheepak/lazygit.nvim')
 
@@ -52,9 +57,22 @@ now(function()
 
     -- Theming
     add('RRethy/base16-nvim')
+    
+    -- LLM Chat interface and inline suggestions
+    add('augmentcode/augment.vim')
 
     -- LLM inline suggestions
-    add("supermaven-inc/supermaven-nvim")
+    -- add("supermaven-inc/supermaven-nvim")
+end)
+
+-- Configure nvim lsps
+now(function()
+    vim.lsp.enable('rust-analyze')
+    vim.lsp.enable('clangd')
+    vim.lsp.enable('pyright')
+    vim.lsp.enable('lua_ls')
+    vim.lsp.enable('nil')
+    vim.lsp.enable('gopls')
 end)
 
 -- Configure mini.nvim modules
@@ -143,6 +161,11 @@ later(function()
     -- mini.indentscope - Indent scope visualization
     require('mini.indentscope').setup()
 end)
+
+-- Commented out because im using Augmentcode
+-- later(function()
+--     require("supermaven-nvim").setup({})
+-- end)
 
 -- Configure Telescope
 later(function()
@@ -243,33 +266,28 @@ map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message
 map('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+-- LSP keymaps
+-- Go to definition
+map('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
+
+-- Go to references
+map('n', 'gr', vim.lsp.buf.references, { desc = 'Go to references' })
+
+-- Show hover documentation
+map('n', 'K', vim.lsp.buf.hover, { desc = 'Show LSP hover info' })
+
+-- Rename variable
+map('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename symbol' })
+
+-- Search references
+map('n', '<leader>sr', '<cmd>Telescope lsp_references<CR>', { desc = 'Search references with Telescope' })
+
 -- Auto commands
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking text',
     group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
     callback = function()
         vim.highlight.on_yank()
-    end,
-})
-
--- LSP configuration (basic setup for PyTorch development)
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-    callback = function(event)
-        local map_lsp = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        end
-
-        map_lsp('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-        map_lsp('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-        map_lsp('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-        map_lsp('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-        map_lsp('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-        map_lsp('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-        map_lsp('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map_lsp('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-        map_lsp('K', vim.lsp.buf.hover, 'Hover Documentation')
-        map_lsp('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     end,
 })
 
