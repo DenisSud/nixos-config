@@ -39,7 +39,7 @@
     };
   };
 
-  fonts = {
+  fontd = {
     packages = with pkgs; [
       noto-fonts                # Universal sans-serif fonts for many languages
         noto-fonts-emoji          # Emoji rendering
@@ -47,7 +47,7 @@
         ubuntu_font_family        # Clean and widely used sans-serif font
         cantarell-fonts           # Commonly used in GNOME environments
         font-awesome              # Icon font for i3status
-        nerd-fonts.jetbrains-mono                 # Programming fonts with icons
+        nerd-fonts.jetbrains-mono                 # Programming fonts with iconsnerd
     ];
   };
 
