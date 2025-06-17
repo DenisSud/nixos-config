@@ -46,6 +46,8 @@
         liberation_ttf            # Popular alternative to Arial, Times New Roman, etc.
         ubuntu_font_family        # Clean and widely used sans-serif font
         cantarell-fonts           # Commonly used in GNOME environments
+        font-awesome              # Icon font for i3status
+        nerd-fonts.jetbrains-mono                 # Programming fonts with icons
     ];
   };
 
@@ -173,6 +175,19 @@
         gnomeExtensions.clipboard-indicator
         gnomeExtensions.blur-my-shell
         gnomeExtensions.vitals
+        # i3 packages - available system-wide
+        i3status
+        i3lock
+        rofi
+        picom
+        feh
+        brightnessctl
+        playerctl
+        pulseaudio
+        pavucontrol
+        arandr
+        nitrogen
+        dunst
     ];
   };
 
@@ -181,6 +196,78 @@
 #########################################################
 
   specialisation = {
+    i3.configuration = {
+      # Disable GNOME for i3 specialization
+      services.desktopManager.gnome.enable = lib.mkForce false;
+      services.displayManager.gdm.enable = lib.mkForce false;
+      
+      # Enable i3 and related services
+      services.xserver = {
+        enable = true;
+        displayManager = {
+          lightdm.enable = true;
+          defaultSession = "none+i3";
+        };
+        windowManager.i3 = {
+          enable = true;
+          extraPackages = with pkgs; [
+            dmenu
+            i3status
+            i3lock
+            i3blocks
+          ];
+        };
+      };
+      
+      # Enable compositor for transparency and effects
+      services.picom = {
+        enable = true;
+        fade = true;
+        shadow = true;
+        fadeDelta = 4;
+      };
+      
+      # Notification daemon
+      services.dunst.enable = true;
+      
+      # Sound settings for i3
+      sound.enable = true;
+      hardware.pulseaudio.enable = true;
+      
+      # Additional packages for i3 environment
+      environment.systemPackages = with pkgs; [
+        # Application launcher
+        rofi
+        dmenu
+        
+        # Status bar
+        i3status
+        i3blocks
+        
+        # System utilities
+        networkmanagerapplet
+        blueman
+        
+        # File manager
+        thunar
+        
+        # Screenshot tools
+        scrot
+        maim
+        
+        # System monitor
+        htop
+        
+        # Terminal emulator (if you want an alternative)
+        alacritty
+        
+        # Volume control
+        pamixer
+        
+        # Clipboard manager
+        clipmenu
+      ];
+    };
   };
 
 # Stylix

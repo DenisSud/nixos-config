@@ -58,6 +58,13 @@
       ".config/starship.toml".source = ../../dotfiles/starship.toml;
       ".config/ghostty/themes/black-metal-gorgoroth".source =
         ../../dotfiles/ghostty/themes/black-metal-gorgoroth;
+     
+      # i3 configuration files
+      ".config/i3/config".source = ../../dotfiles/i3/config;
+      ".config/i3status/config".source = ../../dotfiles/i3status/config;
+      
+      # Set wallpaper for i3
+      ".config/wallpaper.png".source = ../../wallpapers/touch.png;
     };
   };
 
@@ -125,10 +132,10 @@
         font-size = 12;
         shell-integration-features = "sudo";
         keybind = [
-          "ctrl+alt+h=goto_split:left"
-          "ctrl+alt+j=goto_split:bottom"
-          "ctrl+alt+k=goto_split:top"
-          "ctrl+alt+l=goto_split:right"
+          "ctrl+shift+h=goto_split:left"
+          "ctrl+shift+j=goto_split:bottom"
+          "ctrl+shift+k=goto_split:top"
+          "ctrl+shift+l=goto_split:right"
         ];
       };
     };
