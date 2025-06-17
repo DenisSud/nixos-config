@@ -228,7 +228,7 @@
       };
       
       # Notification daemon
-      services.dunst.enable = true;
+      # services.dunst.enable = true;
       
       # Sound settings for i3
       sound.enable = true;
