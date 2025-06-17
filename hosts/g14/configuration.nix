@@ -126,7 +126,7 @@
     };
 
     twingate.enable = true;
-    flatpak.enable = true;
+    # flatpak.enable = true;
     printing.enable = true;
     openssh.enable = true;
   };
@@ -139,6 +139,7 @@
     git.enable = true;
     adb.enable = true;
     zsh.enable = true;
+    thunar.enable = true;
     nh = {
       enable = true;
       flake = "/home/denis/NixOS";
@@ -231,8 +232,8 @@
       # services.dunst.enable = true;
       
       # Sound settings for i3
-      sound.enable = true;
-      hardware.pulseaudio.enable = true;
+      # sound.enable = true;
+      # hardware.pulseaudio.enable = true;
       
       # Additional packages for i3 environment
       environment.systemPackages = with pkgs; [
@@ -249,7 +250,7 @@
         blueman
         
         # File manager
-        thunar
+        # thunar uses programs.thunar.enable
         
         # Screenshot tools
         scrot
