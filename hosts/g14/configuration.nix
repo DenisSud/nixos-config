@@ -39,15 +39,15 @@
     };
   };
 
-  fontd = {
+  fonts = {
     packages = with pkgs; [
-      noto-fonts                # Universal sans-serif fonts for many languages
+      noto-fonts                  # Universal sans-serif fonts for many languages
         noto-fonts-emoji          # Emoji rendering
         liberation_ttf            # Popular alternative to Arial, Times New Roman, etc.
         ubuntu_font_family        # Clean and widely used sans-serif font
         cantarell-fonts           # Commonly used in GNOME environments
         font-awesome              # Icon font for i3status
-        nerd-fonts.jetbrains-mono                 # Programming fonts with iconsnerd
+        nerd-fonts.jetbrains-mono # Programming fonts with iconsnerd
     ];
   };
 
@@ -117,15 +117,17 @@
 
   services = {
 
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    xserver = {
+        displayManager.gdm.enable = true;
+        desktopManager.gnome.enable = true;
+    };
 
     ollama = {
       enable = true;
       acceleration = "cuda";
     };
 
-    twingate.enable = true;
+    twingate.enable = false;
     # flatpak.enable = true;
     printing.enable = true;
     openssh.enable = true;
@@ -299,7 +301,7 @@
       anki # For studying
       lima
       tor
-      opencode
+      gemini-cli
       android-tools  # For ADB
       foliate # eBook reader
       chromium
@@ -319,7 +321,6 @@
       twingate # remote management
       gnome-chess # chess gui
       gnuchess # chess engine
-      dia # gnome diagram editor
     ];
   };
 

@@ -67,7 +67,7 @@ end)
 
 -- Configure nvim lsps
 now(function()
-    vim.lsp.enable('rust-analyze')
+    vim.lsp.enable('rust_analyze')
     vim.lsp.enable('clangd')
     vim.lsp.enable('pyright')
     vim.lsp.enable('lua_ls')
