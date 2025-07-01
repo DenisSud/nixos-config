@@ -3,10 +3,11 @@
   home = {
     username = "denis";
     homeDirectory = "/home/denis";
-    stateVersion = "24.11";
+    stateVersion = "25.05";
 
     packages = with pkgs; [
       # Development tools
+      gemini-cli
       podman-compose
       zellij
       starship
@@ -98,6 +99,7 @@
 
         bindkey -v
         export KEYTIMEOUT=1
+        export GOOGLE_CLOUD_PROJECT="code-408211"
         '';
 
       shellAliases = {

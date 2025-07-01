@@ -195,84 +195,6 @@
   };
 
 
-# Specializations
-#########################################################
-
-  specialisation = {
-    i3.configuration = {
-      # Disable GNOME for i3 specialization
-      services.desktopManager.gnome.enable = lib.mkForce false;
-      services.displayManager.gdm.enable = lib.mkForce false;
-      
-      # Enable i3 and related services
-      services.xserver = {
-        enable = true;
-        displayManager = {
-          lightdm.enable = true;
-          defaultSession = "none+i3";
-        };
-        windowManager.i3 = {
-          enable = true;
-          extraPackages = with pkgs; [
-            dmenu
-            i3status
-            i3lock
-            i3blocks
-          ];
-        };
-      };
-      
-      # Enable compositor for transparency and effects
-      services.picom = {
-        enable = true;
-        fade = true;
-        shadow = true;
-        fadeDelta = 4;
-      };
-      
-      # Notification daemon
-      # services.dunst.enable = true;
-      
-      # Sound settings for i3
-      # sound.enable = true;
-      # hardware.pulseaudio.enable = true;
-      
-      # Additional packages for i3 environment
-      environment.systemPackages = with pkgs; [
-        # Application launcher
-        rofi
-        dmenu
-        
-        # Status bar
-        i3status
-        i3blocks
-        
-        # System utilities
-        networkmanagerapplet
-        blueman
-        
-        # File manager
-        # thunar uses programs.thunar.enable
-        
-        # Screenshot tools
-        scrot
-        maim
-        
-        # System monitor
-        htop
-        
-        # Terminal emulator (if you want an alternative)
-        alacritty
-        
-        # Volume control
-        pamixer
-        
-        # Clipboard manager
-        clipmenu
-      ];
-    };
-  };
-
 # Stylix
 #########################################################
 
@@ -280,7 +202,7 @@
     enable = lib.mkDefault true;
     image = lib.mkDefault ../../wallpapers/touch.png;
     polarity = lib.mkDefault "dark";
-    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/black-metal-gorgoroth.yaml";
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/black-metal-venom.yaml";
   };
 
 # User & Home Manager Configuration
@@ -301,7 +223,6 @@
       anki # For studying
       lima
       tor
-      gemini-cli
       android-tools  # For ADB
       foliate # eBook reader
       chromium
