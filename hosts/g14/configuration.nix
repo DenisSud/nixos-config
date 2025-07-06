@@ -171,26 +171,11 @@
         ghostty
         rquickshare
         gnomeExtensions.gsconnect
-        gnomeExtensions.penguin-ai-chatbot
         gnomeExtensions.wintile-beyond
-        gnomeExtensions.pip-on-top
         gnomeExtensions.caffeine
         gnomeExtensions.clipboard-indicator
         gnomeExtensions.blur-my-shell
         gnomeExtensions.vitals
-        # i3 packages - available system-wide
-        i3status
-        i3lock
-        rofi
-        picom
-        feh
-        brightnessctl
-        playerctl
-        pulseaudio
-        pavucontrol
-        arandr
-        nitrogen
-        dunst
     ];
   };
 
@@ -218,9 +203,6 @@
     packages = with pkgs; [
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
-      uutils-coreutils-noprefix # replacing standard core utils with rusty alternatives
-      galaxy-buds-client
-      anki # For studying
       lima
       tor
       android-tools  # For ADB
@@ -230,18 +212,12 @@
       v4l-utils      # Camera utilities
       droidcam       # Client application
       zed-editor # code editor
-      code-cursor
       vscode # the devil
       telegram-desktop # messenger
-      whatsapp-for-linux
       libreoffice # office suite
       obsidian # note taking and knowledge base
-      newsflash
-      zoom-us
       bottles
       twingate # remote management
-      gnome-chess # chess gui
-      gnuchess # chess engine
     ];
   };
 

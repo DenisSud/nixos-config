@@ -15,13 +15,13 @@
       ripgrep
       lazygit
       lazysql
-      lazydocker 
-      git-lfs # Large file storage for git
-      zoxide # Better cd
-      harper # Grammer language server
-      rip2 # Better rm
-      bat # Better cat
-      jq # Json quiry
+      lazydocker
+      git-lfs
+      zoxide
+      harper
+      rip2
+      bat
+      jq
       gh # GitHub cli tool
       xh # HTTP requests
       mprocs
