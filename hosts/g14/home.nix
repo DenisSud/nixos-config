@@ -7,6 +7,7 @@
 
     packages = with pkgs; [
       # Development tools
+      btop
       gemini-cli
       podman-compose
       zellij
@@ -53,6 +54,10 @@
 
 # Dotfiles
     file = {
+      ".config/helix" = {
+        source = ../../dotfiles/helix;
+        recursive = true;
+      };
       ".config/nvim" = {
         source = ../../dotfiles/nvim; # Points to your `dotfiles/nvim` directory
           recursive = true;             # Ensures the entire directory contents are linked/copied
@@ -72,10 +77,6 @@
 
 # Program configurations
   programs = {
-    bat.enable = true;
-    btop.enable = true;
-    lazygit.enable = true;
-
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -88,7 +89,6 @@
         extended = true;
       };
 
-# Load zsh extra config from file
       initExtraFirst = ''
         autoload -U compinit
         compinit
