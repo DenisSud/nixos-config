@@ -20,7 +20,6 @@
     nixpkgs.config = {
         allowUnfree = true;
         enableCuda = true;
-        allowBroken = true;
     };
 
 # Localization Settings
@@ -88,8 +87,8 @@
             modesetting.enable = true;
             open = true;
             powerManagement = {
-                enable = true;
-                finegrained = true;
+                enable = false;
+                finegrained = false;
             };
             prime = {
                 offload = {
@@ -112,11 +111,11 @@
     virtualisation = {
         containers.enable = true;
         podman = {
-            enable = false;
+            enable = true;
             dockerCompat = true;
             defaultNetwork.settings.dns_enabled = true;
         };
-        docker.enable = true;
+        docker.enable = false;
     };
 
 # Services Configuration
@@ -192,6 +191,7 @@
             gnomeExtensions.clipboard-indicator
             gnomeExtensions.blur-my-shell
             gnomeExtensions.vitals
+            gnomeExtensions.zen
         ];
     };
 
@@ -201,9 +201,9 @@
 
     stylix = {
         enable = true;
-        image = ../../wallpapers/falling-god.png;
+        image = ../../wallpapers/School_of_Athens.jpg;
         polarity = "dark";
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-venom.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-gorgoroth.yaml";
     };
 
 # User & Home Manager Configuration
@@ -217,6 +217,8 @@
         initialPassword = "password";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
         packages = with pkgs; [
+            vllm
+	    gcc
             cudaPackages.cudatoolkit
             cudaPackages.cudnn
             lima
