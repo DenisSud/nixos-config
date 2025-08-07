@@ -1,0 +1,7 @@
+# ~/.config/starship.toml
+
+add_newline = false
+# Configure the left prompt to display directory and host information
+format = "$directory$hostname"
+# Configure the right prompt to display Git, Docker, Python, Go, Rust, and Nix Shell information
+right_format = "$git_branch$git_status$docker_context$python$golang$rust$nix_shell"
