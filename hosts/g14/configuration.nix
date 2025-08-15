@@ -91,13 +91,13 @@
     graphics = {
       enable = true;
     };
-    nvidia-container-toolkit.enable = false;
+    nvidia-container-toolkit.enable = true;
     nvidia = {
       modesetting.enable = true;
       open = true;
       powerManagement = {
-        enable = false;
-        finegrained = false;
+        enable = true;
+        finegrained = true;
       };
       prime = {
         offload = {
@@ -142,9 +142,6 @@
     xserver.videoDrivers = ["nvidia"];
     xserver.displayManager.gdm.enable = true;
     xserver.desktopManager.gnome.enable = true;
-    #
-    # displayManager.gdm.enable = true;
-    # desktopManager.gnome.enable = true;
 
     ollama = {
       enable = true;
