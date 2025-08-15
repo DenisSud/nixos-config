@@ -8,7 +8,7 @@
     packages = with pkgs; [
     ];
 
-# Dotfiles
+    # Dotfiles
     file = {
       ".config/helix" = {
         source = ../../dotfiles/helix;
@@ -16,22 +16,22 @@
       };
       ".config/nvim" = {
         source = ../../dotfiles/nvim; # Points to your `dotfiles/nvim` directory
-          recursive = true;             # Ensures the entire directory contents are linked/copied
+        recursive = true;             # Ensures the entire directory contents are linked/copied
       };
       ".config/starship.toml".source = ../../dotfiles/starship.toml;
       ".config/ghostty/themes/kanagawa-dragon".source =
         ../../dotfiles/ghostty/themes/kanagawa-dragon;
-     
+
       # i3 configuration files
       ".config/i3/config".source = ../../dotfiles/i3/config;
       ".config/i3status/config".source = ../../dotfiles/i3status/config;
-      
+
       # Set wallpaper for i3
       ".config/wallpaper.png".source = ../../wallpapers/touch.png;
     };
   };
 
-# Program configurations
+  # Program configurations
   programs = {
     zsh = {
       enable = true;
@@ -57,7 +57,7 @@
         bindkey -v
         export KEYTIMEOUT=1
         export GOOGLE_CLOUD_PROJECT="code-408211"
-        '';
+      '';
 
       shellAliases = {
         rm = "rip";

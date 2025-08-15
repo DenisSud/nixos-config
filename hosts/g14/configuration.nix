@@ -91,7 +91,7 @@
     graphics = {
       enable = true;
     };
-    nvidia-container-toolkit.enable = true;
+    nvidia-container-toolkit.enable = false;
     nvidia = {
       modesetting.enable = true;
       open = true;
@@ -142,6 +142,9 @@
     xserver.videoDrivers = ["nvidia"];
     xserver.displayManager.gdm.enable = true;
     xserver.desktopManager.gnome.enable = true;
+    #
+    # displayManager.gdm.enable = true;
+    # desktopManager.gnome.enable = true;
 
     ollama = {
       enable = true;
@@ -249,6 +252,7 @@
       jellyfin-media-player
             # Development tools
       btop
+      qwen-code
       gemini-cli
       podman-compose
       zellij
@@ -284,7 +288,6 @@
 # For language servers
       nodejs
       python3
-      rust-analyzer
       pyright
       gopls
       nil
@@ -304,6 +307,6 @@
   # System State Version
   #########################################################
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 
 }
