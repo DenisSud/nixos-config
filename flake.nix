@@ -2,7 +2,7 @@
   description = "My NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # Or a specific branch
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,8 +22,9 @@
         modules = [
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix
-          ./configuration.nix # Your existing configuration
-          ./hardware-configuration.nix # Include if needed
+          ./configuration.nix
+          ./modules/pc-hardware-configuration.nix
+          ./modules/pc-config.nix
         ];
       };
     };

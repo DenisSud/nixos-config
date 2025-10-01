@@ -7,11 +7,8 @@
 
 # Dotfiles
     file = {
-      ".config/nvim" = {
-        source = dotfiles/nvim; # Points to your `dotfiles/nvim` directory
-          recursive = true;             # Ensures the entire directory contents are linked/copied
-      };
-      ".config/starship.toml".source = dotfiles/starship.toml;
+      ".config/nvim".source = ../dotfiles/nvim; # Points to your `dotfiles/nvim` directory
+      ".config/starship.toml".source = ../dotfiles/starship.toml;
     };
   };
 

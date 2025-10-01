@@ -4,13 +4,10 @@
   # ==============================
   # 🖥️  Imports & Core Settings
   # ==============================
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "qtwebengine-5.15.19"
-  # ]; 
   system.stateVersion = "25.05";
 
 
@@ -27,10 +24,8 @@
   # 🌐  Networking
   # ==============================
   networking = {
-    hostName = "pc";
     networkmanager.enable = true;
     firewall.enable = true;
-    firewall.allowedTCPPorts = [ 1111 11434 ];
   };
 
   services.openssh.enable = true;
@@ -57,43 +52,7 @@
   };
 
 
-  # ==============================
-  # 🎮  Hardware & Graphics
-  # ==============================
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-
-    nvidia = {
-      modesetting.enable = true;
-      open = true;
-    };
-
-    nvidia-container-toolkit.enable = true;
-  };
-
   virtualisation.docker.enable = true;
-
-
-  # ==============================
-  # 🖼️  Desktop Environment (GNOME + X11)
-  # ==============================
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
-
-  services.printing.enable = true;
 
 
   # ==============================
@@ -116,15 +75,7 @@
   # ==============================
   # 🤖  AI & Dev Services
   # ==============================
-  services = {
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-      loadModels = [ "qwen3:4b" "qwen3:30b" ];
-    };
-
-    flatpak.enable = true;
-  };
+  services.flatpak.enable = true;
 
   # Styling
   stylix = {
@@ -159,9 +110,10 @@
   # ==============================
   # 👤  User Accounts
   # ==============================
+  home-manager.backupFileExtension = "backup";
   home-manager.users.denis = {
     # import a separate home.nix file for clarity and easier reuse across machines
-    imports = [ ./home.nix ];
+    imports = [ ./modules/home.nix ];
   };
   users.users.denis = {
     isNormalUser = true;
@@ -251,14 +203,6 @@
       enable = true;
       binfmt = true;
     };
-
-    fish = {
-      enable = true;
-      interactiveShellInit = ''
-        starship init fish | source
-        zoxide init fish | source
-        alias v "nvim"
-      '';
-    };
+    fish.enable = true;
   };
 }

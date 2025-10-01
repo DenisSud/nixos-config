@@ -1,0 +1,62 @@
+# ~/.config/starship.toml
+# Clean & minimal — no time/date
+
+add_newline = true
+format = "$all"
+
+# HOSTNAME - show only on SSH
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
+style = "cyan"
+
+# DIRECTORY - compact path
+[directory]
+format = "[$path]($style) "
+truncation_length = 3
+truncation_symbol = "…/"
+
+# GIT - branch + status
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+
+[git_state]
+format = "([$state]($style)) "
+
+[git_status]
+format = "([$all_status]($style)) "
+conflicted = "⚔️ "
+ahead = "⇡"
+behind = "⇣"
+stashed = "📦"
+style = "red"
+
+# RUNTIME VERSIONS - show when present
+[python]
+format = "🐍 $version "
+pyenv_version_name = false
+
+[nodejs]
+format = "⬢ $version "
+detect_files = ["package.json"]
+
+# BACKGROUND JOBS
+[jobs]
+threshold = 1
+
+# COMMAND DURATION - only for slow commands (ms)
+[cmd_duration]
+min_time = 2000
+
+# BATTERY - laptop useful
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+format = "[$symbol$percentage]($style) "
+
+# PROMPT CHARACTER
+[character]
+success_symbol = "➜"
+error_symbol = "✖"
+vicmd_symbol = "🔰"

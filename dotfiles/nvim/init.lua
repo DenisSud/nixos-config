@@ -1,6 +1,16 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Theming:
+
+-- Make Neovim use terminal background, enabling "transparency"
+vim.o.termguicolors = false   -- Use the terminal's color palette
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -166,20 +176,6 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-  -- Theming:
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      require('kanagawa').setup({
-        theme = "dragon",
-        background = {
-          dark = "dragon",
-          light = "lotus"
-        },
-      })
-      vim.cmd("colorscheme kanagawa-dragon")
-    end,
-  },
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
