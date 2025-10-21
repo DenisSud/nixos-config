@@ -43,7 +43,6 @@
   services.ollama = {
     enable = true;
     acceleration = "cuda";
-    loadModels = [ "qwen3:4b" "qwen3:30b" ];
   };
 
 

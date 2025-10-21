@@ -15,6 +15,11 @@
 # Program configurations
   programs = {
 
+    btop = {
+      package = pkgs.btop-cuda;
+      enable = true;
+    };
+
     fzf = {
       enable = true;
       enableFishIntegration = true;
@@ -47,7 +52,14 @@
         font-size = 12;
         font-family = "JetBrainsMono Nerd Font Mono";
         shell-integration-features = "sudo";
+        keybind = [
+          "ctrl+h=goto_split:left"
+          "ctrl+l=goto_split:right"
+          "ctrl+j=goto_split:down"
+          "ctrl+k=goto_split:up"
+        ];
       };
+
     };
 
     home-manager.enable = true;

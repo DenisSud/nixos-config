@@ -78,34 +78,34 @@
   services.flatpak.enable = true;
 
   # Styling
-  stylix = {
-    fonts = {
-      serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
-      };
-
-      sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
-      };
-
-      # Modified section for Nerd Fonts
-      monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono; 
-        name = "JetBrainsMono Nerd Font";
-      };
-
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
-    enable = true;
-    image = ./wallpaper.png;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
-  };
+  # stylix = {
+  #   fonts = {
+  #     serif = {
+  #       package = pkgs.dejavu_fonts;
+  #       name = "DejaVu Serif";
+  #     };
+  #
+  #     sansSerif = {
+  #       package = pkgs.dejavu_fonts;
+  #       name = "DejaVu Sans";
+  #     };
+  #
+  #     # Modified section for Nerd Fonts
+  #     monospace = {
+  #       package = pkgs.nerd-fonts.jetbrains-mono; 
+  #       name = "JetBrainsMono Nerd Font";
+  #     };
+  #
+  #     emoji = {
+  #       package = pkgs.noto-fonts-emoji;
+  #       name = "Noto Color Emoji";
+  #     };
+  #   };
+  #   enable = true;
+  #   image = ./wallpaper.png;
+  #   polarity = "dark";
+  #   base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+  # };
 
   # ==============================
   # 👤  User Accounts
@@ -126,6 +126,7 @@
       onefetch
       rip2
       codex
+      lima
       unzip
       fzf
       dust
@@ -144,6 +145,7 @@
       # jellyfin-media-player
       zed-editor
       lazygit
+      lazydocker
       gnome-tweaks
       # GNOME Extensions
       gnomeExtensions.brightness-control-using-ddcutil
@@ -168,6 +170,7 @@
     wget
     curl
     tmux
+    zellij
     file
     dig
     iw
