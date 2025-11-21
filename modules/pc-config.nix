@@ -5,7 +5,7 @@
   networking.hostName = "pc";
 
   # firewall and extra ports for pc
-  networking.firewall.allowedTCPPorts = [ 1111 11434 ];
+  networking.firewall.allowedTCPPorts = [ 1111 11434 8080 ];
 
   # ==============================
   # 🎮  Hardware & Graphics
@@ -41,9 +41,12 @@
     };
   };
   services.ollama = {
+    host = "0.0.0.0";
     enable = true;
+    openFirewall = true;
     acceleration = "cuda";
   };
+
 
 
   services.printing.enable = true;

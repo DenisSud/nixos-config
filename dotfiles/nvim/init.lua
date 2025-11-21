@@ -176,6 +176,27 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  -- installing lazygit
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  },
   -- Using lazy.nvim
   {
     "metalelf0/black-metal-theme-neovim",
@@ -859,6 +880,13 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+
+      -- Split and join arguments (like function parameters or table elements)
+      --
+      -- Examples:
+      --   - gS  - [G]o to [S]plit/Join: toggles between single-line and multi-line format
+      --           (e.g., converts function(args) to function(\n  args\n) and back)
+      require('mini.splitjoin').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

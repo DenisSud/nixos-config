@@ -21,7 +21,7 @@
         specialArgs = { inherit inputs; }; # Pass inputs to modules
         modules = [
           inputs.home-manager.nixosModules.default
-          # inputs.stylix.nixosModules.stylix
+          inputs.stylix.nixosModules.stylix
           ./configuration.nix
           ./modules/pc-hardware-configuration.nix
           ./modules/pc-config.nix

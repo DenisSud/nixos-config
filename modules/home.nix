@@ -7,6 +7,19 @@
 
 # Dotfiles
     file = {
+      # Desktop entry for AppImage
+      ".local/share/applications/my-app.desktop".text = ''
+        [Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=Helium
+        Comment=The Helium Browser
+        Exec=appimage-run /home/denis/Helium.AppImage
+        Icon=/home/denis/Pictures/Helium-icon.png
+        Categories=Utility;
+        Terminal=false
+        StartupWMClass=my-appimage
+      '';
       ".config/nvim".source = ../dotfiles/nvim; # Points to your `dotfiles/nvim` directory
       ".config/starship.toml".source = ../dotfiles/starship.toml;
     };

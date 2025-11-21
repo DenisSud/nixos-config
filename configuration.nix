@@ -70,42 +70,15 @@
   };
 
   services.pulseaudio.enable = false;  # PipeWire replaces this
-
-
-  # ==============================
-  # 🤖  AI & Dev Services
-  # ==============================
   services.flatpak.enable = true;
 
   # Styling
-  # stylix = {
-  #   fonts = {
-  #     serif = {
-  #       package = pkgs.dejavu_fonts;
-  #       name = "DejaVu Serif";
-  #     };
-  #
-  #     sansSerif = {
-  #       package = pkgs.dejavu_fonts;
-  #       name = "DejaVu Sans";
-  #     };
-  #
-  #     # Modified section for Nerd Fonts
-  #     monospace = {
-  #       package = pkgs.nerd-fonts.jetbrains-mono; 
-  #       name = "JetBrainsMono Nerd Font";
-  #     };
-  #
-  #     emoji = {
-  #       package = pkgs.noto-fonts-emoji;
-  #       name = "Noto Color Emoji";
-  #     };
-  #   };
-  #   enable = true;
-  #   image = ./wallpaper.png;
-  #   polarity = "dark";
-  #   base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
-  # };
+  stylix = {
+    enable = true;
+    image = ./wallpaper.png;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
+  };
 
   # ==============================
   # 👤  User Accounts
@@ -137,8 +110,6 @@
       ghostty
       fragments
       telegram-desktop
-      lutris
-      mangohud
       xclip
       zoxide
       libreoffice
@@ -147,11 +118,13 @@
       lazygit
       lazydocker
       gnome-tweaks
+      yandex-music
       # GNOME Extensions
       gnomeExtensions.brightness-control-using-ddcutil
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.blur-my-shell
+      gnomeExtensions.gsconnect
     ];
   };
 
@@ -161,6 +134,7 @@
   # ==============================
   environment.systemPackages = with pkgs; [
     # System essentials
+    corefonts
     ffmpeg
     btop-cuda
     git
@@ -185,7 +159,7 @@
   # 🐟  User Programs & Shells
   # ==============================
   programs = {
-    steam.enable = true;
+    steam.enable = false;
     mtr.enable = true;
 
     nh = {
