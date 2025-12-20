@@ -25,7 +25,7 @@
   # ==============================
   networking = {
     networkmanager.enable = true;
-    firewall.enable = true;
+    firewall.enable = false;
   };
 
   services.openssh.enable = true;
@@ -91,7 +91,7 @@
   users.users.denis = {
     isNormalUser = true;
     description = "denis";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "i2c" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       vlc
@@ -119,6 +119,10 @@
       lazydocker
       gnome-tweaks
       yandex-music
+      impression
+      # CLI ai tools
+      qwen-code
+      goose-cli
       # GNOME Extensions
       gnomeExtensions.brightness-control-using-ddcutil
       gnomeExtensions.caffeine
@@ -134,6 +138,7 @@
   # ==============================
   environment.systemPackages = with pkgs; [
     # System essentials
+    ntfs3g
     corefonts
     ffmpeg
     btop-cuda
@@ -150,6 +155,7 @@
     iw
     tree
     neovim
+    bat
     jq
     ddcutil
   ];

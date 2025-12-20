@@ -3,6 +3,7 @@
 {
   # PC-only settings (moved from your old configuration.nix)
   networking.hostName = "pc";
+  networking.interfaces.eno1.wakeOnLan.enable = true;
 
   # firewall and extra ports for pc
   networking.firewall.allowedTCPPorts = [ 1111 11434 8080 ];
@@ -11,6 +12,7 @@
   # 🎮  Hardware & Graphics
   # ==============================
   hardware = {
+    i2c.enable = true;
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -28,24 +30,28 @@
   # ==============================
   # Desktop Environment (GNOME + X11)
   # ==============================
+  
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
-
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
 
     xkb = {
       layout = "us";
       variant = "";
     };
   };
+  services = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
   services.ollama = {
     host = "0.0.0.0";
     enable = true;
     openFirewall = true;
-    acceleration = "cuda";
+    package = pkgs.ollama-cuda;
   };
+  services.jellyfin.enable = true;
+  services.jellyfin.openFirewall = true;
 
 
 
