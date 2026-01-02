@@ -6,7 +6,9 @@
   networking.interfaces.eno1.wakeOnLan.enable = true;
 
   # firewall and extra ports for pc
-  networking.firewall.allowedTCPPorts = [ 1111 11434 8080 ];
+  networking.firewall.allowedTCPPorts = [ 11434 8080 ];
+  networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowPing = false;
 
   # ==============================
   # 🎮  Hardware & Graphics

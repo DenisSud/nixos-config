@@ -25,7 +25,7 @@
   # ==============================
   networking = {
     networkmanager.enable = true;
-    firewall.enable = false;
+    firewall.enable = true;
   };
 
   services.openssh.enable = true;
@@ -71,6 +71,11 @@
 
   services.pulseaudio.enable = false;  # PipeWire replaces this
   services.flatpak.enable = true;
+  
+  # For ferris sweep keyboard
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess"
+  '';
 
   # Styling
   stylix = {
@@ -120,9 +125,11 @@
       gnome-tweaks
       yandex-music
       impression
+      anki
+
+      vial
       # CLI ai tools
-      qwen-code
-      goose-cli
+      opencode
       # GNOME Extensions
       gnomeExtensions.brightness-control-using-ddcutil
       gnomeExtensions.caffeine
