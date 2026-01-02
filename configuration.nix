@@ -165,6 +165,8 @@
     bat
     jq
     ddcutil
+    fd
+    eza
   ];
 
 
