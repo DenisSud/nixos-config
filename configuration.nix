@@ -150,7 +150,6 @@
       zoxide
       libreoffice
       # jellyfin-media-player
-      zed-editor
       lazygit
       lazydocker
       gnome-tweaks
