@@ -6,10 +6,12 @@
   # ==============================
   imports = [ ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
-
 
   # ==============================
   # ⚙️  Bootloader
@@ -18,7 +20,6 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
 
   # ==============================
   # 🌐  Networking
@@ -29,7 +30,14 @@
   };
 
   services.openssh.enable = true;
-
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      epson-escpr
+      # epson-escpr2
+    ];
+    browsing = false; # avoids GNOME hangs
+  };
 
   # ==============================
   # 🌍  Locale & Time
@@ -51,9 +59,7 @@
     };
   };
 
-
   virtualisation.docker.enable = true;
-
 
   # ==============================
   # 🔊  Audio (PipeWire)
@@ -69,9 +75,11 @@
     pulse.enable = true;
   };
 
-  services.pulseaudio.enable = false;  # PipeWire replaces this
+  services.pulseaudio.enable = false; # PipeWire replaces this
   services.flatpak.enable = true;
-  
+
+  security.polkit.enable = true;
+
   # For ferris sweep keyboard
   services.udev.extraRules = ''
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess"
@@ -85,6 +93,23 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
   };
 
+  fonts = {
+    packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "JetBrainsMono Nerd Font Mono" ];
+        sansSerif = [ "Inter" ];
+        serif = [ "Inter" ];
+      };
+      cache32Bit = true;
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
+    };
+  };
+
   # ==============================
   # 👤  User Accounts
   # ==============================
@@ -96,7 +121,13 @@
   users.users.denis = {
     isNormalUser = true;
     description = "denis";
-    extraGroups = [ "networkmanager" "wheel" "docker" "i2c" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "i2c"
+      "seat"
+    ];
     shell = pkgs.fish;
     packages = with pkgs; [
       vlc
@@ -139,13 +170,13 @@
     ];
   };
 
-
   # ==============================
   # 📦  System-Wide Packages
   # ==============================
   environment.systemPackages = with pkgs; [
     # System essentials
     ntfs3g
+    lsof
     corefonts
     ffmpeg
     btop-cuda
@@ -168,7 +199,6 @@
     fd
     eza
   ];
-
 
   # ==============================
   # 🐟  User Programs & Shells

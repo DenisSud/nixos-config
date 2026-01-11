@@ -175,6 +175,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>o', group = '[O]penCode' },
       },
     },
   },
@@ -281,6 +282,18 @@ require('lazy').setup({
             },
           },
         },
+        nixd = {
+          settings = {
+            nixd = {
+              formatting = {
+                command = { 'nixfmt' },
+              },
+              nixpkgs = {
+                expr = 'import <nixpkgs> {}',
+              },
+            },
+          },
+        },
       }
 
       -- 3. Native Setup (vim.lsp.config)
@@ -370,6 +383,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        nix = { 'nixfmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -538,7 +552,7 @@ require('lazy').setup({
           main = 'nvim-treesitter.configs', -- Sets main module to use for opts
           -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
           opts = {
-            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+            ensure_installed = { 'bash', 'c', 'css', 'diff', 'go', 'gomod', 'gowork', 'gosum', 'html', 'javascript', 'json', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'python', 'query', 'tsx', 'typescript', 'vim', 'vimdoc' },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {
@@ -584,6 +598,32 @@ require('lazy').setup({
         -- Or use telescope!
         -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
         -- you can continue same window with `<space>sr` which resumes last telescope search
+
+        {
+          "NickvanDyke/opencode.nvim",
+          dependencies = {
+            -- Recommended for `ask()` and `select()`.
+            -- Required for `snacks` provider.
+            ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+            { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+          },
+          config = function()
+            ---@type opencode.Opts
+            vim.g.opencode_opts = {
+              -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+            }
+
+            -- Required for `opts.events.reload`.
+            vim.o.autoread = true
+            vim.keymap.set({ "n", "t" }, "<leader>ot", function() require("opencode").toggle() end,                          { desc = "[O]penCode [T]oggle" })
+            vim.keymap.set({ "n", "x" }, "<leader>oa", function() require("opencode").ask("@this: ", { submit = true }) end, { desc = "[O]penCode [A]sk" })
+            vim.keymap.set({ "n", "x" }, "<leader>op", function() require("opencode").select_prompt() end,                  { desc = "[O]penCode [P]rompt library" })
+
+            vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { expr = true, desc = "Add range to opencode" })
+            vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { expr = true, desc = "Add line to opencode" })
+
+          end,
+        },
       }, {
         ui = {
           -- If you are using a Nerd Font: set icons to an empty table which will use the

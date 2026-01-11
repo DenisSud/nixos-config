@@ -15,7 +15,6 @@
 
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
-      # Replace "hostname" with your system's hostname
       pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux"; # System architecture
         specialArgs = { inherit inputs; }; # Pass inputs to modules
