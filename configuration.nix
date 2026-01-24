@@ -156,13 +156,14 @@
       gnome-tweaks
       yandex-music
       impression
+      mangohud
       anki
 
       vial
       # CLI ai tools
-      opencode
+      # opencode # This currently doesn't build, so will use with 'nix run' for now
       # GNOME Extensions
-      gnomeExtensions.brightness-control-using-ddcutil
+      gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.blur-my-shell
@@ -204,7 +205,8 @@
   # 🐟  User Programs & Shells
   # ==============================
   programs = {
-    steam.enable = false;
+    steam.enable = true;
+    steam.gamescopeSession.enable = true;
     mtr.enable = true;
 
     nh = {
