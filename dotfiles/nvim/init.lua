@@ -56,24 +56,6 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 require("lazy").setup({
-	-- installing lazygit
-	{
-		"kdheepak/lazygit.nvim",
-		lazy = true,
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		keys = {
-			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-		},
-	},
 	{
 		"metalelf0/black-metal-theme-neovim",
 		lazy = false,
@@ -131,7 +113,121 @@ require("lazy").setup({
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
+			on_attach = function(bufnr)
+				local gitsigns = require("gitsigns")
+
+				local function map(mode, l, r, opts)
+					opts = opts or {}
+					opts.buffer = bufnr
+					vim.keymap.set(mode, l, r, opts)
+				end
+
+				-- Navigation
+				map("n", "]c", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gitsigns.nav_hunk("next")
+					end
+				end, { desc = "Jump to next git [c]hange" })
+
+				map("n", "[c", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gitsigns.nav_hunk("prev")
+					end
+				end, { desc = "Jump to previous git [c]hange" })
+
+				-- Actions
+				-- visual mode
+				map("v", "<leader>hs", function()
+					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, { desc = "git [s]tage hunk" })
+				map("v", "<leader>hr", function()
+					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, { desc = "git [r]eset hunk" })
+				-- normal mode
+				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git [s]tage hunk" })
+				map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git [r]eset hunk" })
+				map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git [S]tage buffer" })
+				map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "git [u]ndo stage hunk" })
+				map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "git [R]eset buffer" })
+				map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk" })
+				map("n", "<leader>hb", gitsigns.blame_line, { desc = "git [b]lame line" })
+				map("n", "<leader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
+				map("n", "<leader>hD", function()
+					gitsigns.diffthis("@")
+				end, { desc = "git [D]iff against last commit" })
+				-- Toggles
+				map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
+				map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
+			end,
 		},
+	},
+	{
+		"sindrets/diffview.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local actions = require("diffview.actions")
+
+			require("diffview").setup({
+				keymaps = {
+					view = {
+						["<leader>e"] = actions.toggle_files,
+					},
+					file_panel = {
+						["j"] = actions.next_entry,
+						["k"] = actions.prev_entry,
+						["<cr>"] = actions.select_entry,
+						["s"] = actions.toggle_stage_entry,
+						["S"] = actions.stage_all,
+						["U"] = actions.unstage_all,
+						["X"] = actions.restore_entry,
+						["R"] = actions.refresh_files,
+					},
+				},
+			})
+
+			vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "[G]it [D]iff view open" })
+			vim.keymap.set("n", "<leader>gD", "<cmd>DiffviewClose<cr>", { desc = "[G]it [D]iff view close" })
+			vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", { desc = "[G]it [H]istory" })
+			vim.keymap.set("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", { desc = "[G]it [F]ile history" })
+		end,
+	},
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("neogit").setup({
+				integrations = {
+					diffview = true,
+					telescope = true,
+				},
+				mappings = {
+					status = {
+						["<cr>"] = "Toggle",
+						["l"] = "Toggle",
+						["h"] = "Toggle",
+						["s"] = "Stage",
+						["u"] = "Unstage",
+						["c"] = "Commit",
+						["P"] = "Push",
+						["p"] = "Pull",
+						["d"] = "DiffAtFile",
+					},
+				},
+			})
+
+			vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "[G]it Neo[g]it status" })
+			vim.keymap.set("n", "<leader>gc", "<cmd>Neogit commit<cr>", { desc = "[G]it [c]ommit" })
+			vim.keymap.set("n", "<leader>gp", "<cmd>Neogit push<cr>", { desc = "[G]it [p]ush" })
+			vim.keymap.set("n", "<leader>gP", "<cmd>Neogit pull<cr>", { desc = "[G]it [P]ull" })
+		end,
 	},
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
@@ -175,7 +271,7 @@ require("lazy").setup({
 				{ "<leader>s", group = "[S]earch" },
 				{ "<leader>t", group = "[T]oggle" },
 				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
-				{ "<leader>o", group = "[O]penCode" },
+				{ "<leader>g", group = "[G]it", mode = { "n", "v" } },
 			},
 		},
 	},
@@ -751,4 +847,3 @@ require("lazy").setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
---
