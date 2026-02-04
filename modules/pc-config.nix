@@ -53,6 +53,19 @@
     nvidia-container-toolkit.enable = true;
   };
 
+  fileSystems."/media/Denis" = {
+    device = "/dev/disk/by-uuid/68F929974FE7F126";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "nofail"
+      "uid=1000"
+      "gid=1000"
+      "umask=022"
+      "allow_other"
+    ];
+  };
+
   # ==============================
   # Desktop Environment (GNOME + X11)
   # ==============================
@@ -74,6 +87,9 @@
     host = "0.0.0.0";
     enable = true;
     openFirewall = true;
+    # environmentVariables = {
+    #   "OLLAMA_CONTEXT_LENGTH" = "200000";
+    # };
     package = pkgs.ollama-cuda;
   };
   services.jellyfin.enable = true;

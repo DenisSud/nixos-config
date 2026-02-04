@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   # ==============================
@@ -114,9 +119,9 @@
   # 👤  User Accounts
   # ==============================
   home-manager.backupFileExtension = "backup";
-  home-manager.users.denis = {
-    # import a separate home.nix file for clarity and easier reuse across machines
-    imports = [ ./modules/home.nix ];
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; }; # Add this line
+    users.denis = import ./modules/home.nix;
   };
   users.users.denis = {
     isNormalUser = true;
@@ -133,7 +138,7 @@
       vlc
       fastfetch
       onefetch
-      rip2
+      # rip2
       codex
       lima
       unzip
@@ -151,6 +156,7 @@
       libreoffice
       # jellyfin-media-player
       zed-editor
+      code-cursor
       lazygit
       lazydocker
       gnome-tweaks
@@ -161,7 +167,8 @@
 
       vial
       # CLI ai tools
-      # opencode # This currently doesn't build, so will use with 'nix run' for now
+      opencode
+      claude-code
       # GNOME Extensions
       gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
       gnomeExtensions.caffeine
@@ -175,6 +182,9 @@
   # 📦  System-Wide Packages
   # ==============================
   environment.systemPackages = with pkgs; [
+    # Untill they add rip to nixpkgs
+    inputs.rip.packages.${pkgs.system}.default
+
     # System essentials
     ntfs3g
     lsof
@@ -199,13 +209,21 @@
     ddcutil
     fd
     eza
+
+    # LSP related stuff
+    nixfmt
+    gopls
+    stylua
+    prettierd
+    gofumpt
+    rustfmt
   ];
 
   # ==============================
   # 🐟  User Programs & Shells
   # ==============================
   programs = {
-    steam.enable = true;
+    steam.enable = false;
     steam.gamescopeSession.enable = true;
     mtr.enable = true;
 

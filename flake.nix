@@ -11,32 +11,38 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations = {
-      pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux"; # System architecture
-        specialArgs = { inherit inputs; }; # Pass inputs to modules
-        modules = [
-          inputs.home-manager.nixosModules.default
-          inputs.stylix.nixosModules.stylix
-          ./configuration.nix
-          ./modules/pc-hardware-configuration.nix
-          ./modules/pc-config.nix
-        ];
-      };
-      g14 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux"; # System architecture
-        specialArgs = { inherit inputs; }; # Pass inputs to modules
-        modules = [
-          inputs.home-manager.nixosModules.default
-          inputs.stylix.nixosModules.stylix
-          ./configuration.nix
-          ./modules/g14-hardware-configuration.nix
-          ./modules/g14-config.nix
-        ];
-      };
+    rip = {
+      url = "github:cesarferreira/rip";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    {
+      nixosConfigurations = {
+        pc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; }; # This makes 'inputs' available in all your modules
+          modules = [
+            inputs.home-manager.nixosModules.default
+            inputs.stylix.nixosModules.stylix
+            ./configuration.nix
+            ./modules/pc-hardware-configuration.nix
+            ./modules/pc-config.nix
+          ];
+        };
+        g14 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            inputs.home-manager.nixosModules.default
+            inputs.stylix.nixosModules.stylix
+            ./configuration.nix
+            ./modules/g14-hardware-configuration.nix
+            ./modules/g14-config.nix
+          ];
+        };
+      };
+    };
 }
