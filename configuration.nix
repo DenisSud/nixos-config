@@ -6,29 +6,17 @@
 }:
 
 {
-  # ==============================
-  # 🖥️  Imports & Core Settings
-  # ==============================
   imports = [ ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
 
-  # ==============================
-  # ⚙️  Bootloader
-  # ==============================
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
-  # ==============================
-  # 🌐  Networking
-  # ==============================
   networking = {
     networkmanager.enable = true;
     firewall.enable = true;
@@ -37,16 +25,10 @@
   services.openssh.enable = true;
   services.printing = {
     enable = true;
-    drivers = with pkgs; [
-      epson-escpr
-      # epson-escpr2
-    ];
-    browsing = false; # avoids GNOME hangs
+    drivers = with pkgs; [ epson-escpr ];
+    browsing = false;
   };
 
-  # ==============================
-  # 🌍  Locale & Time
-  # ==============================
   time.timeZone = "Europe/Moscow";
 
   i18n = {
@@ -66,31 +48,20 @@
 
   virtualisation.docker.enable = true;
 
-  # ==============================
-  # 🔊  Audio (PipeWire)
-  # ==============================
   security.rtkit.enable = true;
-
   services.pipewire = {
     enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
+    alsa = { enable = true; support32Bit = true; };
     pulse.enable = true;
   };
-
-  services.pulseaudio.enable = false; # PipeWire replaces this
+  services.pulseaudio.enable = false;
   services.flatpak.enable = true;
-
   security.polkit.enable = true;
 
-  # For ferris sweep keyboard
   services.udev.extraRules = ''
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess"
   '';
 
-  # Styling
   stylix = {
     enable = true;
     image = ./wallpaper.png;
@@ -108,37 +79,25 @@
         serif = [ "Inter" ];
       };
       cache32Bit = true;
-      hinting = {
-        enable = true;
-        style = "slight";
-      };
+      hinting = { enable = true; style = "slight"; };
     };
   };
 
-  # ==============================
-  # 👤  User Accounts
-  # ==============================
   home-manager.backupFileExtension = "backup";
   home-manager = {
-    extraSpecialArgs = { inherit inputs; }; # Add this line
+    extraSpecialArgs = { inherit inputs; };
     users.denis = import ./modules/home.nix;
   };
+
   users.users.denis = {
     isNormalUser = true;
     description = "denis";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "i2c"
-      "seat"
-    ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "i2c" "seat" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       vlc
       fastfetch
       onefetch
-      # rip2
       codex
       lima
       unzip
@@ -154,7 +113,6 @@
       xclip
       zoxide
       libreoffice
-      # jellyfin-media-player
       zed-editor
       code-cursor
       lazygit
@@ -164,12 +122,10 @@
       impression
       mangohud
       anki
-
       vial
-      # CLI ai tools
       opencode
       claude-code
-      # GNOME Extensions
+      pi-coding-agent
       gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
@@ -178,50 +134,36 @@
     ];
   };
 
-  # ==============================
-  # 📦  System-Wide Packages
-  # ==============================
   environment.systemPackages = with pkgs; [
-    # Untill they add rip to nixpkgs
     inputs.rip.packages.${pkgs.system}.default
 
-    # System essentials
-    ntfs3g
-    lsof
-    corefonts
-    ffmpeg
-    btop-cuda
-    git
-    git-lfs
-    gcc
-    pkg-config
-    wget
-    curl
-    tmux
-    zellij
-    file
-    dig
-    iw
-    tree
-    neovim
-    bat
-    jq
-    ddcutil
-    fd
-    eza
+    # system essentials
+    ntfs3g lsof corefonts ffmpeg btop-cuda
+    git git-lfs gcc pkg-config wget curl
+    tmux zellij file dig iw tree neovim
+    bat jq ddcutil fd eza
 
-    # LSP related stuff
-    nixfmt
+    # LSP servers
+    vtsls
+    vscode-langservers-extracted
+    emmet-language-server
     gopls
+    rust-analyzer
+    lua-language-server
+    basedpyright
+    nil
+
+    # formatters
+    nixfmt
     stylua
     prettierd
     gofumpt
+    gotools
     rustfmt
+    isort
+    black
   ];
 
-  # ==============================
-  # 🐟  User Programs & Shells
-  # ==============================
   programs = {
     steam.enable = false;
     steam.gamescopeSession.enable = true;
@@ -230,10 +172,7 @@
     nh = {
       enable = true;
       flake = "/home/denis/NixOS";
-      clean = {
-        enable = true;
-        dates = "weekly";
-      };
+      clean = { enable = true; dates = "weekly"; };
     };
 
     gnupg.agent = {
@@ -241,10 +180,7 @@
       enableSSHSupport = true;
     };
 
-    appimage = {
-      enable = true;
-      binfmt = true;
-    };
+    appimage = { enable = true; binfmt = true; };
     fish.enable = true;
   };
 }

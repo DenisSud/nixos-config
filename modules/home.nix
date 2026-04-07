@@ -11,9 +11,7 @@
     homeDirectory = "/home/denis";
     stateVersion = "25.05";
 
-    # Dotfiles
     file = {
-      # Desktop entry for AppImage
       ".local/share/applications/my-app.desktop".text = ''
         [Desktop Entry]
         Version=1.0
@@ -26,7 +24,7 @@
         Terminal=false
         StartupWMClass=my-appimage
       '';
-      ".config/nvim".source = ../dotfiles/nvim; # Points to your `dotfiles/nvim` directory
+      ".config/nvim".source = ../dotfiles/nvim;
       ".config/starship.toml".source = ../dotfiles/starship.toml;
     };
 
@@ -37,14 +35,7 @@
     };
   };
 
-  # Program configurations
   programs = {
-
-    btop = {
-      package = pkgs.btop-cuda;
-      enable = true;
-    };
-
     fzf = {
       enable = true;
       enableFishIntegration = true;
@@ -58,35 +49,26 @@
     fish = {
       enable = true;
       interactiveShellInit = ''
-        # starship prompt
         if type -q starship
           starship init fish | source
         end
-
-        # zoxide
         if type -q zoxide
           zoxide init fish | source
         end
-
-        # atuin
         if type -q atuin
           atuin init fish | source
         end
 
         alias v="nvim"
         alias cl="clear"
-
-        # Terminal productivity
         alias ls='eza'
         alias ll='eza -lbF --git'
         alias la='eza -lbhHigUmuSa --git'
         alias lt='eza --tree --level=2'
 
-        # fzf integration with fd
         set -gx FZF_DEFAULT_COMMAND 'fd --type f'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f'
         set -gx FZF_ALT_C_COMMAND 'fd --type d'
-
       '';
     };
 
@@ -107,15 +89,8 @@
           "ctrl+k=goto_split:up"
         ];
       };
-
     };
 
     home-manager.enable = true;
   };
-
-  home.packages = with pkgs; [
-    fd
-    eza
-    nixfmt
-  ];
 }
