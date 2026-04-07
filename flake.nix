@@ -7,10 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     rip = {
       url = "github:cesarferreira/rip";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +22,6 @@
           specialArgs = { inherit inputs; }; # This makes 'inputs' available in all your modules
           modules = [
             inputs.home-manager.nixosModules.default
-            inputs.stylix.nixosModules.stylix
             ./configuration.nix
             ./modules/pc-hardware-configuration.nix
             ./modules/pc-config.nix
@@ -37,7 +32,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             inputs.home-manager.nixosModules.default
-            inputs.stylix.nixosModules.stylix
             ./configuration.nix
             ./modules/g14-hardware-configuration.nix
             ./modules/g14-config.nix

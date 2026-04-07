@@ -8,32 +8,41 @@
 {
   # PC-only settings (moved from your old configuration.nix)
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [
-    "amd_pstate=active"
-    "nvidia_drm.fbdev=1"
-    "nvidia_drm.modeset=1"
-  ];
   boot.kernel.sysctl = {
-    "vm.swappiness" = 10;
-    "vm.dirty_ratio" = 15;
-    "vm.dirty_background_ratio" = 3;
-    "vm.overcommit_memory" = 1;
-    "vm.min_free_kbytes" = 524288;
-    "kernel.numa_balancing" = false;
+    "net.ipv4.ip_forward" = 1;
   };
 
   networking.hostName = "pc";
-  networking.interfaces.eno1.wakeOnLan.enable = true;
 
   # firewall and extra ports for pc
   networking.firewall.allowedTCPPorts = [
+    22
     631
-    11434
     8080
   ];
   networking.firewall.allowedUDPPorts = [ ];
   networking.firewall.allowPing = false;
 
+  systemd.services.xray = {
+    description = "Xray Service";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.xray}/bin/xray run -c /etc/xray/config.json";
+      Restart = "always";
+      User = "nobody";
+      CapabilityBoundingSet = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_BIND_SERVICE"
+      ];
+      AmbientCapabilities = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_BIND_SERVICE"
+      ];
+      NoNewPrivileges = true;
+    };
+  };
   # ==============================
   # 🎮  Hardware & Graphics
   # ==============================
@@ -44,12 +53,7 @@
       enable32Bit = true;
     };
 
-    nvidia = {
-      modesetting.enable = true;
-      open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
-
+    nvidia.open = true;
     nvidia-container-toolkit.enable = true;
   };
 
@@ -69,7 +73,6 @@
   # ==============================
   # Desktop Environment (GNOME + X11)
   # ==============================
-
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
@@ -87,9 +90,6 @@
     host = "0.0.0.0";
     enable = true;
     openFirewall = true;
-    # environmentVariables = {
-    #   "OLLAMA_CONTEXT_LENGTH" = "200000";
-    # };
     package = pkgs.ollama-cuda;
   };
   services.jellyfin.enable = true;

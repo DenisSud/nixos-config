@@ -49,8 +49,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local out = vim.fn.system({
-		"git", "clone", "--filter=blob:none", "--branch=stable",
-		"https://github.com/folke/lazy.nvim.git", lazypath,
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"--branch=stable",
+		"https://github.com/folke/lazy.nvim.git",
+		lazypath,
 	})
 	if vim.v.shell_error ~= 0 then
 		error("Error cloning lazy.nvim:\n" .. out)
@@ -109,16 +113,26 @@ require("lazy").setup({
 				end
 
 				map("n", "]c", function()
-					if vim.wo.diff then vim.cmd.normal({ "]c", bang = true })
-					else gitsigns.nav_hunk("next") end
+					if vim.wo.diff then
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gitsigns.nav_hunk("next")
+					end
 				end, { desc = "Jump to next git [c]hange" })
 				map("n", "[c", function()
-					if vim.wo.diff then vim.cmd.normal({ "[c", bang = true })
-					else gitsigns.nav_hunk("prev") end
+					if vim.wo.diff then
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gitsigns.nav_hunk("prev")
+					end
 				end, { desc = "Jump to previous git [c]hange" })
 
-				map("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "git [s]tage hunk" })
-				map("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "git [r]eset hunk" })
+				map("v", "<leader>hs", function()
+					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, { desc = "git [s]tage hunk" })
+				map("v", "<leader>hr", function()
+					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, { desc = "git [r]eset hunk" })
 				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git [s]tage hunk" })
 				map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git [r]eset hunk" })
 				map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git [S]tage buffer" })
@@ -127,7 +141,9 @@ require("lazy").setup({
 				map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk" })
 				map("n", "<leader>hb", gitsigns.blame_line, { desc = "git [b]lame line" })
 				map("n", "<leader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
-				map("n", "<leader>hD", function() gitsigns.diffthis("@") end, { desc = "git [D]iff against last commit" })
+				map("n", "<leader>hD", function()
+					gitsigns.diffthis("@")
+				end, { desc = "git [D]iff against last commit" })
 				map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
 				map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
 			end,
@@ -198,7 +214,9 @@ require("lazy").setup({
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "make",
-				cond = function() return vim.fn.executable("make") == 1 end,
+				cond = function()
+					return vim.fn.executable("make") == 1
+				end,
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
@@ -224,7 +242,9 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 			vim.keymap.set("n", "<leader>/", function()
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ winblend = 10, previewer = false }))
+				builtin.current_buffer_fuzzy_find(
+					require("telescope.themes").get_dropdown({ winblend = 10, previewer = false })
+				)
 			end, { desc = "[/] Fuzzily search in current buffer" })
 			vim.keymap.set("n", "<leader>s/", function()
 				builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files" })
@@ -285,7 +305,15 @@ require("lazy").setup({
 				jsonls = {},
 				eslint = {},
 				emmet_ls = {
-					filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+					filetypes = {
+						"html",
+						"css",
+						"scss",
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+					},
 				},
 				gopls = {
 					settings = {
@@ -375,7 +403,9 @@ require("lazy").setup({
 		keys = {
 			{
 				"<leader>f",
-				function() require("conform").format({ async = true, lsp_format = "fallback" }) end,
+				function()
+					require("conform").format({ async = true, lsp_format = "fallback" })
+				end,
 				mode = "",
 				desc = "[F]ormat buffer",
 			},
@@ -384,7 +414,9 @@ require("lazy").setup({
 			notify_on_error = false,
 			format_on_save = function(bufnr)
 				local disable_filetypes = { c = true, cpp = true }
-				if disable_filetypes[vim.bo[bufnr].filetype] then return nil end
+				if disable_filetypes[vim.bo[bufnr].filetype] then
+					return nil
+				end
 				return { timeout_ms = 500, lsp_format = "fallback" }
 			end,
 			formatters_by_ft = {
@@ -412,7 +444,9 @@ require("lazy").setup({
 				"L3MON4D3/LuaSnip",
 				version = "2.*",
 				build = (function()
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then return end
+					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+						return
+					end
 					return "make install_jsregexp"
 				end)(),
 				opts = {},
@@ -472,39 +506,76 @@ require("lazy").setup({
 
 			local Terminal = require("toggleterm.terminal").Terminal
 			local claude = Terminal:new({
-				cmd = "claude",
+				cmd = "proxychains4 -q pi",
 				direction = "vertical",
-				size = function() return math.floor(vim.o.columns * 0.4) end,
+				size = function()
+					return math.floor(vim.o.columns * 0.4)
+				end,
 				hidden = true,
 			})
-			vim.keymap.set("n", "<leader>tc", function() claude:toggle() end, { desc = "[T]oggle [C]laude terminal" })
+			vim.keymap.set("n", "<leader>tc", function()
+				claude:toggle()
+			end, { desc = "[T]oggle [C]laude terminal" })
 		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false, -- v1.x does NOT support lazy-loading
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs",
-		opts = {
-			ensure_installed = {
-				"bash", "c", "css", "diff", "go", "gomod", "gowork", "gosum",
-				"html", "javascript", "json", "lua", "luadoc", "markdown",
-				"markdown_inline", "python", "query", "tsx", "typescript",
-				"vim", "vimdoc",
-			},
-			auto_install = true,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = { "ruby" },
-			},
-			indent = { enable = true, disable = { "ruby" } },
-		},
+		config = function()
+			require("nvim-treesitter").install({
+				"bash",
+				"c",
+				"css",
+				"diff",
+				"go",
+				"gomod",
+				"gowork",
+				"gosum",
+				"html",
+				"javascript",
+				"json",
+				"lua",
+				"luadoc",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"query",
+				"tsx",
+				"typescript",
+				"vim",
+				"vimdoc",
+			})
+			-- enable treesitter highlighting + indent per filetype
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					pcall(vim.treesitter.start)
+					vim.bo.indentexpr = "v:lua.vim.treesitter.indentexpr()"
+				end,
+			})
+		end,
 	},
 }, {
+	performance = {
+		rtp = {
+			reset = false, -- preserve Nix-managed runtimepath
+		},
+	},
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
-			cmd = "⌘", config = "🛠", event = "📅", ft = "📂", init = "⚙",
-			keys = "🗝", plugin = "🔌", runtime = "💻", require = "🌙",
-			source = "📄", start = "🚀", task = "📌", lazy = "💤 ",
+			cmd = "⌘",
+			config = "🛠",
+			event = "📅",
+			ft = "📂",
+			init = "⚙",
+			keys = "🗝",
+			plugin = "🔌",
+			runtime = "💻",
+			require = "🌙",
+			source = "📄",
+			start = "🚀",
+			task = "📌",
+			lazy = "💤 ",
 		},
 	},
 })

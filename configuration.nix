@@ -8,7 +8,10 @@
 {
   imports = [ ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
 
@@ -19,7 +22,7 @@
 
   networking = {
     networkmanager.enable = true;
-    firewall.enable = true;
+    firewall.enable = false;
   };
 
   services.openssh.enable = true;
@@ -51,23 +54,15 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    alsa = { enable = true; support32Bit = true; };
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     pulse.enable = true;
   };
   services.pulseaudio.enable = false;
   services.flatpak.enable = true;
   security.polkit.enable = true;
-
-  services.udev.extraRules = ''
-    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess"
-  '';
-
-  stylix = {
-    enable = true;
-    image = ./wallpaper.png;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal.yaml";
-  };
 
   fonts = {
     packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
@@ -79,7 +74,10 @@
         serif = [ "Inter" ];
       };
       cache32Bit = true;
-      hinting = { enable = true; style = "slight"; };
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
     };
   };
 
@@ -92,9 +90,16 @@
   users.users.denis = {
     isNormalUser = true;
     description = "denis";
-    extraGroups = [ "networkmanager" "wheel" "docker" "i2c" "seat" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "i2c"
+      "seat"
+    ];
     shell = pkgs.fish;
     packages = with pkgs; [
+      xray
       vlc
       fastfetch
       onefetch
@@ -123,9 +128,7 @@
       mangohud
       anki
       vial
-      opencode
-      claude-code
-      pi-coding-agent
+      # pi-coding-agent
       gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
@@ -137,11 +140,36 @@
   environment.systemPackages = with pkgs; [
     inputs.rip.packages.${pkgs.system}.default
 
+    claude-code
+    pi-coding-agent
+
+    xray
+    proxychains-ng
+
     # system essentials
-    ntfs3g lsof corefonts ffmpeg btop-cuda
-    git git-lfs gcc pkg-config wget curl
-    tmux zellij file dig iw tree neovim
-    bat jq ddcutil fd eza
+    ntfs3g
+    lsof
+    corefonts
+    ffmpeg
+    btop-cuda
+    git
+    git-lfs
+    gcc
+    pkg-config
+    wget
+    curl
+    tmux
+    zellij
+    file
+    dig
+    iw
+    tree
+    neovim
+    bat
+    jq
+    ddcutil
+    fd
+    eza
 
     # LSP servers
     vtsls
@@ -171,8 +199,11 @@
 
     nh = {
       enable = true;
-      flake = "/home/denis/NixOS";
-      clean = { enable = true; dates = "weekly"; };
+      flake = "/home/denis/nixos-config";
+      clean = {
+        enable = true;
+        dates = "weekly";
+      };
     };
 
     gnupg.agent = {
@@ -180,7 +211,13 @@
       enableSSHSupport = true;
     };
 
-    appimage = { enable = true; binfmt = true; };
+    appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = pkgs: [ pkgs.libepoxy ];
+      };
+    };
     fish.enable = true;
   };
 }

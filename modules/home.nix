@@ -59,7 +59,7 @@
           atuin init fish | source
         end
 
-        alias v="nvim"
+        alias vi="nvim"
         alias cl="clear"
         alias ls='eza'
         alias ll='eza -lbF --git'
