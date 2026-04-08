@@ -6,8 +6,6 @@
 }:
 
 {
-  imports = [ ];
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -15,23 +13,19 @@
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
 
+  # ── Boot ──────────────────────────────────────────────
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
+  # ── Networking ────────────────────────────────────────
   networking = {
     networkmanager.enable = true;
     firewall.enable = false;
   };
 
-  services.openssh.enable = true;
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ epson-escpr ];
-    browsing = false;
-  };
-
+  # ── Time / Locale ─────────────────────────────────────
   time.timeZone = "Europe/Moscow";
 
   i18n = {
@@ -49,8 +43,27 @@
     };
   };
 
-  virtualisation.docker.enable = true;
+  # ── Hardware / Graphics ───────────────────────────────
+  hardware = {
+    i2c.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    nvidia-container-toolkit.enable = true;
+  };
 
+  # ── Desktop: GNOME ────────────────────────────────────
+  services = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+  };
+
+  # ── Audio ──────────────────────────────────────────────
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -60,12 +73,23 @@
     };
     pulse.enable = true;
   };
-  services.pulseaudio.enable = false;
-  services.flatpak.enable = true;
+
+  # ── Services ──────────────────────────────────────────
+  services = {
+    openssh.enable = true;
+    flatpak.enable = true;
+    ollama = {
+      host = "0.0.0.0";
+      enable = true;
+      package = pkgs.ollama-cuda;
+    };
+  };
+  virtualisation.docker.enable = true;
   security.polkit.enable = true;
 
+  # ── Fonts ─────────────────────────────────────────────
   fonts = {
-    packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
+    packages = with pkgs; [ inter nerd-fonts.jetbrains-mono ];
     fontconfig = {
       enable = true;
       defaultFonts = {
@@ -81,12 +105,7 @@
     };
   };
 
-  home-manager.backupFileExtension = "backup";
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users.denis = import ./modules/home.nix;
-  };
-
+  # ── User ──────────────────────────────────────────────
   users.users.denis = {
     isNormalUser = true;
     description = "denis";
@@ -99,7 +118,6 @@
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      xray
       vlc
       fastfetch
       onefetch
@@ -128,8 +146,6 @@
       mangohud
       anki
       vial
-      # pi-coding-agent
-      gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.blur-my-shell
@@ -137,11 +153,11 @@
     ];
   };
 
+  # ── System Packages ──────────────────────────────────
   environment.systemPackages = with pkgs; [
     inputs.rip.packages.${pkgs.system}.default
 
     claude-code
-    pi-coding-agent
 
     xray
     proxychains-ng
@@ -170,6 +186,7 @@
     ddcutil
     fd
     eza
+    nodejs
 
     # LSP servers
     vtsls
@@ -192,9 +209,8 @@
     black
   ];
 
+  # ── Programs ─────────────────────────────────────────
   programs = {
-    steam.enable = false;
-    steam.gamescopeSession.enable = true;
     mtr.enable = true;
 
     nh = {
@@ -219,5 +235,12 @@
       };
     };
     fish.enable = true;
+  };
+
+  # ── Home Manager ─────────────────────────────────────
+  home-manager.backupFileExtension = "backup";
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users.denis = import ./modules/home.nix;
   };
 }
