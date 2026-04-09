@@ -89,7 +89,10 @@
 
   # ── Fonts ─────────────────────────────────────────────
   fonts = {
-    packages = with pkgs; [ inter nerd-fonts.jetbrains-mono ];
+    packages = with pkgs; [
+      inter
+      nerd-fonts.jetbrains-mono
+    ];
     fontconfig = {
       enable = true;
       defaultFonts = {
@@ -156,8 +159,6 @@
   # ── System Packages ──────────────────────────────────
   environment.systemPackages = with pkgs; [
     inputs.rip.packages.${pkgs.system}.default
-
-    claude-code
 
     xray
     proxychains-ng
@@ -244,3 +245,4 @@
     users.denis = import ./modules/home.nix;
   };
 }
+

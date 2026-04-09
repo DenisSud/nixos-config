@@ -506,7 +506,7 @@ require("lazy").setup({
 
 			local Terminal = require("toggleterm.terminal").Terminal
 			local claude = Terminal:new({
-				cmd = "proxychains4 -q pi",
+				cmd = "pi",
 				direction = "vertical",
 				size = function()
 					return math.floor(vim.o.columns * 0.4)
