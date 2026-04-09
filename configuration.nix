@@ -164,6 +164,7 @@
     proxychains-ng
 
     # system essentials
+    claude-code
     ntfs3g
     lsof
     corefonts
@@ -245,4 +246,3 @@
     users.denis = import ./modules/home.nix;
   };
 }
-
