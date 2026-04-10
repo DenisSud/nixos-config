@@ -18,6 +18,7 @@
 
   # ── Ollama: expose to LAN ─────────────────────────────
   services.ollama.openFirewall = true;
+  services.ollama.enable = true;
 
   # ── Xray Proxy Service ───────────────────────────────
   systemd.services.xray = {

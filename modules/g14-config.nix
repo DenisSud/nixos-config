@@ -34,22 +34,10 @@
     "amdgpu"
   ];
 
+  services.ollama.enable = true;
+
   # ── ASUS-specific ─────────────────────────────────────
   # Uncomment after adding the asus-linux flake input:
   # services.supergfxd.enable = true;
   # environment.systemPackages = [ pkgs.asusctl ];
-
-  # ── Laptop Power ──────────────────────────────────────
-  services.auto-cpufreq = {
-    enable = true;
-    settings = {
-      battery = {
-        governor = "powersave";
-      };
-      charger = {
-        governor = "performance";
-      };
-    };
-  };
 }
-
