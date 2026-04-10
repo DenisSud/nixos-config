@@ -203,6 +203,7 @@ require("lazy").setup({
 				{ "<leader>t", group = "[T]oggle / [T]erminal" },
 				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
 				{ "<leader>g", group = "[G]it", mode = { "n", "v" } },
+				{ "<leader>a", group = "[A]I / Pi" },
 			},
 		},
 	},
@@ -505,17 +506,23 @@ require("lazy").setup({
 			})
 
 			local Terminal = require("toggleterm.terminal").Terminal
-			local claude = Terminal:new({
+			local pi_term = Terminal:new({
 				cmd = "pi",
-				direction = "vertical",
-				size = function()
-					return math.floor(vim.o.columns * 0.4)
-				end,
+				direction = "float",
 				hidden = true,
 			})
-			vim.keymap.set("n", "<leader>tc", function()
-				claude:toggle()
-			end, { desc = "[T]oggle [C]laude terminal" })
+			vim.keymap.set("n", "<leader>tp", function()
+				pi_term:toggle()
+			end, { desc = "[T]oggle [P]i terminal" })
+		end,
+	},
+	{
+		"pablopunk/pi.nvim",
+		config = function()
+			require("pi").setup({
+				provider = "ollama",
+				model = "glm-5.1:cloud",
+			})
 		end,
 	},
 	{

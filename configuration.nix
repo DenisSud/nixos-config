@@ -164,7 +164,9 @@
     proxychains-ng
 
     # system essentials
+    tree-sitter
     claude-code
+    pi-coding-agent
     ntfs3g
     lsof
     corefonts

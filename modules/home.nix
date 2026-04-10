@@ -49,6 +49,8 @@
     fish = {
       enable = true;
       interactiveShellInit = ''
+        set -g fish_greeting
+
         if type -q starship
           starship init fish | source
         end
@@ -62,7 +64,6 @@
         alias ll='eza -lbF --git'
         alias la='eza -lbhHigUmuSa --git'
         alias lt='eza --tree --level=2'
-        alias pi='npx @mariozechner/pi-coding-agent@latest'
 
         set -gx FZF_DEFAULT_COMMAND 'fd --type f'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f'
