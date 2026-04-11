@@ -214,6 +214,12 @@
 
   # ── Programs ─────────────────────────────────────────
   programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports for Steam Remote Play
+      localNetworkGameTransfers.openFirewall = true; # Open ports for local network game transfers
+    };
+
     mtr.enable = true;
 
     nh = {

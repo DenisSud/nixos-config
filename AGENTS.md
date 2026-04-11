@@ -5,19 +5,22 @@ This repo contains the NixOS system configuration for two machines:
 - **pc** — Desktop with AMD CPU + NVIDIA RTX 5070 (Blackwell, open driver)
 - **g14** — ASUS ROG Zephyrus G14 laptop with AMD CPU + NVIDIA hybrid graphics
 
-## Architecture
+## Architecture: 
 ```
-flake.nix              # Flake entry point, defines both hosts
-configuration.nix      # Shared config (bootloader, GNOME, audio, users, base packages)
-modules/
-  pc-hardware-configuration.nix   # Desktop hardware (generated, don't edit)
-  pc-config.nix                  # Desktop-specific: hostname, NVIDIA, xray proxy, ollama, IP forwarding
-  g14-hardware-configuration.nix # Laptop hardware (generated, don't edit)
-  g14-config.nix                 # Laptop-specific: hostname, NVIDIA hybrid
-  home.nix                       # Home Manager config for user "denis"
-dotfiles/
-  nvim/init.lua     # Neovim config (lazy.nvim, treesitter v1.x, blink.cmp, lspconfig, etc.)
-  starship.toml     # Starship prompt config
+/home/denis/nixos-config
+├── flake.nix # Flake entry point, defines both hosts
+├── configuration.nix # Shared config (bootloader, GNOME, audio, users, base packages)
+├── modules
+│   ├── pc-hardware-configuration.nix # Desktop hardware (generated, don't edit)
+│   ├── pc-config.nix # Desktop-specific: hostname, NVIDIA, xray proxy, ollama, IP forwarding
+│   ├── g14-hardware-configuration.nix # Laptop hardware (generated, don't edit)
+│   ├── g14-config.nix # Laptop-specific: hostname, NVIDIA hybrid
+│   └── home.nix # Home Manager config for 'denis' user
+└── dotfiles
+    ├── nvim
+    │   └── init.lua
+    ├── starship.toml
+    └── pi/ # Pi coding agent configuration: skills, extensions, system prompts and more
 ```
 
 ## Key Facts
