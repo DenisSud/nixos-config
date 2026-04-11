@@ -32,6 +32,7 @@
       ".pi/agent/settings.json".source = ../dotfiles/.pi/agent/settings.json;
       ".pi/agent/skills".source = ../dotfiles/.pi/agent/skills;
       ".pi/agent/extensions".source = ../dotfiles/.pi/agent/extensions;
+      ".pi/agent/prompts".source = ../dotfiles/.pi/agent/prompts;
     };
 
     sessionVariables = {

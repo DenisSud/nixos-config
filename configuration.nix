@@ -145,6 +145,7 @@
       gnome-tweaks
       yandex-music
       impression
+      lutris
       mangohud
       anki
       vial
