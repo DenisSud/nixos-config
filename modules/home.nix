@@ -26,6 +26,12 @@
       '';
       ".config/nvim".source = ../dotfiles/nvim;
       ".config/starship.toml".source = ../dotfiles/starship.toml;
+
+      # Pi coding agent — declarative config only
+      # (models.json, auth.json, sessions/ are per-device runtime state)
+      ".pi/agent/settings.json".source = ../dotfiles/pi/agent/settings.json;
+      ".pi/agent/skills".source = ../dotfiles/pi/agent/skills;
+      ".pi/agent/extensions".source = ../dotfiles/pi/agent/extensions;
     };
 
     sessionVariables = {
@@ -63,6 +69,12 @@
         alias ll='eza -lbF --git'
         alias la='eza -lbhHigUmuSa --git'
         alias lt='eza --tree --level=2'
+
+        # Source per-device secrets (API keys, etc.)
+        # Create ~/.env with lines like: set -gx OPENAI_API_KEY "sk-..."
+        if test -f ~/.env
+          source ~/.env
+        end
 
         set -gx FZF_DEFAULT_COMMAND 'fd --type f'
         set -gx FZF_CTRL_T_COMMAND 'fd --type f'
