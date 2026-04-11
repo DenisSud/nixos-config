@@ -59,7 +59,6 @@
         end
 
         alias vi="nvim"
-        alias cl="clear"
         alias ls='eza'
         alias ll='eza -lbF --git'
         alias la='eza -lbhHigUmuSa --git'
