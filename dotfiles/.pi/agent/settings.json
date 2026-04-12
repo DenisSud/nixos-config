@@ -1,5 +1,6 @@
 {
   "defaultModel": "glm-5.1:cloud",
   "defaultProvider": "ollama",
-  "lastChangelogVersion": "0.64.0"
+  "lastChangelogVersion": "0.64.0",
+  "quietStartup": true
 }
