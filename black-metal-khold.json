@@ -1,0 +1,82 @@
+{
+  "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+  "name": "black-metal-khold",
+  "vars": {
+    "bg": "#000000",
+    "bg1": "#121212",
+    "bg2": "#222222",
+    "bg3": "#333333",
+    "muted": "#999999",
+    "fg": "#c1c1c1",
+    "teal": "#5f8787",
+    "clay": "#974b46",
+    "snow": "#eceee3",
+    "silver": "#aaaaaa",
+    "stone": "#888888",
+    "cinder": "#444444"
+  },
+  "colors": {
+    "accent": "teal",
+    "border": "bg3",
+    "borderAccent": "teal",
+    "borderMuted": "bg2",
+    "success": "teal",
+    "error": "clay",
+    "warning": "silver",
+    "muted": "muted",
+    "dim": "stone",
+    "text": "fg",
+    "thinkingText": "muted",
+
+    "selectedBg": "bg2",
+    "userMessageBg": "bg1",
+    "userMessageText": "fg",
+    "customMessageBg": "bg1",
+    "customMessageText": "fg",
+    "customMessageLabel": "teal",
+    "toolPendingBg": "bg1",
+    "toolSuccessBg": "bg1",
+    "toolErrorBg": "bg1",
+    "toolTitle": "teal",
+    "toolOutput": "fg",
+
+    "mdHeading": "snow",
+    "mdLink": "teal",
+    "mdLinkUrl": "muted",
+    "mdCode": "silver",
+    "mdCodeBlock": "fg",
+    "mdCodeBlockBorder": "bg3",
+    "mdQuote": "muted",
+    "mdQuoteBorder": "bg3",
+    "mdHr": "bg3",
+    "mdListBullet": "teal",
+
+    "toolDiffAdded": "teal",
+    "toolDiffRemoved": "clay",
+    "toolDiffContext": "muted",
+
+    "syntaxComment": "cinder",
+    "syntaxKeyword": "silver",
+    "syntaxFunction": "teal",
+    "syntaxVariable": "fg",
+    "syntaxString": "snow",
+    "syntaxNumber": "silver",
+    "syntaxType": "silver",
+    "syntaxOperator": "muted",
+    "syntaxPunctuation": "stone",
+
+    "thinkingOff": "bg3",
+    "thinkingMinimal": "cinder",
+    "thinkingLow": "stone",
+    "thinkingMedium": "muted",
+    "thinkingHigh": "teal",
+    "thinkingXhigh": "clay",
+
+    "bashMode": "clay"
+  },
+  "export": {
+    "pageBg": "#000000",
+    "cardBg": "#121212",
+    "infoBg": "#222222"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+  "name": "black-metal-khold",
+  "vars": {
+    "bg":      "#000000",
+    "bg1":     "#111111",
+    "bg2":     "#222222",
+    "bg3":     "#333333",
+    "dim":     "#888888",
+    "text":    "#c1c1c1",
+    "muted":   "#aaaaaa",
+    "snow":    "#eceee3",
+    "teal":    "#5f8787",
+    "clay":    "#974b46",
+    "comment": "#444444",
+    "num":     "#999999"
+  },
+  "colors": {
+    "accent":             "teal",
+    "border":             "bg3",
+    "borderAccent":       "teal",
+    "borderMuted":        "comment",
+    "success":            "teal",
+    "error":              "clay",
+    "warning":            "clay",
+    "muted":              "muted",
+    "dim":                "dim",
+    "text":               "",
+    "thinkingText":       "muted",
+
+    "selectedBg":         "bg2",
+    "userMessageBg":      "bg1",
+    "userMessageText":    "",
+    "customMessageBg":    "bg1",
+    "customMessageText":  "",
+    "customMessageLabel": "teal",
+    "toolPendingBg":      "bg2",
+    "toolSuccessBg":      "#112222",
+    "toolErrorBg":        "#221111",
+    "toolTitle":          "teal",
+    "toolOutput":         "text",
+
+    "mdHeading":          "snow",
+    "mdLink":             "teal",
+    "mdLinkUrl":          "muted",
+    "mdCode":             "snow",
+    "mdCodeBlock":        "",
+    "mdCodeBlockBorder":  "comment",
+    "mdQuote":            "muted",
+    "mdQuoteBorder":      "comment",
+    "mdHr":               "comment",
+    "mdListBullet":       "teal",
+
+    "toolDiffAdded":      "#448844",
+    "toolDiffRemoved":    "clay",
+    "toolDiffContext":     "dim",
+
+    "syntaxComment":      "comment",
+    "syntaxKeyword":      "teal",
+    "syntaxFunction":     "teal",
+    "syntaxVariable":     "text",
+    "syntaxString":       "snow",
+    "syntaxNumber":       "num",
+    "syntaxType":         "muted",
+    "syntaxOperator":     "dim",
+    "syntaxPunctuation":  "dim",
+
+    "thinkingOff":        "comment",
+    "thinkingMinimal":    "dim",
+    "thinkingLow":        "muted",
+    "thinkingMedium":     "teal",
+    "thinkingHigh":       "clay",
+    "thinkingXhigh":      "clay",
+
+    "bashMode":            "clay"
+  },
+  "export": {
+    "pageBg": "#000000",
+    "cardBg": "#111111",
+    "infoBg": "#222222"
+  }
+}

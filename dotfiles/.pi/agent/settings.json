@@ -2,5 +2,6 @@
   "defaultModel": "glm-5.1:cloud",
   "defaultProvider": "ollama",
   "lastChangelogVersion": "0.64.0",
-  "quietStartup": true
+  "quietStartup": true,
+  "theme": "black-metal-khold"
 }

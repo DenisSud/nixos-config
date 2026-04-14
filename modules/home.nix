@@ -30,6 +30,7 @@
       # Pi coding agent — declarative config only
       # (models.json, auth.json, sessions/ are per-device runtime state)
       ".pi/agent/settings.json".source = ../dotfiles/.pi/agent/settings.json;
+      ".pi/agent/themes".source = ../dotfiles/.pi/agent/themes;
       ".pi/agent/skills".source = ../dotfiles/.pi/agent/skills;
       ".pi/agent/extensions".source = ../dotfiles/.pi/agent/extensions;
       ".pi/agent/prompts".source = ../dotfiles/.pi/agent/prompts;
