@@ -1,7 +1,15 @@
 {
-  "defaultModel": "glm-5.1:cloud",
   "defaultProvider": "ollama",
+  "defaultModel": "qwen3.5:latest",
   "lastChangelogVersion": "0.64.0",
   "quietStartup": true,
-  "theme": "black-metal-khold"
+  "theme": "black-metal-khold",
+  "models": [
+    "minimax-m2.7:cloud",
+    "glm-5.1:cloud",
+    "qwen3.5:cloud",
+    "qwen3.5:latest",
+    "qwen3.5:35b"
+  ]
 }
+

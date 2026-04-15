@@ -126,16 +126,14 @@
       codex
       lima
       unzip
-      fzf
       dust
       ripgrep
       starship
       obsidian
       vscode
-      ghostty
       fragments
       telegram-desktop
-      xclip
+      wl-clipboard
       zoxide
       libreoffice
       zed-editor
@@ -164,7 +162,6 @@
     proxychains-ng
 
     # system essentials
-    tree-sitter
     claude-code
     pi-coding-agent
     ntfs3g
@@ -215,11 +212,7 @@
 
   # ── Programs ─────────────────────────────────────────
   programs = {
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports for Steam Remote Play
-      localNetworkGameTransfers.openFirewall = true; # Open ports for local network game transfers
-    };
+    steam.enable = true;
 
     mtr.enable = true;
 

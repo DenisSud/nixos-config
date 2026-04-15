@@ -1,0 +1,36 @@
+{
+  "providers": {
+    "ollama": {
+      "baseUrl": "http://localhost:11434/v1",
+      "api": "openai-completions",
+      "apiKey": "ollama",
+      "models": [
+        {
+          "id": "minimax-m2.7:cloud",
+          "name": "MiniMax M2.7 Cloud",
+          "contextWindow": 131072
+        },
+        {
+          "id": "glm-5.1:cloud",
+          "name": "GLM-5.1 Cloud",
+          "contextWindow": 131072
+        },
+        {
+          "id": "qwen3.5:cloud",
+          "name": "Qwen 3.5 Cloud",
+          "contextWindow": 131072
+        },
+        {
+          "id": "qwen3.5:latest",
+          "name": "Qwen 3.5 Latest",
+          "contextWindow": 131072
+        },
+        {
+          "id": "qwen3.5:35b",
+          "name": "Qwen 3.5 35B",
+          "contextWindow": 131072
+        }
+      ]
+    }
+  }
+}
