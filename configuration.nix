@@ -241,7 +241,8 @@
   };
 
   # ── Home Manager ─────────────────────────────────────
-  home-manager.backupFileExtension = "backup";
+  home-manager.backupFileExtension = "backup"; # Расширение для резервных копий
+  home-manager.overwriteBackup = true; # Перезаписывать существующие резервные копии
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.denis = import ./modules/home.nix;
