@@ -496,6 +496,13 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"hedyhli/outline.nvim",
+		opts = {},
+		keys = {
+			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle [O]utline" },
+		},
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		config = function()
