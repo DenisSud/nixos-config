@@ -342,13 +342,16 @@ require("lazy").setup({
 				basedpyright = {
 					filetypes = { "python" },
 					cmd = { "basedpyright-langserver", "--stdio" },
-					root_dir = function(fname)
-						return vim.fs.dirname(
-							vim.fs.find(
-								{ "pyproject.toml", "setup.py", "pyrightconfig.json", ".python-version" },
-								{ path = fname, upward = true }
-							)[1]
-						)
+					root_dir = function(bufnr)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						if fname == "" then
+							return nil
+						end
+						local root = vim.fs.find(
+							{ "pyproject.toml", "setup.py", "pyrightconfig.json", ".python-version" },
+							{ path = fname, upward = true }
+						)[1]
+						return root and vim.fs.dirname(root)
 					end,
 					settings = {
 						basedpyright = {
