@@ -339,14 +339,14 @@ require("lazy").setup({
 						Lua = { completion = { callSnippet = "Replace" } },
 					},
 				},
-				pyright = {
+				basedpyright = {
 					filetypes = { "python" },
-					cmd = { "pyright-langserver", "--stdio" },
+					cmd = { "basedpyright-langserver", "--stdio" },
 					root_dir = function(fname)
-						return vim.fs.dirname(vim.fs.find({ "pyproject.toml", "setup.py", "pyrightconfig.json" }, { path = fname, upward = true })[1])
+						return vim.fs.dirname(vim.fs.find({ "pyproject.toml", "setup.py", "pyrightconfig.json", ".python-version" }, { path = fname, upward = true })[1])
 					end,
 					settings = {
-						pyright = {
+						basedpyright = {
 							analysis = { typeCheckingMode = "basic", diagnosticMode = "workspace" },
 						},
 					},
