@@ -1,6 +1,6 @@
 {
   "defaultProvider": "ollama",
-  "defaultModel": "qwen3.5:latest",
+  "defaultModel": "minimax-m2.7:cloud",
   "lastChangelogVersion": "0.64.0",
   "quietStartup": true,
   "theme": "black-metal-khold",

@@ -339,9 +339,14 @@ require("lazy").setup({
 						Lua = { completion = { callSnippet = "Replace" } },
 					},
 				},
-				basedpyright = {
+				pyright = {
+					filetypes = { "python" },
+					cmd = { "pyright-langserver", "--stdio" },
+					root_dir = function(fname)
+						return vim.fs.dirname(vim.fs.find({ "pyproject.toml", "setup.py", "pyrightconfig.json" }, { path = fname, upward = true })[1])
+					end,
 					settings = {
-						basedpyright = {
+						pyright = {
 							analysis = { typeCheckingMode = "basic", diagnosticMode = "workspace" },
 						},
 					},
@@ -497,7 +502,9 @@ require("lazy").setup({
 	},
 	{
 		"hedyhli/outline.nvim",
-		opts = {},
+		opts = {
+			symbol_folding = { autofold_depth = 1 },
+		},
 		keys = {
 			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle [O]utline" },
 		},
@@ -592,4 +599,6 @@ require("lazy").setup({
 			lazy = "💤 ",
 		},
 	},
+}, {
+	rock = { enabled = false },
 })

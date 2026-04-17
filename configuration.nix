@@ -164,6 +164,7 @@
     # system essentials
     claude-code
     pi-coding-agent
+    gh
     ntfs3g
     lsof
     corefonts
@@ -196,7 +197,7 @@
     gopls
     rust-analyzer
     lua-language-server
-    basedpyright
+    pyright
     nil
 
     # formatters
@@ -208,6 +209,9 @@
     rustfmt
     isort
     black
+
+    # tree-sitter
+    tree-sitter
   ];
 
   # ── Programs ─────────────────────────────────────────
