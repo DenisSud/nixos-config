@@ -343,7 +343,12 @@ require("lazy").setup({
 					filetypes = { "python" },
 					cmd = { "basedpyright-langserver", "--stdio" },
 					root_dir = function(fname)
-						return vim.fs.dirname(vim.fs.find({ "pyproject.toml", "setup.py", "pyrightconfig.json", ".python-version" }, { path = fname, upward = true })[1])
+						return vim.fs.dirname(
+							vim.fs.find(
+								{ "pyproject.toml", "setup.py", "pyrightconfig.json", ".python-version" },
+								{ path = fname, upward = true }
+							)[1]
+						)
 					end,
 					settings = {
 						basedpyright = {
@@ -518,16 +523,6 @@ require("lazy").setup({
 				direction = "float",
 				float_opts = { border = "rounded" },
 			})
-
-			local Terminal = require("toggleterm.terminal").Terminal
-			local pi_term = Terminal:new({
-				cmd = "pi",
-				direction = "float",
-				hidden = true,
-			})
-			vim.keymap.set("n", "<leader>tp", function()
-				pi_term:toggle()
-			end, { desc = "[T]oggle [P]i terminal" })
 		end,
 	},
 	{
@@ -535,7 +530,7 @@ require("lazy").setup({
 		config = function()
 			require("pi").setup({
 				provider = "ollama",
-				model = "glm-5.1:cloud",
+				model = "glm-5:cloud",
 			})
 		end,
 	},
