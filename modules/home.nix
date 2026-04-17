@@ -34,6 +34,7 @@
       ".pi/agent/themes".source = ../dotfiles/.pi/agent/themes;
       ".pi/agent/skills".source = ../dotfiles/.pi/agent/skills;
       ".pi/agent/extensions".source = ../dotfiles/.pi/agent/extensions;
+      ".pi/hosts".source = ../dotfiles/.pi/hosts;
     };
 
     sessionVariables = {
