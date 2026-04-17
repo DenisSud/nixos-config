@@ -1,5 +1,10 @@
 {
   "providers": {
+    "opencode": {
+      "baseUrl": "https://opencode.ai/zen/v1",
+      "api": "openai-responses",
+      "apiKey": "OPENCODE_API_KEY"
+    },
     "ollama": {
       "baseUrl": "http://localhost:11434/v1",
       "api": "openai-completions",
@@ -39,4 +44,3 @@
     }
   }
 }
-

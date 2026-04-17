@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
+vim.o.shell = vim.fn.exepath("fish")
 vim.o.expandtab = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -340,22 +341,15 @@ require("lazy").setup({
 					},
 				},
 				basedpyright = {
-					filetypes = { "python" },
-					cmd = { "basedpyright-langserver", "--stdio" },
-					root_dir = function(bufnr)
-						local fname = vim.api.nvim_buf_get_name(bufnr)
-						if fname == "" then
-							return nil
-						end
-						local root = vim.fs.find(
-							{ "pyproject.toml", "setup.py", "pyrightconfig.json", ".python-version" },
-							{ path = fname, upward = true }
-						)[1]
-						return root and vim.fs.dirname(root)
-					end,
 					settings = {
 						basedpyright = {
-							analysis = { typeCheckingMode = "basic", diagnosticMode = "workspace" },
+							analysis = {
+								typeCheckingMode = "basic",
+								diagnosticMode = "workspace",
+							},
+						},
+						python = {
+							pythonPath = ".venv/bin/python",
 						},
 					},
 				},
@@ -388,7 +382,7 @@ require("lazy").setup({
 					map("grn", vim.lsp.buf.rename, "Rename")
 
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					if client and client.supports_method("textDocument_inlayHint") then
+					if client and client:supports_method("textDocument/inlayHint") then
 						map("<leader>th", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 						end, "Toggle Inlay Hints")
@@ -524,6 +518,7 @@ require("lazy").setup({
 			require("toggleterm").setup({
 				open_mapping = [[<C-\>]],
 				direction = "float",
+				shell = vim.fn.exepath("fish"),
 				float_opts = { border = "rounded" },
 			})
 
@@ -543,7 +538,7 @@ require("lazy").setup({
 		config = function()
 			require("pi").setup({
 				provider = "ollama",
-				model = "glm-5.1:cloud",
+				model = "minimax-m2.7:cloud",
 			})
 		end,
 	},

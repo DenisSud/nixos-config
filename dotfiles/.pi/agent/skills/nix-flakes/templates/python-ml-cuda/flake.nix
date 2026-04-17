@@ -1,5 +1,5 @@
 {
-  description = "Python ML development environment with CUDA and uv";
+  description = "Python ML development environment with CUDA, uv, and fish shell";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -22,25 +22,37 @@
           ninja
           cudaPackages.cudatoolkit
           cudaPackages.cuda_cudart
-          cudaPackages.cuda_cuddev
           cudaPackages.cuda_cupti
           cudaPackages.cuda_nvrtc
           cudaPackages.cuda_nvtx
-          cudaPackages.cudnn
           cudaPackages.libcublas
           cudaPackages.libcufft
           cudaPackages.libcurand
           cudaPackages.libcusolver
           cudaPackages.libcusparse
           cudaPackages.libnvjitlink
-          cudaPackages.nccl
           nix-gl-host.defaultPackage.x86_64-linux
           uv
           python312
           zlib
+          fish
         ];
 
         shellHook = ''
+          # ── Export all variables to fish ────────────────────────────────────
+          set -a
+
+          # ── CUDA library paths ──────────────────────────────────────────────
+          export LD_LIBRARY_PATH=$(nixglhost -p):$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH="${lib.makeLibraryPath packages}:$LD_LIBRARY_PATH"
+          export LD_LIBRARY_PATH="${stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+
+          # ── CUDA env ────────────────────────────────────────────────────────
+          export CUDA_VISIBLE_DEVICES=0
+          export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+          export TORCH_CUDA_ARCH_LIST=7.0
+
+          # ── venv bootstrap ──────────────────────────────────────────────────
           if [ ! -f pyproject.toml ] && [ ! -f requirements.txt ]; then
             echo "No pyproject.toml or requirements.txt found. Run 'uv init' or create requirements.txt"
           elif [ -f requirements.txt ] && [ ! -d .venv ]; then
@@ -53,15 +65,11 @@
           elif [ -d .venv ]; then
             source .venv/bin/activate
           fi
-          
-          export LD_LIBRARY_PATH=$(nixglhost -p):$LD_LIBRARY_PATH
-          export LD_LIBRARY_PATH="${lib.makeLibraryPath packages}:$LD_LIBRARY_PATH
-          export LD_LIBRARY_PATH="${stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
-          
-          # CUDA-specific environment variables
-          export CUDA_VISIBLE_DEVICES=0
-          export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
-          export TORCH_CUDA_ARCH_LIST=7.0
+
+          set +a
+
+          # ── Launch fish shell ───────────────────────────────────────────────
+          exec fish
         '';
       };
     };
