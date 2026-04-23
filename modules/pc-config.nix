@@ -21,7 +21,7 @@
   services.ollama.enable = true;
 
   # ── Steam ──────────────────────────────────────
-  prorgrams.steam.enable = true;
+  programs.steam.enable = true;
 
   # ── Xray Proxy Service ───────────────────────────────
   systemd.services.xray = {

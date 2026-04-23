@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     rip = {
       url = "github:cesarferreira/rip";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,9 +15,8 @@
       nixosConfigurations = {
         pc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; }; # This makes 'inputs' available in all your modules
+          specialArgs = { inherit inputs; };
           modules = [
-            inputs.home-manager.nixosModules.default
             ./configuration.nix
             ./modules/pc-hardware-configuration.nix
             ./modules/pc-config.nix
@@ -31,7 +26,6 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            inputs.home-manager.nixosModules.default
             ./configuration.nix
             ./modules/g14-hardware-configuration.nix
             ./modules/g14-config.nix

@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
 
@@ -107,6 +108,21 @@
     };
   };
 
+  # ── Environment ──────────────────────────────────────
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  environment.shellAliases = {
+    vi = "nvim";
+    ls = "eza";
+    ll = "eza -lbF --git";
+    la = "eza -lbhHigUmuSa --git";
+    lt = "eza --tree --level=2";
+  };
+
   # ── User ──────────────────────────────────────────────
   users.users.denis = {
     isNormalUser = true;
@@ -139,6 +155,10 @@
       lutris
       anki
       vial
+      ghostty
+      fzf
+      direnv
+      nix-direnv
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.blur-my-shell
@@ -207,7 +227,7 @@
 
   # ── Programs ─────────────────────────────────────────
   programs = {
-    steam.enable = false;
+    steam.enable = lib.mkDefault false;
 
     mtr.enable = true;
 
@@ -233,13 +253,9 @@
       };
     };
     fish.enable = true;
-  };
-
-  # ── Home Manager ─────────────────────────────────────
-  home-manager.backupFileExtension = "backup"; # Расширение для резервных копий
-  home-manager.overwriteBackup = true; # Перезаписывать существующие резервные копии
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users.denis = import ./modules/home.nix;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }
