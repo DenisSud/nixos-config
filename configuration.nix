@@ -120,31 +120,23 @@
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      vlc
       fastfetch
       onefetch
       codex
-      lima
       unzip
       dust
       ripgrep
       starship
       obsidian
-      vscode
       fragments
       telegram-desktop
       wl-clipboard
       zoxide
       libreoffice
-      zed-editor
-      code-cursor
-      lazygit
-      lazydocker
       gnome-tweaks
       yandex-music
       impression
       lutris
-      mangohud
       anki
       vial
       gnomeExtensions.caffeine
@@ -162,7 +154,6 @@
     proxychains-ng
 
     # system essentials
-    claude-code
     pi-coding-agent
     gh
     ntfs3g
@@ -216,7 +207,7 @@
 
   # ── Programs ─────────────────────────────────────────
   programs = {
-    steam.enable = true;
+    steam.enable = false;
 
     mtr.enable = true;
 

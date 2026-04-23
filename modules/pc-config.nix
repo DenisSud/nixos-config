@@ -20,6 +20,9 @@
   services.ollama.openFirewall = true;
   services.ollama.enable = true;
 
+  # ── Steam ──────────────────────────────────────
+  prorgrams.steam.enable = true;
+
   # ── Xray Proxy Service ───────────────────────────────
   systemd.services.xray = {
     description = "Xray Service";
@@ -29,8 +32,14 @@
       ExecStart = "${pkgs.xray}/bin/xray run -c /etc/xray/config.json";
       Restart = "always";
       User = "nobody";
-      CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
-      AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
+      CapabilityBoundingSet = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_BIND_SERVICE"
+      ];
+      AmbientCapabilities = [
+        "CAP_NET_ADMIN"
+        "CAP_NET_BIND_SERVICE"
+      ];
       NoNewPrivileges = true;
     };
   };

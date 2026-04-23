@@ -34,7 +34,7 @@
     "amdgpu"
   ];
 
-  services.ollama.enable = true;
+  services.ollama.enable = false;
 
   # ── ASUS-specific ─────────────────────────────────────
   # Uncomment after adding the asus-linux flake input:
