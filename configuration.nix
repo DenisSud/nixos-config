@@ -117,6 +117,7 @@
 
   environment.shellAliases = {
     vi = "nvim";
+    pi = "npx @mariozechner/pi-coding-agent";
     ls = "eza";
     ll = "eza -lbF --git";
     la = "eza -lbhHigUmuSa --git";
@@ -152,7 +153,7 @@
       gnome-tweaks
       yandex-music
       impression
-      lutris
+      # lutris
       anki
       vial
       ghostty
