@@ -145,7 +145,7 @@
       ripgrep
       starship
       obsidian
-      fragments
+      qbittorrent
       telegram-desktop
       wl-clipboard
       zoxide
@@ -195,6 +195,7 @@
     iw
     tree
     neovim
+    glow
     bat
     jq
     ddcutil
