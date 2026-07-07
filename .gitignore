@@ -1,0 +1,17 @@
+# Secrets
+.env
+*.pem
+*.key
+
+# Nix build artifacts
+result*
+/.direnv/
+
+# OS garbage
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.swp
+*.swo
+*~
