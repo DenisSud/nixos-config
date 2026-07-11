@@ -14,6 +14,9 @@
     xray
     proxychains-ng
 
+    # Encryption (secrets management)
+    age
+
     # System essentials
     pi-coding-agent
     gh

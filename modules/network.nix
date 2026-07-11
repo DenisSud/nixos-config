@@ -11,6 +11,12 @@
       allowedTCPPorts = [
         22 # SSH (also auto-opened by services.openssh, kept explicit for clarity)
       ];
+      allowedTCPPortRanges = [
+        { from = 1714; to = 1764; } # KDE Connect / GSConnect
+      ];
+      allowedUDPPortRanges = [
+        { from = 1714; to = 1764; } # KDE Connect / GSConnect
+      ];
     };
   };
 }
