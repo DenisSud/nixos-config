@@ -112,6 +112,24 @@ nh os boot
 sudo nix flake update
 ```
 
+### Git workflow
+
+Every change made by the AI assistant must be committed atomically with a
+clear, descriptive commit message. Commit after each logical change (not
+batched at the end).
+
+```bash
+git add -A
+git commit -m "scope: description of the change"
+```
+
+Remote is `origin` pointing to `git@git.sudakov.site:DenisSud/nixos-config.git`.
+Push after each commit:
+
+```bash
+git push origin main
+```
+
 ## Dotfiles Setup
 
 After a fresh install, clone and link the dotfile repos:
