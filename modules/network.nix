@@ -10,6 +10,7 @@
       enable = true;
       allowedTCPPorts = [
         22 # SSH (also auto-opened by services.openssh, kept explicit for clarity)
+        2719 # marimo public notebooks
       ];
       allowedTCPPortRanges = [
         { from = 1714; to = 1764; } # KDE Connect / GSConnect

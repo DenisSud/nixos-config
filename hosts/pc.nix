@@ -28,13 +28,19 @@
 
     # ── PC-only modules ─────────────────────────────────
     ../modules/virtualization.nix
-    ../modules/ollama.nix
     ../modules/gaming.nix
     ../modules/xray.nix
   ];
 
   # ── Host identity ─────────────────────────────────────
   networking.hostName = "pc";
+
+  # ── Jellyfin media (256GB loopback mount) ──────────────
+  fileSystems."/home/denis/jellyfin/media" = {
+    device = "/home/denis/jellyfin/media.img";
+    fsType = "ext4";
+    options = [ "loop" "noatime" ];
+  };
 
   # ── State version ─────────────────────────────────────
   system.stateVersion = "25.05";

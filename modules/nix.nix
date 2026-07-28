@@ -2,10 +2,13 @@
 
 {
   # ── Nix daemon ────────────────────────────────────────
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    trusted-users = [ "root" "denis" ];
+  };
 
   # ── nh: NixOS helper ──────────────────────────────────
   # `nh os switch` / `nh os boot` from any directory,
