@@ -30,6 +30,7 @@
     ../modules/virtualization.nix
     ../modules/gaming.nix
     ../modules/xray.nix
+    ../modules/ollama.nix
   ];
 
   # ── Host identity ─────────────────────────────────────
