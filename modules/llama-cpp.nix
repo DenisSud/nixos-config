@@ -16,6 +16,7 @@
 
       hf-repo = "unsloth/Qwen3.8-27B-GGUF";
       hf-file = "Qwen3.8-27B-UD-IQ2_XXS.gguf";
+      alias = "Qwen3.8-27B"; # stable model id exposed via /v1/models
 
       gpu-layers = 99; # all layers on GPU
       ctx-size = 131072;
