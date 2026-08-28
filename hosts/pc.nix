@@ -31,6 +31,7 @@
     ../modules/gaming.nix
     ../modules/xray.nix
     ../modules/ollama.nix
+    ../modules/llama-cpp.nix
   ];
 
   # ── Host identity ─────────────────────────────────────
