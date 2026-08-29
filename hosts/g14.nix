@@ -11,7 +11,7 @@
   # ╚══════════════════════════════════════════════════════════╝
   # "Lite" config: no Docker, no Steam, no LibreOffice.
   # Adds the full asusd + supergfxd stack for power/profile/fan
-  # control and dGPU mode switching, plus Ollama (CPU-only).
+  # control and dGPU mode switching.
 
   imports = [
     # ── Common modules ──────────────────────────────────
@@ -32,7 +32,6 @@
 
     # ── g14-only modules ────────────────────────────────
     ../modules/asus.nix
-    ../modules/ollama.nix
   ];
 
   # ── Host identity ─────────────────────────────────────

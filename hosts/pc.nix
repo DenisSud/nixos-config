@@ -8,7 +8,7 @@
   # ║  PC — Desktop (AMD Ryzen + NVIDIA RTX 5070 / Blackwell)  ║
   # ╚══════════════════════════════════════════════════════════╝
   # Imports every common module, then layers on PC-only extras
-  # (Docker, Ollama+CUDA on LAN, gaming stack, Xray proxy).
+  # (Docker, gaming stack, Xray proxy).
 
   imports = [
     # ── Common modules ──────────────────────────────────
@@ -31,7 +31,6 @@
     ../modules/virtualization.nix
     ../modules/gaming.nix
     ../modules/xray.nix
-    ../modules/ollama.nix
     ../modules/llama-cpp.nix
   ];
 
