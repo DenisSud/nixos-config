@@ -26,10 +26,9 @@
     ++ lib.optional config.virtualisation.docker.enable "docker";
     shell = pkgs.fish;
     packages = with pkgs; [
+      fetch
       sqlite
-      fastfetch
       foliate
-      onefetch
       codex
       unzip
       dust
@@ -54,7 +53,6 @@
       gnomeExtensions.clipboard-indicator
       gnomeExtensions.blur-my-shell
       gnomeExtensions.gsconnect
-      flclash
     ];
   };
 }
