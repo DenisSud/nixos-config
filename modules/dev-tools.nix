@@ -16,7 +16,6 @@
     gopls
     rust-analyzer
     lua-language-server
-    basedpyright
     nil
 
     # Formatters

@@ -8,7 +8,7 @@
   # ── Shell / system utilities ──────────────────────────
   environment.systemPackages = with pkgs; [
     # Custom: `rip` from flake input
-    inputs.rip.packages.${pkgs.system}.default
+    inputs.rip.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Proxy
     xray

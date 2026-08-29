@@ -28,6 +28,10 @@
     packages = with pkgs; [
       fastfetch
       onefetch
+      fetch
+      sqlite
+      foliate
+      codex
       unzip
       dust
       ripgrep
