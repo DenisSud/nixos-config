@@ -31,7 +31,6 @@
       fetch
       sqlite
       foliate
-      codex
       unzip
       dust
       ripgrep
