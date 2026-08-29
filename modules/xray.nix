@@ -3,6 +3,11 @@
 {
   # ── Xray proxy service ────────────────────────────────
   # Reads /etc/xray/config.json (deployed out-of-band).
+  environment.systemPackages = with pkgs; [
+    xray
+    proxychains-ng
+  ];
+
   systemd.services.xray = {
     description = "Xray Service";
     after = [ "network.target" ];

@@ -45,8 +45,6 @@
       ghostty
       texstudio
       fzf
-      direnv
-      nix-direnv
 
       # GNOME extensions (declarative install)
       gnomeExtensions.caffeine

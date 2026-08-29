@@ -10,10 +10,6 @@
     # Custom: `rip` from flake input
     inputs.rip.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-    # Proxy
-    xray
-    proxychains-ng
-
     # Encryption (secrets management)
     age
 
@@ -30,7 +26,6 @@
     btop-cuda
     git
     git-lfs
-    wget
     curl
     tmux
     zellij
