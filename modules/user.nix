@@ -28,14 +28,11 @@
     packages = with pkgs; [
       fastfetch
       onefetch
-      codex
       unzip
       dust
       ripgrep
       starship
       obsidian
-      qbittorrent
-      telegram-desktop
       wl-clipboard
       zoxide
       gnome-tweaks
@@ -43,6 +40,7 @@
       anki
       vial
       ghostty
+      texstudio
       fzf
       direnv
       nix-direnv

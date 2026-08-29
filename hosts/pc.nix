@@ -25,6 +25,7 @@
     ../modules/shell-utils.nix
     ../modules/user.nix
     ../modules/programs.nix
+    ../modules/vial.nix
 
     # ── PC-only modules ─────────────────────────────────
     ../modules/virtualization.nix

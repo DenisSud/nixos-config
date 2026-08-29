@@ -9,9 +9,9 @@
   # ║  g14 — ASUS ROG Zephyrus G14 laptop                      ║
   # ║      AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid)  ║
   # ╚══════════════════════════════════════════════════════════╝
-  # "Lite" config: no Docker, no Steam, no LibreOffice, no Ollama.
+  # "Lite" config: no Docker, no Steam, no LibreOffice.
   # Adds the full asusd + supergfxd stack for power/profile/fan
-  # control and dGPU mode switching.
+  # control and dGPU mode switching, plus Ollama (CPU-only).
 
   imports = [
     # ── Common modules ──────────────────────────────────
@@ -28,9 +28,11 @@
     ../modules/shell-utils.nix
     ../modules/user.nix
     ../modules/programs.nix
+    ../modules/vial.nix
 
     # ── g14-only modules ────────────────────────────────
     ../modules/asus.nix
+    ../modules/ollama.nix
   ];
 
   # ── Host identity ─────────────────────────────────────

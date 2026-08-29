@@ -17,6 +17,9 @@
     # Encryption (secrets management)
     age
 
+    # browser thing for agents
+    playwright
+
     # System essentials
     pi-coding-agent
     gh
@@ -48,7 +51,6 @@
   # ── Shell aliases (apply system-wide) ─────────────────
   environment.shellAliases = {
     vi = "nvim";
-    # pi = "npx @mariozechner/pi-coding-agent";
     ls = "eza";
     ll = "eza -lbF --git";
     la = "eza -lbhHigUmuSa --git";
