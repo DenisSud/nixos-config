@@ -2,8 +2,8 @@
 
 My NixOS config, supporting two hosts:
 
-- **`pc`** — Desktop, AMD Ryzen + NVIDIA RTX 5070 (Blackwell). The "decked out" machine: Docker, Ollama+CUDA on LAN, Steam + gaming stack, Xray proxy.
-- **`g14`** — ASUS ROG Zephyrus G14 laptop, AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid). The "lite" machine: no Docker, no Steam, no LibreOffice. Adds `asusctl` + `supergfxd` for power/profile/dGPU-mode control, plus Ollama (CUDA).
+- **`pc`** — Desktop, AMD Ryzen + NVIDIA RTX 5070 (Blackwell). The "decked out" machine: Docker, Steam + gaming stack, Xray proxy.
+- **`g14`** — ASUS ROG Zephyrus G14 laptop, AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid). The "lite" machine: no Docker, no Steam, no LibreOffice. Adds `asusctl` + `supergfxd` for power/profile/dGPU-mode control
 
 Dotfiles are managed as separate git repos and symlinked into place (out-of-band from NixOS):
 
@@ -45,7 +45,6 @@ nixos-config/
     ├── programs.nix                # fish, direnv, gnupg, mtr      (common)
     │
     ├── virtualization.nix          # Docker                        (PC only)
-    ├── ollama.nix                  # ollama-cuda, LAN-exposed      (PC only)
     ├── gaming.nix                  # Steam + ProtonUp-Qt + Lutris
     │                               #   + Heroic + mangohud +
     │                               #   gamescope + gamemode        (PC only)
@@ -69,7 +68,6 @@ add/remove a feature from a host, add/remove its module from the host's
 - Kernel: `linuxPackages_latest`
 - systemd-boot
 - Docker enabled
-- Ollama (CUDA build) exposed to LAN on port `11434`
 - Steam + full gaming stack
 - Xray proxy service (reads `/etc/xray/config.json`)
 - LibreOffice + ddcutil-based monitor brightness GNOME extension
@@ -169,7 +167,7 @@ The `dotfiles.fish` script creates these symlinks:
 - **PipeWire** for audio
 - **NVIDIA** graphics with container toolkit
 - **Docker** virtualization (PC only)
-- **Ollama** local LLM server, CUDA-enabled (both hosts)
+
 - **Steam + ProtonUp-Qt + Lutris + Heroic** gaming (PC only)
 - **Xray** proxy service (PC only)
 
@@ -231,7 +229,7 @@ sudo nixos-generate-config --flake .#pc --show-hardware-config > hosts/pc-hardwa
 ## Notes
 
 - Both hosts import the same set of common modules — host files only differ in which extra modules they pull in and per-host values (hostname, NVIDIA options, kernel, extra user packages).
-- The firewall is **on** with explicit allowed ports (SSH on 22; Ollama on 11434 is auto-opened by `services.ollama.openFirewall`).
+- The firewall is **on** with explicit allowed ports (SSH on 22).
 - Pi agent uses declarative config only; runtime state (sessions, auth) is per-device.
 - `nh` runs weekly garbage collection automatically.
 - Dotfiles are managed as independent git repos, not through NixOS (this is intentional — see "Dotfiles Setup" above).
