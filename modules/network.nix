@@ -8,7 +8,7 @@
     # Each service module that needs an inbound port opens it
     # explicitly via `networking.firewall.allowedTCPPorts`.
     firewall = {
-      enable = true;
+      enable = false; # temporarily disabled
       allowedTCPPorts = [
         22 # SSH (also auto-opened by services.openssh, kept explicit for clarity)
         2718 # marimo arc-agi-3 notebook (marimo.sudakov.site)

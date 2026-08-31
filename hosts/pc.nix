@@ -32,10 +32,18 @@
     ../modules/gaming.nix
     ../modules/xray.nix
     ../modules/llama-cpp.nix
+    ../modules/wake-on-lan.nix
   ];
 
   # ── Host identity ─────────────────────────────────────
   networking.hostName = "pc";
+
+  # ── Wake-on-LAN (magic packet) ────────────────────────
+  # NetworkManager applies this on every eno1 activation,
+  # so WOL survives reconnects and suspend/resume cycles.
+  # Wake remotely via the always-on RPi:
+  #   ssh pi.wan 'wakeonlan 60:cf:84:dc:80:22'
+  networking.networkmanager.connectionConfig."ethernet.wake-on-lan" = "magic";
 
   # ── Jellyfin media (256GB loopback mount) ──────────────
   fileSystems."/home/denis/jellyfin/media" = {
