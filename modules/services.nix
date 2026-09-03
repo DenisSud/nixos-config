@@ -3,7 +3,14 @@
 {
   # ── Common services ───────────────────────────────────
   services = {
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        # Key-only login — no password or keyboard-interactive auth.
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
     flatpak.enable = true;
   };
 
