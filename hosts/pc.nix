@@ -33,6 +33,7 @@
     ../modules/xray.nix
     ../modules/llama-cpp.nix
     ../modules/wake-on-lan.nix
+    ../modules/tmux.nix
   ];
 
   # ── Host identity ─────────────────────────────────────

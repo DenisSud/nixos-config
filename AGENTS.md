@@ -49,6 +49,7 @@ nixos-config/
     │                               #   + Heroic + mangohud +
     │                               #   gamescope + gamemode        (PC only)
     ├── xray.nix                    # Xray systemd service          (PC only)
+    ├── tmux.nix                    # tmux + SSH auto-attach        (PC only)
     │
     └── asus.nix                    # asusctl + supergfxd           (g14 only)
 ```
