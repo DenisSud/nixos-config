@@ -27,6 +27,7 @@
     git
     git-lfs
     curl
+    openssl
     tmux
     zellij
     file
