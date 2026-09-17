@@ -31,7 +31,7 @@
     ../modules/virtualization.nix
     ../modules/gaming.nix
     ../modules/xray.nix
-    ../modules/llama-cpp.nix
+    # ../modules/llama-cpp.nix  # disabled: frees ~11 GB VRAM; re-add to enable
     ../modules/wake-on-lan.nix
     ../modules/tmux.nix
   ];
