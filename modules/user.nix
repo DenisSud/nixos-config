@@ -44,6 +44,7 @@
       vial
       ghostty
       texstudio
+      qbittorrent
       fzf
 
       # GNOME extensions (declarative install)
