@@ -1,6 +1,6 @@
 # ── tmux: persistent terminal sessions for remote (phone/tablet) access ──
 #
-# SSH in from Termux (Samsung phone/tablet) → fish auto-attaches to the
+# SSH in from Termux (Samsung phone/tablet) → zsh auto-attaches to the
 # session "main". Disconnects leave everything running; reconnecting
 # (from any device) re-attaches to the same session.
 #
@@ -23,13 +23,13 @@
   };
 
   # Auto-attach on interactive SSH logins. Guards:
-  #   - status is-interactive → never hijack scp/rsync/git-over-ssh
+  #   - [[ -o interactive ]]  → never hijack scp/rsync/git-over-ssh
   #   - SSH_TTY               → only real SSH logins, not local terminals
   #   - TMUX                  → no nesting when SSHing from inside tmux
   # `new-session -A` attaches to session "main" if it exists, else creates it.
-  programs.fish.interactiveShellInit = ''
-    if status is-interactive; and set -q SSH_TTY; and not set -q TMUX
-        exec tmux new-session -A -s main
-    end
+  programs.zsh.interactiveShellInit = ''
+    if [[ -o interactive && -n $SSH_TTY && -z $TMUX ]]; then
+      exec tmux new-session -A -s main
+    fi
   '';
 }

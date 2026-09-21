@@ -24,7 +24,7 @@
     # enabled — the group doesn't exist otherwise and the build
     # would fail trying to add the user to a non-existent group.
     ++ lib.optional config.virtualisation.docker.enable "docker";
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     packages = with pkgs; [
       fastfetch
       onefetch
