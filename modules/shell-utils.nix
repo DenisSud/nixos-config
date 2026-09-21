@@ -13,6 +13,12 @@
     # Encryption (secrets management)
     age
 
+    # Bitwarden CLI bridge (vault stays in the Bitwarden apps; rbw is the
+    # programmatic layer used by pi's security extension). pinentry-curses
+    # handles the `rbw unlock` master-password prompt in the terminal.
+    rbw
+    pinentry-curses
+
     # browser thing for agents
     playwright
 
