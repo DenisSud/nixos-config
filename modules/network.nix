@@ -4,11 +4,10 @@
     networkmanager.enable = true;
     # enableIPv6 = false;
 
-    # Firewall is re-enabled (was disabled globally before).
     # Each service module that needs an inbound port opens it
     # explicitly via `networking.firewall.allowedTCPPorts`.
+    # `enable` itself is set per host in hosts/*.nix (g14: on, pc: off).
     firewall = {
-      enable = false; # temporarily disabled
       allowedTCPPorts = [
         22 # SSH (also auto-opened by services.openssh, kept explicit for clarity)
         2718 # marimo arc-agi-3 notebook (marimo.sudakov.site)

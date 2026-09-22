@@ -40,6 +40,12 @@
   # ── Host identity ─────────────────────────────────────
   networking.hostName = "pc";
 
+  # ── Firewall: kept off on pc ─────────────────────────
+  # Flipped off 2026-08-31 ("temporarily disabled") and never reverted.
+  # Turning it on needs the LAN ports opened first, e.g. 8080 for the
+  # linkers demo (systemd user service on this box).
+  networking.firewall.enable = false;
+
   # ── Wake-on-LAN (magic packet) ────────────────────────
   # NetworkManager applies this on every eno1 activation,
   # so WOL survives reconnects and suspend/resume cycles.

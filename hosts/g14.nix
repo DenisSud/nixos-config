@@ -26,6 +26,7 @@
     ../modules/services.nix
     ../modules/dev-tools.nix
     ../modules/shell-utils.nix
+    ../modules/web-search.nix
     ../modules/user.nix
     ../modules/programs.nix
     ../modules/vial.nix
@@ -36,6 +37,11 @@
 
   # ── Host identity ─────────────────────────────────────
   networking.hostName = "g14";
+
+  # ── Firewall: on — the laptop roams untrusted networks ─
+  # Inbound ports are opened per service in the modules.
+  # The pc keeps it off for now (see hosts/pc.nix).
+  networking.firewall.enable = true;
 
   # ── State version ─────────────────────────────────────
   system.stateVersion = "25.05";
