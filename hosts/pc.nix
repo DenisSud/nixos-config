@@ -23,6 +23,7 @@
     ../modules/services.nix
     ../modules/dev-tools.nix
     ../modules/shell-utils.nix
+    ../modules/web-search.nix
     ../modules/user.nix
     ../modules/programs.nix
     ../modules/vial.nix
