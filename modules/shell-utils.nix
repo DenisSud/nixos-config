@@ -25,6 +25,7 @@
     # System essentials
     pi-coding-agent
     gh
+    forgejo-cli
     ntfs3g
     lsof
     corefonts
