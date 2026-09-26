@@ -78,5 +78,6 @@
   # ── g14-only user packages ────────────────────────────
   users.users.denis.packages = with pkgs; [
     libreoffice # Writer + Calc for .docx/.xlsx
+    bottles # Wine prefix manager
   ];
 }
