@@ -9,7 +9,7 @@
   # ║  g14 — ASUS ROG Zephyrus G14 laptop                      ║
   # ║      AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid)  ║
   # ╚══════════════════════════════════════════════════════════╝
-  # "Lite" config: no Docker, no Steam, no LibreOffice.
+  # "Lite" config: no Docker, no Steam.
   # Adds the full asusd + supergfxd stack for power/profile/fan
   # control and dGPU mode switching.
 
@@ -73,5 +73,10 @@
   services.xserver.videoDrivers = [
     "nvidia"
     "amdgpu"
+  ];
+
+  # ── g14-only user packages ────────────────────────────
+  users.users.denis.packages = with pkgs; [
+    libreoffice # Writer + Calc for .docx/.xlsx
   ];
 }
