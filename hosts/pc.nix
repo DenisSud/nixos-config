@@ -32,7 +32,7 @@
     ../modules/virtualization.nix
     ../modules/gaming.nix
     ../modules/xray.nix
-    ../modules/ollama.nix
+    ../modules/lmstudio.nix
     ../modules/wake-on-lan.nix
     ../modules/tmux.nix
   ];

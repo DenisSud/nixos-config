@@ -10,6 +10,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # LM Studio — GUI + headless server (`llmster`) + `lms` CLI.
+    # nixpkgs only has the GUI; this flake wraps upstream's server bundle
+    # too, which is what runs as the systemd user service on pc.
+    lmstudio = {
+      url = "github:Daaboulex/lmstudio-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # NOTE: ASUS laptop support (asusctl + supergfxd) is built into
     # nixpkgs directly via `services.asusd` and `services.supergfxd` —
     # no separate flake input needed.
