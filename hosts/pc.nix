@@ -7,66 +7,35 @@
   # ╔══════════════════════════════════════════════════════════╗
   # ║  PC — Desktop (AMD Ryzen + NVIDIA RTX 5070 / Blackwell)  ║
   # ╚══════════════════════════════════════════════════════════╝
-  # Imports every common module, then layers on PC-only extras
-  # (Docker, gaming stack, Xray proxy).
-
-  imports = [
-    # ── Common modules ──────────────────────────────────
-    ../modules/boot.nix
-    ../modules/nix.nix
-    ../modules/network.nix
-    ../modules/locale.nix
-    ../modules/graphics.nix
-    ../modules/audio.nix
-    ../modules/desktop.nix
-    ../modules/fonts.nix
-    ../modules/services.nix
-    ../modules/dev-tools.nix
-    ../modules/shell-utils.nix
-    ../modules/web-search.nix
-    ../modules/user.nix
-    ../modules/programs.nix
-    ../modules/vial.nix
-
-    # ── PC-only modules ─────────────────────────────────
-    ../modules/virtualization.nix
-    ../modules/gaming.nix
-    ../modules/xray.nix
-    ../modules/lmstudio.nix
-    ../modules/wake-on-lan.nix
-    ../modules/tmux.nix
-  ];
+  # Thin host: imports the shared layer and sets `denis.*` values.
+  # Hardware-specific bits (NVIDIA, file systems) stay below.
+  imports = [ ../modules/shared.nix ];
 
   # ── Host identity ─────────────────────────────────────
-  networking.hostName = "pc";
+  denis.hostName = "pc";
 
   # ── Firewall: kept off on pc ─────────────────────────
   # Flipped off 2026-08-31 ("temporarily disabled") and never reverted.
   # Turning it on needs the LAN ports opened first, e.g. 8080 for the
   # linkers demo (systemd user service on this box).
-  networking.firewall.enable = false;
+  denis.firewall.enable = false;
 
-  # ── Wake-on-LAN (magic packet) ────────────────────────
-  # NetworkManager applies this on every eno1 activation,
-  # so WOL survives reconnects and suspend/resume cycles.
-  # Wake remotely via the always-on RPi:
-  #   ssh pi.wan 'wakeonlan 60:cf:84:dc:80:22'
-  networking.networkmanager.connectionConfig."ethernet.wake-on-lan" = "magic";
+  # ── Kernel / routing ──────────────────────────────────
+  denis.latestKernel = true;
+  denis.ipForward = true;
 
-  # ── Jellyfin media (256GB loopback mount) ──────────────
-  fileSystems."/home/denis/jellyfin/media" = {
-    device = "/home/denis/jellyfin/media.img";
-    fsType = "ext4";
-    options = [ "loop" "noatime" ];
-  };
+  # ── Feature toggles ───────────────────────────────────
+  denis.docker.enable = true;
+  denis.gaming.enable = true;
+  denis.xray.enable = true;
+  denis.wakeOnLan.enable = true;
+  denis.tmux.enable = true;
 
-  # ── State version ─────────────────────────────────────
-  system.stateVersion = "25.05";
-  nixpkgs.config.allowUnfree = true;
-
-  # ── Kernel ────────────────────────────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+  # ── PC-only user packages ─────────────────────────────
+  denis.userPackages = with pkgs; [
+    libreoffice
+    gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
+  ];
 
   # ── NVIDIA (RTX 5070 / Blackwell, open kernel module) ─
   hardware.nvidia = {
@@ -75,9 +44,13 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # ── PC-only user packages ─────────────────────────────
-  users.users.denis.packages = with pkgs; [
-    libreoffice
-    gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
-  ];
+  # ── Jellyfin media (256GB loopback mount) ──────────────
+  fileSystems."/home/denis/jellyfin/media" = {
+    device = "/home/denis/jellyfin/media.img";
+    fsType = "ext4";
+    options = [
+      "loop"
+      "noatime"
+    ];
+  };
 }

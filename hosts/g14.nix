@@ -9,43 +9,27 @@
   # ║  g14 — ASUS ROG Zephyrus G14 laptop                      ║
   # ║      AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid)  ║
   # ╚══════════════════════════════════════════════════════════╝
-  # "Lite" config: no Docker, no Steam.
-  # Adds the full asusd + supergfxd stack for power/profile/fan
-  # control and dGPU mode switching.
-
-  imports = [
-    # ── Common modules ──────────────────────────────────
-    ../modules/boot.nix
-    ../modules/nix.nix
-    ../modules/network.nix
-    ../modules/locale.nix
-    ../modules/graphics.nix
-    ../modules/audio.nix
-    ../modules/desktop.nix
-    ../modules/fonts.nix
-    ../modules/services.nix
-    ../modules/dev-tools.nix
-    ../modules/shell-utils.nix
-    ../modules/web-search.nix
-    ../modules/user.nix
-    ../modules/programs.nix
-    ../modules/vial.nix
-
-    # ── g14-only modules ────────────────────────────────
-    ../modules/asus.nix
-  ];
+  # Thin host: imports the shared layer and sets `denis.*` values.
+  # "Lite" config: no Docker, no Steam (feature toggles off).
+  # Hardware-specific bits (NVIDIA/Prime) stay below.
+  imports = [ ../modules/shared.nix ];
 
   # ── Host identity ─────────────────────────────────────
-  networking.hostName = "g14";
+  denis.hostName = "g14";
 
   # ── Firewall: on — the laptop roams untrusted networks ─
   # Inbound ports are opened per service in the modules.
   # The pc keeps it off for now (see hosts/pc.nix).
-  networking.firewall.enable = true;
+  denis.firewall.enable = true;
 
-  # ── State version ─────────────────────────────────────
-  system.stateVersion = "25.05";
-  nixpkgs.config.allowUnfree = true;
+  # ── Feature toggles ───────────────────────────────────
+  denis.asus.enable = true;
+
+  # ── g14-only user packages ────────────────────────────
+  denis.userPackages = with pkgs; [
+    libreoffice # Writer + Calc for .docx/.xlsx
+    bottles # Wine prefix manager
+  ];
 
   # ── NVIDIA (ROG Zephyrus G14 — hybrid graphics) ───────
   # Proprietary modules + Prime offload. dGPU is gated on
@@ -73,11 +57,5 @@
   services.xserver.videoDrivers = [
     "nvidia"
     "amdgpu"
-  ];
-
-  # ── g14-only user packages ────────────────────────────
-  users.users.denis.packages = with pkgs; [
-    libreoffice # Writer + Calc for .docx/.xlsx
-    bottles # Wine prefix manager
   ];
 }

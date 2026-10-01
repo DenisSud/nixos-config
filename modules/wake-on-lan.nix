@@ -11,21 +11,36 @@
 # under (00:02.1 → ... → 08:00.0) — already `enabled` via sysfs
 # (verified: /sys/devices/pci0000:00/0000:00:02.1/power/wakeup).
 {
-  pkgs,
+  config,
   lib,
+  pkgs,
   ...
 }:
 
+let
+  cfg = config.denis.wakeOnLan;
+in
 {
-  systemd.services.wake-on-lan = {
-    description = "Arm Wake-on-LAN (magic packet) on eno1";
-    wantedBy = [ "multi-user.target" "sleep.target" ];
-    before = [ "sleep.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${pkgs.ethtool}/bin/ethtool -s eno1 wol g";
+  options.denis.wakeOnLan.enable = lib.mkEnableOption "Wake-on-LAN arming on eno1";
+
+  config = lib.mkIf cfg.enable {
+    # NetworkManager applies this on every eno1 activation,
+    # so WOL survives reconnects and suspend/resume cycles.
+    networking.networkmanager.connectionConfig."ethernet.wake-on-lan" = "magic";
+
+    systemd.services.wake-on-lan = {
+      description = "Arm Wake-on-LAN (magic packet) on eno1";
+      wantedBy = [
+        "multi-user.target"
+        "sleep.target"
+      ];
+      before = [ "sleep.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.ethtool}/bin/ethtool -s eno1 wol g";
+      };
     };
   };
 }
