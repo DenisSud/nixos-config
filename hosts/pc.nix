@@ -28,6 +28,7 @@
   denis.docker.enable = true;
   denis.gaming.enable = true;
   denis.xray.enable = true;
+  denis.happ.enable = true;
   denis.wakeOnLan.enable = true;
   denis.tmux.enable = true;
 
