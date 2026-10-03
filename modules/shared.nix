@@ -39,6 +39,7 @@ in
     ./virtualization.nix # denis.docker.enable
     ./gaming.nix # denis.gaming.enable
     ./xray.nix # denis.xray.enable
+    ./happ.nix # denis.happ.enable
     ./wake-on-lan.nix # denis.wakeOnLan.enable
     ./tmux.nix # denis.tmux.enable
     ./asus.nix # denis.asus.enable

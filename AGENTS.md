@@ -19,6 +19,10 @@ nixos-config/
 ├── flake.lock
 ├── AGENTS.md                       # This file
 │
+├── pkgs/                           # Vendored package expressions
+│   └── happ.nix                    # Happ desktop client, repackaged from
+│                                   #   the upstream .deb (see modules/happ.nix)
+│
 ├── hosts/                          # One entry file + one hardware file per machine
 │   ├── pc.nix                      # PC host — imports modules/shared.nix,
 │   │                               #   sets `denis.*` + NVIDIA/FS
@@ -52,6 +56,7 @@ nixos-config/
     ├── virtualization.nix          # denis.docker.enable
     ├── gaming.nix                  # denis.gaming.enable
     ├── xray.nix                    # denis.xray.enable
+    ├── happ.nix                    # denis.happ.enable
     ├── wake-on-lan.nix             # denis.wakeOnLan.enable
     ├── tmux.nix                    # denis.tmux.enable
     └── asus.nix                    # denis.asus.enable
@@ -70,8 +75,9 @@ on a host, set the corresponding `denis.<feature>.enable`.
 (`bool`, default `true`), `denis.latestKernel` (`bool`, default `false`),
 `denis.ipForward` (`bool`, default `false`), `denis.userPackages`
 (`listOf package`, default `[]`), and the feature toggles `denis.docker.enable`,
-`denis.gaming.enable`, `denis.xray.enable`, `denis.wakeOnLan.enable`,
-`denis.tmux.enable`, `denis.asus.enable` (all `bool`, default `false`).
+`denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
+`denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
+`bool`, default `false`).
 
 ## Machines
 
@@ -83,6 +89,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - Docker enabled
 - Steam + full gaming stack
 - Xray proxy service (reads `/etc/xray/config.json`)
+- Happ proxy client + `happd` TUN daemon (`denis.happ.enable`; package
+  vendored in `pkgs/happ.nix`, repackaged from the upstream .deb)
 - LibreOffice + ddcutil-based monitor brightness GNOME extension
 
 ### `g14` (Laptop)
