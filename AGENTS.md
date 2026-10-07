@@ -91,7 +91,7 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - Xray proxy service (reads `/etc/xray/config.json`)
 - Happ proxy client + `happd` TUN daemon (`denis.happ.enable`; package
   vendored in `pkgs/happ.nix`, repackaged from the upstream .deb)
-- LibreOffice + ddcutil-based monitor brightness GNOME extension
+- LibreOffice, DaVinci Resolve (free, unfree package) + ddcutil-based monitor brightness GNOME extension
 
 ### `g14` (Laptop)
 - Hostname: `g14`

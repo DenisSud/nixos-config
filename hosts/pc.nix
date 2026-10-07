@@ -35,6 +35,11 @@
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice
+    # Unfree + FHS-wrapped; the installer is fetched from Blackmagic at
+    # build time (~4 GB), so the first rebuild that includes it is slow.
+    # GPU acceleration uses the NVIDIA driver's CUDA libs via
+    # addDriverRunpath — nothing extra to configure here.
+    davinci-resolve
     gnomeExtensions.control-monitor-brightness-and-volume-with-ddcutil
   ];
 
