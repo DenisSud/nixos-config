@@ -44,6 +44,8 @@ nixos-config/
     ├── fonts.nix                   # Inter + JetBrains Mono        (common)
     ├── services.nix                # openssh, flatpak, appimage,
     │                               #   polkit, nix-index           (common)
+    ├── printing.nix                # CUPS + Avahi, Epson L3271
+    │                               #   (L3270 series) queue        (common)
     ├── dev-tools.nix               # LSPs, formatters, tree-sitter,
     │                               #   gcc, pkg-config, nodejs     (common)
     ├── shell-utils.nix             # bat, fd, eza, gh, etc. + shell
@@ -186,6 +188,7 @@ The `dotfiles.fish` script creates these symlinks:
 - **Neovim** with Lua configuration
 - **GNOME** desktop environment
 - **PipeWire** for audio
+- **CUPS + Avahi** network printing (Epson L3271 via IPP)
 - **NVIDIA** graphics with container toolkit
 - **Docker** virtualization (PC only)
 

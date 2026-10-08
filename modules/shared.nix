@@ -28,6 +28,7 @@ in
     ./desktop.nix
     ./fonts.nix
     ./services.nix
+    ./printing.nix
     ./dev-tools.nix
     ./shell-utils.nix
     ./web-search.nix
