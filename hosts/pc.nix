@@ -57,6 +57,13 @@
     package = pkgs.ollama-cuda;
   };
 
+  # nvcc only generates device code for the 5070 (Blackwell, sm_120).
+  # Without this, ollama-cuda builds llama.cpp for all 9 supported
+  # architectures (sm_75 … sm_121), which is the bulk of the build time.
+  # Note: the resulting binary targets sm_120 only — it would not run on
+  # the g14's RTX 3050 (sm_86) if ollama were ever enabled there.
+  nixpkgs.config.cudaCapabilities = [ "12.0" ];
+
   # ── Jellyfin media (256GB loopback mount) ──────────────
   fileSystems."/home/denis/jellyfin/media" = {
     device = "/home/denis/jellyfin/media.img";
