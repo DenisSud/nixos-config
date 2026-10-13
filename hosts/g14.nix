@@ -22,8 +22,16 @@
   # The pc keeps it off for now (see hosts/pc.nix).
   denis.firewall.enable = true;
 
+  # ── Passwordless sudo (agent remote management) ───────
+  # The pi agent on pc manages g14 over SSH — passwordless
+  # wheel sudo keeps rebuilds non-interactive. g14 only;
+  # the pc keeps the default (password required).
+  security.sudo.wheelNeedsPassword = false;
+
   # ── Feature toggles ───────────────────────────────────
   denis.asus.enable = true;
+  denis.wakeOnLan.enable = true;
+  denis.wakeOnLan.wifiPhy = "phy0";
 
   # ── g14-only user packages ────────────────────────────
   denis.userPackages = with pkgs; [

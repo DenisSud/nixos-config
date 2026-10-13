@@ -30,6 +30,7 @@
   denis.xray.enable = true;
   denis.happ.enable = true;
   denis.wakeOnLan.enable = true;
+  denis.wakeOnLan.ethernetInterface = "eno1";
   denis.tmux.enable = true;
 
   # ── PC-only user packages ─────────────────────────────
@@ -49,6 +50,12 @@
     powerManagement.enable = true; # needed for proper suspend/resume
   };
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  # ── Ollama (local LLM server, CUDA on the RTX 5070) ──
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+  };
 
   # ── Jellyfin media (256GB loopback mount) ──────────────
   fileSystems."/home/denis/jellyfin/media" = {

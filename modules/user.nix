@@ -47,6 +47,11 @@
       qbittorrent
       fzf
 
+      # Browser automation for the pi agent (skill: agent-browser);
+      # chromium is its CDP browser, found on PATH.
+      agent-browser
+      chromium
+
       # GNOME extensions (declarative install)
       gnomeExtensions.caffeine
       gnomeExtensions.clipboard-indicator

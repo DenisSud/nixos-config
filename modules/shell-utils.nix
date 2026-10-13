@@ -40,6 +40,7 @@
     file
     dig
     iw
+    wakeonlan
     tree
     neovim
     glow
