@@ -144,7 +144,7 @@ git add -A
 git commit -m "scope: description of the change"
 ```
 
-Remote is `origin` pointing to `git@git.sudakov.site:DenisSud/nixos-config.git`.
+Remote is `origin` pointing to `git@github.com:DenisSud/nixos-config.git`.
 Push after each commit:
 
 ```bash
