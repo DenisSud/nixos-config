@@ -13,6 +13,21 @@
     # NOTE: ASUS laptop support (asusctl + supergfxd) is built into
     # nixpkgs directly via `services.asusd` and `services.supergfxd` —
     # no separate flake input needed.
+
+    # `pi` — Pi coding agent, taken from the upstream flake instead of the
+    # nixpkgs `pi-coding-agent` package (which is bumped by a bot and lags
+    # weeks behind). `main` carries every release plus unreleased fixes;
+    # release tags are not pinned here because their Nix build can fail
+    # upstream (v1.2.0 did — esbuild missing from the install lock), which is
+    # also why upstream's `stable` branch lags a release behind.
+    # Bump: `nix flake update pi && nh os switch`.
+    pi = {
+      url = "github:earendil-works/pi/main";
+      # Reuse our nixpkgs for both of upstream's nixpkgs inputs; the darwin
+      # one only feeds the x86_64-darwin package, which is never built here.
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-darwin-x64.follows = "nixpkgs";
+    };
   };
 
   outputs =

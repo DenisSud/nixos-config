@@ -23,7 +23,10 @@
     playwright
 
     # System essentials
-    pi-coding-agent
+    # Pi coding agent — from the upstream flake input (`inputs.pi`), bumped with
+    # `nix flake update pi`. Nix builds it from source, so a bump costs a
+    # ~1–2 min local build; nothing is substituted from a binary cache.
+    inputs.pi.packages.${pkgs.stdenv.hostPlatform.system}.default
     gh
     ntfs3g
     lsof

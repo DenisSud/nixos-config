@@ -15,7 +15,8 @@ Dotfiles are managed as separate git repos and symlinked into place (out-of-band
 
 ```
 nixos-config/
-├── flake.nix                       # Flake entry point: nixpkgs + rip inputs (asusctl/supergfxd built-in)
+├── flake.nix                       # Flake entry point: nixpkgs + rip + pi inputs
+│                                   #   (asusctl/supergfxd built-in)
 ├── flake.lock
 ├── AGENTS.md                       # This file
 │
@@ -220,7 +221,7 @@ Xray's `/etc/xray/config.json` is also deployed out-of-band (not managed by NixO
 - **Git Tools**: git, git-lfs, gh
 - **LSP Servers**: vtsls, vscode-langservers-extracted, emmet-language-server, gopls, rust-analyzer, lua-language-server, basedpyright, nil
 - **Formatters**: nixfmt, stylua, prettierd, gofumpt, gotools, rustfmt, isort, black
-- **System Tools**: fastfetch, onefetch, gh, pi-coding-agent
+- **System Tools**: fastfetch, onefetch, gh, pi (upstream flake input)
 - **Nix Helpers**: nh, nix-index (replaces command-not-found)
 
 ## Common Tasks
@@ -250,6 +251,25 @@ hosts, or set `denis.userPackages` in the host file for host-specific packages.
 sudo nixos-generate-config --flake .#pc --show-hardware-config > hosts/pc-hardware.nix
 ```
 
+### Update Pi to the latest upstream code
+`pi` is not the nixpkgs `pi-coding-agent` package (that one is bumped by a bot
+and lags weeks behind). It comes from the `pi` flake input
+(`github:earendil-works/pi/main`), built from source:
+
+```bash
+nix flake update pi
+nh os switch          # or: sudo nixos-rebuild switch --flake .#pc
+```
+
+A bump costs ~1 min of local build (no binary cache); the model catalog is
+pinned in the upstream repo, so the build works offline.
+
+- `main` is tracked on purpose, not a release tag: tag builds can fail upstream
+  (v1.2.0's did — esbuild missing from the install lock), and upstream's
+  `stable` branch fast-forwards to a tag only after that tag builds, so it can
+  lag a whole release.
+- If a bump does not build, roll back with `git checkout flake.lock`.
+
 ## Time Zone & Locale
 
 - Time Zone: `Europe/Moscow`
@@ -261,5 +281,7 @@ sudo nixos-generate-config --flake .#pc --show-hardware-config > hosts/pc-hardwa
 - Both hosts import the same shared layer (`modules/shared.nix`) — host files only differ in `denis.*` values and genuinely host-specific hardware config (NVIDIA/Prime, file systems).
 - The firewall is on by default (`denis.firewall.enable = true`) with explicit allowed ports (SSH on 22); pc sets `denis.firewall.enable = false`.
 - Pi agent uses declarative config only; runtime state (sessions, auth) is per-device.
+- `pi` follows the upstream flake input `github:earendil-works/pi/main` — see
+  "Update Pi to the latest upstream code" above.
 - `nh` runs weekly garbage collection automatically.
 - Dotfiles are managed as independent git repos, not through NixOS (this is intentional — see "Dotfiles Setup" above).
