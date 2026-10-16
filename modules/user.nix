@@ -38,6 +38,7 @@
       obsidian
       wl-clipboard
       zoxide
+      wayshot
       gnome-tweaks
       impression
       anki
