@@ -55,6 +55,7 @@
   services.ollama = {
     enable = true;
     package = pkgs.ollama-cuda;
+    host = "0.0.0.0";
   };
 
   # nvcc only generates device code for the 5070 (Blackwell, sm_120).
