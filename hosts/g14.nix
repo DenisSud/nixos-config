@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -14,8 +15,12 @@
   # Hardware-specific bits (NVIDIA/Prime) stay below.
   imports = [ ../modules/shared.nix ];
 
-  # ── Host identity ─────────────────────────────────────
+  # ── Identity ──────────────────────────────────────────
   denis.hostName = "g14";
+
+  # Fresh install (Oct 2026): keep the install-time state
+  # version; the shared layer carries pc's historical 25.05.
+  system.stateVersion = lib.mkForce "26.05";
 
   # ── Firewall: on — the laptop roams untrusted networks ─
   # Inbound ports are opened per service in the modules.
@@ -36,7 +41,8 @@
   # ── g14-only user packages ────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice # Writer + Calc for .docx/.xlsx
-    bottles # Wine prefix manager
+    # bottles  # disabled: its lsfg-vk source (git.lsfg-vk.dev) drops
+    # every fetchgit download; re-enable when the host cooperates.
   ];
 
   # ── NVIDIA (ROG Zephyrus G14 — hybrid graphics) ───────
