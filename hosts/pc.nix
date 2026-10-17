@@ -26,6 +26,7 @@
 
   # ── Feature toggles ───────────────────────────────────
   denis.docker.enable = true;
+  denis.podman.enable = true;
   denis.gaming.enable = true;
   denis.xray.enable = true;
   denis.happ.enable = true;
@@ -56,6 +57,29 @@
     enable = true;
     package = pkgs.ollama-cuda;
     host = "0.0.0.0";
+  };
+
+  # ── Phonon-2 dictation ASR (mason's web client) ────────
+  # The OpenAI-compatible speech server the dictation button posts to:
+  # POST http://<page host>:8000/v1/audio/transcriptions (multipart).
+  # The model (~164 MB) is fetched from Hugging Face on first start and
+  # kept in the phonon-cache volume. CPU-only; no GPU needed.
+  # NOTE: bound to all interfaces — the unauthenticated endpoint is LAN-
+  # exposed, same as ollama above (firewall is off on this host).
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers.phonon = {
+      image = "ghcr.io/fermionresearch/phonon-cpu:2.0.9";
+      cmd = [
+        "serve"
+        "phonon-2"
+        "--host"
+        "0.0.0.0"
+        "--cors"
+      ];
+      ports = [ "8000:8000" ];
+      volumes = [ "phonon-cache:/home/phonon/.cache" ];
+    };
   };
 
   # nvcc only generates device code for the 5070 (Blackwell, sm_120).
