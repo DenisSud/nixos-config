@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -26,7 +27,11 @@ in
       # ── Podman ──────────────────────────────────────────
       # Runs the Phonon-2 dictation container declared via
       # virtualisation.oci-containers in hosts/pc.nix.
+      virtualisation.containers.enable = true;
       virtualisation.podman.enable = true;
+      virtualisation.podman.dockerSocket.enable = true; # so `docker compose` finds a socket
+
+      environment.systemPackages = [ pkgs.podman-compose ];
     })
   ];
 }

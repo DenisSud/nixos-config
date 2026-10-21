@@ -25,7 +25,7 @@
   denis.ipForward = true;
 
   # ── Feature toggles ───────────────────────────────────
-  denis.docker.enable = true;
+  denis.docker.enable = false;
   denis.podman.enable = true;
   denis.gaming.enable = true;
   denis.xray.enable = true;
