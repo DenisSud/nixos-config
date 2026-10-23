@@ -20,6 +20,7 @@
   wireplumber,
   libnotify,
   gnome-shell,
+  xorg,
 }:
 
 let
@@ -98,6 +99,9 @@ python.buildPythonApplication rec {
       libnotify
       # `gnome-extensions` (best-effort runtime enable in the login service).
       gnome-shell
+      # IBus calls setxkbmap when switching input sources; without it the
+      # ibus CLI exits 1 even though the switch worked.
+      xorg.setxkbmap
     ]}"
     "--set"
     "PARAKEET_TYPING_MODEL_DIR"

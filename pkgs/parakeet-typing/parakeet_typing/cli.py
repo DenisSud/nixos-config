@@ -95,10 +95,17 @@ def current_engine(cfg: Config) -> str | None:
 
 def _switch_engine(cfg: Config, name: str) -> bool:
     try:
-        proc = _run_ibus(cfg, "engine", name)
+        _run_ibus(cfg, "engine", name)
     except (OSError, subprocess.TimeoutExpired):
         return False
-    return proc.returncode == 0
+    # `ibus engine` exits non-zero when it cannot run setxkbmap, which is
+    # common on Wayland/NixOS, even though the switch itself succeeded.  Trust
+    # the active engine rather than the exit status.
+    for _ in range(12):
+        if current_engine(cfg) == name:
+            return True
+        time.sleep(0.05)
+    return False
 
 
 def _write_pending(cfg: Config, prev: str | None) -> None:
