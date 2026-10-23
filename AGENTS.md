@@ -21,8 +21,11 @@ nixos-config/
 ├── AGENTS.md                       # This file
 │
 ├── pkgs/                           # Vendored package expressions
-│   └── happ.nix                    # Happ desktop client, repackaged from
-│                                   #   the upstream .deb (see modules/happ.nix)
+│   ├── happ.nix                    # Happ desktop client, repackaged from
+│   │                               #   the upstream .deb (see modules/happ.nix)
+│   ├── parakeet-typing/            # Parakeet TDT v3 IBus engine + dataset
+│   │                               #   (see modules/voice-typing.nix)
+│   └── parakeet-indicator/         # GNOME Shell waveform pill extension
 │
 ├── hosts/                          # One entry file + one hardware file per machine
 │   ├── pc.nix                      # PC host — imports modules/shared.nix,
@@ -62,7 +65,8 @@ nixos-config/
     ├── happ.nix                    # denis.happ.enable
     ├── wake-on-lan.nix             # denis.wakeOnLan.enable
     ├── tmux.nix                    # denis.tmux.enable
-    └── asus.nix                    # denis.asus.enable
+    ├── asus.nix                    # denis.asus.enable
+    └── voice-typing.nix            # denis.voiceTyping.enable
 ```
 
 **Pattern:** `modules/shared.nix` is the shared layer. It imports every common
@@ -95,6 +99,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - Happ proxy client + `happd` TUN daemon (`denis.happ.enable`; package
   vendored in `pkgs/happ.nix`, repackaged from the upstream .deb)
 - LibreOffice, DaVinci Resolve (free, unfree package) + ddcutil-based monitor brightness GNOME extension
+- Parakeet v3 voice typing (`denis.voiceTyping.enable`): IBus engine +
+  floating waveform pill; model runs on CPU
 
 ### `g14` (Laptop)
 - Hostname: `g14`
@@ -104,6 +110,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - **Full ASUS Linux stack** (built into nixpkgs, no extra flake input): `services.asusd` (profiles, fan curves, AniMe matrix, LED keyboard, ROG Control Center GUI) + `services.supergfxd` (dGPU mode switching)
   - **Note**: `supergfxctl` is being phased out upstream — only keep it if you need vfio for VMs or have dGPU power-off issues. See https://asus-linux.org/guides/nixos
 - **No** Docker or Steam — keeps rebuilds fast. LibreOffice (Writer/Calc) is installed as a user package.
+- Parakeet v3 voice typing (`denis.voiceTyping.enable`), same engine and
+  model as pc (CPU; ~1.1 GB resident while the engine process is alive)
 - Default kernel (no `linuxPackages_latest`)
 
 ## Applying Configuration
@@ -192,6 +200,8 @@ The `dotfiles.fish` script creates these symlinks:
 - **CUPS + Avahi** network printing (Epson L3271 via IPP)
 - **NVIDIA** graphics with container toolkit
 - **Docker** virtualization (PC only)
+- **Parakeet TDT v3** local ASR (sherpa-onnx, int8 ONNX via the IBus engine)
+- **IBus** input-method injection + a custom GNOME Shell extension (waveform pill)
 
 - **Steam + ProtonUp-Qt + Lutris + Heroic** gaming (PC only)
 - **Xray** proxy service (PC only)
@@ -221,7 +231,8 @@ Xray's `/etc/xray/config.json` is also deployed out-of-band (not managed by NixO
 - **Git Tools**: git, git-lfs, gh
 - **LSP Servers**: vtsls, vscode-langservers-extracted, emmet-language-server, gopls, rust-analyzer, lua-language-server, basedpyright, nil
 - **Formatters**: nixfmt, stylua, prettierd, gofumpt, gotools, rustfmt, isort, black
-- **System Tools**: fastfetch, onefetch, gh, pi (upstream flake input)
+- **System Tools**: fastfetch, onefetch, gh, pi (upstream flake input),
+  parakeet-typing (voice typing)
 - **Nix Helpers**: nh, nix-index (replaces command-not-found)
 
 ## Common Tasks
@@ -250,6 +261,38 @@ hosts, or set `denis.userPackages` in the host file for host-specific packages.
 ```bash
 sudo nixos-generate-config --flake .#pc --show-hardware-config > hosts/pc-hardware.nix
 ```
+
+### Voice typing (Parakeet v3)
+
+`denis.voiceTyping.enable` installs the `parakeet` IBus engine, the
+`parakeet-indicator@denis` GNOME Shell extension (floating waveform pill),
+and a user service that installs the `Super+Alt+V` keybinding and enables
+the extension at login.
+
+```bash
+parakeet-typing doctor --mic    # model, IBus, keybinding, extension, mic
+parakeet-typing status          # engine state + dataset counters
+parakeet-typing stop | cancel   # CLI equivalents of the hotkey / Escape
+parakeet-typing stream f.wav    # exercise the streaming pipeline headless
+```
+
+- After the first rebuild (or a GNOME Shell version change) **log out and
+  back in**: GNOME only discovers system extensions at shell startup. IBus
+  can be refreshed without a logout with `ibus restart`.
+- The engine shows a live preedit, commits on a 700 ms pause or a second
+  hotkey press, and stays active for a 15 s correction window to capture
+  manual edits.
+- Dataset (audio + transcripts + corrections) is append-only under
+  `~/.local/share/parakeet-typing/`. `parakeet-typing review` replays
+  utterances and saves corrected text; `parakeet-typing export --out DIR`
+  writes a Hugging Face audiofolder dataset.
+- The model is fetched at build time (671 MB int8) and kept in the Nix
+  store; inference is CPU-only on purpose (~35-40x realtime).
+- If the mic is muted, `doctor --mic` warns; unmute with
+  `wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0`.
+- Implementation lives in `pkgs/parakeet-typing/` (Python engine, VAD,
+  dataset, CLI), `pkgs/parakeet-indicator/` (GNOME Shell extension), and
+  `modules/voice-typing.nix` (wiring).
 
 ### Update Pi to the latest upstream code
 `pi` is not the nixpkgs `pi-coding-agent` package (that one is bumped by a bot
@@ -284,4 +327,7 @@ pinned in the upstream repo, so the build works offline.
 - `pi` follows the upstream flake input `github:earendil-works/pi/main` — see
   "Update Pi to the latest upstream code" above.
 - `nh` runs weekly garbage collection automatically.
+- Voice typing logs audio/transcripts by default for fine-tuning;
+  `parakeet-typing export` builds the dataset and `{"log_audio": false}`
+  in `~/.config/parakeet-typing/config.json` disables audio capture.
 - Dotfiles are managed as independent git repos, not through NixOS (this is intentional — see "Dotfiles Setup" above).

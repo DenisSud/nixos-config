@@ -44,6 +44,7 @@ in
     ./wake-on-lan.nix # denis.wakeOnLan.enable
     ./tmux.nix # denis.tmux.enable
     ./asus.nix # denis.asus.enable
+    ./voice-typing.nix # denis.voiceTyping.enable
   ];
 
   options.denis = {

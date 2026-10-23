@@ -1,0 +1,9 @@
+{
+  "uuid": "parakeet-indicator@denis",
+  "name": "Parakeet Dictation Indicator",
+  "description": "Floating waveform pill that appears while Parakeet voice typing is listening. Click to commit, right-click to cancel.",
+  "shell-version": ["50"],
+  "version": 1,
+  "author": "Denis",
+  "url": "https://github.com/DenisSud/nixos-config"
+}

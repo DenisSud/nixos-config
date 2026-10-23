@@ -33,6 +33,7 @@
   denis.wakeOnLan.enable = true;
   denis.wakeOnLan.ethernetInterface = "eno1";
   denis.tmux.enable = true;
+  denis.voiceTyping.enable = true;
 
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [

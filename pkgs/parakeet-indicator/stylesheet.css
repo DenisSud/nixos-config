@@ -1,0 +1,12 @@
+/* Floating dictation pill. Keep it visually close to the desktop mock:
+   dark translucent capsule, thin light border, white waveform. */
+.parakeet-pill {
+    background-color: rgba(18, 18, 20, 0.93);
+    border: 2px solid rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    padding: 0;
+}
+
+.parakeet-wave {
+    padding: 0;
+}

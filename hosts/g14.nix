@@ -35,6 +35,7 @@
 
   # ── Feature toggles ───────────────────────────────────
   denis.asus.enable = true;
+  denis.voiceTyping.enable = true;
   denis.wakeOnLan.enable = true;
   denis.wakeOnLan.wifiPhy = "phy0";
 

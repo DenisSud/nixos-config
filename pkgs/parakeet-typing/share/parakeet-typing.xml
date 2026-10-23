@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component>
+  <name>org.freedesktop.IBus.ParakeetTyping</name>
+  <description>Parakeet voice typing</description>
+  <exec>@ENGINE@</exec>
+  <version>0.1.0</version>
+  <author>Denis</author>
+  <license>MIT</license>
+  <homepage></homepage>
+  <textdomain>parakeet-typing</textdomain>
+  <engines>
+    <engine>
+      <name>parakeet</name>
+      <longname>Parakeet Dictation</longname>
+      <description>Local speech-to-text with NVIDIA Parakeet TDT v3</description>
+      <language>en</language>
+      <license>MIT</license>
+      <author>Denis</author>
+      <icon>audio-input-microphone</icon>
+      <layout>us</layout>
+      <rank>1</rank>
+    </engine>
+  </engines>
+</component>
