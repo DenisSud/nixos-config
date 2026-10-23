@@ -14,6 +14,7 @@
 import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 import Meta from 'gi://Meta';
 import St from 'gi://St';
 
@@ -67,9 +68,10 @@ function roundedRect(cr, x, y, width, height, radius) {
     cr.closePath();
 }
 
+const ParakeetPill = GObject.registerClass(
 class ParakeetPill extends St.Widget {
-    constructor() {
-        super({
+    _init() {
+        super._init({
             style_class: 'parakeet-pill',
             reactive: true,
             track_hover: true,
@@ -210,7 +212,7 @@ class ParakeetPill extends St.Widget {
         cr.fill();
         cr.$dispose();
     }
-}
+});
 
 export default class ParakeetIndicatorExtension extends Extension {
     enable() {
