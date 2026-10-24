@@ -15,7 +15,6 @@ import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Meta from 'gi://Meta';
 import St from 'gi://St';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -112,15 +111,6 @@ class ParakeetPill extends St.Widget {
             return Clutter.EVENT_STOP;
         });
 
-        this.connect('enter-event', () => {
-            global.display.set_cursor(Meta.Cursor.POINTING_HAND);
-            return Clutter.EVENT_PROPAGATE;
-        });
-        this.connect('leave-event', () => {
-            global.display.set_cursor(Meta.Cursor.DEFAULT);
-            return Clutter.EVENT_PROPAGATE;
-        });
-
         this.connect('destroy', () => {
             if (this._tickId) {
                 GLib.source_remove(this._tickId);
@@ -130,6 +120,8 @@ class ParakeetPill extends St.Widget {
     }
 
     setState(state) {
+        // DEBUG(diag): remove after the GNOME 50 pill regression is confirmed fixed
+        console.log(`parakeet-indicator: pill.setState(${state}) visible=${this.visible}`);
         if (this._state === state && this.visible === VISIBLE_STATES.has(state))
             return;
         this._state = state;
@@ -146,7 +138,6 @@ class ParakeetPill extends St.Widget {
             this.reposition();
         } else {
             this.hide();
-            global.display.set_cursor(Meta.Cursor.DEFAULT);
         }
     }
 
@@ -216,6 +207,8 @@ class ParakeetPill extends St.Widget {
 
 export default class ParakeetIndicatorExtension extends Extension {
     enable() {
+        // DEBUG(diag)
+        console.log('parakeet-indicator: enable()');
         this._pill = new ParakeetPill();
         Main.layoutManager.addChrome(this._pill);
 
@@ -247,6 +240,8 @@ export default class ParakeetIndicatorExtension extends Extension {
     }
 
     disable() {
+        // DEBUG(diag)
+        console.log('parakeet-indicator: disable()');
         if (this._signalId) {
             Gio.DBus.session.signal_unsubscribe(this._signalId);
             this._signalId = 0;
@@ -264,7 +259,6 @@ export default class ParakeetIndicatorExtension extends Extension {
             this._pill.destroy();
             this._pill = null;
         }
-        global.display.set_cursor(Meta.Cursor.DEFAULT);
     }
 
     _sync() {
@@ -285,6 +279,7 @@ export default class ParakeetIndicatorExtension extends Extension {
     }
 
     _onSignal(signal, params) {
+        console.log(`parakeet-indicator: signal ${signal}`);
         if (signal === 'StateChanged') {
             const [state] = params.deep_unpack();
             this._pill?.setState(state);
