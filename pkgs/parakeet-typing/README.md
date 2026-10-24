@@ -33,9 +33,20 @@ No cloud, no network after the build.
   model itself is an offline TDT checkpoint; the English-only "realtime"
   Parakeet variants are not multilingual). On a Ryzen 5 9600X a 10 s
   utterance decodes in ~220 ms, so the cadence has plenty of headroom.
-- **Endpointing** is a silero VAD: a pause (default 700 ms) commits the
-  text and ends the session. Press the hotkey again to finish immediately;
-  Escape cancels.
+- **Endpointing** is a VAD model plus a small policy layer
+  (`parakeet_typing/endpoint.py`): the model says what is speech, the policy
+  decides when dictation is over. Onset needs the model *and* 6 dB above the
+  adaptive noise floor, so a false positive in a noisy room does not start a
+  session. The endpoint waits 0.6 s in a clean pause and 1.2 s while the tail
+  is still noisy, plus another 0.25 s while the running hypothesis is still
+  changing (a mid-sentence pause rarely comes with settled text). Press the
+  hotkey again to finish immediately; Escape cancels.
+- **The final decode never sees the silence we waited for.** The trailing
+  hangover is trimmed off (keeping 150 ms), because handing the int8
+  transducer a chunk that ends in dead air regularly made it emit *nothing* —
+  which looked like the transcript disappearing. If a final decode still comes
+  back empty or degenerate (`Hehehehehehe`), the last non-empty partial is
+  committed instead, so a session never silently drops what the preedit showed.
 - After a commit the engine stays active for a short correction window
   (default 15 s) and replays the user's BackSpace/typing edits against the
   committed text. That is stored as a *correction* record, flagged
@@ -89,11 +100,19 @@ Optional `~/.config/parakeet-typing/config.json` (all keys optional):
 {
   "num_threads": 4,
   "partial_interval": 0.35,
-  "end_silence": 0.7,
+  "vad_model": "silero",
+  "vad_threshold": 0.45,
+  "end_silence": 0.6,
+  "end_silence_noisy": 1.2,
+  "pause_grace": 0.25,
+  "partial_grace": 0.7,
+  "onset_snr": 6.0,
+  "quiet_snr": 9.0,
+  "tail_pad": 0.15,
+  "lead_pad": 0.1,
   "pre_roll": 0.6,
   "max_utterance": 20.0,
   "min_speech": 0.2,
-  "vad_threshold": 0.5,
   "correction_window": 15.0,
   "idle_timeout": 30.0,
   "log_audio": true,
@@ -103,9 +122,18 @@ Optional `~/.config/parakeet-typing/config.json` (all keys optional):
 ```
 
 `partial_interval` trades CPU/latency for how often the preedit updates.
-`end_silence` controls how quickly a pause commits. `correction_window: 0`
-restores the input source immediately after a commit and disables edit
-tracking.
+`end_silence` / `end_silence_noisy` are the hangovers after a quiet and a
+noisy pause; `pause_grace` is added while the hypothesis is younger than
+`partial_grace`. `onset_snr` / `quiet_snr` are dB above the adaptive noise
+floor. `correction_window: 0` restores the input source immediately after a
+commit and disables edit tracking.
+
+Two VAD models ship with the package: **silero** (default, MIT, 644 kB) and
+**ten-vad** (129 kB int8, selected with `"vad_model": "ten"`; Apache-2.0 with
+additional conditions, see its LICENSE). TEN is not the default because it
+under-segmented this machine's real recordings at its default threshold;
+`"vad_threshold": 0.3` is a better starting point if you want to try it.
+Both are only the frame classifier — the hangover/trim policy is the same.
 
 ## GNOME integration
 

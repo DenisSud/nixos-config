@@ -82,11 +82,13 @@ class Dataset:
             "is_last_segment": is_last,
             "source": source,
             "settings": {
+                "vad_model": self.cfg.vad_model,
+                "vad_threshold": self.cfg.vad_threshold,
                 "end_silence": self.cfg.end_silence,
+                "end_silence_noisy": self.cfg.end_silence_noisy,
                 "partial_interval": self.cfg.partial_interval,
                 "pre_roll": self.cfg.pre_roll,
                 "max_utterance": self.cfg.max_utterance,
-                "vad_threshold": self.cfg.vad_threshold,
             },
             **info,
         }

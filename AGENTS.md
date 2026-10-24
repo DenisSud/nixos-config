@@ -279,9 +279,13 @@ parakeet-typing stream f.wav    # exercise the streaming pipeline headless
 - After the first rebuild (or a GNOME Shell version change) **log out and
   back in**: GNOME only discovers system extensions at shell startup. IBus
   can be refreshed without a logout with `ibus restart`.
-- The engine shows a live preedit, commits on a 700 ms pause or a second
-  hotkey press, and stays active for a 15 s correction window to capture
-  manual edits.
+- The engine shows a live preedit, commits when the endpointer decides the
+  user is done (0.6 s of clean silence, 1.2 s while the tail is still noisy,
+  plus 0.25 s while the hypothesis is still changing) or on a second hotkey
+  press, and stays active for a 15 s correction window to capture manual
+  edits. The final decode is trimmed of the trailing hangover and falls back
+  to the last non-empty partial if the transducer returns nothing, so a
+  finished transcript is never dropped.
 - Dataset (audio + transcripts + corrections) is append-only under
   `~/.local/share/parakeet-typing/`. `parakeet-typing review` replays
   utterances and saves corrected text; `parakeet-typing export --out DIR`

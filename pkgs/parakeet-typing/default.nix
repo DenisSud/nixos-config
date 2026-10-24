@@ -42,12 +42,20 @@ let
     url = "${hf}/tokens.txt";
     hash = "sha256-1YVEZ56kvGrFY9H1Ret9R0vWz6Rn8KbiwdwcfTfjw10=";
   };
-  # silero-vad is the endpoint detector sherpa-onnx ships.  Pinned by hash;
+  # silero-vad is the default endpoint model: MIT, 644 kB, and it held up
+  # better than ten-vad on this machine's real recordings.  Pinned by hash;
   # the upstream release asset is not versioned per file, so bump the hash
   # deliberately if it is ever replaced.
   sileroVad = fetchurl {
     url = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx";
     hash = "sha256-niRJ4Qh0ltjUyrqQfyPgvT942R+lUkebucI6wJy7H9Y=";
+  };
+  # ten-vad: 129 kB int8, selected with `"vad_model": "ten"` in
+  # ~/.config/parakeet-typing/config.json.  Apache-2.0 plus additional
+  # conditions (see TEN-framework/ten-vad LICENSE); fine for personal use.
+  tenVad = fetchurl {
+    url = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/ten-vad.int8.onnx";
+    hash = "sha256-iAwHLxiO+haeoCiyFZ0bOkOOFT0IC4fqwxt07K1RHmE=";
   };
 
   model = runCommand "parakeet-tdt-0.6b-v3-int8" { } ''
@@ -58,6 +66,7 @@ let
     cp ${joiner} "$out/joiner.int8.onnx"
     cp ${tokens} "$out/tokens.txt"
     cp ${sileroVad} "$out/silero_vad.onnx"
+    cp ${tenVad} "$out/ten-vad.int8.onnx"
     runHook postInstall
   '';
 
@@ -65,7 +74,7 @@ let
 in
 python.buildPythonApplication rec {
   pname = "parakeet-typing";
-  version = "0.1.0";
+  version = "0.2.0";
   pyproject = true;
 
   src = lib.cleanSource ./.;
@@ -116,6 +125,12 @@ python.buildPythonApplication rec {
     "PARAKEET_TYPING_PW_PLAY"
     "${pipewire}/bin/pw-play"
   ];
+
+  # The endpoint policy is pure numpy and needs no model: cheap to test.
+  doCheck = true;
+  checkPhase = ''
+    python -m unittest discover -s tests -t .
+  '';
 
   postInstall = ''
     install -Dm644 ${./share/parakeet-typing.xml} \

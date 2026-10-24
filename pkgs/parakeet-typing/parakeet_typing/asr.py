@@ -22,8 +22,14 @@ MODEL_FILES = (
     "decoder.int8.onnx",
     "joiner.int8.onnx",
     "tokens.txt",
-    "silero_vad.onnx",
 )
+
+#: VAD model per `vad_model` setting.  Both ship with the package; silero is
+#: the default, ten-vad is 129 kB int8 and can be selected in config.json.
+VAD_FILES = {
+    "silero": "silero_vad.onnx",
+    "ten": "ten-vad.int8.onnx",
+}
 
 MODEL_NAME = "parakeet-tdt-0.6b-v3-int8"
 
@@ -52,6 +58,18 @@ class AsrEngine:
                 "model files missing in %s: %s" % (model_dir, ", ".join(missing))
             )
         return paths
+
+    def vad_path(self) -> Path:
+        name = VAD_FILES.get(self.cfg.vad_model)
+        if name is None:
+            raise AsrError(
+                "unknown vad_model %r (expected one of %s)"
+                % (self.cfg.vad_model, ", ".join(sorted(VAD_FILES)))
+            )
+        path = Path(self.cfg.model_dir) / name
+        if not path.is_file():
+            raise AsrError("VAD model missing: %s" % path)
+        return path
 
     def load(self) -> None:
         if self._rec is not None:
@@ -103,18 +121,32 @@ class AsrEngine:
         return text, (time.monotonic() - t0) * 1000.0
 
     def make_vad(self):
-        """Create a fresh silero VAD instance for one dictation session."""
+        """Create a fresh VAD instance for one dictation session.
+
+        The model only answers "is this frame speech"; when a dictation ends
+        is decided by `endpoint.Endpointer`.  Its own segmenter is therefore
+        set to a short silence duration.
+        """
         import sherpa_onnx
 
-        paths = self.model_paths()
+        path = str(self.vad_path())
         vad_cfg = sherpa_onnx.VadModelConfig()
-        vad_cfg.silero_vad.model = str(paths["silero_vad.onnx"])
-        vad_cfg.silero_vad.threshold = float(self.cfg.vad_threshold)
-        vad_cfg.silero_vad.min_silence_duration = float(self.cfg.end_silence)
-        vad_cfg.silero_vad.min_speech_duration = float(self.cfg.min_speech)
-        vad_cfg.silero_vad.max_speech_duration = float(
-            max(30.0, self.cfg.max_utterance + 10.0)
-        )
+        if self.cfg.vad_model == "ten":
+            vad_cfg.ten_vad.model = path
+            vad_cfg.ten_vad.threshold = float(self.cfg.vad_threshold)
+            vad_cfg.ten_vad.min_silence_duration = float(self.cfg.vad_min_silence)
+            vad_cfg.ten_vad.min_speech_duration = float(self.cfg.min_speech)
+            vad_cfg.ten_vad.max_speech_duration = float(
+                max(30.0, self.cfg.max_utterance + 10.0)
+            )
+        else:
+            vad_cfg.silero_vad.model = path
+            vad_cfg.silero_vad.threshold = float(self.cfg.vad_threshold)
+            vad_cfg.silero_vad.min_silence_duration = float(self.cfg.vad_min_silence)
+            vad_cfg.silero_vad.min_speech_duration = float(self.cfg.min_speech)
+            vad_cfg.silero_vad.max_speech_duration = float(
+                max(30.0, self.cfg.max_utterance + 10.0)
+            )
         vad_cfg.sample_rate = int(self.cfg.sample_rate)
         vad_cfg.num_threads = 1
         vad_cfg.provider = "cpu"

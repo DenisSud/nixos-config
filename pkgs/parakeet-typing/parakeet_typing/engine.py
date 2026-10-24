@@ -154,6 +154,7 @@ class Manager:
         self.tracker: TextTracker | None = None
         self.entry_id: str | None = None
         self.committed_text: str = ""
+        self._pending_commit: str | None = None
         self._correction_timer: int | None = None
         self._correction_grace_until = 0.0
         self._focus_suspect = False
@@ -303,6 +304,8 @@ class Manager:
         log.info("engine enabled (state=%s)", self.state)
         self.active = engine
         engine.set_active(True)
+        if self._pending_commit:
+            GLib.idle_add(self._flush_pending_commit)
         if self.state == "idle":
             pending = self._consume_pending()
             if pending is not None:
@@ -337,6 +340,10 @@ class Manager:
             self.state = "idle"
 
     def on_focus_in(self, engine: "ParakeetEngine") -> None:
+        if self._pending_commit:
+            # A commit that arrived while no engine instance was active; the
+            # input context exists again, so deliver it.
+            GLib.idle_add(self._flush_pending_commit)
         # While a session is running, keep talking to the engine instance that
         # actually received `enable`.  IBus can emit focus_in/focus_out while
         # the input source is switching; cancelling on those events would kill
@@ -464,21 +471,47 @@ class Manager:
     def _ui_segment(self, gen: int, segment: Segment) -> bool:
         if gen != self.generation:
             return False
-        if self.active is None or not self.active.is_active():
-            log.warning("segment ready but engine is not active; text: %r", segment.text)
-            return False
-        if segment.text:
-            log.info("commit: %r", segment.text)
-            self.active.commit(segment.text)
-        self._hide_preedit()
+        self._commit(segment.text)
         if segment.is_last:
-            self.state = "correction"
             self.entry_id = segment.entry_id
             self.committed_text = segment.text
             if segment.text:
+                self.state = "correction"
                 self._begin_correction(segment)
             else:
+                log.info("final decode was empty; nothing to commit")
+                self.state = "idle"
                 self._restore_engine()
+        return False
+
+    def _commit(self, text: str) -> None:
+        """Hide the preedit, then commit (same order as IBus' simple engine).
+
+        If no engine instance is active when the transcript is ready (IBus can
+        disable one while a session is still finishing), hold the text and
+        deliver it on the next focus instead of dropping it.
+        """
+        self._hide_preedit()
+        if not text:
+            return
+        engine = self.active
+        if engine is None or not engine.is_active():
+            log.warning("no active engine to commit into; deferring %r", text)
+            self._pending_commit = text
+            return
+        log.info("commit: %r", text)
+        engine.commit(text)
+
+    def _flush_pending_commit(self) -> bool:
+        text, self._pending_commit = self._pending_commit, None
+        if not text:
+            return False
+        engine = self.active
+        if engine is None or not engine.is_active():
+            self._pending_commit = text
+            return False
+        log.info("commit (deferred): %r", text)
+        engine.commit(text)
         return False
 
     def _ui_done(self, gen: int, reason: str) -> bool:
@@ -650,6 +683,7 @@ class Manager:
             "engine_active": bool(self.active is not None and self.active.is_active()),
             "prev_engine": self.prev_engine,
             "model_loaded": self.asr.loaded,
+            "pending_commit": bool(self._pending_commit),
             "socket": str(self.cfg.socket_path),
             "data_dir": str(self.cfg.data_dir),
             "config": self.cfg.status(),

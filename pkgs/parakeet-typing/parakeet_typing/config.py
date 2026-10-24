@@ -40,10 +40,19 @@ _CONFIG_KEYS = {
     "partial_interval",
     "partial_min_audio",
     "end_silence",
+    "end_silence_noisy",
+    "onset_snr",
+    "quiet_snr",
+    "pause_grace",
+    "partial_grace",
+    "tail_pad",
+    "lead_pad",
     "min_speech",
     "pre_roll",
     "max_utterance",
+    "vad_model",
     "vad_threshold",
+    "vad_min_silence",
     "log_audio",
     "log_partials",
     "correction_window",
@@ -64,12 +73,23 @@ class Config:
     num_threads: int = 4
     partial_interval: float = 0.35
     partial_min_audio: float = 0.35
-    end_silence: float = 0.70
     min_speech: float = 0.20
     pre_roll: float = 0.60
     max_utterance: float = 20.0
-    vad_threshold: float = 0.50
     idle_timeout: float = 30.0
+
+    # Endpointing (see parakeet_typing/endpoint.py)
+    vad_model: str = "silero"          # "silero" | "ten"
+    vad_threshold: float = 0.45
+    vad_min_silence: float = 0.25     # VAD segmenter; the hangover is the policy
+    end_silence: float = 0.60         # hangover after a clearly quiet pause
+    end_silence_noisy: float = 1.20   # hangover while the tail is still noisy
+    onset_snr: float = 6.0            # dB above the noise floor to start
+    quiet_snr: float = 9.0            # dB above the floor that counts as quiet
+    pause_grace: float = 0.25         # extra hangover for a fresh hypothesis
+    partial_grace: float = 0.70       # ... "fresh" means changed this recently
+    tail_pad: float = 0.15            # audio kept after the last speech frame
+    lead_pad: float = 0.10            # ... and before the first one
 
     # Dataset
     log_audio: bool = True
@@ -144,7 +164,7 @@ class Config:
                         "unknown config key %r in %s", key, CONFIG_PATH
                     )
                     continue
-                if key in ("pw_record", "pw_play", "ibus", "hotkey"):
+                if key in ("pw_record", "pw_play", "ibus", "hotkey", "vad_model"):
                     setattr(cfg, key, str(value))
                 elif key == "model_dir":
                     cfg.model_dir = Path(value).expanduser()
@@ -177,7 +197,11 @@ class Config:
             "model_dir": str(self.model_dir),
             "num_threads": self.num_threads,
             "partial_interval": self.partial_interval,
+            "vad_model": self.vad_model,
+            "vad_threshold": self.vad_threshold,
             "end_silence": self.end_silence,
+            "end_silence_noisy": self.end_silence_noisy,
+            "onset_snr": self.onset_snr,
             "correction_window": self.correction_window,
             "hotkey": self.hotkey,
             "source_file": self.source_file,
