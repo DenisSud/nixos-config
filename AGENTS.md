@@ -23,6 +23,8 @@ nixos-config/
 ├── pkgs/                           # Vendored package expressions
 │   ├── happ.nix                    # Happ desktop client, repackaged from
 │   │                               #   the upstream .deb (see modules/happ.nix)
+│   ├── anime-matrix/               # AniMe Matrix lid helper: gif/image/
+│   │                               #   video/text -> asusctl (modules/asus.nix)
 │   ├── parakeet-typing/            # Parakeet TDT v3 IBus engine + dataset
 │   │                               #   (see modules/voice-typing.nix)
 │   └── parakeet-indicator/         # GNOME Shell waveform pill extension
@@ -65,7 +67,8 @@ nixos-config/
     ├── happ.nix                    # denis.happ.enable
     ├── wake-on-lan.nix             # denis.wakeOnLan.enable
     ├── tmux.nix                    # denis.tmux.enable
-    ├── asus.nix                    # denis.asus.enable
+    ├── asus.nix                    # denis.asus.enable,
+    │                               #   denis.asus.animeMatrix.enable
     └── voice-typing.nix            # denis.voiceTyping.enable
 ```
 
@@ -84,7 +87,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 (`listOf package`, default `[]`), and the feature toggles `denis.docker.enable`,
 `denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
 `denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
-`bool`, default `false`).
+`bool`, default `false`), plus `denis.asus.animeMatrix.enable` (nested under
+`denis.asus.enable`) for the AniMe Matrix lid helper.
 
 ## Machines
 
@@ -110,6 +114,9 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - **Full ASUS Linux stack** (built into nixpkgs, no extra flake input): `services.asusd` (profiles, fan curves, AniMe matrix, LED keyboard, ROG Control Center GUI) + `services.supergfxd` (dGPU mode switching)
   - **Note**: `supergfxctl` is being phased out upstream — only keep it if you need vfio for VMs or have dGPU power-off issues. See https://asus-linux.org/guides/nixos
 - **No** Docker or Steam — keeps rebuilds fast. LibreOffice (Writer/Calc) is installed as a user package.
+- AniMe Matrix lid display (`denis.asus.animeMatrix.enable`): custom gifs,
+  images, video and text via `anime-matrix` (see "AniMe Matrix" below). The
+  panel is a GA401 33 x 55 diagonal lattice, 16 grey levels.
 - Parakeet v3 voice typing (`denis.voiceTyping.enable`), same engine and
   model as pc (CPU; ~1.1 GB resident while the engine process is alive)
 - Default kernel (no `linuxPackages_latest`)
@@ -191,7 +198,7 @@ The `dotfiles.fish` script creates these symlinks:
 ## Key Technologies
 
 - **NixOS** with flakes and `nixos-unstable`
-- **ASUS Linux** (built into nixpkgs via `services.asusd` + `services.supergfxd`) for laptop power/profile/dGPU control
+- **ASUS Linux** (built into nixpkgs via `services.asusd` + `services.supergfxd`) for laptop power/profile/dGPU control, plus `anime-matrix` for the AniMe Matrix lid
 - **Fish** shell (with Starship prompt)
 - **Ghostty** terminal
 - **Neovim** with Lua configuration
@@ -261,6 +268,45 @@ hosts, or set `denis.userPackages` in the host file for host-specific packages.
 ```bash
 sudo nixos-generate-config --flake .#pc --show-hardware-config > hosts/pc-hardware.nix
 ```
+
+### AniMe Matrix (lid display)
+
+`denis.asus.animeMatrix.enable` installs `anime-matrix`
+(`pkgs/anime-matrix/`), which renders a source to the panel's aspect with
+ffmpeg and pushes it through asusd via `asusctl anime`. asusd keeps
+running: the third-party AniMe apps (`animatrix` and friends) ask you to
+stop it because they open the USB device directly, and that costs the fan
+curves and profile switching.
+
+```bash
+anime-matrix presets                 # the 34 gifs asusctl ships
+anime-matrix preset "ROG glitch"     # play one of them
+anime-matrix show ~/vid.mp4 --fps 12 # image, gif or video
+anime-matrix text "DENIS"            # static text, auto-sized
+anime-matrix text "ON MY LID NOW" --scroll
+anime-matrix stop                    # clear the panel, forget the choice
+anime-matrix status                  # what plays, brightness, panel switches
+anime-matrix brightness low          # off|low|med|high, whole panel
+anime-matrix battery off             # stay lit on battery (default: dark)
+```
+
+- The last choice is replayed at login by `anime-matrix.service` (user
+  unit); prepared frames live in `~/.cache/anime-matrix`, the choice in
+  `~/.local/state/anime-matrix/current`. Changing the animation needs no
+  rebuild.
+- Sources: anything ffmpeg reads. They are scaled to 78x48 (the panel
+  rect aspect), padded black and quantised to 16 greys. `--size 74x36`
+  matches the framing of ASUS's own gifs.
+- Still images are written once (`asusctl anime image`) and stay on the
+  panel; gifs and video stream frames from a foreground process
+  (`asusctl anime gif --loops 0`), which is why they live in the user
+  service.
+- The GA401 panel is dark on battery by default (`off_when_unplugged` in
+  `/etc/asusd/anime.ron`), and `rog-control-center` only exposes
+  brightness and the builtin animations — no image/gif picker.
+- Angles, rotation and offsets are asusctl options this wrapper does not
+  expose; call `asusctl anime gif --path f.gif --angle 0.5` directly for
+  those.
 
 ### Voice typing (Parakeet v3)
 

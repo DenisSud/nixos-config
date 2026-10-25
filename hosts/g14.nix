@@ -35,6 +35,7 @@
 
   # ── Feature toggles ───────────────────────────────────
   denis.asus.enable = true;
+  denis.asus.animeMatrix.enable = true; # lid display: anime-matrix
   denis.happ.enable = true;
   denis.voiceTyping.enable = true;
   denis.wakeOnLan.enable = true;
