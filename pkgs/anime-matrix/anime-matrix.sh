@@ -262,19 +262,31 @@ panel_switch() { # property -> human readable
   esac
 }
 
+prop_or_unknown() { # property -> value or ?
+  local value
+  value=$(device_prop "$1")
+  printf '%s' "${value:-?}"
+}
+
 cmd_status() {
   local state
   state=$(systemctl --user is-active "$UNIT" 2>/dev/null || true)
-  printf 'service:    %s\n' "${state:-unknown}"
   if read_spec; then
+    # A still image is a one-shot write: the unit exits and the panel keeps
+    # the frame, so its active state says nothing.
+    if [ "$SPEC_KIND" = image ]; then
+      state="n/a (still image written once)"
+    fi
+    printf 'service:    %s\n' "${state:-unknown}"
     printf 'showing:    %s (%s, bright %s)\n' "$SPEC_SRC" "$SPEC_KIND" "$SPEC_BRIGHT"
     printf 'rendered:   %s\n' "$SPEC_OUT"
   else
+    printf 'service:    %s\n' "${state:-unknown}"
     printf 'showing:    nothing custom (builtin animations)\n'
   fi
-  printf 'display:    %s\n' "$(device_prop EnableDisplay || echo '?')"
+  printf 'display:    %s\n' "$(prop_or_unknown EnableDisplay)"
   printf 'brightness: %s (0=off 1=low 2=med 3=high)\n' \
-    "$(device_prop Brightness || echo '?')"
+    "$(prop_or_unknown Brightness)"
   printf 'on battery: %s\n' "$(panel_switch OffWhenUnplugged)"
   printf 'lid closed: %s\n' "$(panel_switch OffWhenLidClosed)"
   printf 'suspended:  %s\n' "$(panel_switch OffWhenSuspended)"
