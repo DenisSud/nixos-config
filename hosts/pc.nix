@@ -9,7 +9,11 @@
   # ╚══════════════════════════════════════════════════════════╝
   # Thin host: imports the shared layer and sets `denis.*` values.
   # Hardware-specific bits (NVIDIA, file systems) stay below.
-  imports = [ ../modules/shared.nix ];
+  imports = [
+    ../modules/shared.nix
+    # Demo stand for the championship: compas.sudakov.site (Caddy on pi → :8110).
+    ../modules/clinical-compass.nix
+  ];
 
   # ── Host identity ─────────────────────────────────────
   denis.hostName = "pc";
