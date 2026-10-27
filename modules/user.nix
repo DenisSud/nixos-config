@@ -41,6 +41,10 @@
       wayshot
       gnome-tweaks
       impression
+      # Screen recording / streaming. The GoPro does not need it — gopro-webcam
+      # feeds /dev/video42 (pc) and any app can take that directly. OBS's own
+      # "Start Virtual Camera" wants a v4l2loopback device too and will fight
+      # gopro-webcam for video_nr=42; leave it off while streaming.
       obs-studio
       anki
       vial
