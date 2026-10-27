@@ -25,6 +25,8 @@ nixos-config/
 │   │                               #   the upstream .deb (see modules/happ.nix)
 │   ├── anime-matrix/               # AniMe Matrix lid helper: gif/image/
 │   │                               #   video/text -> asusctl (modules/asus.nix)
+│   ├── gopro-webcam/               # GoPro USB webcam bridge: udp/8554 ->
+│   │                               #   /dev/video42 (modules/gopro-webcam.nix)
 │   ├── parakeet-typing/            # Parakeet TDT v3 IBus engine + dataset
 │   │                               #   (see modules/voice-typing.nix)
 │   └── parakeet-indicator/         # GNOME Shell waveform pill extension
@@ -69,7 +71,8 @@ nixos-config/
     ├── tmux.nix                    # denis.tmux.enable
     ├── asus.nix                    # denis.asus.enable,
     │                               #   denis.asus.animeMatrix.enable
-    └── voice-typing.nix            # denis.voiceTyping.enable
+    ├── voice-typing.nix            # denis.voiceTyping.enable
+    └── gopro-webcam.nix            # denis.goproWebcam.enable
 ```
 
 **Pattern:** `modules/shared.nix` is the shared layer. It imports every common
@@ -88,7 +91,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 `denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
 `denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
 `bool`, default `false`), plus `denis.asus.animeMatrix.enable` (nested under
-`denis.asus.enable`) for the AniMe Matrix lid helper.
+`denis.asus.enable`) for the AniMe Matrix lid helper and
+`denis.goproWebcam.enable` for the GoPro USB webcam bridge.
 
 ## Machines
 
@@ -343,6 +347,38 @@ parakeet-typing stream f.wav    # exercise the streaming pipeline headless
 - Implementation lives in `pkgs/parakeet-typing/` (Python engine, VAD,
   dataset, CLI), `pkgs/parakeet-indicator/` (GNOME Shell extension), and
   `modules/voice-typing.nix` (wiring).
+
+### GoPro as a webcam
+
+`denis.goproWebcam.enable` installs `gopro-webcam` (in `pkgs/gopro-webcam/`)
+plus the `v4l2loopback` module, so a GoPro HERO8 or later can be used as a
+webcam over USB — no capture card, no Media Mod.
+
+```bash
+gopro-webcam                # stream into /dev/video42, Ctrl-C stops it
+gopro-webcam --res 720 --fov wide
+gopro-webcam status         # interface, virtual device, current format
+gopro-webcam stop           # tell the camera to leave webcam mode
+```
+
+- On the camera: Preferences → Connections → USB Connection → **GoPro
+  Connect** (not MTP), and a USB-C cable that carries data. The camera shows
+  a webcam icon while streaming.
+- The camera enumerates as a USB ethernet adapter (`enx<mac>` interface) and
+  serves MPEG-TS/H.264 on UDP 8554 after one HTTP request to
+  `/gp/gpWebcam/START` at `.51` of that subnet. `gopro-webcam` does the
+  discovery, the request and the `ffmpeg → v4l2loopback` leg; what apps see
+  is a normal 1080p30 camera called “GoPro”.
+- `exclusive_caps=1` means the device only appears to apps while something
+  is writing to it — start `gopro-webcam` first, then pick “GoPro” in OBS,
+  Meet, the browser or whatever else.
+- Camera stuck / bridge refuses to start: Preferences → Connections →
+  **Reset Connections** on the camera. Unplugging is not enough, USB keeps
+  the camera powered.
+- Kernel 7.3 (`pc` runs `linuxPackages_latest`) writes depmod metadata into
+  the out-of-tree module, which collides with the kernel's own
+  `modules.builtin.bin`. The module strips those files in `postInstall`;
+  only `v4l2loopback.ko` is wanted from that package.
 
 ### Update Pi to the latest upstream code
 `pi` is not the nixpkgs `pi-coding-agent` package (that one is bumped by a bot
