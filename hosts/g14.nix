@@ -38,6 +38,7 @@
   denis.asus.animeMatrix.enable = true; # lid display: anime-matrix
   denis.happ.enable = true;
   denis.voiceTyping.enable = true;
+  denis.goproWebcam.enable = true; # GoPro HERO9 as /dev/video42
   denis.wakeOnLan.enable = true;
   denis.wakeOnLan.wifiPhy = "phy0";
 

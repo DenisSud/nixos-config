@@ -45,6 +45,7 @@ in
     ./tmux.nix # denis.tmux.enable
     ./asus.nix # denis.asus.enable
     ./voice-typing.nix # denis.voiceTyping.enable
+    ./gopro-webcam.nix # denis.goproWebcam.enable
   ];
 
   options.denis = {

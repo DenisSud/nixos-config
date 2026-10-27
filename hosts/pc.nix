@@ -34,6 +34,7 @@
   denis.wakeOnLan.ethernetInterface = "eno1";
   denis.tmux.enable = true;
   denis.voiceTyping.enable = true;
+  denis.goproWebcam.enable = true; # GoPro HERO9 as /dev/video42
 
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [
