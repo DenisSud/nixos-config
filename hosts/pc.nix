@@ -31,10 +31,27 @@
   denis.xray.enable = true;
   denis.happ.enable = true;
   denis.wakeOnLan.enable = true;
+
   denis.wakeOnLan.ethernetInterface = "eno1";
   denis.tmux.enable = true;
   denis.voiceTyping.enable = true;
   denis.goproWebcam.enable = true; # GoPro HERO9 as /dev/video42
+
+  # ── VPN passthrough ───────────────────────────────────
+  # Happ's TUN takes the default route and installs a catch-all policy rule
+  # (pref 9002, its own table), so even a route in `main` is bypassed. The
+  # mason and tanya stacks each run a sing-box `vpn` sidecar whose own
+  # upstream is that VLESS server; through Happ's tunnel it is unreachable,
+  # the sidecar stalls and both Telegram bots stop polling (2026-10-27,
+  # 23 minutes). The LAN and the podman bridges go the same way, which is
+  # what `localNetworks` covers.
+  #
+  # 201.51.3.119 is `deploy/vpn/config.json` in ~/dev/mason and
+  # ~/dev/mason-tanya: keep the three in step when the subscription moves.
+  denis.vpnPassthrough = {
+    enable = true;
+    destinations = [ "201.51.3.119" ];
+  };
 
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [

@@ -67,6 +67,7 @@ nixos-config/
     ├── gaming.nix                  # denis.gaming.enable
     ├── xray.nix                    # denis.xray.enable
     ├── happ.nix                    # denis.happ.enable
+    ├── vpn-passthrough.nix         # denis.vpnPassthrough.enable
     ├── wake-on-lan.nix             # denis.wakeOnLan.enable
     ├── tmux.nix                    # denis.tmux.enable
     ├── asus.nix                    # denis.asus.enable,
@@ -89,7 +90,7 @@ on a host, set the corresponding `denis.<feature>.enable`.
 `denis.ipForward` (`bool`, default `false`), `denis.userPackages`
 (`listOf package`, default `[]`), and the feature toggles `denis.docker.enable`,
 `denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
-`denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
+`denis.vpnPassthrough.enable`, `denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
 `bool`, default `false`), plus `denis.asus.animeMatrix.enable` (nested under
 `denis.asus.enable`) for the AniMe Matrix lid helper and
 `denis.goproWebcam.enable` for the GoPro USB webcam bridge.
@@ -106,6 +107,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - Xray proxy service (reads `/etc/xray/config.json`)
 - Happ proxy client + `happd` TUN daemon (`denis.happ.enable`; package
   vendored in `pkgs/happ.nix`, repackaged from the upstream .deb)
+- Passthrough policy routing (`denis.vpnPassthrough.enable`): the container
+  sidecars' upstream, the LAN and the podman bridges stay off Happ's tunnel
 - LibreOffice, DaVinci Resolve (free, unfree package) + ddcutil-based monitor brightness GNOME extension
 - Parakeet v3 voice typing (`denis.voiceTyping.enable`): IBus engine +
   floating waveform pill; model runs on CPU
@@ -395,6 +398,39 @@ gopro-webcam stop           # tell the camera to leave webcam mode
   the out-of-tree module, which collides with the kernel's own
   `modules.builtin.bin`. The module strips those files in `postInstall`;
   only `v4l2loopback.ko` is wanted from that package.
+
+### VPN passthrough (a TUN VPN vs the container sidecars)
+
+`denis.vpnPassthrough.enable` keeps declared destinations on the physical
+uplink while a TUN VPN owns the default route. On `pc` that is Happ's
+`happ-xray`: the mason and tanya stacks' own `vpn` sidecars reach their VLESS
+server directly, and through Happ's tunnel that server is unreachable, which
+stalls the proxy and stops both Telegram bots polling (2026-10-27, 23 min).
+
+Happ's TUN is sing-box with `auto_route`, and that installs a catch-all rule
+at priority 9002 pointing at its own table, so a route in `main` is never
+consulted. The fix is a policy table (`table`, default 1090) mirroring `main`
+minus tunnel devices, plus one rule per destination at `rulePriority` (default
+1000, must stay below 9000). Both are reconciled on a timer (`interval`,
+30s) — the tunnel coming and going never touches them.
+
+```bash
+vpn-passthrough status     # table, rules, and where each destination leaves
+vpn-passthrough apply      # reconcile by hand (root)
+systemctl --failed         # vpn-passthrough-guard is there when it broke
+```
+
+- `destinations` is per host and holds the tunnel's own upstream servers:
+  `201.51.3.119` on `pc`, which is `deploy/vpn/config.json` in
+  `~/dev/mason` and `~/dev/mason-tanya`. Move all three together when the
+  subscription changes servers.
+- `localNetworks` (default on) adds every directly connected prefix — the
+  LAN, the podman bridges — so LAN peers and the printer stay reachable
+  while the tunnel is up.
+- `vpn-passthrough-guard.timer` fails a unit naming the destination and the
+  device it went through instead. That is the alarm; nothing else watches it.
+- The mirror skips link-local and multicast prefixes: those repeat per
+  interface, and one table entry per prefix is all the kernel keeps.
 
 ### Update Pi to the latest upstream code
 `pi` is not the nixpkgs `pi-coding-agent` package (that one is bumped by a bot
