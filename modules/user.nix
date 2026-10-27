@@ -41,6 +41,7 @@
       wayshot
       gnome-tweaks
       impression
+      obs-studio
       anki
       vial
       ghostty
