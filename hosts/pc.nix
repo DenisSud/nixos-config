@@ -39,6 +39,11 @@
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice
+    # Screen recording / streaming. The GoPro does not need it — gopro-webcam
+    # feeds /dev/video42 and any app can take that directly. Note that OBS's
+    # own "Start Virtual Camera" wants a v4l2loopback device too and will
+    # fight gopro-webcam for video_nr=42; leave it off while streaming.
+    obs-studio
     # Unfree + FHS-wrapped; the installer is fetched from Blackmagic at
     # build time (~4 GB), so the first rebuild that includes it is slow.
     # GPU acceleration uses the NVIDIA driver's CUDA libs via
