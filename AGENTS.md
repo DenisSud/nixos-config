@@ -380,6 +380,17 @@ gopro-webcam stop           # tell the camera to leave webcam mode
 - Camera stuck / bridge refuses to start: Preferences → Connections →
   **Reset Connections** on the camera. Unplugging is not enough, USB keeps
   the camera powered.
+- Image quality is set by the camera, not by the bridge: `--fov wide|linear|
+  narrow|superview` and `--res 1080|720|480` are the only knobs that do
+  anything. `/gp/gpWebcam/SETTINGS?ev=`/`?iso=`/`?wb=` all answer HTTP 200 and
+  leave the frame bit-identical (measured: same YAVG at ev -2, 0, +2), so
+  exposure and white balance are fixed by GoPro's webcam mode. Room light in
+  front of the face, an eye-level mount about a metre away, and `--fov
+  linear` (no fisheye) matter more than anything software can do.
+- `--look` adds denoise + luma sharpen + saturation. It is off by default
+  because it costs a core: the raw pipeline is ~15% of one core at 1080p30,
+  `--look` is ~85%. OBS does the same on the GPU for free — prefer a Sharpen
+  and Color Correction filter on the Video Capture Device source.
 - Kernel 7.3 (`pc` runs `linuxPackages_latest`) writes depmod metadata into
   the out-of-tree module, which collides with the kernel's own
   `modules.builtin.bin`. The module strips those files in `postInstall`;

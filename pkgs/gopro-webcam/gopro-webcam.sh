@@ -24,6 +24,14 @@ set -euo pipefail
 RES=1080
 FOV=linear
 PORT=8554
+# Optional sharpening/colour pass (--look). The camera exposes no exposure,
+# ISO or sharpness settings in webcam mode — /gp/gpWebcam/SETTINGS?ev= and
+# friends answer 200 and change nothing, measured — so this is the only
+# software lever. It is off by default because it costs a full core: the raw
+# pipeline sits at ~15% of one core, this chain at ~85% (1080p30, measured).
+# OBS applies the same filters on the GPU for nothing; use that when OBS is in
+# the path.
+LOOK=""
 OUT=/dev/video42
 IFACE=
 CAM_IP=
@@ -43,6 +51,8 @@ usage:
     --out /dev/videoN           v4l2loopback device         (default /dev/video42)
     --iface IFACE               pin the camera's network interface
     --ip 172.2X.X.51            pin the camera address
+    --look                      denoise + sharpen + colour (+~80% of a core,
+                                prefer OBS filters when OBS is in the path)
   gopro-webcam status          camera, interface and virtual device state
   gopro-webcam stop            tell the camera to leave webcam mode
 
@@ -155,16 +165,18 @@ run() {
   fi
 
   start_stream
-  trap 'stop_stream; [ -n "${FFMPEG_PID:-}" ] && kill "$FFMPEG_PID" 2>/dev/null || true' INT TERM EXIT
+  trap 'STOPPING=1; stop_stream; [ -n "${FFMPEG_PID:-}" ] && kill "$FFMPEG_PID" 2>/dev/null || true' INT TERM EXIT
 
   ffmpeg -hide_banner -nostdin \
     -fflags nobuffer -flags low_delay \
     -probesize 1000000 -analyzeduration 500000 \
     -i "udp://@0.0.0.0:$PORT?overrun_nonfatal=1&fifo_size=50000000" \
-    -map 0:v:0 -vf format=yuv420p \
+    -map 0:v:0 -vf "${LOOK:+$LOOK,}format=yuv420p" \
     -loglevel error -f v4l2 "$OUT" &
   FFMPEG_PID=$!
-  wait "$FFMPEG_PID" || say "ffmpeg exited — the camera stopped sending, or the cable dropped"
+  if ! wait "$FFMPEG_PID" && [ -z "${STOPPING:-}" ]; then
+    say "ffmpeg exited — the camera stopped sending, or the cable dropped"
+  fi
 }
 
 status() {
@@ -210,6 +222,7 @@ while [ $# -gt 0 ]; do
     --res) RES=$2; shift ;;
     --fov) FOV=$2; shift ;;
     --out) OUT=$2; shift ;;
+    --look) LOOK="hqdn3d=1.5:1.5:6:6,unsharp=5:5:0.9:5:5:0.0,eq=contrast=1.05:saturation=1.1" ;;
     --iface) IFACE=$2; shift ;;
     --ip) CAM_IP=$2; shift ;;
     --port) PORT=$2; shift ;;
