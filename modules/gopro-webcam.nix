@@ -71,15 +71,17 @@ in
     ];
 
     # The camera streams back to whoever asked for the stream, arriving on
-    # the USB ethernet interface (named enx<mac> by predictable naming). The
-    # firewall here is the iptables backend, and `+` matches any interface
-    # name with that prefix — so the rule holds whatever the camera's MAC is,
-    # and never exposes the port on wifi or the wired LAN.
+    # its own USB interface. Interface names are not something to match on —
+    # the HERO9 reports a locally-administered MAC, so systemd's predictable
+    # naming gives enp10s0u5 here rather than enx<mac>, and `+` wildcards only
+    # work on a trailing prefix. The camera's subnet is always inside
+    # 172.16.0.0/12, so scope the rule by source instead: the port never
+    # answers on wifi or the wired LAN.
     networking.firewall.extraCommands = ''
-      iptables -A nixos-fw -i enx+ -p udp --dport 8554 -j nixos-fw-accept
+      iptables -A nixos-fw -s 172.16.0.0/12 -p udp --dport 8554 -j nixos-fw-accept
     '';
     networking.firewall.extraStopCommands = ''
-      iptables -D nixos-fw -i enx+ -p udp --dport 8554 -j nixos-fw-accept 2>/dev/null || true
+      iptables -D nixos-fw -s 172.16.0.0/12 -p udp --dport 8554 -j nixos-fw-accept 2>/dev/null || true
     '';
   };
 }

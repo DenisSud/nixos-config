@@ -364,11 +364,16 @@ gopro-webcam stop           # tell the camera to leave webcam mode
 - On the camera: Preferences → Connections → USB Connection → **GoPro
   Connect** (not MTP), and a USB-C cable that carries data. The camera shows
   a webcam icon while streaming.
-- The camera enumerates as a USB ethernet adapter (`enx<mac>` interface) and
-  serves MPEG-TS/H.264 on UDP 8554 after one HTTP request to
-  `/gp/gpWebcam/START` at `.51` of that subnet. `gopro-webcam` does the
-  discovery, the request and the `ffmpeg → v4l2loopback` leg; what apps see
-  is a normal 1080p30 camera called “GoPro”.
+- The camera enumerates as a USB ethernet adapter and serves MPEG-TS/H.264
+  on UDP 8554 after one HTTP request to `/gp/gpWebcam/START` at `.51` of that
+  subnet. `gopro-webcam` does the discovery, the request and the
+  `ffmpeg → v4l2loopback` leg; what apps see is a normal 1080p30 camera
+  called “GoPro”.
+- Interface names are not predictable here: the HERO9 reports a
+  locally-administered MAC, so systemd names it by slot (`enp10s0u5` on pc,
+  not `enx<mac>`). Discovery goes by USB vendor id (`2672`) instead, and the
+  firewall rule matches the camera subnet (`172.16.0.0/12`) rather than an
+  interface name.
 - `exclusive_caps=1` means the device only appears to apps while something
   is writing to it — start `gopro-webcam` first, then pick “GoPro” in OBS,
   Meet, the browser or whatever else.
