@@ -45,6 +45,9 @@
   # ── g14-only user packages ────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice # Writer + Calc for .docx/.xlsx
+    # Minecraft Java client. Native, not under Wine/Lutris — the launcher
+    # is Java and manages its own JREs (bundled: 25/21/17/8).
+    prismlauncher
     # bottles  # disabled: its lsfg-vk source (git.lsfg-vk.dev) drops
     # every fetchgit download; re-enable when the host cooperates.
   ];

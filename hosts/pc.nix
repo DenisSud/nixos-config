@@ -53,6 +53,14 @@
     destinations = [ "201.51.3.119" ];
   };
 
+  # ── Minecraft server (Paper, port 25565) ──────────────
+  # World lives in /var/lib/minecraft. Offline accounts on the clients,
+  # so online-mode is off — do not expose the port past the LAN/VPN.
+  denis.minecraft.enable = true;
+  denis.minecraft.memory = "6G";
+  denis.minecraft.motd = "denis's pc";
+  denis.minecraft.onlineMode = false;
+
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice

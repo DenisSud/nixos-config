@@ -47,6 +47,7 @@ in
     ./asus.nix # denis.asus.enable
     ./voice-typing.nix # denis.voiceTyping.enable
     ./gopro-webcam.nix # denis.goproWebcam.enable
+    ./minecraft.nix # denis.minecraft.enable
   ];
 
   options.denis = {
