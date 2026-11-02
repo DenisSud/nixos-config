@@ -116,6 +116,11 @@
   # the g14's RTX 3050 (sm_86) if ollama were ever enabled there.
   nixpkgs.config.cudaCapabilities = [ "12.0" ];
 
+  # gtk2 is marked broken upstream (removed before NixOS 27.05, nixpkgs#410814)
+  # and lutris still pulls it in. Warn instead of failing evaluation; drop this
+  # once lutris migrates to gtk3 or is removed from modules/gaming.nix.
+  nixpkgs.config.problems.handlers."gtk+".broken = "warn";
+
   # ── Jellyfin media (256GB loopback mount) ──────────────
   fileSystems."/home/denis/jellyfin/media" = {
     device = "/home/denis/jellyfin/media.img";
