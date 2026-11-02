@@ -21,8 +21,15 @@
     # upstream (v1.2.0 did — esbuild missing from the install lock), which is
     # also why upstream's `stable` branch lags a release behind.
     # Bump: `nix flake update pi && nh os switch`.
+    #
+    # Pinned to a rev instead of `main` for now: main's own Nix package does
+    # not evaluate since 1.5.0 added @earendil-works/pi-schema to the install
+    # lock without an integrity hash and nix/package.nix has no
+    # packageSourceOverrides entry for it (upstream #11682, fix in PR #11685).
+    # Go back to `main` once that merges. 177e2ad is the last rev before the
+    # 1.5.0 bump and also builds 1.4.0, so nothing is lost in the meantime.
     pi = {
-      url = "github:earendil-works/pi/main";
+      url = "github:earendil-works/pi/177e2ad7e41e85c16c859f844a0569a3c76f2666";
       # Reuse our nixpkgs for both of upstream's nixpkgs inputs; the darwin
       # one only feeds the x86_64-darwin package, which is never built here.
       inputs.nixpkgs.follows = "nixpkgs";

@@ -53,8 +53,8 @@
       },
       "original": {
         "owner": "earendil-works",
-        "ref": "main",
         "repo": "pi",
+        "rev": "177e2ad7e41e85c16c859f844a0569a3c76f2666",
         "type": "github"
       }
     },
