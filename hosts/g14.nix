@@ -45,9 +45,11 @@
   # ── g14-only user packages ────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice # Writer + Calc for .docx/.xlsx
-    # Minecraft Java client. Native, not under Wine/Lutris — the launcher
-    # is Java and manages its own JREs (bundled: 25/21/17/8).
-    prismlauncher
+    # Minecraft Java client. PineconeMC (formerly ElyPrismLauncher) is a
+    # Prism fork with Ely.by and offline accounts, shipped upstream as an
+    # AppImage and repackaged in ../pkgs. It reads the same data layout as
+    # Prism (instances, assets, libraries) and brings its own JREs.
+    (pkgs.callPackage ../pkgs/pineconemc.nix { })
     # bottles  # disabled: its lsfg-vk source (git.lsfg-vk.dev) drops
     # every fetchgit download; re-enable when the host cooperates.
   ];
