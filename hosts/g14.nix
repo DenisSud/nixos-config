@@ -11,7 +11,8 @@
   # ║      AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid)  ║
   # ╚══════════════════════════════════════════════════════════╝
   # Thin host: imports the shared layer and sets `denis.*` values.
-  # No Docker. Gaming stack on since 2026-11-06 (Steam on the RTX 3050).
+  # No Docker: Podman (rootless) is the container runtime on this host.
+  # Gaming stack on since 2026-11-06 (Steam on the RTX 3050).
   # Hardware-specific bits (NVIDIA/Prime) stay below.
   imports = [ ../modules/shared.nix ];
 
@@ -35,6 +36,7 @@
 
   # ── Feature toggles ───────────────────────────────────
   denis.gaming.enable = true; # Steam + ProtonUp-Qt + Lutris + Heroic
+  denis.podman.enable = true; # container runtime, rootless
   denis.asus.enable = true;
   denis.asus.animeMatrix.enable = true; # lid display: anime-matrix
   denis.happ.enable = true;

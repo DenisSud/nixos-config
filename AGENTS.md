@@ -2,8 +2,8 @@
 
 My NixOS config, supporting two hosts:
 
-- **`pc`** — Desktop, AMD Ryzen + NVIDIA RTX 5070 (Blackwell). The "decked out" machine: Docker, Steam + gaming stack, Xray proxy.
-- **`g14`** — ASUS ROG Zephyrus G14 laptop, AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid). The "lite" machine: no Docker, gaming stack on (Steam). Adds `asusctl` + `supergfxd` for power/profile/dGPU-mode control
+- **`pc`** — Desktop, AMD Ryzen + NVIDIA RTX 5070 (Blackwell). The "decked out" machine: Podman, Steam + gaming stack, Xray proxy.
+- **`g14`** — ASUS ROG Zephyrus G14 laptop, AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid). The "lite" machine: Podman instead of Docker, gaming stack on (Steam). Adds `asusctl` + `supergfxd` for power/profile/dGPU-mode control
 
 Dotfiles are managed as separate git repos and symlinked into place (out-of-band from NixOS):
 
@@ -63,7 +63,8 @@ nixos-config/
     ├── programs.nix                # fish/zsh, direnv, gnupg, mtr  (common)
     ├── vial.nix                    # Vial udev rules               (common)
     │
-    ├── virtualization.nix          # denis.docker.enable
+    ├── virtualization.nix          # denis.docker.enable,
+    │                               #   denis.podman.enable
     ├── gaming.nix                  # denis.gaming.enable
     ├── xray.nix                    # denis.xray.enable
     ├── happ.nix                    # denis.happ.enable
@@ -89,7 +90,7 @@ on a host, set the corresponding `denis.<feature>.enable`.
 (`bool`, default `true`), `denis.latestKernel` (`bool`, default `false`),
 `denis.ipForward` (`bool`, default `false`), `denis.userPackages`
 (`listOf package`, default `[]`), and the feature toggles `denis.docker.enable`,
-`denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
+`denis.podman.enable`, `denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
 `denis.vpnPassthrough.enable`, `denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
 `bool`, default `false`), plus `denis.asus.animeMatrix.enable` (nested under
 `denis.asus.enable`) for the AniMe Matrix lid helper and
@@ -102,7 +103,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - GPU: NVIDIA RTX 5070 (Blackwell) with **open** kernel module
 - Kernel: `linuxPackages_latest`
 - systemd-boot
-- Docker enabled
+- Podman enabled (`denis.podman.enable`): runtime + `podman-compose`; carries the
+  Phonon-2 dictation container
 - Steam + full gaming stack
 - Xray proxy service (reads `/etc/xray/config.json`)
 - Happ proxy client + `happd` TUN daemon (`denis.happ.enable`; package
@@ -120,7 +122,11 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - Proprietary NVIDIA kernel modules (open modules don't play well with Prime hybrid yet)
 - **Full ASUS Linux stack** (built into nixpkgs, no extra flake input): `services.asusd` (profiles, fan curves, AniMe matrix, LED keyboard, ROG Control Center GUI) + `services.supergfxd` (dGPU mode switching)
   - **Note**: `supergfxctl` is being phased out upstream — only keep it if you need vfio for VMs or have dGPU power-off issues. See https://asus-linux.org/guides/nixos
-- **No** Docker — keeps rebuilds fast. LibreOffice (Writer/Calc) is installed as a user package.
+- **No** Docker; Podman instead (`denis.podman.enable`) — rootless, kept lean to
+  keep rebuilds fast. Published ports land on all interfaces, so the firewall
+  (on for this host) decides who reaches them; publish with
+  `-p 127.0.0.1:PORT:PORT` for local-only. LibreOffice (Writer/Calc) is
+  installed as a user package.
 - Gaming stack on (`denis.gaming.enable`): Steam + ProtonUp-Qt + Lutris +
   Heroic, gamescope, gamemode, MangoHud. Games run on the Cezanne iGPU by
   default; prefix the launch options with `nvidia-offload %command%` to use
@@ -217,7 +223,7 @@ The `dotfiles.fish` script creates these symlinks:
 - **PipeWire** for audio
 - **CUPS + Avahi** network printing (Epson L3271 via IPP)
 - **NVIDIA** graphics with container toolkit
-- **Docker** virtualization (PC only)
+- **Podman** container runtime (both hosts; rootless for user containers)
 - **Parakeet TDT v3** local ASR (sherpa-onnx, int8 ONNX via the IBus engine)
 - **IBus** input-method injection + a custom GNOME Shell extension (waveform pill)
 
