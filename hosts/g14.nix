@@ -11,7 +11,7 @@
   # ║      AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid)  ║
   # ╚══════════════════════════════════════════════════════════╝
   # Thin host: imports the shared layer and sets `denis.*` values.
-  # "Lite" config: no Docker, no Steam (feature toggles off).
+  # No Docker. Gaming stack on since 2026-11-06 (Steam on the RTX 3050).
   # Hardware-specific bits (NVIDIA/Prime) stay below.
   imports = [ ../modules/shared.nix ];
 
@@ -34,6 +34,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   # ── Feature toggles ───────────────────────────────────
+  denis.gaming.enable = true; # Steam + ProtonUp-Qt + Lutris + Heroic
   denis.asus.enable = true;
   denis.asus.animeMatrix.enable = true; # lid display: anime-matrix
   denis.happ.enable = true;

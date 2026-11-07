@@ -3,7 +3,7 @@
 My NixOS config, supporting two hosts:
 
 - **`pc`** — Desktop, AMD Ryzen + NVIDIA RTX 5070 (Blackwell). The "decked out" machine: Docker, Steam + gaming stack, Xray proxy.
-- **`g14`** — ASUS ROG Zephyrus G14 laptop, AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid). The "lite" machine: no Docker, no Steam. Adds `asusctl` + `supergfxd` for power/profile/dGPU-mode control
+- **`g14`** — ASUS ROG Zephyrus G14 laptop, AMD Cezanne iGPU + NVIDIA RTX 3050 Mobile (hybrid). The "lite" machine: no Docker, gaming stack on (Steam). Adds `asusctl` + `supergfxd` for power/profile/dGPU-mode control
 
 Dotfiles are managed as separate git repos and symlinked into place (out-of-band from NixOS):
 
@@ -120,7 +120,11 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - Proprietary NVIDIA kernel modules (open modules don't play well with Prime hybrid yet)
 - **Full ASUS Linux stack** (built into nixpkgs, no extra flake input): `services.asusd` (profiles, fan curves, AniMe matrix, LED keyboard, ROG Control Center GUI) + `services.supergfxd` (dGPU mode switching)
   - **Note**: `supergfxctl` is being phased out upstream — only keep it if you need vfio for VMs or have dGPU power-off issues. See https://asus-linux.org/guides/nixos
-- **No** Docker or Steam — keeps rebuilds fast. LibreOffice (Writer/Calc) is installed as a user package.
+- **No** Docker — keeps rebuilds fast. LibreOffice (Writer/Calc) is installed as a user package.
+- Gaming stack on (`denis.gaming.enable`): Steam + ProtonUp-Qt + Lutris +
+  Heroic, gamescope, gamemode, MangoHud. Games run on the Cezanne iGPU by
+  default; prefix the launch options with `nvidia-offload %command%` to use
+  the RTX 3050.
 - AniMe Matrix lid display (`denis.asus.animeMatrix.enable`): custom gifs,
   images, video and text via `anime-matrix` (see "AniMe Matrix" below). The
   panel is a GA401 33 x 55 diagonal lattice, 16 grey levels.
@@ -217,7 +221,7 @@ The `dotfiles.fish` script creates these symlinks:
 - **Parakeet TDT v3** local ASR (sherpa-onnx, int8 ONNX via the IBus engine)
 - **IBus** input-method injection + a custom GNOME Shell extension (waveform pill)
 
-- **Steam + ProtonUp-Qt + Lutris + Heroic** gaming (PC only)
+- **Steam + ProtonUp-Qt + Lutris + Heroic** gaming (both hosts)
 - **Xray** proxy service (PC only)
 
 ## Important Paths
