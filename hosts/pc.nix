@@ -46,11 +46,18 @@
   # 23 minutes). The LAN and the podman bridges go the same way, which is
   # what `localNetworks` covers.
   #
-  # 201.51.3.119 is `deploy/vpn/config.json` in ~/dev/mason and
-  # ~/dev/mason-tanya: keep the three in step when the subscription moves.
+  # These three are the servers `deploy/vpn/config.json` lists in
+  # ~/dev/mason and ~/dev/mason-tanya (its `auto` urltest group picks among
+  # them), so all of them have to stay off the tunnel: one left inside it
+  # stalls the sidecar the moment urltest selects it. 109.73.192.226 is
+  # tw2.flexiona.net, resolved because the option takes addresses.
   denis.vpnPassthrough = {
     enable = true;
-    destinations = [ "201.51.3.119" ];
+    destinations = [
+      "147.45.175.99"
+      "109.73.192.226"
+      "89.169.46.158"
+    ];
   };
 
   # ── Minecraft server (Paper, port 25565) ──────────────

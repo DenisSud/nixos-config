@@ -431,9 +431,12 @@ systemctl --failed         # vpn-passthrough-guard is there when it broke
 ```
 
 - `destinations` is per host and holds the tunnel's own upstream servers:
-  `201.51.3.119` on `pc`, which is `deploy/vpn/config.json` in
-  `~/dev/mason` and `~/dev/mason-tanya`. Move all three together when the
-  subscription changes servers.
+  on `pc`, every `server` in `deploy/vpn/config.json` of `~/dev/mason` and
+  `~/dev/mason-tanya` (2026-11-08: `147.45.175.99`, `tw2.flexiona.net` as
+  `109.73.192.226`, `89.169.46.158`). A hostname in that config has to be
+  added as the address it resolves to. Keep the two in step when the
+  subscription moves: the guard only knows the declared list, so a config
+  full of servers nobody declared reads `ok` while the sidecar stalls.
 - `localNetworks` (default on) adds every directly connected prefix — the
   LAN, the podman bridges — so LAN peers and the printer stay reachable
   while the tunnel is up.
