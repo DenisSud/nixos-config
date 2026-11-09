@@ -53,6 +53,10 @@
     # AppImage and repackaged in ../pkgs. It reads the same data layout as
     # Prism (instances, assets, libraries) and brings its own JREs.
     (pkgs.callPackage ../pkgs/pineconemc.nix { })
+    # LearnHarness: agent harness for learning (adaptive teaching, practice,
+    # knowledge graph). Electron 44 + a Next standalone server repackaged
+    # from the upstream .deb in ../pkgs; all state under ~/.config/LearnHarness.
+    (pkgs.callPackage ../pkgs/learnharness.nix { })
     # bottles  # disabled: its lsfg-vk source (git.lsfg-vk.dev) drops
     # every fetchgit download; re-enable when the host cooperates.
   ];
