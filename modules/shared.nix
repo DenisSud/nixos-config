@@ -48,6 +48,7 @@ in
     ./voice-typing.nix # denis.voiceTyping.enable
     ./gopro-webcam.nix # denis.goproWebcam.enable
     ./minecraft.nix # denis.minecraft.enable
+    ./agent-desktop.nix # denis.agentDesktop.enable
   ];
 
   options.denis = {

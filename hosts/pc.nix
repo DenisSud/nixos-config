@@ -68,6 +68,11 @@
   denis.minecraft.motd = "denis's pc";
   denis.minecraft.onlineMode = false;
 
+  # ── Agent computer use ────────────────────────────────
+  # agent-desktop reads app accessibility trees (AT-SPI) so an agent can
+  # drive the desktop by ref instead of by pixel.
+  denis.agentDesktop.enable = true;
+
   # ── PC-only user packages ─────────────────────────────
   denis.userPackages = with pkgs; [
     libreoffice

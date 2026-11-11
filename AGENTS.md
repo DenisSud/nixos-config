@@ -29,7 +29,10 @@ nixos-config/
 │   │                               #   /dev/video42 (modules/gopro-webcam.nix)
 │   ├── parakeet-typing/            # Parakeet TDT v3 IBus engine + dataset
 │   │                               #   (see modules/voice-typing.nix)
-│   └── parakeet-indicator/         # GNOME Shell waveform pill extension
+│   ├── parakeet-indicator/         # GNOME Shell waveform pill extension
+│   └── agent-desktop.nix           # agent-desktop, repackaged from the
+│                                   #   upstream release tarball (see
+│                                   #   modules/agent-desktop.nix)
 │
 ├── hosts/                          # One entry file + one hardware file per machine
 │   ├── pc.nix                      # PC host — imports modules/shared.nix,
@@ -74,7 +77,8 @@ nixos-config/
     ├── asus.nix                    # denis.asus.enable,
     │                               #   denis.asus.animeMatrix.enable
     ├── voice-typing.nix            # denis.voiceTyping.enable
-    └── gopro-webcam.nix            # denis.goproWebcam.enable
+    ├── gopro-webcam.nix            # denis.goproWebcam.enable
+    └── agent-desktop.nix           # denis.agentDesktop.enable
 ```
 
 **Pattern:** `modules/shared.nix` is the shared layer. It imports every common
@@ -93,8 +97,9 @@ on a host, set the corresponding `denis.<feature>.enable`.
 `denis.podman.enable`, `denis.gaming.enable`, `denis.xray.enable`, `denis.happ.enable`,
 `denis.vpnPassthrough.enable`, `denis.wakeOnLan.enable`, `denis.tmux.enable`, `denis.asus.enable` (all
 `bool`, default `false`), plus `denis.asus.animeMatrix.enable` (nested under
-`denis.asus.enable`) for the AniMe Matrix lid helper and
-`denis.goproWebcam.enable` for the GoPro USB webcam bridge.
+`denis.asus.enable`) for the AniMe Matrix lid helper,
+`denis.goproWebcam.enable` for the GoPro USB webcam bridge and
+`denis.agentDesktop.enable` for accessibility-tree computer use.
 
 ## Machines
 
@@ -114,6 +119,8 @@ on a host, set the corresponding `denis.<feature>.enable`.
 - LibreOffice, DaVinci Resolve (free, unfree package) + ddcutil-based monitor brightness GNOME extension
 - Parakeet v3 voice typing (`denis.voiceTyping.enable`): IBus engine +
   floating waveform pill; model runs on CPU
+- agent-desktop (`denis.agentDesktop.enable`): accessibility-tree computer
+  use for AI agents, CLI + MCP server
 
 ### `g14` (Laptop)
 - Hostname: `g14`
@@ -444,6 +451,47 @@ systemctl --failed         # vpn-passthrough-guard is there when it broke
   device it went through instead. That is the alarm; nothing else watches it.
 - The mirror skips link-local and multicast prefixes: those repeat per
   interface, and one table entry per prefix is all the kernel keeps.
+
+### Agent desktop (computer use over the accessibility tree)
+
+`denis.agentDesktop.enable` installs `agent-desktop` (in
+`pkgs/agent-desktop.nix`, repackaged from the upstream release tarball) plus
+`wl-clipboard`. It reads a desktop app's accessibility tree over AT-SPI and
+returns JSON with a ref per element, so an agent acts on refs instead of
+pixels. No model inside: the CLI is the hands, the loop lives in the caller.
+
+```bash
+agent-desktop status                   # platform, bus state, surfaces
+agent-desktop list-apps                # what is registered on the bus
+agent-desktop snapshot --app Files -i  # interactive elements, each with a ref
+agent-desktop click @s8f3k2p9:e8       # act on a ref from that snapshot
+agent-desktop skills get desktop       # the loop/refs/retry rules, for agents
+agent-desktop mcp                      # every command as an MCP tool on stdio
+```
+
+- Refs belong to one snapshot. After a UI change an action answers
+  `STALE_REF` or `AMBIGUOUS_TARGET`; take a fresh snapshot instead of
+  retrying the old ref. Several windows for one app: pass `--window-id`
+  from `error.details`.
+- Ref actions are semantic AT-SPI calls, so they do not move the pointer or
+  steal focus. `--headed` opts into physical input (needed for wheel scroll
+  and pointer gestures, X11 only).
+- Needs the session's own environment: run it from a shell inside the GNOME
+  session, not over SSH. `at-spi-dbus-bus.service` must be up (GNOME starts
+  it); `status` reports `accessibility: granted` when the bus answers.
+- Wayland (what both hosts run) limits the surface: window control,
+  `focus-window`, pointer gestures and the X11 clipboard helper do not
+  apply, and `close-app` needs `--force`, which skips the graceful close
+  request. App names come from `list-apps` (`gnome-calculator` is
+  `.gnome-calculator-wrapped` under the nix wrapper), not from window titles.
+- Chromium needs `--force-renderer-accessibility`, Qt needs
+  `QT_ACCESSIBILITY=1`; GTK apps that started before the bus never register,
+  so restart them. Flatpak needs `--talk-name=org.a11y.Bus`.
+- State root `~/.agent-desktop` must stay private (0700) or commands that
+  write there fail with `INTERNAL`.
+- Bumping: set `version` in `pkgs/agent-desktop.nix`, replace `hash`
+  (`nix hash file <tarball>`), and check the archive still ships both the
+  CLI and `agent-desktop-linux-clipboard-owner`.
 
 ### Update Pi to the latest upstream code
 `pi` is not the nixpkgs `pi-coding-agent` package (that one is bumped by a bot
